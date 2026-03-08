@@ -14,6 +14,7 @@ const slides = [
 
 export function LuminaSlider() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const currentSlideRef = useRef(0);
 
   useEffect(() => {
     let renderer: any, scene: any, camera: any, shaderMaterial: any;
