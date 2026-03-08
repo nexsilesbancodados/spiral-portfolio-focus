@@ -182,10 +182,24 @@ export function LuminaSlider() {
       slides.forEach((slide, i) => {
         const item = document.createElement("div");
         item.className = `slide-nav-item${i === 0 ? " active" : ""}`;
-        item.innerHTML = `<div class="slide-progress-line"><div class="slide-progress-fill"></div></div><div class="slide-nav-title">${slide.title}</div>`;
-        item.addEventListener("click", () => {
+        item.innerHTML = `<div class="slide-progress-line"><div class="slide-progress-fill"></div></div><div class="slide-nav-title">${slide.title}</div><button class="slide-nav-explore" data-index="${i}">Explorar <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-7-7l7 7-7 7"/></svg></button>`;
+        item.addEventListener("click", (e) => {
+          if ((e.target as HTMLElement).closest('.slide-nav-explore')) return;
           if (!isTransitioning && i !== currentSlideIndex) navigateToSlide(i);
         });
+        const exploreBtn = item.querySelector('.slide-nav-explore');
+        if (exploreBtn) {
+          exploreBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            // Navigate to slide first if not current
+            if (i !== currentSlideIndex && !isTransitioning) {
+              navigateToSlide(i);
+              setTimeout(() => triggerExplore(i), 600);
+            } else {
+              triggerExplore(i);
+            }
+          });
+        }
         nav.appendChild(item);
       });
     };
