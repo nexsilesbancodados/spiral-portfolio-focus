@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState, lazy, Suspense } from 'react';
 import { WebDesignPortfolio } from '@/components/WebDesignPortfolio';
+import { DesignInterfaceShowcase } from '@/components/DesignInterfaceShowcase';
 declare const gsap: any;
 
 const InteractiveGlobe = lazy(() => import('@/components/ui/interactive-globe').then(m => ({ default: m.InteractiveGlobe })));
@@ -103,6 +104,7 @@ const sections = [
 
 export function SectionsDetail() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const scrollAreaRef = useRef<HTMLDivElement>(null);
   const [activeSlide, setActiveSlide] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
 
