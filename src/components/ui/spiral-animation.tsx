@@ -244,36 +244,6 @@ class TextParticleAnimation {
     ctx.globalAlpha = 1
   }
 
-  private drawSpiralTrail(p: number) {
-    const ctx = this.ctx
-    const trailLen = 150
-    const t = p / 0.5
-
-    for (let i = 0; i < trailLen; i++) {
-      const f = 1 - i / trailLen
-      const angle = t * Math.PI * 10 - i * 0.07
-      const radius = 200 * t * f
-      const x = Math.cos(angle) * radius
-      const y = Math.sin(angle) * radius
-      const sw = 3 * f * t
-
-      ctx.globalAlpha = f * t * 0.7
-      ctx.fillStyle = `hsl(43, 100%, ${50 + f * 35}%)`
-      ctx.beginPath()
-      ctx.arc(x, y, sw, 0, Math.PI * 2)
-      ctx.fill()
-
-      // Trail glow
-      if (f > 0.6) {
-        ctx.globalAlpha = f * t * 0.15
-        ctx.fillStyle = `hsl(43, 100%, 80%)`
-        ctx.beginPath()
-        ctx.arc(x, y, sw * 3, 0, Math.PI * 2)
-        ctx.fill()
-      }
-    }
-    ctx.globalAlpha = 1
-  }
 
   public destroy() {
     this.timeline.kill()
