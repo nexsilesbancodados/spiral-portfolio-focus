@@ -77,31 +77,39 @@ export function DesignInterfaceShowcase({ scrollerRef }: { scrollerRef: React.Re
       if (cancelled) return;
 
       SHOWCASE_ITEMS.forEach((_, i) => {
+        const wrapper = boxRefs.current[i]?.parentElement;
         const box = boxRefs.current[i];
         const overlay = overlayRefs.current[i];
         const content = overlayContentRefs.current[i];
         const caption = captionRefs.current[i];
-        if (!box || !overlay || !content) return;
+        if (!wrapper || !box || !overlay || !content) return;
 
         g.set(box, { width: 280, height: 280, borderRadius: 20, overflow: 'hidden' });
         g.set(overlay, { clipPath: 'inset(100% 0 0 0)' });
         g.set(content, { filter: 'blur(8px)', scale: 1.05, y: 30 });
         if (caption) g.set(caption, { y: 20, opacity: 0 });
 
+        // Pin each card in the center while it expands
         const tl = g.timeline({
           scrollTrigger: {
-            trigger: box,
+            trigger: wrapper,
             scroller: scroller,
-            start: 'top 80%',
-            end: 'top 10%',
-            scrub: 1.2,
+            start: 'top top',
+            end: '+=150%',
+            scrub: 1,
+            pin: box,
+            pinSpacing: true,
           },
         });
 
-        tl.to(box, { width: '88vw', height: '70vh', borderRadius: 8, ease: 'expo.out' }, 0)
-          .to(overlay, { clipPath: 'inset(0% 0 0 0)', ease: 'expo.out' }, 0.3)
-          .to(content, { y: 0, filter: 'blur(0px)', scale: 1, ease: 'expo.out' }, 0.35)
-          .to(caption, { y: 0, opacity: 1, ease: 'power3.out' }, 0.3);
+        tl.to(box, { width: '92vw', height: '88vh', borderRadius: 0, ease: 'expo.out', duration: 1 }, 0)
+          .to(overlay, { clipPath: 'inset(0% 0 0 0)', ease: 'expo.out', duration: 1 }, 0.2)
+          .to(content, { y: 0, filter: 'blur(0px)', scale: 1, ease: 'expo.out', duration: 1 }, 0.25)
+          .to(caption, { y: 0, opacity: 1, ease: 'power3.out', duration: 0.8 }, 0.2)
+          // Hold fully expanded
+          .to({}, { duration: 0.5 })
+          // Shrink and fade out
+          .to(box, { scale: 0.9, opacity: 0, duration: 0.5, ease: 'power2.in' });
 
         cleanups.push(() => {
           tl.scrollTrigger?.kill();
@@ -119,7 +127,7 @@ export function DesignInterfaceShowcase({ scrollerRef }: { scrollerRef: React.Re
   }, [scrollerRef]);
 
   return (
-    <div ref={rootRef} className="anim-el w-full mt-16 space-y-[50vh]">
+    <div ref={rootRef} className="anim-el w-full mt-16 space-y-[20vh]">
       {SHOWCASE_ITEMS.map((item, i) => (
         <div key={i} className="flex flex-col items-center">
           <div
