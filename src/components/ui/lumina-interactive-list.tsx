@@ -140,15 +140,23 @@ export function LuminaSlider() {
         const updateContent = (idx: number) => {
             const titleEl = document.getElementById('mainTitle');
             const descEl = document.getElementById('mainDesc');
+            const skillsEl = document.getElementById('mainSkills');
             if (titleEl && descEl) {
                  gsap.to(titleEl.children, { y: -20, opacity: 0, duration: 0.5, stagger: 0.02, ease: "power2.in" });
                  gsap.to(descEl, { y: -10, opacity: 0, duration: 0.4, ease: "power2.in" });
+                 if (skillsEl) gsap.to(skillsEl.children, { y: -10, opacity: 0, duration: 0.3, stagger: 0.05, ease: "power2.in" });
                  
                  setTimeout(() => {
                      titleEl.innerHTML = splitText(slides[idx].title);
                      descEl.textContent = slides[idx].description; 
+                     if (skillsEl) {
+                         skillsEl.innerHTML = slides[idx].skills.map((s: string) => 
+                             `<span class="skill-tag">${s}</span>`
+                         ).join('');
+                     }
                      gsap.set(titleEl.children, { opacity: 0 });
                      gsap.set(descEl, { y: 20, opacity: 0 });
+                     if (skillsEl) gsap.set(skillsEl.children, { y: 15, opacity: 0 });
 
                      const children = titleEl.children;
                      switch(idx % 6) {
@@ -178,6 +186,7 @@ export function LuminaSlider() {
                             break;
                      }
                      gsap.to(descEl, { y: 0, opacity: 1, duration: 0.8, delay: 0.2, ease: "power3.out" });
+                     if (skillsEl) gsap.to(skillsEl.children, { y: 0, opacity: 1, duration: 0.6, delay: 0.4, stagger: 0.08, ease: "power3.out" });
                  }, 500); 
             }
         };
