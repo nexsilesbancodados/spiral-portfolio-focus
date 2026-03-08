@@ -115,27 +115,20 @@ class TextParticleAnimation {
 
   private setupTimeline() {
     this.timeline
-      // Phase 1: Spiral inward (0 -> 0.4)
-      .to(this.progress, {
-        value: 0.4,
-        duration: 3.5,
-        ease: 'power2.inOut',
-        onUpdate: () => this.render(),
-      })
-      // Phase 2: Form text (0.4 -> 1.0)
+      // Phase 1: Fly in and form text (0 -> 1.0)
       .to(this.progress, {
         value: 1.0,
-        duration: 2.5,
+        duration: 4,
         ease: 'power3.inOut',
         onUpdate: () => this.render(),
       })
-      // Phase 3: Hold text with shimmer
+      // Phase 2: Hold text with shimmer
       .to(this.progress, {
         value: 1.0,
         duration: 5,
         onUpdate: () => this.render(),
       })
-      // Phase 4: Dissolve out (1.0 -> 1.5)
+      // Phase 3: Dissolve out (1.0 -> 1.5)
       .to(this.progress, {
         value: 1.5,
         duration: 2.5,
@@ -159,8 +152,8 @@ class TextParticleAnimation {
     const p = this.progress.value
     this.frameCount++
 
-    // Full clear with slight trail
-    ctx.fillStyle = 'rgba(5, 5, 5, 0.12)'
+    // Clear
+    ctx.fillStyle = 'rgba(5, 5, 5, 0.15)'
     ctx.fillRect(0, 0, w, h)
 
     ctx.save()
@@ -169,49 +162,26 @@ class TextParticleAnimation {
     // Background ambient particles
     this.drawBgParticles()
 
-    // Draw spiral trail in early phase
-    if (p < 0.5) {
-      this.drawSpiralTrail(p)
-    }
-
     // Draw main particles
     for (const particle of this.particles) {
       const adjustedP = Math.max(0, Math.min(p - particle.delay, 1.5))
       let x: number, y: number, alpha: number, size: number
 
       if (adjustedP <= 0) {
+        // At start position, barely visible
         x = particle.startX
         y = particle.startY
         alpha = 0.05
         size = particle.size * 0.2
-      } else if (adjustedP < 0.4) {
-        // Spiral toward center
-        const t = adjustedP / 0.4
-        const currentRadius = particle.spiralRadius * (1 - t * 0.75)
-        const currentAngle = particle.spiralAngle + particle.spiralSpeed * t * Math.PI * 5
-
-        const spiralX = Math.cos(currentAngle) * currentRadius
-        const spiralY = Math.sin(currentAngle) * currentRadius
-
-        const blend = Math.min(t * 3, 1)
-        x = particle.startX * (1 - blend) + spiralX * blend
-        y = particle.startY * (1 - blend) + spiralY * blend
-        alpha = 0.2 + t * 0.6
-        size = particle.size * (0.4 + t * 0.6)
       } else if (adjustedP < 1.0) {
-        // Converge to text
-        const t = (adjustedP - 0.4) / 0.6
-        const eased = this.easeOutElastic(Math.min(t * 1.3, 1))
+        // Fly straight from start to text target
+        const t = adjustedP / 1.0
+        const eased = this.easeOutElastic(Math.min(t * 1.2, 1))
 
-        const currentRadius = particle.spiralRadius * 0.25
-        const currentAngle = particle.spiralAngle + particle.spiralSpeed * 0.4 * Math.PI * 5
-        const spiralX = Math.cos(currentAngle) * currentRadius
-        const spiralY = Math.sin(currentAngle) * currentRadius
-
-        x = spiralX * (1 - eased) + particle.targetX * eased
-        y = spiralY * (1 - eased) + particle.targetY * eased
-        alpha = 0.5 + eased * 0.5
-        size = particle.size * (0.7 + eased * 0.5)
+        x = particle.startX * (1 - eased) + particle.targetX * eased
+        y = particle.startY * (1 - eased) + particle.targetY * eased
+        alpha = 0.1 + eased * 0.9
+        size = particle.size * (0.3 + eased * 0.9)
       } else if (adjustedP <= 1.0) {
         // Hold — shimmer
         const time = this.frameCount * 0.016
@@ -221,9 +191,9 @@ class TextParticleAnimation {
         alpha = 0.8 + shimmer * 0.2
         size = particle.size * (1.1 + shimmer * 0.15)
       } else {
-        // Dissolve out with swirl
+        // Dissolve out
         const t = (adjustedP - 1.0) / 0.5
-        const angle = particle.spiralAngle + t * Math.PI * 2
+        const angle = particle.spiralAngle
         const dist = t * t * 700
         x = particle.targetX + Math.cos(angle) * dist
         y = particle.targetY + Math.sin(angle) * dist
@@ -237,14 +207,12 @@ class TextParticleAnimation {
       const sat = 85 + particle.brightness * 0.15
       const light = particle.brightness
 
-      // Main dot
       ctx.globalAlpha = alpha
       ctx.fillStyle = `hsl(${hue}, ${sat}%, ${light}%)`
       ctx.beginPath()
       ctx.arc(x, y, size, 0, Math.PI * 2)
       ctx.fill()
 
-      // Subtle glow only for large bright particles
       if (alpha > 0.8 && size > 1.3) {
         ctx.globalAlpha = alpha * 0.08
         ctx.fillStyle = `hsl(${hue}, 100%, 80%)`
@@ -276,36 +244,6 @@ class TextParticleAnimation {
     ctx.globalAlpha = 1
   }
 
-  private drawSpiralTrail(p: number) {
-    const ctx = this.ctx
-    const trailLen = 150
-    const t = p / 0.5
-
-    for (let i = 0; i < trailLen; i++) {
-      const f = 1 - i / trailLen
-      const angle = t * Math.PI * 10 - i * 0.07
-      const radius = 200 * t * f
-      const x = Math.cos(angle) * radius
-      const y = Math.sin(angle) * radius
-      const sw = 3 * f * t
-
-      ctx.globalAlpha = f * t * 0.7
-      ctx.fillStyle = `hsl(43, 100%, ${50 + f * 35}%)`
-      ctx.beginPath()
-      ctx.arc(x, y, sw, 0, Math.PI * 2)
-      ctx.fill()
-
-      // Trail glow
-      if (f > 0.6) {
-        ctx.globalAlpha = f * t * 0.15
-        ctx.fillStyle = `hsl(43, 100%, 80%)`
-        ctx.beginPath()
-        ctx.arc(x, y, sw * 3, 0, Math.PI * 2)
-        ctx.fill()
-      }
-    }
-    ctx.globalAlpha = 1
-  }
 
   public destroy() {
     this.timeline.kill()
