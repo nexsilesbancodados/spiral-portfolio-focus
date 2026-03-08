@@ -61,12 +61,12 @@ export function LuminaSlider() {
         const TRANSITION_DURATION = () => SLIDER_CONFIG.settings.transitionDuration;
 
         const slides = [
-            { title: "FOCUSS DEV", description: "Transformando ideias em experiências digitais extraordinárias.", media: "/images/slide-01.jpg" },
-            { title: "Web Design", description: "Interfaces modernas que conectam marcas ao futuro digital.", media: "/images/slide-02.jpg" },
-            { title: "Desenvolvimento", description: "Código limpo, performance máxima e arquitetura escalável.", media: "/images/slide-03.jpg" },
-            { title: "UI/UX Design", description: "Design centrado no usuário com estética cinematográfica.", media: "/images/slide-04.jpg" },
-            { title: "Inovação", description: "Tecnologias de ponta para soluções que fazem a diferença.", media: "/images/slide-05.jpg" },
-            { title: "Mobile & Web", description: "Aplicações responsivas que funcionam em qualquer dispositivo.", media: "/images/slide-06.jpg" }
+            { title: "FOCUSS DEV", description: "Transformando ideias em experiências digitais extraordinárias.", media: "/images/slide-01.jpg", skills: ["React", "TypeScript", "Node.js"] },
+            { title: "Web Design", description: "Interfaces modernas que conectam marcas ao futuro digital.", media: "/images/slide-02.jpg", skills: ["Figma", "UI/UX", "Prototipagem"] },
+            { title: "Desenvolvimento", description: "Código limpo, performance máxima e arquitetura escalável.", media: "/images/slide-03.jpg", skills: ["JavaScript", "Python", "APIs REST"] },
+            { title: "Design de Interface", description: "Design centrado no usuário com estética cinematográfica.", media: "/images/slide-04.jpg", skills: ["Tailwind CSS", "Framer Motion", "GSAP"] },
+            { title: "Inovação", description: "Tecnologias de ponta para soluções que fazem a diferença.", media: "/images/slide-05.jpg", skills: ["IA", "Machine Learning", "Cloud"] },
+            { title: "Mobile & Web", description: "Aplicações responsivas que funcionam em qualquer dispositivo.", media: "/images/slide-06.jpg", skills: ["React Native", "PWA", "Responsivo"] }
         ];
 
         const vertexShader = `varying vec2 vUv; void main() { vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }`;
