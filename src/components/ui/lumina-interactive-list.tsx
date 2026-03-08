@@ -228,20 +228,22 @@ export function LuminaSlider() {
       }, undefined, reject);
     });
 
-    const loadVideoTexture = (src: string) => new Promise<any>((resolve, reject) => {
+    const loadVideoTexture = (src: string, index: number) => new Promise<any>((resolve, reject) => {
       const video = document.createElement('video');
       video.src = src;
       video.loop = true;
       video.muted = true;
       video.playsInline = true;
       video.crossOrigin = 'anonymous';
+      video.preload = index === 0 ? 'auto' : 'metadata';
       video.addEventListener('loadeddata', () => {
         const t = new THREE.VideoTexture(video);
         t.minFilter = THREE.LinearFilter;
         t.magFilter = THREE.LinearFilter;
         t.userData = { size: new THREE.Vector2(video.videoWidth, video.videoHeight), video };
         videoElements.push(video);
-        video.play().catch(() => {});
+        // Only auto-play the first video, others play on demand
+        if (index <= 1) video.play().catch(() => {});
         resolve(t);
       });
       video.addEventListener('error', () => reject(new Error(`Failed video: ${src}`)));
