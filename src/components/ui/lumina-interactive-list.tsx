@@ -198,7 +198,7 @@ export function LuminaSlider() {
       slides.forEach((slide, i) => {
         const item = document.createElement("div");
         item.className = `slide-nav-item${i === 0 ? " active" : ""}`;
-        item.innerHTML = `<div class="slide-progress-line"><div class="slide-progress-fill"></div></div><div class="slide-nav-title">${slide.title}</div><button class="slide-nav-explore" data-index="${i}">Explorar <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-7-7l7 7-7 7"/></svg></button>`;
+        item.innerHTML = `<div class="slide-progress-line"><div class="slide-progress-fill"></div></div><div class="slide-nav-title">${slide.title}</div><button class="slide-nav-explore" data-index="${i}">Explorar <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14m-7-7l7 7 7-7"/></svg></button>`;
         item.addEventListener("click", (e) => {
           if ((e.target as HTMLElement).closest('.slide-nav-explore')) return;
           if (!isTransitioning && i !== currentSlideIndex) navigateToSlide(i);
