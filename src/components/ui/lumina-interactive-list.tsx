@@ -288,6 +288,26 @@ export function LuminaSlider() {
              l.load(src, (t: any) => { t.minFilter = t.magFilter = THREE.LinearFilter; t.userData = { size: new THREE.Vector2(t.image.width, t.image.height) }; resolve(t); }, undefined, reject);
         });
 
+        const loadVideoTexture = (src: string) => new Promise<any>((resolve, reject) => {
+             const video = document.createElement('video');
+             video.src = src;
+             video.loop = true;
+             video.muted = true;
+             video.playsInline = true;
+             video.crossOrigin = 'anonymous';
+             video.addEventListener('loadeddata', () => {
+                 const t = new THREE.VideoTexture(video);
+                 t.minFilter = THREE.LinearFilter;
+                 t.magFilter = THREE.LinearFilter;
+                 t.userData = { size: new THREE.Vector2(video.videoWidth, video.videoHeight), video };
+                 videoElements.push(video);
+                 video.play().catch(() => {});
+                 resolve(t);
+             });
+             video.addEventListener('error', () => reject(new Error(`Failed video: ${src}`)));
+             video.load();
+        });
+
         const initRenderer = async () => {
             const canvas = document.querySelector(".webgl-canvas") as HTMLCanvasElement; if (!canvas) return;
             scene = new THREE.Scene(); camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
