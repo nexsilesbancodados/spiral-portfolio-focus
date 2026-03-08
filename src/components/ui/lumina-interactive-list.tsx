@@ -254,9 +254,9 @@ export function LuminaSlider() {
 
       scene = new THREE.Scene();
       camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-      renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: false });
+      renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: false, powerPreference: 'high-performance' });
       renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
 
       shaderMaterial = new THREE.ShaderMaterial({
         uniforms: {
@@ -287,14 +287,32 @@ export function LuminaSlider() {
         document.querySelector(".slider-wrapper")?.classList.add("loaded");
       }
 
-      const render = () => { animFrameId = requestAnimationFrame(render); renderer.render(scene, camera); };
+      let isVisible = true;
+      const render = () => {
+        animFrameId = requestAnimationFrame(render);
+        if (!isVisible) return;
+        renderer.render(scene, camera);
+      };
       render();
     };
 
+    let resizeTimer: ReturnType<typeof setTimeout>;
     const handleResize = () => {
-      if (renderer) {
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        shaderMaterial.uniforms.uResolution.value.set(window.innerWidth, window.innerHeight);
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        if (renderer) {
+          renderer.setSize(window.innerWidth, window.innerHeight);
+          shaderMaterial.uniforms.uResolution.value.set(window.innerWidth, window.innerHeight);
+        }
+      }, 150);
+    };
+
+    // Pause render when tab is hidden
+    const handleVisibility = () => {
+      if (document.hidden) {
+        videoElements.forEach(v => v.pause());
+      } else {
+        videoElements.forEach(v => v.play().catch(() => {}));
       }
     };
 
