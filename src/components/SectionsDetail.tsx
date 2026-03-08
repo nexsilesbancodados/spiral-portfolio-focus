@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState, lazy, Suspense } from 'react';
 import { WebDesignPortfolio } from '@/components/WebDesignPortfolio';
-import { DesignInterfaceShowcase } from '@/components/DesignInterfaceShowcase';
+import { ScrollExpandMedia } from '@/components/ScrollExpandMedia';
 declare const gsap: any;
 
 const InteractiveGlobe = lazy(() => import('@/components/ui/interactive-globe').then(m => ({ default: m.InteractiveGlobe })));
