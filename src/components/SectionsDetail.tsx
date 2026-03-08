@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { InteractiveGlobe } from '@/components/ui/interactive-globe';
+import { WebGLShader } from '@/components/ui/web-gl-shader';
 declare const gsap: any;
 
 const sections = [
@@ -111,9 +112,18 @@ export function SectionsDetail() {
       <div className="relative h-screen overflow-hidden">
         {/* Background */}
         <div className="absolute inset-0">
-          <img src={section.image} alt={section.title} className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" />
-          <div className="absolute inset-0 opacity-20" style={{ background: `linear-gradient(135deg, hsl(45, 100%, 55%, 0.2) 0%, transparent 60%)` }} />
+          {section.id === 'inovacao-ia' ? (
+            <>
+              <WebGLShader />
+              <div className="absolute inset-0 bg-background/60" />
+            </>
+          ) : (
+            <>
+              <img src={section.image} alt={section.title} className="w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" />
+              <div className="absolute inset-0 opacity-20" style={{ background: `linear-gradient(135deg, hsl(45, 100%, 55%, 0.2) 0%, transparent 60%)` }} />
+            </>
+          )}
         </div>
 
         {/* Back button */}
