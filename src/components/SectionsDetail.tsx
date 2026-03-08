@@ -18,7 +18,7 @@ const sections = [
       'Foco em performance, acessibilidade e experiência do usuário',
       'Metodologias ágeis e entrega contínua',
     ],
-    image: '/images/focuss-dev-hero.png',
+    image: '/images/slide-01.jpg',
   },
   {
     id: 'web-design',
@@ -57,7 +57,7 @@ const sections = [
       'Estilização avançada com Tailwind CSS',
       'Micro-interações que encantam o usuário',
     ],
-    image: '/videos/slide-04.mp4',
+    image: '/images/slide-04.jpg',
   },
   {
     id: 'inovacao-ia',
