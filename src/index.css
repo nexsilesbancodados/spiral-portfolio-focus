@@ -267,6 +267,33 @@ All colors MUST be HSL.
   color: rgba(255, 255, 255, 0.9);
 }
 
+.slide-nav-explore {
+  display: none;
+  align-items: center;
+  gap: 4px;
+  margin-top: 6px;
+  padding: 3px 10px;
+  font-family: 'Space Grotesk', monospace;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: hsl(45 100% 55%);
+  background: hsla(45, 100%, 55%, 0.1);
+  border: 1px solid hsla(45, 100%, 55%, 0.3);
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.slide-nav-explore:hover {
+  background: hsla(45, 100%, 55%, 0.2);
+  border-color: hsla(45, 100%, 55%, 0.6);
+}
+
+.slide-nav-item.active .slide-nav-explore {
+  display: inline-flex;
+}
+
 @media (max-width: 768px) {
   .slide-content {
     bottom: 10rem;

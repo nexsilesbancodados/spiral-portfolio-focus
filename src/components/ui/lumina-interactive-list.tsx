@@ -175,6 +175,22 @@ export function LuminaSlider() {
       );
     };
 
+    const triggerExplore = (slideIndex: number) => {
+      const detail = document.getElementById('detail-section');
+      const container = containerRef.current;
+      if (!detail || typeof gsap === 'undefined' || !container) return;
+      currentSlideRef.current = slideIndex;
+      window.dispatchEvent(new CustomEvent('explore-slide', { detail: { slideIndex } }));
+      gsap.to(container, { y: '-100%', opacity: 0, duration: 1.4, ease: 'power3.inOut' });
+      gsap.fromTo(detail, { y: '100%', opacity: 0 }, {
+        y: '0%', opacity: 1, duration: 1.4, ease: 'power3.inOut',
+        onComplete: () => {
+          const innerEls = detail.querySelectorAll('.anim-el');
+          gsap.fromTo(innerEls, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: 'power3.out' });
+        }
+      });
+    };
+
     const createSlidesNavigation = () => {
       const nav = document.getElementById("slidesNav");
       if (!nav) return;
@@ -182,10 +198,24 @@ export function LuminaSlider() {
       slides.forEach((slide, i) => {
         const item = document.createElement("div");
         item.className = `slide-nav-item${i === 0 ? " active" : ""}`;
-        item.innerHTML = `<div class="slide-progress-line"><div class="slide-progress-fill"></div></div><div class="slide-nav-title">${slide.title}</div>`;
-        item.addEventListener("click", () => {
+        item.innerHTML = `<div class="slide-progress-line"><div class="slide-progress-fill"></div></div><div class="slide-nav-title">${slide.title}</div><button class="slide-nav-explore" data-index="${i}">Explorar <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-7-7l7 7-7 7"/></svg></button>`;
+        item.addEventListener("click", (e) => {
+          if ((e.target as HTMLElement).closest('.slide-nav-explore')) return;
           if (!isTransitioning && i !== currentSlideIndex) navigateToSlide(i);
         });
+        const exploreBtn = item.querySelector('.slide-nav-explore');
+        if (exploreBtn) {
+          exploreBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            // Navigate to slide first if not current
+            if (i !== currentSlideIndex && !isTransitioning) {
+              navigateToSlide(i);
+              setTimeout(() => triggerExplore(i), 600);
+            } else {
+              triggerExplore(i);
+            }
+          });
+        }
         nav.appendChild(item);
       });
     };
@@ -320,29 +350,6 @@ export function LuminaSlider() {
 
       <nav className="slides-navigation" id="slidesNav" />
 
-      <button
-        className="explore-btn"
-        aria-label="Explorar seções"
-        onClick={() => {
-          const detail = document.getElementById('detail-section');
-          if (!detail || typeof gsap === 'undefined') return;
-          window.dispatchEvent(new CustomEvent('explore-slide', { detail: { slideIndex: currentSlideRef.current } }));
-          gsap.to(containerRef.current, { y: '-100%', opacity: 0, duration: 1.4, ease: 'power3.inOut' });
-          gsap.fromTo(detail,
-            { y: '100%', opacity: 0 },
-            {
-              y: '0%', opacity: 1, duration: 1.4, ease: 'power3.inOut',
-              onComplete: () => {
-                const innerEls = detail.querySelectorAll('.anim-el');
-                gsap.fromTo(innerEls, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: 'power3.out' });
-              }
-            }
-          );
-        }}
-      >
-        <span className="explore-btn-text">Explorar</span>
-        <svg className="explore-btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 5v14m-7-7l7 7 7-7"/></svg>
-      </button>
     </main>
   );
 }
