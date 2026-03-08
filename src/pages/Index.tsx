@@ -3,7 +3,7 @@ import { SectionsDetail } from '@/components/SectionsDetail'
 
 const Index = () => {
   return (
-    <div className="relative">
+    <div className="relative h-screen overflow-hidden">
       <LuminaSlider />
       <SectionsDetail />
     </div>
