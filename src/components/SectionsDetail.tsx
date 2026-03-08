@@ -143,8 +143,8 @@ export function SectionsDetail() {
 
         {/* Content */}
         <div className="relative flex items-center h-full px-6 md:px-16 lg:px-24">
-          <div className={`w-full ${section.id === 'desenvolvimento' ? 'flex flex-col lg:flex-row items-center gap-8' : 'max-w-4xl mx-auto'}`}>
-            <div className={section.id === 'desenvolvimento' ? 'flex-1' : ''}>
+          <div className={`w-full ${(section.id === 'desenvolvimento' || section.id === 'inovacao-ia') ? 'flex flex-col lg:flex-row items-center gap-8' : 'max-w-4xl mx-auto'}`}>
+            <div className={(section.id === 'desenvolvimento' || section.id === 'inovacao-ia') ? 'flex-1' : ''}>
               <div className="anim-el h-[2px] w-16 mb-6 origin-left bg-accent" />
               <span className="anim-el block font-[family-name:var(--font-display)] text-xs tracking-[0.2em] uppercase mb-3 text-accent">
                 {section.subtitle}
