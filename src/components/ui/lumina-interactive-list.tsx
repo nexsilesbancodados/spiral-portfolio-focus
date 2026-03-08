@@ -355,6 +355,7 @@ export function LuminaSlider() {
       <div className="slide-content">
           <h1 className="slide-title" id="mainTitle"></h1>
           <p className="slide-description" id="mainDesc"></p>
+          <div className="slide-skills" id="mainSkills"></div>
       </div>
      
       <nav className="slides-navigation" id="slidesNav"></nav>
