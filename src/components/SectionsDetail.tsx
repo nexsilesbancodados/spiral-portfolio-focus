@@ -18,46 +18,74 @@ const sections = [
     image: '/images/slide-01.jpg',
   },
   {
-    id: 'focuss-missao',
-    title: 'Nossa Missão',
-    subtitle: 'Propósito',
-    description: 'Impulsionar negócios através da tecnologia, entregando soluções digitais que geram resultados reais. Acreditamos que cada projeto é uma oportunidade de criar algo que transforma a forma como as pessoas interagem com o mundo digital.',
+    id: 'web-design',
+    title: 'Web Design',
+    subtitle: 'Criação Visual',
+    description: 'Interfaces modernas e elegantes que conectam marcas ao futuro digital. Nosso processo de design combina pesquisa de usuário, prototipagem rápida e uma estética visual impactante.',
     details: [
-      'Compromisso com qualidade e prazos',
-      'Relacionamento transparente com nossos clientes',
-      'Evolução contínua das nossas habilidades técnicas',
-      'Impacto positivo em cada projeto entregue',
+      'Design responsivo e mobile-first',
+      'Prototipagem interativa no Figma',
+      'Criação de Design Systems consistentes',
+      'Testes de usabilidade e iteração contínua',
+    ],
+    accent: 'hsl(45, 100%, 55%)',
+    image: '/images/slide-02.jpg',
+  },
+  {
+    id: 'desenvolvimento',
+    title: 'Desenvolvimento',
+    subtitle: 'Código & Performance',
+    description: 'Código limpo, performance máxima e arquitetura escalável. Utilizamos as melhores práticas e tecnologias modernas para construir aplicações robustas e de alta qualidade.',
+    details: [
+      'Arquitetura limpa e código manutenível',
+      'APIs REST e GraphQL performáticas',
+      'Integração contínua e deploy automatizado',
+      'Banco de dados otimizados com PostgreSQL',
     ],
     accent: 'hsl(45, 100%, 55%)',
     image: '/images/slide-03.jpg',
   },
   {
-    id: 'focuss-valores',
-    title: 'Nossos Valores',
-    subtitle: 'O que nos Move',
-    description: 'Nossos valores são o alicerce de tudo que fazemos. Inovação, excelência e colaboração guiam cada decisão, cada linha de código e cada interação com nossos parceiros e clientes.',
+    id: 'design-interface',
+    title: 'Design de Interface',
+    subtitle: 'UI/UX Premium',
+    description: 'Design centrado no usuário com estética cinematográfica e animações fluidas. Cada pixel é pensado para criar experiências memoráveis e intuitivas.',
     details: [
-      'Inovação constante em cada solução',
-      'Excelência técnica sem concessões',
-      'Colaboração genuína com nossos clientes',
-      'Responsabilidade e ética em cada entrega',
+      'Animações fluidas com GSAP e Framer Motion',
+      'Interfaces 3D interativas com Three.js',
+      'Estilização avançada com Tailwind CSS',
+      'Micro-interações que encantam o usuário',
     ],
     accent: 'hsl(45, 100%, 55%)',
     image: '/images/slide-04.jpg',
   },
   {
-    id: 'focuss-equipe',
-    title: 'Nossa Equipe',
-    subtitle: 'Talentos',
-    description: 'Uma equipe multidisciplinar de designers, desenvolvedores e estrategistas digitais. Cada membro traz uma perspectiva única, criando sinergia para entregar projetos que superam expectativas.',
+    id: 'inovacao-ia',
+    title: 'Inovação e IA',
+    subtitle: 'Futuro Digital',
+    description: 'Tecnologias de ponta e inteligência artificial para soluções que fazem a diferença. Integramos IA nos nossos projetos para criar experiências inteligentes e personalizadas.',
     details: [
-      'Designers UI/UX com olhar cinematográfico',
-      'Desenvolvedores full-stack especializados',
-      'Gestores de projeto com foco em resultados',
-      'Especialistas em performance e SEO',
+      'Integração com modelos de Machine Learning',
+      'Automação inteligente de processos',
+      'Infraestrutura cloud escalável na AWS',
+      'Chatbots e assistentes virtuais customizados',
     ],
     accent: 'hsl(45, 100%, 55%)',
     image: '/images/slide-05.jpg',
+  },
+  {
+    id: 'mobile-web',
+    title: 'Mobile e Web',
+    subtitle: 'Multiplataforma',
+    description: 'Aplicações responsivas e multiplataforma que funcionam perfeitamente em qualquer dispositivo. Do mobile ao desktop, garantimos consistência e performance.',
+    details: [
+      'Apps nativos com React Native',
+      'Progressive Web Apps (PWA)',
+      'Layouts 100% responsivos',
+      'Deploy containerizado com Docker',
+    ],
+    accent: 'hsl(45, 100%, 55%)',
+    image: '/images/slide-06.jpg',
   },
 ];
 
@@ -65,6 +93,15 @@ export function SectionsDetail() {
   const containerRef = useRef<HTMLDivElement>(null);
   const currentIndex = useRef(0);
   const isTransitioning = useRef(false);
+  const [initialSlide, setInitialSlide] = useState(0);
+
+  useEffect(() => {
+    const handleExplore = (e: CustomEvent) => {
+      setInitialSlide(e.detail.slideIndex);
+    };
+    window.addEventListener('explore-slide', handleExplore as EventListener);
+    return () => window.removeEventListener('explore-slide', handleExplore as EventListener);
+  }, []);
 
   useEffect(() => {
     const waitForGsap = () => {
@@ -81,14 +118,18 @@ export function SectionsDetail() {
       const panels = containerRef.current.querySelectorAll('.detail-panel');
       const navItems = containerRef.current.querySelectorAll('.detail-nav-item');
 
-      // Set initial state: first panel visible, rest hidden to right
+      const idx = initialSlide;
+      currentIndex.current = idx;
+
       panels.forEach((panel, i) => {
-        if (i === 0) {
+        if (i === idx) {
           gsap.set(panel, { x: '0%', opacity: 1, visibility: 'visible' });
         } else {
           gsap.set(panel, { x: '100%', opacity: 0, visibility: 'hidden' });
         }
       });
+
+      navItems.forEach((item, i) => item.classList.toggle('active', i === idx));
 
       const navigateTo = (targetIndex: number) => {
         if (isTransitioning.current || targetIndex === currentIndex.current) return;
@@ -98,10 +139,8 @@ export function SectionsDetail() {
         const targetPanel = panels[targetIndex];
         const direction = targetIndex > currentIndex.current ? 1 : -1;
 
-        // Update nav
         navItems.forEach((item, i) => item.classList.toggle('active', i === targetIndex));
 
-        // Animate out current
         gsap.to(currentPanel, {
           x: `${-direction * 100}%`,
           opacity: 0,
@@ -112,7 +151,6 @@ export function SectionsDetail() {
           },
         });
 
-        // Animate in target
         gsap.set(targetPanel, { x: `${direction * 100}%`, visibility: 'visible', opacity: 0 });
         gsap.to(targetPanel, {
           x: '0%',
@@ -125,7 +163,6 @@ export function SectionsDetail() {
           },
         });
 
-        // Stagger animate inner elements
         const innerEls = targetPanel.querySelectorAll('.anim-el');
         gsap.fromTo(innerEls,
           { y: 40, opacity: 0 },
@@ -133,12 +170,10 @@ export function SectionsDetail() {
         );
       };
 
-      // Click nav
       navItems.forEach((item, i) => {
         item.addEventListener('click', () => navigateTo(i));
       });
 
-      // Arrow buttons
       const prevBtn = containerRef.current!.querySelector('.detail-prev');
       const nextBtn = containerRef.current!.querySelector('.detail-next');
       prevBtn?.addEventListener('click', () => {
@@ -148,16 +183,17 @@ export function SectionsDetail() {
         if (currentIndex.current < sections.length - 1) navigateTo(currentIndex.current + 1);
       });
 
-      // Initial animation for first panel
-      const firstInner = panels[0].querySelectorAll('.anim-el');
-      gsap.fromTo(firstInner,
-        { y: 40, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8, stagger: 0.12, ease: 'power3.out', delay: 0.3 }
-      );
+      const firstInner = panels[idx]?.querySelectorAll('.anim-el');
+      if (firstInner) {
+        gsap.fromTo(firstInner,
+          { y: 40, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.8, stagger: 0.12, ease: 'power3.out', delay: 0.3 }
+        );
+      }
     };
 
     waitForGsap();
-  }, []);
+  }, [initialSlide]);
 
   return (
     <div ref={containerRef} id="detail-section" className="fixed inset-0 z-20 bg-background" style={{ transform: 'translateY(100%)', opacity: 0 }}>
@@ -176,38 +212,22 @@ export function SectionsDetail() {
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 19V5m7 7l-7-7-7 7"/></svg>
           Voltar
         </button>
+
         {/* Panels */}
-        {sections.map((section, index) => (
+        {sections.map((section) => (
           <div
             key={section.id}
             className="detail-panel absolute inset-0 flex items-center px-6 md:px-16 lg:px-24"
           >
-            {/* Background image */}
             <div className="absolute inset-0">
-              <img
-                src={section.image}
-                alt={section.title}
-                className="w-full h-full object-cover"
-              />
+              <img src={section.image} alt={section.title} className="w-full h-full object-cover" />
               <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" />
-              <div
-                className="absolute inset-0 opacity-20"
-                style={{
-                  background: `linear-gradient(135deg, ${section.accent}33 0%, transparent 60%)`,
-                }}
-              />
+              <div className="absolute inset-0 opacity-20" style={{ background: `linear-gradient(135deg, ${section.accent}33 0%, transparent 60%)` }} />
             </div>
 
-            {/* Content */}
             <div className="relative max-w-4xl mx-auto w-full">
-              <div
-                className="anim-el h-[2px] w-16 mb-6 origin-left"
-                style={{ background: section.accent }}
-              />
-              <span
-                className="anim-el block font-[family-name:var(--font-display)] text-xs tracking-[0.2em] uppercase mb-3"
-                style={{ color: section.accent }}
-              >
+              <div className="anim-el h-[2px] w-16 mb-6 origin-left" style={{ background: section.accent }} />
+              <span className="anim-el block font-[family-name:var(--font-display)] text-xs tracking-[0.2em] uppercase mb-3" style={{ color: section.accent }}>
                 {section.subtitle}
               </span>
               <h2 className="anim-el font-[family-name:var(--font-display)] text-4xl md:text-6xl lg:text-7xl font-light text-foreground mb-6 leading-tight tracking-tight">
@@ -218,14 +238,8 @@ export function SectionsDetail() {
               </p>
               <ul className="space-y-3">
                 {section.details.map((detail, i) => (
-                  <li
-                    key={i}
-                    className="anim-el flex items-start gap-3 text-muted-foreground text-sm md:text-base"
-                  >
-                    <span
-                      className="mt-2 block w-1.5 h-1.5 rounded-full shrink-0"
-                      style={{ background: section.accent }}
-                    />
+                  <li key={i} className="anim-el flex items-start gap-3 text-muted-foreground text-sm md:text-base">
+                    <span className="mt-2 block w-1.5 h-1.5 rounded-full shrink-0" style={{ background: section.accent }} />
                     {detail}
                   </li>
                 ))}
@@ -247,11 +261,9 @@ export function SectionsDetail() {
           {sections.map((section, i) => (
             <button
               key={section.id}
-              className={`detail-nav-item group flex flex-col items-center gap-2 cursor-pointer ${i === 0 ? 'active' : ''}`}
+              className={`detail-nav-item group flex flex-col items-center gap-2 cursor-pointer ${i === initialSlide ? 'active' : ''}`}
             >
-              <span className="block w-8 h-[2px] rounded-full transition-all duration-500 bg-foreground/20 group-[.active]:bg-[var(--accent-color)] group-[.active]:w-12"
-                style={{ '--accent-color': section.accent } as React.CSSProperties}
-              />
+              <span className="block w-8 h-[2px] rounded-full transition-all duration-500 bg-foreground/20 group-[.active]:bg-accent group-[.active]:w-12" />
               <span className="text-[10px] tracking-[0.15em] uppercase text-foreground/30 group-[.active]:text-foreground/70 transition-colors duration-300 font-[family-name:var(--font-display)]">
                 {section.subtitle}
               </span>

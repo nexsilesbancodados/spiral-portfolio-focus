@@ -324,6 +324,7 @@ export function LuminaSlider() {
         onClick={() => {
           const detail = document.getElementById('detail-section');
           if (!detail || typeof gsap === 'undefined') return;
+          window.dispatchEvent(new CustomEvent('explore-slide', { detail: { slideIndex: currentSlideIndex } }));
           gsap.to(containerRef.current, { y: '-100%', opacity: 0, duration: 1.4, ease: 'power3.inOut' });
           gsap.fromTo(detail,
             { y: '100%', opacity: 0 },
