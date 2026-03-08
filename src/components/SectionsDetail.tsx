@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { InteractiveGlobe } from '@/components/ui/interactive-globe';
+import { WebGLShader } from '@/components/ui/web-gl-shader';
 declare const gsap: any;
 
 const sections = [
@@ -111,9 +112,18 @@ export function SectionsDetail() {
       <div className="relative h-screen overflow-hidden">
         {/* Background */}
         <div className="absolute inset-0">
-          <img src={section.image} alt={section.title} className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" />
-          <div className="absolute inset-0 opacity-20" style={{ background: `linear-gradient(135deg, hsl(45, 100%, 55%, 0.2) 0%, transparent 60%)` }} />
+          {section.id === 'inovacao-ia' ? (
+            <>
+              <WebGLShader />
+              <div className="absolute inset-0 bg-background/60" />
+            </>
+          ) : (
+            <>
+              <img src={section.image} alt={section.title} className="w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" />
+              <div className="absolute inset-0 opacity-20" style={{ background: `linear-gradient(135deg, hsl(45, 100%, 55%, 0.2) 0%, transparent 60%)` }} />
+            </>
+          )}
         </div>
 
         {/* Back button */}
@@ -133,8 +143,8 @@ export function SectionsDetail() {
 
         {/* Content */}
         <div className="relative flex items-center h-full px-6 md:px-16 lg:px-24">
-          <div className={`w-full ${section.id === 'desenvolvimento' ? 'flex flex-col lg:flex-row items-center gap-8' : 'max-w-4xl mx-auto'}`}>
-            <div className={section.id === 'desenvolvimento' ? 'flex-1' : ''}>
+          <div className={`w-full ${(section.id === 'desenvolvimento' || section.id === 'inovacao-ia') ? 'flex flex-col lg:flex-row items-center gap-8' : 'max-w-4xl mx-auto'}`}>
+            <div className={(section.id === 'desenvolvimento' || section.id === 'inovacao-ia') ? 'flex-1' : ''}>
               <div className="anim-el h-[2px] w-16 mb-6 origin-left bg-accent" />
               <span className="anim-el block font-[family-name:var(--font-display)] text-xs tracking-[0.2em] uppercase mb-3 text-accent">
                 {section.subtitle}
@@ -163,6 +173,22 @@ export function SectionsDetail() {
                   markerColor="rgba(230, 200, 100, 1)"
                   autoRotateSpeed={0.003}
                 />
+              </div>
+            )}
+            {section.id === 'inovacao-ia' && (
+              <div className="anim-el flex-1 flex flex-col items-center gap-6">
+                <div className="grid grid-cols-3 gap-4 w-full max-w-sm">
+                  {[
+                    { value: '99.7%', label: 'Precisão IA' },
+                    { value: '<200ms', label: 'Latência' },
+                    { value: '24/7', label: 'Disponibilidade' },
+                  ].map((stat, i) => (
+                    <div key={i} className="text-center p-4 rounded-lg border border-accent/20 bg-background/30 backdrop-blur-sm">
+                      <div className="text-2xl font-bold text-accent">{stat.value}</div>
+                      <div className="text-xs text-muted-foreground mt-1">{stat.label}</div>
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
           </div>
