@@ -228,20 +228,22 @@ export function LuminaSlider() {
       }, undefined, reject);
     });
 
-    const loadVideoTexture = (src: string) => new Promise<any>((resolve, reject) => {
+    const loadVideoTexture = (src: string, index: number) => new Promise<any>((resolve, reject) => {
       const video = document.createElement('video');
       video.src = src;
       video.loop = true;
       video.muted = true;
       video.playsInline = true;
       video.crossOrigin = 'anonymous';
+      video.preload = index === 0 ? 'auto' : 'metadata';
       video.addEventListener('loadeddata', () => {
         const t = new THREE.VideoTexture(video);
         t.minFilter = THREE.LinearFilter;
         t.magFilter = THREE.LinearFilter;
         t.userData = { size: new THREE.Vector2(video.videoWidth, video.videoHeight), video };
         videoElements.push(video);
-        video.play().catch(() => {});
+        // Only auto-play the first video, others play on demand
+        if (index <= 1) video.play().catch(() => {});
         resolve(t);
       });
       video.addEventListener('error', () => reject(new Error(`Failed video: ${src}`)));
@@ -254,9 +256,9 @@ export function LuminaSlider() {
 
       scene = new THREE.Scene();
       camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-      renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: false });
+      renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: false, powerPreference: 'high-performance' });
       renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
 
       shaderMaterial = new THREE.ShaderMaterial({
         uniforms: {
@@ -272,9 +274,10 @@ export function LuminaSlider() {
       });
       scene.add(new THREE.Mesh(new THREE.PlaneGeometry(2, 2), shaderMaterial));
 
-      for (const s of slides) {
+      for (let i = 0; i < slides.length; i++) {
+        const s = slides[i];
         try {
-          slideTextures.push(s.isVideo ? await loadVideoTexture(s.media) : await loadImageTexture(s.media));
+          slideTextures.push(s.isVideo ? await loadVideoTexture(s.media, i) : await loadImageTexture(s.media));
         } catch { console.warn("Failed texture:", s.media); }
       }
 
@@ -287,14 +290,32 @@ export function LuminaSlider() {
         document.querySelector(".slider-wrapper")?.classList.add("loaded");
       }
 
-      const render = () => { animFrameId = requestAnimationFrame(render); renderer.render(scene, camera); };
+      let isVisible = true;
+      const render = () => {
+        animFrameId = requestAnimationFrame(render);
+        if (!isVisible) return;
+        renderer.render(scene, camera);
+      };
       render();
     };
 
+    let resizeTimer: ReturnType<typeof setTimeout>;
     const handleResize = () => {
-      if (renderer) {
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        shaderMaterial.uniforms.uResolution.value.set(window.innerWidth, window.innerHeight);
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        if (renderer) {
+          renderer.setSize(window.innerWidth, window.innerHeight);
+          shaderMaterial.uniforms.uResolution.value.set(window.innerWidth, window.innerHeight);
+        }
+      }, 150);
+    };
+
+    // Pause render when tab is hidden
+    const handleVisibility = () => {
+      if (document.hidden) {
+        videoElements.forEach(v => v.pause());
+      } else {
+        videoElements.forEach(v => v.play().catch(() => {}));
       }
     };
 
@@ -324,12 +345,15 @@ export function LuminaSlider() {
 
       await initRenderer();
       window.addEventListener("resize", handleResize);
+      document.addEventListener("visibilitychange", handleVisibility);
     };
 
     init();
 
     return () => {
       window.removeEventListener("resize", handleResize);
+      document.removeEventListener("visibilitychange", handleVisibility);
+      clearTimeout(resizeTimer);
       if (animFrameId) cancelAnimationFrame(animFrameId);
       videoElements.forEach(v => { v.pause(); v.src = ''; });
       if (renderer) renderer.dispose();

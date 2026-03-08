@@ -1,7 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { InteractiveGlobe } from '@/components/ui/interactive-globe';
-import { WebGLShader } from '@/components/ui/web-gl-shader';
+import React, { useEffect, useRef, useState, lazy, Suspense } from 'react';
 declare const gsap: any;
+
+const InteractiveGlobe = lazy(() => import('@/components/ui/interactive-globe').then(m => ({ default: m.InteractiveGlobe })));
+const WebGLShader = lazy(() => import('@/components/ui/web-gl-shader').then(m => ({ default: m.WebGLShader })));
 
 const sections = [
   {
@@ -87,10 +88,12 @@ const sections = [
 export function SectionsDetail() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeSlide, setActiveSlide] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const handleExplore = (e: CustomEvent) => {
       setActiveSlide(e.detail.slideIndex);
+      setIsVisible(true);
     };
     window.addEventListener('explore-slide', handleExplore as EventListener);
     return () => window.removeEventListener('explore-slide', handleExplore as EventListener);
@@ -112,11 +115,11 @@ export function SectionsDetail() {
       <div className="relative h-screen overflow-hidden">
         {/* Background */}
         <div className="absolute inset-0">
-          {section.id === 'inovacao-ia' ? (
-            <>
+          {section.id === 'inovacao-ia' && isVisible ? (
+            <Suspense fallback={<div className="absolute inset-0 bg-background" />}>
               <WebGLShader />
               <div className="absolute inset-0 bg-background/60" />
-            </>
+            </Suspense>
           ) : (
             <>
               <img src={section.image} alt={section.title} className="w-full h-full object-cover" />
@@ -164,16 +167,18 @@ export function SectionsDetail() {
                 ))}
               </ul>
             </div>
-            {section.id === 'desenvolvimento' && (
-              <div className="anim-el flex-1 flex justify-center">
-                <InteractiveGlobe
-                  size={400}
-                  dotColor="rgba(200, 170, 80, ALPHA)"
-                  arcColor="rgba(200, 170, 80, 0.4)"
-                  markerColor="rgba(230, 200, 100, 1)"
-                  autoRotateSpeed={0.003}
-                />
-              </div>
+            {section.id === 'desenvolvimento' && isVisible && (
+              <Suspense fallback={null}>
+                <div className="anim-el flex-1 flex justify-center">
+                  <InteractiveGlobe
+                    size={400}
+                    dotColor="rgba(200, 170, 80, ALPHA)"
+                    arcColor="rgba(200, 170, 80, 0.4)"
+                    markerColor="rgba(230, 200, 100, 1)"
+                    autoRotateSpeed={0.003}
+                  />
+                </div>
+              </Suspense>
             )}
             {section.id === 'inovacao-ia' && (
               <div className="anim-el flex-1 flex flex-col items-center gap-6">
