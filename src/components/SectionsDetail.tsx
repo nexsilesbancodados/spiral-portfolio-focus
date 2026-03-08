@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState, lazy, Suspense } from 'react';
+import { DevScrollFX } from '@/components/DevScrollFX';
 declare const gsap: any;
 
-const InteractiveGlobe = lazy(() => import('@/components/ui/interactive-globe').then(m => ({ default: m.InteractiveGlobe })));
 const WebGLShader = lazy(() => import('@/components/ui/web-gl-shader').then(m => ({ default: m.WebGLShader })));
 
 const sections = [
