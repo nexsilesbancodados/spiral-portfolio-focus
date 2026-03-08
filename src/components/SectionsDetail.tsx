@@ -164,7 +164,7 @@ export function SectionsDetail() {
         {/* Content */}
         {section.id === 'design-interface' && isVisible ? (
           <ScrollExpandMedia
-            mediaSrc="/videos/slide-04.mp4"
+            mediaSrc="/images/slide-04.jpg"
             bgImageSrc="/images/slide-04.jpg"
             title={section.title}
             subtitle={section.subtitle}
