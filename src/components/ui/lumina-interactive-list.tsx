@@ -61,12 +61,12 @@ export function LuminaSlider() {
         const TRANSITION_DURATION = () => SLIDER_CONFIG.settings.transitionDuration;
 
         const slides = [
-            { title: "FOCUSS DEV", description: "Transformando ideias em experiências digitais extraordinárias.", media: "/images/slide-01.jpg" },
-            { title: "Web Design", description: "Interfaces modernas que conectam marcas ao futuro digital.", media: "/images/slide-02.jpg" },
-            { title: "Desenvolvimento", description: "Código limpo, performance máxima e arquitetura escalável.", media: "/images/slide-03.jpg" },
-            { title: "UI/UX Design", description: "Design centrado no usuário com estética cinematográfica.", media: "/images/slide-04.jpg" },
-            { title: "Inovação", description: "Tecnologias de ponta para soluções que fazem a diferença.", media: "/images/slide-05.jpg" },
-            { title: "Mobile & Web", description: "Aplicações responsivas que funcionam em qualquer dispositivo.", media: "/images/slide-06.jpg" }
+            { title: "FOCUSS DEV", description: "Transformando ideias em experiências digitais extraordinárias.", media: "/images/slide-01.jpg", skills: ["React", "TypeScript", "Node.js"] },
+            { title: "Web Design", description: "Interfaces modernas que conectam marcas ao futuro digital.", media: "/images/slide-02.jpg", skills: ["Figma", "UI/UX", "Prototipagem"] },
+            { title: "Desenvolvimento", description: "Código limpo, performance máxima e arquitetura escalável.", media: "/images/slide-03.jpg", skills: ["JavaScript", "Python", "APIs REST"] },
+            { title: "Design de Interface", description: "Design centrado no usuário com estética cinematográfica.", media: "/images/slide-04.jpg", skills: ["Tailwind CSS", "Framer Motion", "GSAP"] },
+            { title: "Inovação", description: "Tecnologias de ponta para soluções que fazem a diferença.", media: "/images/slide-05.jpg", skills: ["IA", "Machine Learning", "Cloud"] },
+            { title: "Mobile & Web", description: "Aplicações responsivas que funcionam em qualquer dispositivo.", media: "/images/slide-06.jpg", skills: ["React Native", "PWA", "Responsivo"] }
         ];
 
         const vertexShader = `varying vec2 vUv; void main() { vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }`;
@@ -140,15 +140,23 @@ export function LuminaSlider() {
         const updateContent = (idx: number) => {
             const titleEl = document.getElementById('mainTitle');
             const descEl = document.getElementById('mainDesc');
+            const skillsEl = document.getElementById('mainSkills');
             if (titleEl && descEl) {
                  gsap.to(titleEl.children, { y: -20, opacity: 0, duration: 0.5, stagger: 0.02, ease: "power2.in" });
                  gsap.to(descEl, { y: -10, opacity: 0, duration: 0.4, ease: "power2.in" });
+                 if (skillsEl) gsap.to(skillsEl.children, { y: -10, opacity: 0, duration: 0.3, stagger: 0.05, ease: "power2.in" });
                  
                  setTimeout(() => {
                      titleEl.innerHTML = splitText(slides[idx].title);
                      descEl.textContent = slides[idx].description; 
+                     if (skillsEl) {
+                         skillsEl.innerHTML = slides[idx].skills.map((s: string) => 
+                             `<span class="skill-tag">${s}</span>`
+                         ).join('');
+                     }
                      gsap.set(titleEl.children, { opacity: 0 });
                      gsap.set(descEl, { y: 20, opacity: 0 });
+                     if (skillsEl) gsap.set(skillsEl.children, { y: 15, opacity: 0 });
 
                      const children = titleEl.children;
                      switch(idx % 6) {
@@ -178,6 +186,7 @@ export function LuminaSlider() {
                             break;
                      }
                      gsap.to(descEl, { y: 0, opacity: 1, duration: 0.8, delay: 0.2, ease: "power3.out" });
+                     if (skillsEl) gsap.to(skillsEl.children, { y: 0, opacity: 1, duration: 0.6, delay: 0.4, stagger: 0.08, ease: "power3.out" });
                  }, 500); 
             }
         };
@@ -320,11 +329,16 @@ export function LuminaSlider() {
         
         const tEl = document.getElementById('mainTitle');
         const dEl = document.getElementById('mainDesc');
+        const sEl = document.getElementById('mainSkills');
         if (tEl && dEl) {
             tEl.innerHTML = splitText(slides[0].title);
             dEl.textContent = slides[0].description;
+            if (sEl) {
+                sEl.innerHTML = slides[0].skills.map((s: string) => `<span class="skill-tag">${s}</span>`).join('');
+            }
             gsap.fromTo(tEl.children, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 1, stagger: 0.03, ease: "power3.out", delay: 0.5 });
             gsap.fromTo(dEl, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: "power3.out", delay: 0.8 });
+            if (sEl) gsap.fromTo(sEl.children, { y: 15, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, stagger: 0.1, ease: "power3.out", delay: 1.1 });
         }
 
         initRenderer();
@@ -346,6 +360,7 @@ export function LuminaSlider() {
       <div className="slide-content">
           <h1 className="slide-title" id="mainTitle"></h1>
           <p className="slide-description" id="mainDesc"></p>
+          <div className="slide-skills" id="mainSkills"></div>
       </div>
      
       <nav className="slides-navigation" id="slidesNav"></nav>
