@@ -110,6 +110,14 @@ export function SectionsDetail() {
 
   const section = sections[activeSlide];
 
+  const handleBack = () => {
+    if (typeof gsap !== 'undefined') {
+      const slider = document.querySelector('.slider-wrapper');
+      gsap.to(containerRef.current, { y: '100%', opacity: 0, duration: 1.4, ease: 'power3.inOut' });
+      gsap.to(slider, { y: '0%', opacity: 1, duration: 1.4, ease: 'power3.inOut' });
+    }
+  };
+
   return (
     <div ref={containerRef} id="detail-section" className="fixed inset-0 z-20 bg-background" style={{ transform: 'translateY(100%)', opacity: 0 }}>
       {section.id === 'desenvolvimento' && isVisible ? (
