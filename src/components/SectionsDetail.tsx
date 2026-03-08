@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState, lazy, Suspense } from 'react';
+import { WebDesignPortfolio } from '@/components/WebDesignPortfolio';
 declare const gsap: any;
 
 const InteractiveGlobe = lazy(() => import('@/components/ui/interactive-globe').then(m => ({ default: m.InteractiveGlobe })));
@@ -160,8 +161,8 @@ export function SectionsDetail() {
         </button>
 
         {/* Content */}
-        <div className="relative flex items-center h-full px-6 md:px-16 lg:px-24">
-          <div className={`w-full ${(section.id === 'desenvolvimento' || section.id === 'inovacao-ia') ? 'flex flex-col lg:flex-row items-center gap-8' : 'max-w-4xl mx-auto'}`}>
+        <div className={`relative flex items-center h-full px-6 md:px-16 lg:px-24 ${section.id === 'web-design' ? 'overflow-y-auto pt-20 pb-10 items-start' : ''}`}>
+          <div className={`w-full ${(section.id === 'desenvolvimento' || section.id === 'inovacao-ia') ? 'flex flex-col lg:flex-row items-center gap-8' : section.id === 'web-design' ? 'max-w-6xl mx-auto' : 'max-w-4xl mx-auto'}`}>
             <div className={(section.id === 'desenvolvimento' || section.id === 'inovacao-ia') ? 'flex-1' : ''}>
               <div className="anim-el h-[2px] w-16 mb-6 origin-left bg-accent" />
               <span className="anim-el block font-[family-name:var(--font-display)] text-xs tracking-[0.2em] uppercase mb-3 text-accent">
@@ -173,14 +174,17 @@ export function SectionsDetail() {
               <p className="anim-el text-muted-foreground text-base md:text-lg leading-relaxed mb-8 max-w-2xl">
                 {section.description}
               </p>
-              <ul className="space-y-3">
-                {section.details.map((detail, i) => (
-                  <li key={i} className="anim-el flex items-start gap-3 text-muted-foreground text-sm md:text-base">
-                    <span className="mt-2 block w-1.5 h-1.5 rounded-full shrink-0 bg-accent" />
-                    {detail}
-                  </li>
-                ))}
-              </ul>
+              {section.id !== 'web-design' && (
+                <ul className="space-y-3">
+                  {section.details.map((detail, i) => (
+                    <li key={i} className="anim-el flex items-start gap-3 text-muted-foreground text-sm md:text-base">
+                      <span className="mt-2 block w-1.5 h-1.5 rounded-full shrink-0 bg-accent" />
+                      {detail}
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {section.id === 'web-design' && isVisible && <WebDesignPortfolio />}
             </div>
             {section.id === 'desenvolvimento' && isVisible && (
               <Suspense fallback={null}>
