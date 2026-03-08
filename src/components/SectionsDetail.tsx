@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-
+import { InteractiveGlobe } from '@/components/ui/interactive-globe';
 declare const gsap: any;
 
 const sections = [
@@ -133,25 +133,38 @@ export function SectionsDetail() {
 
         {/* Content */}
         <div className="relative flex items-center h-full px-6 md:px-16 lg:px-24">
-          <div className="max-w-4xl mx-auto w-full">
-            <div className="anim-el h-[2px] w-16 mb-6 origin-left bg-accent" />
-            <span className="anim-el block font-[family-name:var(--font-display)] text-xs tracking-[0.2em] uppercase mb-3 text-accent">
-              {section.subtitle}
-            </span>
-            <h2 className="anim-el font-[family-name:var(--font-display)] text-4xl md:text-6xl lg:text-7xl font-light text-foreground mb-6 leading-tight tracking-tight">
-              {section.title}
-            </h2>
-            <p className="anim-el text-muted-foreground text-base md:text-lg leading-relaxed mb-8 max-w-2xl">
-              {section.description}
-            </p>
-            <ul className="space-y-3">
-              {section.details.map((detail, i) => (
-                <li key={i} className="anim-el flex items-start gap-3 text-muted-foreground text-sm md:text-base">
-                  <span className="mt-2 block w-1.5 h-1.5 rounded-full shrink-0 bg-accent" />
-                  {detail}
-                </li>
-              ))}
-            </ul>
+          <div className={`w-full ${section.id === 'desenvolvimento' ? 'flex flex-col lg:flex-row items-center gap-8' : 'max-w-4xl mx-auto'}`}>
+            <div className={section.id === 'desenvolvimento' ? 'flex-1' : ''}>
+              <div className="anim-el h-[2px] w-16 mb-6 origin-left bg-accent" />
+              <span className="anim-el block font-[family-name:var(--font-display)] text-xs tracking-[0.2em] uppercase mb-3 text-accent">
+                {section.subtitle}
+              </span>
+              <h2 className="anim-el font-[family-name:var(--font-display)] text-4xl md:text-6xl lg:text-7xl font-light text-foreground mb-6 leading-tight tracking-tight">
+                {section.title}
+              </h2>
+              <p className="anim-el text-muted-foreground text-base md:text-lg leading-relaxed mb-8 max-w-2xl">
+                {section.description}
+              </p>
+              <ul className="space-y-3">
+                {section.details.map((detail, i) => (
+                  <li key={i} className="anim-el flex items-start gap-3 text-muted-foreground text-sm md:text-base">
+                    <span className="mt-2 block w-1.5 h-1.5 rounded-full shrink-0 bg-accent" />
+                    {detail}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            {section.id === 'desenvolvimento' && (
+              <div className="anim-el flex-1 flex justify-center">
+                <InteractiveGlobe
+                  size={400}
+                  dotColor="rgba(200, 170, 80, ALPHA)"
+                  arcColor="rgba(200, 170, 80, 0.4)"
+                  markerColor="rgba(230, 200, 100, 1)"
+                  autoRotateSpeed={0.003}
+                />
+              </div>
+            )}
           </div>
         </div>
       </div>
