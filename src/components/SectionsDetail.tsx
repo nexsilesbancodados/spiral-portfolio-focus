@@ -160,8 +160,22 @@ export function SectionsDetail() {
   }, []);
 
   return (
-    <div ref={containerRef} className="relative z-10 bg-background">
+    <div ref={containerRef} id="detail-section" className="fixed inset-0 z-20 bg-background" style={{ transform: 'translateY(100%)', opacity: 0 }}>
       <div className="relative h-screen overflow-hidden">
+        {/* Back button */}
+        <button
+          className="absolute top-6 left-6 z-30 flex items-center gap-2 text-foreground/60 hover:text-foreground transition-colors duration-300 font-[family-name:var(--font-display)] text-xs tracking-[0.15em] uppercase"
+          onClick={() => {
+            if (typeof gsap !== 'undefined') {
+              const slider = document.querySelector('.slider-wrapper');
+              gsap.to(containerRef.current, { y: '100%', opacity: 0, duration: 1.4, ease: 'power3.inOut' });
+              gsap.to(slider, { y: '0%', opacity: 1, duration: 1.4, ease: 'power3.inOut' });
+            }
+          }}
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 19V5m7 7l-7-7-7 7"/></svg>
+          Voltar
+        </button>
         {/* Panels */}
         {sections.map((section, index) => (
           <div
