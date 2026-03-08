@@ -244,21 +244,12 @@ class TextParticleAnimation {
       ctx.arc(x, y, size, 0, Math.PI * 2)
       ctx.fill()
 
-      // Inner glow (brighter center)
-      if (alpha > 0.5 && size > 0.8) {
-        ctx.globalAlpha = alpha * 0.4
-        ctx.fillStyle = `hsl(${hue}, 100%, 85%)`
+      // Subtle glow only for large bright particles
+      if (alpha > 0.8 && size > 1.3) {
+        ctx.globalAlpha = alpha * 0.08
+        ctx.fillStyle = `hsl(${hue}, 100%, 80%)`
         ctx.beginPath()
         ctx.arc(x, y, size * 2, 0, Math.PI * 2)
-        ctx.fill()
-      }
-
-      // Outer glow
-      if (alpha > 0.7 && size > 1.2) {
-        ctx.globalAlpha = alpha * 0.1
-        ctx.fillStyle = `hsl(${hue}, 100%, 70%)`
-        ctx.beginPath()
-        ctx.arc(x, y, size * 4, 0, Math.PI * 2)
         ctx.fill()
       }
     }
