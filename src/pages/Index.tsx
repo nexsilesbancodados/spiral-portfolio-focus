@@ -1,7 +1,7 @@
-import SpiralDemo from '@/components/SpiralDemo'
+import { LuminaSlider } from '@/components/ui/lumina-interactive-list'
 
 const Index = () => {
-  return <SpiralDemo />
+  return <LuminaSlider />
 }
 
 export default Index
