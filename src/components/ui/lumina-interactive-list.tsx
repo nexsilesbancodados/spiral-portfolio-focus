@@ -365,7 +365,7 @@ export function LuminaSlider() {
     <main className="slider-wrapper" ref={containerRef}>
       <canvas className="webgl-canvas" />
       <span className="slide-number" id="slideNumber">01</span>
-      <span className="slide-total" id="slideTotal">06</span>
+      <span className="slide-total" id="slideTotal">07</span>
 
       <div className="slide-content">
         <h1 className="slide-title" id="mainTitle" />
