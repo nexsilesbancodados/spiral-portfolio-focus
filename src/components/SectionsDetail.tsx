@@ -104,7 +104,6 @@ const sections = [
 
 export function SectionsDetail() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const scrollAreaRef = useRef<HTMLDivElement>(null);
   const [activeSlide, setActiveSlide] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
 
