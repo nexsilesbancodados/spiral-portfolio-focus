@@ -121,6 +121,9 @@ All colors MUST be HSL.
   background: #0a0a0a;
   opacity: 0;
   transition: opacity 0.8s ease;
+  will-change: transform, opacity;
+  contain: layout style paint;
+  transform: translateZ(0);
 }
 
 .slider-wrapper.loaded {
@@ -133,6 +136,7 @@ All colors MUST be HSL.
   width: 100%;
   height: 100%;
   display: block;
+  will-change: contents;
 }
 
 .slide-number {
@@ -164,6 +168,8 @@ All colors MUST be HSL.
   left: 2.5rem;
   z-index: 10;
   max-width: 600px;
+  will-change: transform, opacity;
+  transform: translateZ(0);
 }
 
 .slide-title {
