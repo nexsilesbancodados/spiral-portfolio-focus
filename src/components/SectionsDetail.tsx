@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState, lazy, Suspense } from 'react';
-import { DevScrollFX } from '@/components/DevScrollFX';
 declare const gsap: any;
 
+const InteractiveGlobe = lazy(() => import('@/components/ui/interactive-globe').then(m => ({ default: m.InteractiveGlobe })));
 const WebGLShader = lazy(() => import('@/components/ui/web-gl-shader').then(m => ({ default: m.WebGLShader })));
 
 const sections = [
@@ -110,72 +110,79 @@ export function SectionsDetail() {
 
   const section = sections[activeSlide];
 
-  const handleBack = () => {
-    if (typeof gsap !== 'undefined') {
-      const slider = document.querySelector('.slider-wrapper');
-      gsap.to(containerRef.current, { y: '100%', opacity: 0, duration: 1.4, ease: 'power3.inOut' });
-      gsap.to(slider, { y: '0%', opacity: 1, duration: 1.4, ease: 'power3.inOut' });
-    }
-  };
-
   return (
     <div ref={containerRef} id="detail-section" className="fixed inset-0 z-20 bg-background" style={{ transform: 'translateY(100%)', opacity: 0 }}>
-      {section.id === 'desenvolvimento' && isVisible ? (
-        <DevScrollFX onBack={handleBack} />
-      ) : (
-        <div className="relative h-screen overflow-hidden">
-          {/* Background */}
-          <div className="absolute inset-0">
-            {section.id === 'inovacao-ia' && isVisible ? (
-              <Suspense fallback={<div className="absolute inset-0 bg-background" />}>
-                <WebGLShader />
-                <div className="absolute inset-0 bg-background/60" />
+      <div className="relative h-screen overflow-hidden">
+        {/* Background */}
+        <div className="absolute inset-0">
+          {section.id === 'inovacao-ia' && isVisible ? (
+            <Suspense fallback={<div className="absolute inset-0 bg-background" />}>
+              <WebGLShader />
+              <div className="absolute inset-0 bg-background/60" />
+            </Suspense>
+          ) : (
+            <>
+              <img src={section.image} alt={section.title} className="w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" />
+              <div className="absolute inset-0 opacity-20" style={{ background: `linear-gradient(135deg, hsl(45, 100%, 55%, 0.2) 0%, transparent 60%)` }} />
+            </>
+          )}
+        </div>
+
+        {/* Back button */}
+        <button
+          className="absolute top-6 left-6 z-30 flex items-center gap-2 text-foreground/60 hover:text-foreground transition-colors duration-300 font-[family-name:var(--font-display)] text-xs tracking-[0.15em] uppercase"
+          onClick={() => {
+            if (typeof gsap !== 'undefined') {
+              const slider = document.querySelector('.slider-wrapper');
+              gsap.to(containerRef.current, { y: '100%', opacity: 0, duration: 1.4, ease: 'power3.inOut' });
+              gsap.to(slider, { y: '0%', opacity: 1, duration: 1.4, ease: 'power3.inOut' });
+            }
+          }}
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 19V5m7 7l-7-7-7 7" /></svg>
+          Voltar
+        </button>
+
+        {/* Content */}
+        <div className="relative flex items-center h-full px-6 md:px-16 lg:px-24">
+          <div className={`w-full ${(section.id === 'desenvolvimento' || section.id === 'inovacao-ia') ? 'flex flex-col lg:flex-row items-center gap-8' : 'max-w-4xl mx-auto'}`}>
+            <div className={(section.id === 'desenvolvimento' || section.id === 'inovacao-ia') ? 'flex-1' : ''}>
+              <div className="anim-el h-[2px] w-16 mb-6 origin-left bg-accent" />
+              <span className="anim-el block font-[family-name:var(--font-display)] text-xs tracking-[0.2em] uppercase mb-3 text-accent">
+                {section.subtitle}
+              </span>
+              <h2 className="anim-el font-[family-name:var(--font-display)] text-4xl md:text-6xl lg:text-7xl font-light text-foreground mb-6 leading-tight tracking-tight">
+                {section.title}
+              </h2>
+              <p className="anim-el text-muted-foreground text-base md:text-lg leading-relaxed mb-8 max-w-2xl">
+                {section.description}
+              </p>
+              <ul className="space-y-3">
+                {section.details.map((detail, i) => (
+                  <li key={i} className="anim-el flex items-start gap-3 text-muted-foreground text-sm md:text-base">
+                    <span className="mt-2 block w-1.5 h-1.5 rounded-full shrink-0 bg-accent" />
+                    {detail}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            {section.id === 'desenvolvimento' && isVisible && (
+              <Suspense fallback={null}>
+                <div className="anim-el flex-1 flex justify-center">
+                  <InteractiveGlobe
+                    size={400}
+                    dotColor="rgba(200, 170, 80, ALPHA)"
+                    arcColor="rgba(200, 170, 80, 0.4)"
+                    markerColor="rgba(230, 200, 100, 1)"
+                    autoRotateSpeed={0.003}
+                  />
+                </div>
               </Suspense>
-            ) : (
-              <>
-                <img src={section.image} alt={section.title} className="w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" />
-                <div className="absolute inset-0 opacity-20" style={{ background: `linear-gradient(135deg, hsl(45, 100%, 55%, 0.2) 0%, transparent 60%)` }} />
-              </>
             )}
           </div>
-
-          {/* Back button */}
-          <button
-            className="absolute top-6 left-6 z-30 flex items-center gap-2 text-foreground/60 hover:text-foreground transition-colors duration-300 font-[family-name:var(--font-display)] text-xs tracking-[0.15em] uppercase"
-            onClick={handleBack}
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 19V5m7 7l-7-7-7 7" /></svg>
-            Voltar
-          </button>
-
-          {/* Content */}
-          <div className="relative flex items-center h-full px-6 md:px-16 lg:px-24">
-            <div className={`w-full ${section.id === 'inovacao-ia' ? 'flex flex-col lg:flex-row items-center gap-8' : 'max-w-4xl mx-auto'}`}>
-              <div className={section.id === 'inovacao-ia' ? 'flex-1' : ''}>
-                <div className="anim-el h-[2px] w-16 mb-6 origin-left bg-accent" />
-                <span className="anim-el block font-[family-name:var(--font-display)] text-xs tracking-[0.2em] uppercase mb-3 text-accent">
-                  {section.subtitle}
-                </span>
-                <h2 className="anim-el font-[family-name:var(--font-display)] text-4xl md:text-6xl lg:text-7xl font-light text-foreground mb-6 leading-tight tracking-tight">
-                  {section.title}
-                </h2>
-                <p className="anim-el text-muted-foreground text-base md:text-lg leading-relaxed mb-8 max-w-2xl">
-                  {section.description}
-                </p>
-                <ul className="space-y-3">
-                  {section.details.map((detail, i) => (
-                    <li key={i} className="anim-el flex items-start gap-3 text-muted-foreground text-sm md:text-base">
-                      <span className="mt-2 block w-1.5 h-1.5 rounded-full shrink-0 bg-accent" />
-                      {detail}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
         </div>
-      )}
+      </div>
     </div>
   );
 }
