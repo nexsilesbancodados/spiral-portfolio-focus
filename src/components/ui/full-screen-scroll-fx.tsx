@@ -704,8 +704,7 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
           .fx-title-layer .fx-title-inner span > span {
             display: inline-block;
           }
-          .fx-title-layer:not(:first-child) .fx-title-inner span > span {
-            transform: translateY(100%);
+          .fx-title-layer:not(:first-child) {
             opacity: 0;
           }
           .fx-title-inner {
