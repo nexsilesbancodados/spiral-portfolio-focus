@@ -274,9 +274,10 @@ export function LuminaSlider() {
       });
       scene.add(new THREE.Mesh(new THREE.PlaneGeometry(2, 2), shaderMaterial));
 
-      for (const s of slides) {
+      for (let i = 0; i < slides.length; i++) {
+        const s = slides[i];
         try {
-          slideTextures.push(s.isVideo ? await loadVideoTexture(s.media) : await loadImageTexture(s.media));
+          slideTextures.push(s.isVideo ? await loadVideoTexture(s.media, i) : await loadImageTexture(s.media));
         } catch { console.warn("Failed texture:", s.media); }
       }
 
