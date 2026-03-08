@@ -9,7 +9,8 @@ const slides = [
   { title: "Desenvolvimento", description: "Código limpo, performance máxima e arquitetura escalável para projetos robustos.", media: "/videos/slide-03.mp4", skills: ["JavaScript", "Python", "APIs REST", "PostgreSQL"], isVideo: true },
   { title: "Design de Interface", description: "Design centrado no usuário com estética cinematográfica e animações fluidas.", media: "/videos/slide-04.mp4", skills: ["Tailwind CSS", "Framer Motion", "GSAP", "Three.js"], isVideo: true },
   { title: "Inovação e IA", description: "Tecnologias de ponta e inteligência artificial para soluções que fazem a diferença.", media: "/images/slide-05.jpg", skills: ["IA", "Machine Learning", "Cloud", "AWS"] },
-  { title: "Mobile e Web", description: "Aplicações responsivas e multiplataforma que funcionam perfeitamente em qualquer dispositivo.", media: "/images/slide-06.jpg", skills: ["React Native", "PWA", "Responsivo", "Docker"] }
+  { title: "Mobile e Web", description: "Aplicações responsivas e multiplataforma que funcionam perfeitamente em qualquer dispositivo.", media: "/images/slide-06.jpg", skills: ["React Native", "PWA", "Responsivo", "Docker"] },
+  { title: "Skills", description: "Domínio completo do ecossistema moderno — front-end, back-end, cloud e design em um só lugar.", media: "/images/slide-07.jpg", skills: ["React", "Node.js", "Python", "AWS", "Figma", "Docker"] }
 ];
 
 export function LuminaSlider() {
@@ -364,7 +365,7 @@ export function LuminaSlider() {
     <main className="slider-wrapper" ref={containerRef}>
       <canvas className="webgl-canvas" />
       <span className="slide-number" id="slideNumber">01</span>
-      <span className="slide-total" id="slideTotal">06</span>
+      <span className="slide-total" id="slideTotal">07</span>
 
       <div className="slide-content">
         <h1 className="slide-title" id="mainTitle" />

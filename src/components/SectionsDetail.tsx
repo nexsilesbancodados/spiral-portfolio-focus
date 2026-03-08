@@ -83,6 +83,21 @@ const sections = [
     ],
     image: '/images/slide-06.jpg',
   },
+  {
+    id: 'skills',
+    subtitle: 'Competências Técnicas',
+    title: 'Skills',
+    description: 'Domínio completo do ecossistema de desenvolvimento moderno. Das linguagens de programação aos frameworks mais avançados, cada skill é refinada com prática e projetos reais.',
+    details: [
+      'React, Next.js, TypeScript — Front-end de alta performance',
+      'Node.js, Python, Go — Back-end escalável e robusto',
+      'PostgreSQL, MongoDB, Redis — Dados otimizados e resilientes',
+      'AWS, Docker, CI/CD — Infraestrutura cloud automatizada',
+      'Figma, GSAP, Three.js — Design e animações cinematográficas',
+      'Git, Scrum, TDD — Processos ágeis e código confiável',
+    ],
+    image: '/images/slide-07.jpg',
+  },
 ];
 
 export function SectionsDetail() {
