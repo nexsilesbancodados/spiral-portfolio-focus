@@ -208,9 +208,12 @@ export function ScrollExpandMedia({
             transition: 'border-radius 0.2s ease',
           }}
         >
-          <img
+          <video
             src={mediaSrc}
-            alt={title}
+            autoPlay
+            muted
+            loop
+            playsInline
             className="w-full h-full object-cover"
           />
           {/* Dark overlay that fades */}

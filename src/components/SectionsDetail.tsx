@@ -57,7 +57,7 @@ const sections = [
       'Estilização avançada com Tailwind CSS',
       'Micro-interações que encantam o usuário',
     ],
-    image: '/images/slide-04.jpg',
+    image: '/videos/slide-04.mp4',
   },
   {
     id: 'inovacao-ia',
