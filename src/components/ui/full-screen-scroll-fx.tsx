@@ -523,7 +523,7 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
                       return (
                         <div key={sIdx} className="fx-title-layer">
                           <div className="fx-title-inner">
-                            {isString ? splitWords(s.title as string) : s.title}
+                            {isString ? splitWords(s.title as string, sIdx) : s.title}
                           </div>
                           <WordsCollector
                             onReady={() => {
