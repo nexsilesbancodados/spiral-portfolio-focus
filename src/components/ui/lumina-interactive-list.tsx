@@ -342,12 +342,15 @@ export function LuminaSlider() {
 
       await initRenderer();
       window.addEventListener("resize", handleResize);
+      document.addEventListener("visibilitychange", handleVisibility);
     };
 
     init();
 
     return () => {
       window.removeEventListener("resize", handleResize);
+      document.removeEventListener("visibilitychange", handleVisibility);
+      clearTimeout(resizeTimer);
       if (animFrameId) cancelAnimationFrame(animFrameId);
       videoElements.forEach(v => { v.pause(); v.src = ''; });
       if (renderer) renderer.dispose();
