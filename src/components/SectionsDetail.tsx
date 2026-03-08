@@ -175,6 +175,22 @@ export function SectionsDetail() {
                 />
               </div>
             )}
+            {section.id === 'inovacao-ia' && (
+              <div className="anim-el flex-1 flex flex-col items-center gap-6">
+                <div className="grid grid-cols-3 gap-4 w-full max-w-sm">
+                  {[
+                    { value: '99.7%', label: 'Precisão IA' },
+                    { value: '<200ms', label: 'Latência' },
+                    { value: '24/7', label: 'Disponibilidade' },
+                  ].map((stat, i) => (
+                    <div key={i} className="text-center p-4 rounded-lg border border-accent/20 bg-background/30 backdrop-blur-sm">
+                      <div className="text-2xl font-bold text-accent">{stat.value}</div>
+                      <div className="text-xs text-muted-foreground mt-1">{stat.label}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
