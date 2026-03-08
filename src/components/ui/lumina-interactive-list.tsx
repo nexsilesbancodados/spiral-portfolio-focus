@@ -279,7 +279,7 @@ export function LuminaSlider() {
              }, PROGRESS_UPDATE_INTERVAL);
         };
         const stopAutoSlideTimer = () => { if (progressAnimation) clearInterval(progressAnimation); if (autoSlideTimer) clearTimeout(autoSlideTimer); progressAnimation = null; autoSlideTimer = null; };
-        const safeStartTimer = (delay = 0) => { stopAutoSlideTimer(); if (sliderEnabled && texturesLoaded) { if (delay > 0) autoSlideTimer = setTimeout(startAutoSlideTimer, delay); else startAutoSlideTimer(); } };
+        const safeStartTimer = (_delay = 0) => { /* Auto-slide disabled — manual navigation only */ };
 
         const loadImageTexture = (src: string) => new Promise<any>((resolve, reject) => {
              const l = new THREE.TextureLoader();
