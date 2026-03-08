@@ -331,7 +331,16 @@ export function LuminaSlider() {
             });
             scene.add(new THREE.Mesh(new THREE.PlaneGeometry(2, 2), shaderMaterial));
             
-            for (const s of slides) { try { slideTextures.push(await loadImageTexture(s.media)); } catch { console.warn("Failed texture:", s.media); } }
+            for (let i = 0; i < slides.length; i++) {
+                const s = slides[i];
+                try {
+                    if (s.isVideo) {
+                        slideTextures.push(await loadVideoTexture(s.media));
+                    } else {
+                        slideTextures.push(await loadImageTexture(s.media));
+                    }
+                } catch { console.warn("Failed texture:", s.media); }
+            }
             if (slideTextures.length >= 2) {
                 shaderMaterial.uniforms.uTexture1.value = slideTextures[0];
                 shaderMaterial.uniforms.uTexture2.value = slideTextures[1];
