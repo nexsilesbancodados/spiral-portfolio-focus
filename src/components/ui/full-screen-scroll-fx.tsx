@@ -137,12 +137,17 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
 
     // Split words for center title
     const tempWordBucket = useRef<HTMLSpanElement[]>([]);
-    const splitWords = (text: string) => {
+    const splitWords = (text: string, sectionIdx: number) => {
       const words = text.split(/\s+/).filter(Boolean);
+      const isFirst = sectionIdx === initialIndex;
       return words.map((w, i) => (
         <span key={i} style={{ display: "inline-block", overflow: "hidden" }}>
           <span
-            style={{ display: "inline-block" }}
+            style={{
+              display: "inline-block",
+              transform: isFirst ? "translateY(0)" : "translateY(100%)",
+              opacity: isFirst ? 1 : 0,
+            }}
             ref={(el) => el && tempWordBucket.current.push(el)}
           >
             {w}
