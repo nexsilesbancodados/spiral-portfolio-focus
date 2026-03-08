@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 declare const gsap: any;
 
@@ -63,6 +63,8 @@ const sections = [
 
 export function SectionsDetail() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const currentIndex = useRef(0);
+  const isTransitioning = useRef(false);
 
   useEffect(() => {
     const waitForGsap = () => {
@@ -70,39 +72,88 @@ export function SectionsDetail() {
         setTimeout(waitForGsap, 200);
         return;
       }
+      initSlider();
+    };
 
-      // Load ScrollTrigger plugin
-      const loadScrollTrigger = () => new Promise<void>((res) => {
-        if ((window as any).ScrollTrigger) { gsap.registerPlugin((window as any).ScrollTrigger); res(); return; }
-        const s = document.createElement('script');
-        s.src = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js';
-        s.onload = () => { setTimeout(() => { gsap.registerPlugin((window as any).ScrollTrigger); res(); }, 100); };
-        document.head.appendChild(s);
+    const initSlider = () => {
+      if (!containerRef.current) return;
+
+      const panels = containerRef.current.querySelectorAll('.detail-panel');
+      const navItems = containerRef.current.querySelectorAll('.detail-nav-item');
+
+      // Set initial state: first panel visible, rest hidden to right
+      panels.forEach((panel, i) => {
+        if (i === 0) {
+          gsap.set(panel, { x: '0%', opacity: 1, visibility: 'visible' });
+        } else {
+          gsap.set(panel, { x: '100%', opacity: 0, visibility: 'hidden' });
+        }
       });
 
-      loadScrollTrigger().then(() => {
-        const ScrollTrigger = (window as any).ScrollTrigger;
-        if (!containerRef.current) return;
+      const navigateTo = (targetIndex: number) => {
+        if (isTransitioning.current || targetIndex === currentIndex.current) return;
+        isTransitioning.current = true;
 
-        const sectionEls = containerRef.current.querySelectorAll('.detail-section');
-        sectionEls.forEach((section) => {
-          const tl = gsap.timeline({
-            scrollTrigger: {
-              trigger: section,
-              start: 'top 80%',
-              end: 'top 20%',
-              toggleActions: 'play none none reverse',
-            },
-          });
+        const currentPanel = panels[currentIndex.current];
+        const targetPanel = panels[targetIndex];
+        const direction = targetIndex > currentIndex.current ? 1 : -1;
 
-          tl.from(section.querySelector('.section-line'), { scaleX: 0, duration: 0.8, ease: 'power3.out' })
-            .from(section.querySelector('.section-subtitle'), { y: 30, opacity: 0, duration: 0.6, ease: 'power3.out' }, '-=0.4')
-            .from(section.querySelector('.section-title'), { y: 50, opacity: 0, duration: 0.8, ease: 'power3.out' }, '-=0.4')
-            .from(section.querySelector('.section-desc'), { y: 30, opacity: 0, duration: 0.7, ease: 'power3.out' }, '-=0.5')
-            .from(section.querySelectorAll('.detail-item'), { y: 25, opacity: 0, duration: 0.5, stagger: 0.1, ease: 'power3.out' }, '-=0.3')
-            .from(section.querySelector('.section-image'), { scale: 1.1, opacity: 0, duration: 1, ease: 'power3.out' }, '-=0.8');
+        // Update nav
+        navItems.forEach((item, i) => item.classList.toggle('active', i === targetIndex));
+
+        // Animate out current
+        gsap.to(currentPanel, {
+          x: `${-direction * 100}%`,
+          opacity: 0,
+          duration: 1.2,
+          ease: 'power3.inOut',
+          onComplete: () => {
+            gsap.set(currentPanel, { visibility: 'hidden' });
+          },
         });
+
+        // Animate in target
+        gsap.set(targetPanel, { x: `${direction * 100}%`, visibility: 'visible', opacity: 0 });
+        gsap.to(targetPanel, {
+          x: '0%',
+          opacity: 1,
+          duration: 1.2,
+          ease: 'power3.inOut',
+          onComplete: () => {
+            currentIndex.current = targetIndex;
+            isTransitioning.current = false;
+          },
+        });
+
+        // Stagger animate inner elements
+        const innerEls = targetPanel.querySelectorAll('.anim-el');
+        gsap.fromTo(innerEls,
+          { y: 40, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: 'power3.out', delay: 0.5 }
+        );
+      };
+
+      // Click nav
+      navItems.forEach((item, i) => {
+        item.addEventListener('click', () => navigateTo(i));
       });
+
+      // Arrow buttons
+      const prevBtn = containerRef.current!.querySelector('.detail-prev');
+      const nextBtn = containerRef.current!.querySelector('.detail-next');
+      prevBtn?.addEventListener('click', () => {
+        if (currentIndex.current > 0) navigateTo(currentIndex.current - 1);
+      });
+      nextBtn?.addEventListener('click', () => {
+        if (currentIndex.current < sections.length - 1) navigateTo(currentIndex.current + 1);
+      });
+
+      // Initial animation for first panel
+      const firstInner = panels[0].querySelectorAll('.anim-el');
+      gsap.fromTo(firstInner,
+        { y: 40, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.8, stagger: 0.12, ease: 'power3.out', delay: 0.3 }
+      );
     };
 
     waitForGsap();
@@ -110,35 +161,52 @@ export function SectionsDetail() {
 
   return (
     <div ref={containerRef} className="relative z-10 bg-background">
-      {sections.map((section, index) => (
-        <section
-          key={section.id}
-          className="detail-section min-h-screen flex items-center py-24 px-6 md:px-16 lg:px-24 overflow-hidden"
-        >
-          <div className={`max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center ${index % 2 === 1 ? 'lg:[direction:rtl]' : ''}`}>
-            {/* Text Content */}
-            <div className={index % 2 === 1 ? 'lg:[direction:ltr]' : ''}>
+      <div className="relative h-screen overflow-hidden">
+        {/* Panels */}
+        {sections.map((section, index) => (
+          <div
+            key={section.id}
+            className="detail-panel absolute inset-0 flex items-center px-6 md:px-16 lg:px-24"
+          >
+            {/* Background image */}
+            <div className="absolute inset-0">
+              <img
+                src={section.image}
+                alt={section.title}
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" />
               <div
-                className="section-line h-[2px] w-16 mb-6 origin-left"
+                className="absolute inset-0 opacity-20"
+                style={{
+                  background: `linear-gradient(135deg, ${section.accent}33 0%, transparent 60%)`,
+                }}
+              />
+            </div>
+
+            {/* Content */}
+            <div className="relative max-w-4xl mx-auto w-full">
+              <div
+                className="anim-el h-[2px] w-16 mb-6 origin-left"
                 style={{ background: section.accent }}
               />
               <span
-                className="section-subtitle block font-[family-name:var(--font-display)] text-xs tracking-[0.2em] uppercase mb-3"
+                className="anim-el block font-[family-name:var(--font-display)] text-xs tracking-[0.2em] uppercase mb-3"
                 style={{ color: section.accent }}
               >
                 {section.subtitle}
               </span>
-              <h2 className="section-title font-[family-name:var(--font-display)] text-4xl md:text-5xl lg:text-6xl font-light text-foreground mb-6 leading-tight tracking-tight">
+              <h2 className="anim-el font-[family-name:var(--font-display)] text-4xl md:text-6xl lg:text-7xl font-light text-foreground mb-6 leading-tight tracking-tight">
                 {section.title}
               </h2>
-              <p className="section-desc text-muted-foreground text-base md:text-lg leading-relaxed mb-8 max-w-lg">
+              <p className="anim-el text-muted-foreground text-base md:text-lg leading-relaxed mb-8 max-w-2xl">
                 {section.description}
               </p>
               <ul className="space-y-3">
                 {section.details.map((detail, i) => (
                   <li
                     key={i}
-                    className="detail-item flex items-start gap-3 text-muted-foreground text-sm md:text-base"
+                    className="anim-el flex items-start gap-3 text-muted-foreground text-sm md:text-base"
                   >
                     <span
                       className="mt-2 block w-1.5 h-1.5 rounded-full shrink-0"
@@ -149,27 +217,34 @@ export function SectionsDetail() {
                 ))}
               </ul>
             </div>
-
-            {/* Image */}
-            <div className={`section-image relative overflow-hidden rounded-sm ${index % 2 === 1 ? 'lg:[direction:ltr]' : ''}`}>
-              <div className="aspect-[4/3] relative">
-                <img
-                  src={section.image}
-                  alt={section.title}
-                  className="absolute inset-0 w-full h-full object-cover"
-                  loading="lazy"
-                />
-                <div
-                  className="absolute inset-0 opacity-30"
-                  style={{
-                    background: `linear-gradient(135deg, ${section.accent}22 0%, transparent 60%)`,
-                  }}
-                />
-              </div>
-            </div>
           </div>
-        </section>
-      ))}
+        ))}
+
+        {/* Navigation arrows */}
+        <button className="detail-prev absolute left-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full border border-foreground/20 flex items-center justify-center text-foreground/60 hover:text-foreground hover:border-foreground/50 transition-all duration-300 backdrop-blur-md bg-background/20">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M15 19l-7-7 7-7"/></svg>
+        </button>
+        <button className="detail-next absolute right-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full border border-foreground/20 flex items-center justify-center text-foreground/60 hover:text-foreground hover:border-foreground/50 transition-all duration-300 backdrop-blur-md bg-background/20">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M9 5l7 7-7 7"/></svg>
+        </button>
+
+        {/* Bottom navigation dots */}
+        <nav className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex gap-4">
+          {sections.map((section, i) => (
+            <button
+              key={section.id}
+              className={`detail-nav-item group flex flex-col items-center gap-2 cursor-pointer ${i === 0 ? 'active' : ''}`}
+            >
+              <span className="block w-8 h-[2px] rounded-full transition-all duration-500 bg-foreground/20 group-[.active]:bg-[var(--accent-color)] group-[.active]:w-12"
+                style={{ '--accent-color': section.accent } as React.CSSProperties}
+              />
+              <span className="text-[10px] tracking-[0.15em] uppercase text-foreground/30 group-[.active]:text-foreground/70 transition-colors duration-300 font-[family-name:var(--font-display)]">
+                {section.subtitle}
+              </span>
+            </button>
+          ))}
+        </nav>
+      </div>
     </div>
   );
 }
