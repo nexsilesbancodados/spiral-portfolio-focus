@@ -701,6 +701,13 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
             justify-content: center;
             pointer-events: none;
           }
+          .fx-title-layer .fx-title-inner span > span {
+            display: inline-block;
+          }
+          .fx-title-layer:not(:first-child) .fx-title-inner span > span {
+            transform: translateY(100%);
+            opacity: 0;
+          }
           .fx-title-inner {
             font-family: 'Cormorant Garamond', serif;
             font-size: clamp(2.5rem, 6vw, 5.5rem);
