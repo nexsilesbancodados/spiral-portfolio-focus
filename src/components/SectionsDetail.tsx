@@ -88,10 +88,12 @@ const sections = [
 export function SectionsDetail() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeSlide, setActiveSlide] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const handleExplore = (e: CustomEvent) => {
       setActiveSlide(e.detail.slideIndex);
+      setIsVisible(true);
     };
     window.addEventListener('explore-slide', handleExplore as EventListener);
     return () => window.removeEventListener('explore-slide', handleExplore as EventListener);
