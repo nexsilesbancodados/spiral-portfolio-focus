@@ -395,6 +395,44 @@ export function LuminaSlider() {
       </div>
      
       <nav className="slides-navigation" id="slidesNav"></nav>
+
+      {/* Explore button */}
+      <button
+        className="explore-btn"
+        onClick={() => {
+          const detail = document.getElementById('detail-section');
+          if (!detail) return;
+          // Animate slider out upward
+          if (typeof gsap !== 'undefined') {
+            gsap.to(containerRef.current, {
+              y: '-100%',
+              opacity: 0,
+              duration: 1.4,
+              ease: 'power3.inOut',
+            });
+            gsap.fromTo(detail,
+              { y: '100%', opacity: 0 },
+              {
+                y: '0%',
+                opacity: 1,
+                duration: 1.4,
+                ease: 'power3.inOut',
+                onComplete: () => {
+                  // Trigger inner animations
+                  const innerEls = detail.querySelectorAll('.anim-el');
+                  gsap.fromTo(innerEls,
+                    { y: 40, opacity: 0 },
+                    { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: 'power3.out' }
+                  );
+                }
+              }
+            );
+          }
+        }}
+      >
+        <span className="explore-btn-text">Explorar</span>
+        <svg className="explore-btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 5v14m-7-7l7 7 7-7"/></svg>
+      </button>
     </main>
   );
 }
