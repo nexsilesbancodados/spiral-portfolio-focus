@@ -356,6 +356,26 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
       });
     };
 
+    // Initialize word visibility after refs are populated
+    const initWordsRef = useRef(false);
+    useEffect(() => {
+      if (initWordsRef.current) return;
+      // Small delay to ensure WordsCollector has fired
+      const timer = setTimeout(() => {
+        wordRefs.current.forEach((words, sIdx) => {
+          words.forEach((w) => {
+            gsap.set(w, {
+              yPercent: sIdx === index ? 0 : 100,
+              opacity: sIdx === index ? 1 : 0,
+            });
+          });
+        });
+        initWordsRef.current = true;
+      }, 50);
+      return () => clearTimeout(timer);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
     // ScrollTrigger setup
     useLayoutEffect(() => {
       if (typeof window === "undefined") return;
@@ -365,15 +385,6 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
 
       gsap.set(bgRefs.current, { opacity: 0, scale: 1.04, yPercent: 0 });
       if (bgRefs.current[0]) gsap.set(bgRefs.current[0], { opacity: 1, scale: 1 });
-
-      wordRefs.current.forEach((words, sIdx) => {
-        words.forEach((w) => {
-          gsap.set(w, {
-            yPercent: sIdx === index ? 0 : 100,
-            opacity: sIdx === index ? 1 : 0,
-          });
-        });
-      });
 
       computePositions();
       measureAndCenterLists(index, false);
