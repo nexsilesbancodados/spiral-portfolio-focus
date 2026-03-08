@@ -129,7 +129,7 @@ export function DesignInterfaceShowcase({ scrollerRef }: { scrollerRef: React.Re
   return (
     <div ref={rootRef} className="anim-el w-full mt-16 space-y-[20vh]">
       {SHOWCASE_ITEMS.map((item, i) => (
-        <div key={i} className="flex flex-col items-center">
+        <div key={i} className="flex flex-col items-center min-h-[100vh]" style={{ perspective: '900px' }}>
           <div
             ref={(el) => { boxRefs.current[i] = el; }}
             className="relative mx-auto shadow-2xl"
