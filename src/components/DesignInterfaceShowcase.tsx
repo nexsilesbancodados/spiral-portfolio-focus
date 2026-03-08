@@ -1,7 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 
-declare const gsap: any;
-
 const SHOWCASE_ITEMS = [
   {
     label: 'PROJECT • 01',
@@ -37,7 +35,7 @@ function loadScript(src: string, globalName: string): Promise<void> {
       const check = setInterval(() => {
         if ((window as any)[globalName]) { clearInterval(check); res(); }
       }, 50);
-      setTimeout(() => { clearInterval(check); rej(new Error(`Timeout: ${globalName}`)); }, 10000);
+      setTimeout(() => { clearInterval(check); rej(new Error(`Timeout`)); }, 10000);
       return;
     }
     const s = document.createElement('script');
@@ -59,14 +57,14 @@ export function DesignInterfaceShowcase({ scrollerRef }: { scrollerRef: React.Re
     const scroller = scrollerRef.current;
     if (!scroller || !rootRef.current) return;
 
-    let triggers: any[] = [];
-    let timelines: any[] = [];
     let cancelled = false;
+    const cleanups: (() => void)[] = [];
 
     const init = async () => {
-      // Ensure GSAP + ScrollTrigger are loaded
-      await loadScript('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js', 'gsap');
-      await loadScript('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js', 'ScrollTrigger');
+      try {
+        await loadScript('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js', 'gsap');
+        await loadScript('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js', 'ScrollTrigger');
+      } catch { return; }
       if (cancelled) return;
 
       const g = (window as any).gsap;
@@ -74,11 +72,10 @@ export function DesignInterfaceShowcase({ scrollerRef }: { scrollerRef: React.Re
       if (!g || !ST) return;
       g.registerPlugin(ST);
 
-    const triggers: any[] = [];
-    const timelines: any[] = [];
+      // Wait for layout
+      await new Promise(r => setTimeout(r, 400));
+      if (cancelled) return;
 
-    // Small delay to let layout settle
-    const timer = setTimeout(() => {
       SHOWCASE_ITEMS.forEach((_, i) => {
         const box = boxRefs.current[i];
         const overlay = overlayRefs.current[i];
@@ -86,18 +83,12 @@ export function DesignInterfaceShowcase({ scrollerRef }: { scrollerRef: React.Re
         const caption = captionRefs.current[i];
         if (!box || !overlay || !content) return;
 
-        // Initial states
-        gsap.set(box, {
-          width: 280,
-          height: 280,
-          borderRadius: 20,
-          overflow: 'hidden',
-        });
-        gsap.set(overlay, { clipPath: 'inset(100% 0 0 0)' });
-        gsap.set(content, { filter: 'blur(8px)', scale: 1.05, y: 30 });
-        if (caption) gsap.set(caption, { y: 20, opacity: 0 });
+        g.set(box, { width: 280, height: 280, borderRadius: 20, overflow: 'hidden' });
+        g.set(overlay, { clipPath: 'inset(100% 0 0 0)' });
+        g.set(content, { filter: 'blur(8px)', scale: 1.05, y: 30 });
+        if (caption) g.set(caption, { y: 20, opacity: 0 });
 
-        const tl = gsap.timeline({
+        const tl = g.timeline({
           scrollTrigger: {
             trigger: box,
             scroller: scroller,
@@ -107,37 +98,23 @@ export function DesignInterfaceShowcase({ scrollerRef }: { scrollerRef: React.Re
           },
         });
 
-        tl.to(box, {
-          width: '88vw',
-          height: '70vh',
-          borderRadius: 8,
-          ease: 'expo.out',
-        }, 0)
-        .to(overlay, {
-          clipPath: 'inset(0% 0 0 0)',
-          ease: 'expo.out',
-        }, 0.3)
-        .to(content, {
-          y: 0,
-          filter: 'blur(0px)',
-          scale: 1,
-          ease: 'expo.out',
-        }, 0.35)
-        .to(caption, {
-          y: 0,
-          opacity: 1,
-          ease: 'power3.out',
-        }, 0.3);
+        tl.to(box, { width: '88vw', height: '70vh', borderRadius: 8, ease: 'expo.out' }, 0)
+          .to(overlay, { clipPath: 'inset(0% 0 0 0)', ease: 'expo.out' }, 0.3)
+          .to(content, { y: 0, filter: 'blur(0px)', scale: 1, ease: 'expo.out' }, 0.35)
+          .to(caption, { y: 0, opacity: 1, ease: 'power3.out' }, 0.3);
 
-        timelines.push(tl);
-        if (tl.scrollTrigger) triggers.push(tl.scrollTrigger);
+        cleanups.push(() => {
+          tl.scrollTrigger?.kill();
+          tl.kill();
+        });
       });
-    }, 300);
+    };
+
+    init();
 
     return () => {
-      clearTimeout(timer);
-      timelines.forEach(tl => tl?.kill?.());
-      triggers.forEach(st => st?.kill?.());
+      cancelled = true;
+      cleanups.forEach(fn => fn());
     };
   }, [scrollerRef]);
 
@@ -145,23 +122,19 @@ export function DesignInterfaceShowcase({ scrollerRef }: { scrollerRef: React.Re
     <div ref={rootRef} className="anim-el w-full mt-16 space-y-[50vh]">
       {SHOWCASE_ITEMS.map((item, i) => (
         <div key={i} className="flex flex-col items-center">
-          {/* Expanding media box */}
           <div
             ref={(el) => { boxRefs.current[i] = el; }}
             className="relative mx-auto shadow-2xl"
             style={{ width: 280, height: 280, borderRadius: 20, overflow: 'hidden' }}
           >
-            {/* Background image */}
             <img
               src={item.image}
               alt={item.title}
               className="absolute inset-0 w-full h-full object-cover"
               loading="lazy"
             />
-            {/* Darken overlay */}
             <div className="absolute inset-0 bg-black/30 z-[1]" />
 
-            {/* Content overlay that reveals */}
             <div
               ref={(el) => { overlayRefs.current[i] = el; }}
               className="absolute inset-0 z-[2] flex flex-col items-center justify-center text-center"
@@ -171,7 +144,6 @@ export function DesignInterfaceShowcase({ scrollerRef }: { scrollerRef: React.Re
                 backdropFilter: 'blur(10px)',
               }}
             >
-              {/* Caption */}
               <div
                 ref={(el) => { captionRefs.current[i] = el; }}
                 className="absolute top-4 md:top-6 left-0 w-full text-center font-[family-name:var(--font-display)] text-[10px] md:text-xs tracking-[0.2em] uppercase text-accent/80"
@@ -179,7 +151,6 @@ export function DesignInterfaceShowcase({ scrollerRef }: { scrollerRef: React.Re
                 {item.label}
               </div>
 
-              {/* Content */}
               <div
                 ref={(el) => { overlayContentRefs.current[i] = el; }}
                 className="max-w-[60ch] px-6 md:px-12 space-y-4"
@@ -196,8 +167,6 @@ export function DesignInterfaceShowcase({ scrollerRef }: { scrollerRef: React.Re
           </div>
         </div>
       ))}
-
-      {/* Bottom spacer */}
       <div className="h-[20vh]" />
     </div>
   );
