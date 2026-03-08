@@ -163,21 +163,26 @@ export function SectionsDetail() {
         </button>
 
         {/* Content */}
-        <div className={`relative flex items-center h-full px-6 md:px-16 lg:px-24 ${section.id === 'web-design' ? 'overflow-y-auto pt-20 pb-10 items-start' : ''}`}>
-          <div className={`w-full ${(section.id === 'desenvolvimento' || section.id === 'inovacao-ia') ? 'flex flex-col lg:flex-row items-center gap-8' : section.id === 'web-design' ? 'max-w-6xl mx-auto' : 'max-w-4xl mx-auto'}`}>
-            <div className={(section.id === 'desenvolvimento' || section.id === 'inovacao-ia') ? 'flex-1' : ''}>
-              <div className="anim-el h-[2px] w-16 mb-6 origin-left bg-accent" />
-              <span className="anim-el block font-[family-name:var(--font-display)] text-xs tracking-[0.2em] uppercase mb-3 text-accent">
-                {section.subtitle}
-              </span>
-              <h2 className="anim-el font-[family-name:var(--font-display)] text-4xl md:text-6xl lg:text-7xl font-light text-foreground mb-6 leading-tight tracking-tight">
-                {section.title}
-              </h2>
-              <p className="anim-el text-muted-foreground text-base md:text-lg leading-relaxed mb-8 max-w-2xl">
-                {section.description}
-              </p>
-              {section.id !== 'web-design' && (
-                <ul className="space-y-3">
+        {section.id === 'design-interface' ? (
+          /* Design de Interface — scrollable with expanding showcase */
+          <div
+            ref={scrollAreaRef}
+            className="relative h-full overflow-y-auto"
+            style={{ scrollBehavior: 'smooth' }}
+          >
+            <div className="flex flex-col items-center px-6 md:px-16 lg:px-24 pt-24 pb-10">
+              <div className="w-full max-w-4xl mx-auto">
+                <div className="anim-el h-[2px] w-16 mb-6 origin-left bg-accent" />
+                <span className="anim-el block font-[family-name:var(--font-display)] text-xs tracking-[0.2em] uppercase mb-3 text-accent">
+                  {section.subtitle}
+                </span>
+                <h2 className="anim-el font-[family-name:var(--font-display)] text-4xl md:text-6xl lg:text-7xl font-light text-foreground mb-6 leading-tight tracking-tight">
+                  {section.title}
+                </h2>
+                <p className="anim-el text-muted-foreground text-base md:text-lg leading-relaxed mb-4 max-w-2xl">
+                  {section.description}
+                </p>
+                <ul className="space-y-3 mb-8">
                   {section.details.map((detail, i) => (
                     <li key={i} className="anim-el flex items-start gap-3 text-muted-foreground text-sm md:text-base">
                       <span className="mt-2 block w-1.5 h-1.5 rounded-full shrink-0 bg-accent" />
@@ -185,24 +190,64 @@ export function SectionsDetail() {
                     </li>
                   ))}
                 </ul>
-              )}
-              {section.id === 'web-design' && isVisible && <WebDesignPortfolio />}
-            </div>
-            {section.id === 'desenvolvimento' && isVisible && (
-              <Suspense fallback={null}>
-                <div className="anim-el flex-1 flex justify-center">
-                  <InteractiveGlobe
-                    size={400}
-                    dotColor="rgba(200, 170, 80, ALPHA)"
-                    arcColor="rgba(200, 170, 80, 0.4)"
-                    markerColor="rgba(230, 200, 100, 1)"
-                    autoRotateSpeed={0.003}
-                  />
+                {/* Scroll hint */}
+                <div className="anim-el flex flex-col items-center gap-2 text-muted-foreground/50 mt-8 mb-4">
+                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.2em] uppercase">Role para explorar</span>
+                  <svg width="16" height="24" viewBox="0 0 16 24" fill="none" stroke="currentColor" strokeWidth="1.2" className="animate-bounce">
+                    <rect x="3" y="1" width="10" height="16" rx="5" />
+                    <line x1="8" y1="5" x2="8" y2="9" />
+                    <path d="M4 20l4 3 4-3" />
+                  </svg>
                 </div>
-              </Suspense>
-            )}
+              </div>
+
+              {/* Expanding showcase */}
+              {isVisible && <DesignInterfaceShowcase scrollerRef={scrollAreaRef} />}
+            </div>
           </div>
-        </div>
+        ) : (
+          /* All other sections — original layout */
+          <div className={`relative flex items-center h-full px-6 md:px-16 lg:px-24 ${section.id === 'web-design' ? 'overflow-y-auto pt-20 pb-10 items-start' : ''}`}>
+            <div className={`w-full ${(section.id === 'desenvolvimento' || section.id === 'inovacao-ia') ? 'flex flex-col lg:flex-row items-center gap-8' : section.id === 'web-design' ? 'max-w-6xl mx-auto' : 'max-w-4xl mx-auto'}`}>
+              <div className={(section.id === 'desenvolvimento' || section.id === 'inovacao-ia') ? 'flex-1' : ''}>
+                <div className="anim-el h-[2px] w-16 mb-6 origin-left bg-accent" />
+                <span className="anim-el block font-[family-name:var(--font-display)] text-xs tracking-[0.2em] uppercase mb-3 text-accent">
+                  {section.subtitle}
+                </span>
+                <h2 className="anim-el font-[family-name:var(--font-display)] text-4xl md:text-6xl lg:text-7xl font-light text-foreground mb-6 leading-tight tracking-tight">
+                  {section.title}
+                </h2>
+                <p className="anim-el text-muted-foreground text-base md:text-lg leading-relaxed mb-8 max-w-2xl">
+                  {section.description}
+                </p>
+                {section.id !== 'web-design' && (
+                  <ul className="space-y-3">
+                    {section.details.map((detail, i) => (
+                      <li key={i} className="anim-el flex items-start gap-3 text-muted-foreground text-sm md:text-base">
+                        <span className="mt-2 block w-1.5 h-1.5 rounded-full shrink-0 bg-accent" />
+                        {detail}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                {section.id === 'web-design' && isVisible && <WebDesignPortfolio />}
+              </div>
+              {section.id === 'desenvolvimento' && isVisible && (
+                <Suspense fallback={null}>
+                  <div className="anim-el flex-1 flex justify-center">
+                    <InteractiveGlobe
+                      size={400}
+                      dotColor="rgba(200, 170, 80, ALPHA)"
+                      arcColor="rgba(200, 170, 80, 0.4)"
+                      markerColor="rgba(230, 200, 100, 1)"
+                      autoRotateSpeed={0.003}
+                    />
+                  </div>
+                </Suspense>
+              )}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
