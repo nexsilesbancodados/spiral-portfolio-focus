@@ -60,14 +60,16 @@ export function LuminaSlider() {
         const PROGRESS_UPDATE_INTERVAL = 50;
         const TRANSITION_DURATION = () => SLIDER_CONFIG.settings.transitionDuration;
 
-        const slides = [
+        const slides: { title: string; description: string; media: string; skills: string[]; isVideo?: boolean }[] = [
             { title: "FOCUSS DEV", description: "Transformando ideias em experiências digitais extraordinárias. Desenvolvimento web de alto nível.", media: "/images/slide-01.jpg", skills: ["React", "TypeScript", "Node.js", "Next.js"] },
-            { title: "Web Design", description: "Interfaces modernas e elegantes que conectam marcas ao futuro digital com impacto visual.", media: "/images/slide-02.jpg", skills: ["Figma", "UI/UX", "Prototipagem", "Design System"] },
+            { title: "Web Design", description: "Interfaces modernas e elegantes que conectam marcas ao futuro digital com impacto visual.", media: "/videos/slide-02.mp4", skills: ["Figma", "UI/UX", "Prototipagem", "Design System"], isVideo: true },
             { title: "Desenvolvimento", description: "Código limpo, performance máxima e arquitetura escalável para projetos robustos.", media: "/images/slide-03.jpg", skills: ["JavaScript", "Python", "APIs REST", "PostgreSQL"] },
             { title: "Design de Interface", description: "Design centrado no usuário com estética cinematográfica e animações fluidas.", media: "/images/slide-04.jpg", skills: ["Tailwind CSS", "Framer Motion", "GSAP", "Three.js"] },
             { title: "Inovação e IA", description: "Tecnologias de ponta e inteligência artificial para soluções que fazem a diferença.", media: "/images/slide-05.jpg", skills: ["IA", "Machine Learning", "Cloud", "AWS"] },
             { title: "Mobile e Web", description: "Aplicações responsivas e multiplataforma que funcionam perfeitamente em qualquer dispositivo.", media: "/images/slide-06.jpg", skills: ["React Native", "PWA", "Responsivo", "Docker"] }
         ];
+        
+        const videoElements: HTMLVideoElement[] = [];
 
         const vertexShader = `varying vec2 vUv; void main() { vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }`;
         const fragmentShader = `
@@ -286,6 +288,26 @@ export function LuminaSlider() {
              l.load(src, (t: any) => { t.minFilter = t.magFilter = THREE.LinearFilter; t.userData = { size: new THREE.Vector2(t.image.width, t.image.height) }; resolve(t); }, undefined, reject);
         });
 
+        const loadVideoTexture = (src: string) => new Promise<any>((resolve, reject) => {
+             const video = document.createElement('video');
+             video.src = src;
+             video.loop = true;
+             video.muted = true;
+             video.playsInline = true;
+             video.crossOrigin = 'anonymous';
+             video.addEventListener('loadeddata', () => {
+                 const t = new THREE.VideoTexture(video);
+                 t.minFilter = THREE.LinearFilter;
+                 t.magFilter = THREE.LinearFilter;
+                 t.userData = { size: new THREE.Vector2(video.videoWidth, video.videoHeight), video };
+                 videoElements.push(video);
+                 video.play().catch(() => {});
+                 resolve(t);
+             });
+             video.addEventListener('error', () => reject(new Error(`Failed video: ${src}`)));
+             video.load();
+        });
+
         const initRenderer = async () => {
             const canvas = document.querySelector(".webgl-canvas") as HTMLCanvasElement; if (!canvas) return;
             scene = new THREE.Scene(); camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
@@ -309,7 +331,16 @@ export function LuminaSlider() {
             });
             scene.add(new THREE.Mesh(new THREE.PlaneGeometry(2, 2), shaderMaterial));
             
-            for (const s of slides) { try { slideTextures.push(await loadImageTexture(s.media)); } catch { console.warn("Failed texture:", s.media); } }
+            for (let i = 0; i < slides.length; i++) {
+                const s = slides[i];
+                try {
+                    if (s.isVideo) {
+                        slideTextures.push(await loadVideoTexture(s.media));
+                    } else {
+                        slideTextures.push(await loadImageTexture(s.media));
+                    }
+                } catch { console.warn("Failed texture:", s.media); }
+            }
             if (slideTextures.length >= 2) {
                 shaderMaterial.uniforms.uTexture1.value = slideTextures[0];
                 shaderMaterial.uniforms.uTexture2.value = slideTextures[1];
