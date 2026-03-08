@@ -61,12 +61,12 @@ export function LuminaSlider() {
         const TRANSITION_DURATION = () => SLIDER_CONFIG.settings.transitionDuration;
 
         const slides = [
-            { title: "FOCUSS DEV", description: "Transformando ideias em experiências digitais extraordinárias.", media: "/images/slide-01.jpg", skills: ["React", "TypeScript", "Node.js"] },
-            { title: "Web Design", description: "Interfaces modernas que conectam marcas ao futuro digital.", media: "/images/slide-02.jpg", skills: ["Figma", "UI/UX", "Prototipagem"] },
-            { title: "Desenvolvimento", description: "Código limpo, performance máxima e arquitetura escalável.", media: "/images/slide-03.jpg", skills: ["JavaScript", "Python", "APIs REST"] },
-            { title: "Design de Interface", description: "Design centrado no usuário com estética cinematográfica.", media: "/images/slide-04.jpg", skills: ["Tailwind CSS", "Framer Motion", "GSAP"] },
-            { title: "Inovação", description: "Tecnologias de ponta para soluções que fazem a diferença.", media: "/images/slide-05.jpg", skills: ["IA", "Machine Learning", "Cloud"] },
-            { title: "Mobile & Web", description: "Aplicações responsivas que funcionam em qualquer dispositivo.", media: "/images/slide-06.jpg", skills: ["React Native", "PWA", "Responsivo"] }
+            { title: "FOCUSS DEV", description: "Transformando ideias em experiências digitais extraordinárias. Desenvolvimento web de alto nível.", media: "/images/slide-01.jpg", skills: ["React", "TypeScript", "Node.js", "Next.js"] },
+            { title: "Web Design", description: "Interfaces modernas e elegantes que conectam marcas ao futuro digital com impacto visual.", media: "/images/slide-02.jpg", skills: ["Figma", "UI/UX", "Prototipagem", "Design System"] },
+            { title: "Desenvolvimento", description: "Código limpo, performance máxima e arquitetura escalável para projetos robustos.", media: "/images/slide-03.jpg", skills: ["JavaScript", "Python", "APIs REST", "PostgreSQL"] },
+            { title: "Design de Interface", description: "Design centrado no usuário com estética cinematográfica e animações fluidas.", media: "/images/slide-04.jpg", skills: ["Tailwind CSS", "Framer Motion", "GSAP", "Three.js"] },
+            { title: "Inovação e IA", description: "Tecnologias de ponta e inteligência artificial para soluções que fazem a diferença.", media: "/images/slide-05.jpg", skills: ["IA", "Machine Learning", "Cloud", "AWS"] },
+            { title: "Mobile e Web", description: "Aplicações responsivas e multiplataforma que funcionam perfeitamente em qualquer dispositivo.", media: "/images/slide-06.jpg", skills: ["React Native", "PWA", "Responsivo", "Docker"] }
         ];
 
         const vertexShader = `varying vec2 vUv; void main() { vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }`;
