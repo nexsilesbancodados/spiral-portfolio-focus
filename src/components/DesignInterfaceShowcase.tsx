@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 
 declare const gsap: any;
-declare const ScrollTrigger: any;
 
 const SHOWCASE_ITEMS = [
   {
@@ -30,6 +29,25 @@ const SHOWCASE_ITEMS = [
   },
 ];
 
+function loadScript(src: string, globalName: string): Promise<void> {
+  return new Promise((res, rej) => {
+    if ((window as any)[globalName]) { res(); return; }
+    const existing = document.querySelector(`script[src="${src}"]`);
+    if (existing) {
+      const check = setInterval(() => {
+        if ((window as any)[globalName]) { clearInterval(check); res(); }
+      }, 50);
+      setTimeout(() => { clearInterval(check); rej(new Error(`Timeout: ${globalName}`)); }, 10000);
+      return;
+    }
+    const s = document.createElement('script');
+    s.src = src;
+    s.onload = () => setTimeout(() => res(), 100);
+    s.onerror = () => rej(new Error(`Failed: ${src}`));
+    document.head.appendChild(s);
+  });
+}
+
 export function DesignInterfaceShowcase({ scrollerRef }: { scrollerRef: React.RefObject<HTMLDivElement> }) {
   const rootRef = useRef<HTMLDivElement>(null);
   const boxRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -38,17 +56,23 @@ export function DesignInterfaceShowcase({ scrollerRef }: { scrollerRef: React.Re
   const captionRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
-    if (typeof gsap === 'undefined') return;
     const scroller = scrollerRef.current;
     if (!scroller || !rootRef.current) return;
 
-    // Load ScrollTrigger if not loaded
-    let ST: any;
-    try {
-      ST = (window as any).ScrollTrigger;
-      if (!ST) return;
-      gsap.registerPlugin(ST);
-    } catch { return; }
+    let triggers: any[] = [];
+    let timelines: any[] = [];
+    let cancelled = false;
+
+    const init = async () => {
+      // Ensure GSAP + ScrollTrigger are loaded
+      await loadScript('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js', 'gsap');
+      await loadScript('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js', 'ScrollTrigger');
+      if (cancelled) return;
+
+      const g = (window as any).gsap;
+      const ST = (window as any).ScrollTrigger;
+      if (!g || !ST) return;
+      g.registerPlugin(ST);
 
     const triggers: any[] = [];
     const timelines: any[] = [];
