@@ -420,9 +420,6 @@ function CinematicSection({ section, isVisible, onScrollUpAtTop }: { section: ty
         </div>
 
         {/* Section-specific content */}
-        {isWebDesign && isVisible && (
-          <div className="px-6 md:px-16 lg:px-24 pb-24"><WebDesignPortfolio /></div>
-        )}
         {isDesenvolvimento && isVisible && (
           <div className="px-6 md:px-16 lg:px-24 pb-24 flex justify-center"><PlatformerGame /></div>
         )}
