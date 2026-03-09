@@ -69,7 +69,7 @@ const IntroPage = () => {
     hidden: { opacity: 0, y: 60, rotateX: -90 },
     visible: (i: number) => ({
       opacity: 1, y: 0, rotateX: 0,
-      transition: { duration: 0.8, delay: 0.08 * i, ease: [0.22, 1, 0.36, 1] }
+      transition: { duration: 0.8, delay: 0.08 * i, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }
     }),
     exit: (i: number) => ({
       opacity: 0, y: -40, scale: 0.8, filter: 'blur(8px)',
