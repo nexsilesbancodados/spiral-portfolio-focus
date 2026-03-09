@@ -229,35 +229,7 @@ export function LuminaSlider() {
       }, undefined, reject);
     });
 
-    const loadVideoTexture = (src: string, index: number) => new Promise<any>((resolve, reject) => {
-      const video = document.createElement('video');
-      video.src = src;
-      video.loop = true;
-      video.muted = true;
-      video.playsInline = true;
-      video.crossOrigin = 'anonymous';
-      video.preload = index === 0 ? 'auto' : 'none';
-      
-      const loadHandler = () => {
-        const t = new THREE.VideoTexture(video);
-        t.minFilter = THREE.LinearFilter;
-        t.magFilter = THREE.LinearFilter;
-        t.userData = { size: new THREE.Vector2(video.videoWidth || 1920, video.videoHeight || 1080), video };
-        videoElements.push(video);
-        if (index === 0) video.play().catch(() => {});
-        resolve(t);
-      };
-
-      if (index === 0) {
-        video.addEventListener('loadeddata', loadHandler);
-        video.load();
-      } else {
-        video.addEventListener('loadedmetadata', loadHandler);
-        setTimeout(() => video.load(), index * 300);
-      }
-      
-      video.addEventListener('error', () => reject(new Error(`Failed video: ${src}`)));
-    });
+    // Video textures removed for performance — all slides use images now
 
     const initRenderer = async () => {
       const canvas = document.querySelector(".webgl-canvas") as HTMLCanvasElement;
