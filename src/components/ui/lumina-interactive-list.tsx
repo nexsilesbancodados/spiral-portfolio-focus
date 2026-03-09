@@ -324,6 +324,36 @@ export function LuminaSlider() {
       await initRenderer();
       window.addEventListener("resize", handleResize);
       document.addEventListener("visibilitychange", handleVisibility);
+
+      // Scroll down to explore current slide
+      let scrollAccumulator = 0;
+      let scrollCooldown = false;
+      const SCROLL_THRESHOLD = 120;
+
+      const handleWheelExplore = (e: WheelEvent) => {
+        if (isTransitioning || scrollCooldown) return;
+        if (e.deltaY > 0) {
+          scrollAccumulator += e.deltaY;
+          if (scrollAccumulator >= SCROLL_THRESHOLD) {
+            scrollAccumulator = 0;
+            scrollCooldown = true;
+            triggerExplore(currentSlideIndex);
+            setTimeout(() => { scrollCooldown = false; }, 2000);
+          }
+        } else {
+          scrollAccumulator = 0;
+        }
+      };
+
+      const container = containerRef.current;
+      if (container) {
+        container.addEventListener('wheel', handleWheelExplore, { passive: true });
+      }
+
+      // Store for cleanup
+      (window as any).__cleanupWheelExplore = () => {
+        container?.removeEventListener('wheel', handleWheelExplore);
+      };
     };
 
     init();
