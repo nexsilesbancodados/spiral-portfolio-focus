@@ -294,11 +294,7 @@ export function LuminaSlider() {
 
     // Pause render when tab is hidden
     const handleVisibility = () => {
-      if (document.hidden) {
-        videoElements.forEach(v => v.pause());
-      } else {
-        videoElements.forEach(v => v.play().catch(() => {}));
-      }
+      // No video elements to manage
     };
 
     const init = async () => {
