@@ -363,10 +363,15 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
   const colors = sectionColors[section.id] || sectionColors['focuss-dev'];
   const viceOverlay = colors.overlay;
 
-  // Parallax effect on hero image (RAF-throttled)
+  // Parallax effect on hero image (RAF-throttled, desktop only)
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
+    // Skip parallax on mobile for performance
+    const isMobile = window.innerWidth < 768;
+    if (isMobile) return;
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) return;
     const heroImg = el.querySelector('.parallax-hero img') as HTMLElement;
     if (!heroImg) return;
     let ticking = false;
@@ -374,8 +379,8 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
       if (ticking) return;
       ticking = true;
       requestAnimationFrame(() => {
-        const offset = el.scrollTop * 0.25;
-        heroImg.style.transform = `translateY(${offset}px) scale(1.1)`;
+        const offset = el.scrollTop * 0.2;
+        heroImg.style.transform = `translate3d(0, ${offset}px, 0) scale(1.1)`;
         ticking = false;
       });
     };
