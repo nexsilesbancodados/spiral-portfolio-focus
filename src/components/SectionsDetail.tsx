@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState, useCallback, lazy, Suspense, memo } from 'react';
 
 const ScrollExpandMedia = lazy(() => import('@/components/ScrollExpandMedia').then(m => ({ default: m.ScrollExpandMedia })));
-const PlatformerGame = lazy(() => import('@/components/PlatformerGame').then(m => ({ default: m.PlatformerGame })));
+
 const FocussChat = lazy(() => import('@/components/FocussChat').then(m => ({ default: m.FocussChat })));
 const TechLogosMarquee = lazy(() => import('@/components/TechLogosMarquee'));
 const MultiOrbitSemiCircle = lazy(() => import('@/components/ui/multi-orbit-semi-circle'));
@@ -429,9 +429,6 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
                 </div>
               ))}
             </div>
-            {isVisible && (
-              <div className="mt-16 flex justify-center"><Suspense fallback={null}><PlatformerGame /></Suspense></div>
-            )}
           </div>
         );
 
