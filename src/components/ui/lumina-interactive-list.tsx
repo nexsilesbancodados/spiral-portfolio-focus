@@ -342,7 +342,7 @@ export function LuminaSlider() {
       if (tEl && dEl) {
         tEl.innerHTML = splitText(slides[0].title);
         dEl.textContent = slides[0].description;
-        if (sEl) sEl.innerHTML = slides[0].skills.map(s => `<span class="skill-tag">${s}</span>`).join('');
+        if (sEl) sEl.innerHTML = slides[0].skills.map(s => `<span class="skill-tag ${slideColors[0]}">${s}</span>`).join('');
         gsap.fromTo(tEl.children, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 1, stagger: 0.03, ease: "power3.out", delay: 0.5 });
         gsap.fromTo(dEl, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: "power3.out", delay: 0.8 });
         if (sEl) gsap.fromTo(sEl.children, { y: 15, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, stagger: 0.1, ease: "power3.out", delay: 1.1 });
