@@ -360,12 +360,200 @@ function CinematicSection({ section, isVisible, onScrollUpAtTop }: { section: ty
     }
   })();
 
+  // Parallax effect on hero image
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const heroImg = el.querySelector('.parallax-hero img') as HTMLElement;
+    if (!heroImg) return;
+    const handleScroll = () => {
+      const scrollY = el.scrollTop;
+      const offset = scrollY * 0.3;
+      heroImg.style.transform = `translateY(${offset}px) scale(1.1)`;
+    };
+    el.addEventListener('scroll', handleScroll, { passive: true });
+    return () => el.removeEventListener('scroll', handleScroll);
+  }, [section.id]);
+
+  // Render section-specific content
+  const renderSectionContent = () => {
+    switch (section.id) {
+      case 'web-design':
+        return (
+          <div className="px-6 md:px-16 lg:px-24 py-16 md:py-24">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {[
+                { src: '/images/webdesign-detail-01.jpg', title: 'Prototipagem UI', desc: 'Wireframes e protótipos interativos' },
+                { src: '/images/webdesign-detail-02.jpg', title: 'Criação Visual', desc: 'Design systems e identidade visual' },
+                { src: '/images/webdesign-detail-03.jpg', title: 'Studio Criativo', desc: 'Ambientes de design profissional' },
+                { src: '/images/slide-02.jpg', title: 'Web Premium', desc: 'Sites de alto impacto visual' },
+                { src: '/images/ui-detail-01.jpg', title: 'Interface 3D', desc: 'Elementos holográficos e futuristas' },
+                { src: '/images/ui-detail-02.jpg', title: 'Design Mobile', desc: 'Experiências mobile-first' },
+              ].map((item, i) => (
+                <div key={i} className="detail-item image-hover-zoom card-hover-glow relative h-[35vh] md:h-[40vh] rounded-sm overflow-hidden border border-border/10 group cursor-pointer" style={{ opacity: 0 }}>
+                  <img src={item.src} alt={item.title} loading="lazy" decoding="async" className="w-full h-full object-cover" style={{ filter: 'brightness(0.7) saturate(1.2)' }} />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: 'linear-gradient(135deg, hsl(var(--vice-sunset) / 0.15), transparent)' }} />
+                  <div className="absolute bottom-0 left-0 right-0 p-5">
+                    <h4 className="font-[family-name:var(--font-display)] text-foreground text-sm font-semibold tracking-wide uppercase">{item.title}</h4>
+                    <p className="text-muted-foreground text-xs mt-1">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+
+      case 'desenvolvimento':
+        return (
+          <div className="px-6 md:px-16 lg:px-24 py-16 md:py-24">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl">
+              {[
+                { icon: '⚡', title: 'APIs REST & GraphQL', desc: 'Endpoints performáticos com autenticação JWT, rate limiting e documentação OpenAPI completa.' },
+                { icon: '🏗️', title: 'Arquitetura Escalável', desc: 'Microserviços, clean architecture e patterns SOLID para projetos que crescem.' },
+                { icon: '🔄', title: 'CI/CD Automatizado', desc: 'Pipelines de deploy com GitHub Actions, Docker e monitoramento em tempo real.' },
+                { icon: '🗄️', title: 'Banco de Dados', desc: 'PostgreSQL otimizado com migrations, índices inteligentes e queries performáticas.' },
+              ].map((card, i) => (
+                <div key={i} className="detail-item card-hover-glow relative p-8 rounded-sm border border-border/20 backdrop-blur-sm group cursor-pointer" 
+                  style={{ opacity: 0, background: 'hsl(var(--card) / 0.5)' }}>
+                  <div className="absolute inset-0 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{ background: 'linear-gradient(135deg, hsl(var(--vice-teal) / 0.06), hsl(var(--vice-sunset) / 0.04))' }} />
+                  <div className="relative z-10">
+                    <span className="text-2xl mb-4 block">{card.icon}</span>
+                    <h4 className="font-[family-name:var(--font-display)] text-foreground text-base font-semibold tracking-wide uppercase mb-3">{card.title}</h4>
+                    <p className="text-muted-foreground text-sm leading-relaxed">{card.desc}</p>
+                    <div className="h-[1px] w-12 mt-6 bg-vice-teal/30 group-hover:w-full group-hover:bg-vice-teal/60 transition-all duration-700" />
+                  </div>
+                </div>
+              ))}
+            </div>
+            {isVisible && (
+              <div className="mt-16 flex justify-center"><PlatformerGame /></div>
+            )}
+          </div>
+        );
+
+      case 'inovacao-ia':
+        return (
+          <div className="px-6 md:px-16 lg:px-24 py-16 md:py-24">
+            {/* Futuristic grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 max-w-7xl">
+              <div className="detail-item lg:col-span-7 image-hover-zoom card-hover-glow relative h-[50vh] rounded-sm overflow-hidden border border-vice-pink/10" style={{ opacity: 0 }}>
+                <img src="/images/ia-detail-01.jpg" alt="Laboratório IA" loading="lazy" className="w-full h-full object-cover" style={{ filter: 'brightness(0.7) saturate(1.3)' }} />
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
+                <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, hsl(var(--vice-pink) / 0.1), transparent)' }} />
+                <div className="absolute bottom-6 left-6">
+                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.3em] uppercase text-vice-pink/80">MACHINE LEARNING</span>
+                  <h4 className="font-[family-name:var(--font-display)] text-foreground text-xl font-bold mt-2">Inteligência que Transforma</h4>
+                </div>
+              </div>
+              <div className="lg:col-span-5 grid grid-rows-2 gap-4">
+                <div className="detail-item card-hover-glow relative p-8 rounded-sm border border-vice-pink/10 backdrop-blur-sm" style={{ opacity: 0, background: 'hsl(var(--card) / 0.5)' }}>
+                  <div className="text-4xl mb-3">🧠</div>
+                  <h4 className="font-[family-name:var(--font-display)] text-foreground text-sm font-semibold tracking-wide uppercase mb-2">Neural Networks</h4>
+                  <p className="text-muted-foreground text-xs leading-relaxed">Modelos treinados para análise preditiva, processamento de linguagem natural e visão computacional.</p>
+                </div>
+                <div className="detail-item image-hover-zoom card-hover-glow relative h-full rounded-sm overflow-hidden border border-vice-pink/10" style={{ opacity: 0 }}>
+                  <img src="/images/ia-detail-02.jpg" alt="Automação" loading="lazy" className="w-full h-full object-cover" style={{ filter: 'brightness(0.7) saturate(1.2)' }} />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
+                  <div className="absolute bottom-4 left-4">
+                    <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.2em] uppercase text-vice-sunset/80">AUTOMAÇÃO</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+
+      case 'mobile-web':
+        return (
+          <div className="px-6 md:px-16 lg:px-24 py-16 md:py-24">
+            {/* Mockup showcase */}
+            <div className="max-w-6xl mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {/* Phone mockup */}
+                <div className="detail-item card-hover-glow flex flex-col items-center p-8 rounded-sm border border-border/10" style={{ opacity: 0, background: 'hsl(var(--card) / 0.3)' }}>
+                  <div className="relative w-[180px] h-[360px] rounded-[24px] border-2 border-foreground/20 overflow-hidden shadow-2xl">
+                    <img src="/images/mobile-detail-01.jpg" alt="Mobile" loading="lazy" className="w-full h-full object-cover" style={{ filter: 'brightness(0.85) saturate(1.2)' }} />
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-5 bg-background rounded-b-xl" />
+                  </div>
+                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.2em] uppercase text-vice-gold/70 mt-6">MOBILE APP</span>
+                </div>
+                {/* Tablet mockup */}
+                <div className="detail-item card-hover-glow flex flex-col items-center p-8 rounded-sm border border-border/10" style={{ opacity: 0, background: 'hsl(var(--card) / 0.3)' }}>
+                  <div className="relative w-[260px] h-[340px] rounded-[16px] border-2 border-foreground/20 overflow-hidden shadow-2xl">
+                    <img src="/images/mobile-detail-02.jpg" alt="Tablet" loading="lazy" className="w-full h-full object-cover" style={{ filter: 'brightness(0.85) saturate(1.2)' }} />
+                  </div>
+                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.2em] uppercase text-vice-gold/70 mt-6">TABLET</span>
+                </div>
+                {/* Desktop mockup */}
+                <div className="detail-item card-hover-glow flex flex-col items-center p-8 rounded-sm border border-border/10" style={{ opacity: 0, background: 'hsl(var(--card) / 0.3)' }}>
+                  <div className="relative w-full h-[220px] rounded-t-lg border-2 border-foreground/20 overflow-hidden shadow-2xl">
+                    <img src="/images/slide-06.jpg" alt="Desktop" loading="lazy" className="w-full h-full object-cover" style={{ filter: 'brightness(0.85) saturate(1.2)' }} />
+                  </div>
+                  <div className="w-24 h-3 bg-foreground/10 rounded-b-lg" />
+                  <div className="w-16 h-1 bg-foreground/10 mt-1 rounded" />
+                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.2em] uppercase text-vice-gold/70 mt-6">DESKTOP</span>
+                </div>
+              </div>
+              {/* PWA + Docker badges */}
+              <div className="flex flex-wrap gap-3 justify-center mt-12">
+                {['React Native', 'PWA', '100% Responsivo', 'Docker', 'Cloud Deploy'].map((badge, i) => (
+                  <span key={i} className="detail-item font-[family-name:var(--font-display)] text-[10px] tracking-[0.15em] uppercase px-4 py-2 rounded-sm border border-vice-gold/20 text-vice-gold/80 bg-vice-gold/5 hover:bg-vice-gold/15 hover:border-vice-gold/50 transition-all duration-300 cursor-default" style={{ opacity: 0 }}>{badge}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+        );
+
+      case 'skills':
+        const skills = [
+          { name: 'React / Next.js', level: 95, category: 'Front-end' },
+          { name: 'TypeScript', level: 92, category: 'Front-end' },
+          { name: 'Tailwind CSS / GSAP', level: 90, category: 'Front-end' },
+          { name: 'Node.js', level: 88, category: 'Back-end' },
+          { name: 'Python', level: 82, category: 'Back-end' },
+          { name: 'PostgreSQL / MongoDB', level: 85, category: 'Back-end' },
+          { name: 'AWS / Docker', level: 80, category: 'DevOps' },
+          { name: 'Figma / UI Design', level: 88, category: 'Design' },
+          { name: 'Three.js / WebGL', level: 75, category: 'Design' },
+          { name: 'CI/CD / Git', level: 90, category: 'DevOps' },
+        ];
+        return (
+          <div className="px-6 md:px-16 lg:px-24 py-16 md:py-24">
+            <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-8">
+              {skills.map((skill, i) => (
+                <div key={i} className="detail-item group" style={{ opacity: 0 }}>
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="font-[family-name:var(--font-display)] text-foreground/90 text-sm tracking-wide uppercase">{skill.name}</span>
+                    <span className="font-[family-name:var(--font-display)] text-vice-sunset/60 text-[10px] tracking-widest">{skill.level}%</span>
+                  </div>
+                  <div className="skill-progress-bar">
+                    <div className="skill-progress-fill" style={{ width: `${skill.level}%` }} />
+                  </div>
+                  <span className="font-[family-name:var(--font-display)] text-[9px] tracking-[0.2em] uppercase text-muted-foreground/60 mt-1 block">{skill.category}</span>
+                </div>
+              ))}
+            </div>
+            {/* Tech badges */}
+            <div className="max-w-5xl mx-auto mt-16 flex flex-wrap gap-3">
+              {['React', 'Next.js', 'TypeScript', 'Node.js', 'Python', 'Go', 'PostgreSQL', 'MongoDB', 'Redis', 'AWS', 'Docker', 'Figma', 'GSAP', 'Three.js', 'Tailwind CSS', 'GraphQL'].map((tech, i) => (
+                <span key={i} className="detail-item card-hover-glow font-[family-name:var(--font-display)] text-[10px] tracking-[0.12em] uppercase px-4 py-2 rounded-sm border border-vice-sunset/20 text-foreground/70 bg-vice-sunset/5 hover:text-vice-sunset hover:border-vice-sunset/50 transition-all duration-300 cursor-default" style={{ opacity: 0 }}>{tech}</span>
+              ))}
+            </div>
+          </div>
+        );
+
+      default:
+        return null;
+    }
+  };
+
   return (
     <div ref={sectionRef} className="absolute inset-0 overflow-y-auto gta-vi-scroll">
-      {/* ── HERO ── */}
-      <div className="relative h-screen w-full overflow-hidden flex items-end">
+      {/* ── HERO with parallax ── */}
+      <div className="relative h-screen w-full overflow-hidden flex items-end parallax-hero">
         <div className="absolute inset-0">
-          <img src={section.image} alt={section.title} loading="eager" decoding="async" className="w-full h-full object-cover" style={{ filter: 'saturate(1.15) contrast(1.05)' }} />
+          <img src={section.image} alt={section.title} loading="eager" decoding="async" className="w-full h-full object-cover" style={{ filter: 'saturate(1.15) contrast(1.05)', transform: 'scale(1.1)' }} />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-r from-background/60 via-transparent to-transparent" />
           <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, transparent 50%, hsl(var(--background)) 100%)' }} />
@@ -419,9 +607,7 @@ function CinematicSection({ section, isVisible, onScrollUpAtTop }: { section: ty
         </div>
 
         {/* Section-specific content */}
-        {isDesenvolvimento && isVisible && (
-          <div className="px-6 md:px-16 lg:px-24 pb-24 flex justify-center"><PlatformerGame /></div>
-        )}
+        {renderSectionContent()}
 
         <div className="h-16 md:h-24" />
       </div>
