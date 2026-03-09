@@ -561,6 +561,33 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
           </div>
         );
 
+      case 'servicos':
+        return (
+          <div className="px-6 md:px-16 lg:px-24 py-16 md:py-24">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl">
+              {[
+                { icon: '📈', title: 'Tráfego Pago', desc: 'Campanhas estratégicas no Google Ads, Meta Ads e TikTok Ads. Maximizamos seu ROI com segmentação precisa e otimização contínua.' },
+                { icon: '🌐', title: 'Criação de Sites', desc: 'Sites modernos, responsivos e otimizados para SEO. Desenvolvidos com as melhores tecnologias para performance máxima.' },
+                { icon: '📱', title: 'Criação de Apps', desc: 'Aplicativos nativos e multiplataforma com experiência de usuário premium. iOS, Android e PWA.' },
+                { icon: '⚙️', title: 'Sistemas & SaaS', desc: 'Plataformas escaláveis sob medida. Painéis administrativos, ERPs, CRMs e soluções SaaS completas.' },
+                { icon: '🚀', title: 'Landing Pages', desc: 'Páginas de alta conversão com design persuasivo, copywriting estratégico e integração com funis de vendas.' },
+                { icon: '🎨', title: 'Design', desc: 'Identidade visual completa, UI/UX premium, design systems e prototipagem interativa no Figma.' },
+              ].map((card, i) => (
+                <div key={i} className="detail-item card-hover-glow relative p-8 rounded-sm border border-border/20 backdrop-blur-sm group cursor-pointer" 
+                  style={{ opacity: 0, background: 'hsl(var(--card) / 0.5)' }}>
+                  <div className="absolute inset-0 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{ background: 'linear-gradient(135deg, hsl(270 70% 60% / 0.08), hsl(300 65% 55% / 0.05))' }} />
+                  <div className="relative z-10">
+                    <span className="text-3xl mb-4 block">{card.icon}</span>
+                    <h4 className="font-[family-name:var(--font-display)] text-foreground text-base font-semibold tracking-wide uppercase mb-3">{card.title}</h4>
+                    <p className="text-muted-foreground text-sm leading-relaxed">{card.desc}</p>
+                    <div className="h-[1px] w-12 mt-6 bg-purple-400/30 group-hover:w-full group-hover:bg-purple-400/60 transition-all duration-700" />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+
       default:
         return null;
     }
