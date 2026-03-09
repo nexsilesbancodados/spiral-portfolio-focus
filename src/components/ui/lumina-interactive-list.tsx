@@ -361,6 +361,7 @@ export function LuminaSlider() {
     return () => {
       window.removeEventListener("resize", handleResize);
       document.removeEventListener("visibilitychange", handleVisibility);
+      (window as any).__cleanupWheelExplore?.();
       clearTimeout(resizeTimer);
       if (animFrameId) cancelAnimationFrame(animFrameId);
       if (renderer) renderer.dispose();
