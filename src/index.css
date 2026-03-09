@@ -327,6 +327,29 @@ All colors MUST be HSL.
   }
 }
 
+/* GTA VI Cinematic Scroll */
+.gta-vi-scroll {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.gta-vi-scroll::-webkit-scrollbar {
+  width: 3px;
+}
+
+.gta-vi-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.gta-vi-scroll::-webkit-scrollbar-thumb {
+  background: hsl(45 100% 55% / 0.2);
+  border-radius: 2px;
+}
+
+.gta-vi-scroll::-webkit-scrollbar-thumb:hover {
+  background: hsl(45 100% 55% / 0.4);
+}
+
 /* Explore Button */
 .explore-btn {
   position: absolute;
