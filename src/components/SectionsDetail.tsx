@@ -205,48 +205,48 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
     // Description fade
     gsap.fromTo(desc, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: 'power2.out', delay: 0.6 });
 
-    // Scroll-triggered gallery animations
-    const scrollHandler = () => {
-      const scrollTop = el.scrollTop;
-      const vh = window.innerHeight;
-
-      galleryEls.forEach((item, i) => {
-        const rect = (item as HTMLElement).getBoundingClientRect();
-        const visible = rect.top < vh * 0.85;
-        if (!visible) return;
-        if ((item as HTMLElement).dataset.animated) return;
-        (item as HTMLElement).dataset.animated = 'true';
-
+    // IntersectionObserver for gallery & detail animations (much lighter than scroll handler)
+    const animateItem = (item: Element, i: number, isGallery: boolean) => {
+      if (isGallery) {
         switch (effect) {
           case 'fade-slide':
-            gsap.fromTo(item, { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, delay: i * 0.15, ease: 'power2.out' });
+            gsap.fromTo(item, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, delay: i * 0.1, ease: 'power2.out' });
             break;
           case 'scale-reveal':
-            gsap.fromTo(item, { scale: 0.85, opacity: 0 }, { scale: 1, opacity: 1, duration: 1, delay: i * 0.12, ease: 'power2.out' });
+            gsap.fromTo(item, { scale: 0.9, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.7, delay: i * 0.1, ease: 'power2.out' });
             break;
           case 'horizontal-wipe':
-            gsap.fromTo(item, { x: i % 2 === 0 ? -80 : 80, opacity: 0 }, { x: 0, opacity: 1, duration: 0.9, delay: i * 0.1, ease: 'power3.out' });
+            gsap.fromTo(item, { x: i % 2 === 0 ? -50 : 50, opacity: 0 }, { x: 0, opacity: 1, duration: 0.6, delay: i * 0.08, ease: 'power3.out' });
             break;
           case 'clip-expand':
-            gsap.fromTo(item, { clipPath: 'inset(20% 20% 20% 20%)', opacity: 0 }, { clipPath: 'inset(0% 0% 0% 0%)', opacity: 1, duration: 1.2, delay: i * 0.15, ease: 'power2.out' });
+            gsap.fromTo(item, { clipPath: 'inset(10% 10% 10% 10%)', opacity: 0 }, { clipPath: 'inset(0% 0% 0% 0%)', opacity: 1, duration: 0.8, delay: i * 0.1, ease: 'power2.out' });
             break;
           case 'stagger-cascade':
-            gsap.fromTo(item, { y: 80, opacity: 0, rotationZ: -2 }, { y: 0, opacity: 1, rotationZ: 0, duration: 0.9, delay: i * 0.18, ease: 'back.out(1.1)' });
+            gsap.fromTo(item, { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, delay: i * 0.12, ease: 'back.out(1.1)' });
             break;
         }
-      });
-
-      // Detail items scroll reveal
-      detailEls.forEach((item, i) => {
-        const rect = (item as HTMLElement).getBoundingClientRect();
-        if (rect.top > vh * 0.9 || (item as HTMLElement).dataset.animated) return;
-        (item as HTMLElement).dataset.animated = 'true';
-        gsap.fromTo(item, { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, delay: i * 0.08, ease: 'power2.out' });
-      });
+      } else {
+        gsap.fromTo(item, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, delay: i * 0.06, ease: 'power2.out' });
+      }
     };
 
-    el.addEventListener('scroll', scrollHandler, { passive: true });
-    return () => el.removeEventListener('scroll', scrollHandler);
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const target = entry.target as HTMLElement;
+        if (target.dataset.animated) return;
+        target.dataset.animated = 'true';
+        const idx = parseInt(target.dataset.animIdx || '0', 10);
+        const isGallery = target.classList.contains('gallery-item');
+        animateItem(target, idx, isGallery);
+        observer.unobserve(target);
+      });
+    }, { root: el, threshold: 0.15 });
+
+    galleryEls.forEach((item, i) => { (item as HTMLElement).dataset.animIdx = String(i); observer.observe(item); });
+    detailEls.forEach((item, i) => { (item as HTMLElement).dataset.animIdx = String(i); observer.observe(item); });
+
+    return () => observer.disconnect();
   }, [section.id, effect]);
 
   // Scroll-up at top → go back to slider
