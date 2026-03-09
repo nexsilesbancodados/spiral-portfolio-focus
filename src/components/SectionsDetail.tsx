@@ -350,17 +350,18 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
     }
   };
 
-  // Per-section Vice City color overlay
-  const viceOverlay = (() => {
-    switch (section.id) {
-      case 'web-design': return 'linear-gradient(135deg, hsl(25 95% 55% / 0.12), hsl(335 75% 55% / 0.08), transparent 70%)';
-      case 'desenvolvimento': return 'linear-gradient(225deg, hsl(175 70% 45% / 0.12), hsl(200 60% 50% / 0.08), transparent 60%)';
-      case 'inovacao-ia': return 'linear-gradient(180deg, hsl(335 75% 55% / 0.1), hsl(25 95% 55% / 0.08), transparent)';
-      case 'mobile-web': return 'linear-gradient(135deg, hsl(40 100% 50% / 0.1), hsl(175 70% 45% / 0.06), transparent 70%)';
-      case 'skills': return 'linear-gradient(225deg, hsl(25 95% 55% / 0.1), hsl(335 75% 55% / 0.06), transparent 60%)';
-      default: return 'none';
-    }
-  })();
+  // Per-section color palette
+  const sectionColors: Record<string, { accent: string; accentHsl: string; gradient: string; overlay: string }> = {
+    'focuss-dev':       { accent: 'text-blue-400',      accentHsl: '210 90% 60%',   gradient: 'linear-gradient(90deg, hsl(210 90% 60%), hsl(230 80% 65%))',          overlay: 'none' },
+    'web-design':       { accent: 'text-orange-400',     accentHsl: '25 95% 55%',    gradient: 'linear-gradient(90deg, hsl(25 95% 55%), hsl(335 75% 55%))',           overlay: 'linear-gradient(135deg, hsl(25 95% 55% / 0.12), hsl(335 75% 55% / 0.08), transparent 70%)' },
+    'desenvolvimento':  { accent: 'text-emerald-400',    accentHsl: '160 70% 50%',   gradient: 'linear-gradient(90deg, hsl(160 70% 50%), hsl(190 80% 55%))',          overlay: 'linear-gradient(225deg, hsl(160 70% 50% / 0.12), hsl(190 80% 55% / 0.08), transparent 60%)' },
+    'design-interface': { accent: 'text-purple-400',     accentHsl: '270 70% 60%',   gradient: 'linear-gradient(90deg, hsl(270 70% 60%), hsl(300 65% 55%))',          overlay: 'linear-gradient(180deg, hsl(270 70% 60% / 0.1), hsl(300 65% 55% / 0.06), transparent)' },
+    'inovacao-ia':      { accent: 'text-pink-400',       accentHsl: '335 75% 55%',   gradient: 'linear-gradient(90deg, hsl(335 75% 55%), hsl(355 85% 60%))',          overlay: 'linear-gradient(180deg, hsl(335 75% 55% / 0.1), hsl(25 95% 55% / 0.08), transparent)' },
+    'mobile-web':       { accent: 'text-amber-400',      accentHsl: '40 100% 50%',   gradient: 'linear-gradient(90deg, hsl(40 100% 50%), hsl(30 95% 55%))',           overlay: 'linear-gradient(135deg, hsl(40 100% 50% / 0.1), hsl(175 70% 45% / 0.06), transparent 70%)' },
+    'skills':           { accent: 'text-cyan-400',       accentHsl: '185 80% 55%',   gradient: 'linear-gradient(90deg, hsl(185 80% 55%), hsl(210 75% 60%))',          overlay: 'linear-gradient(225deg, hsl(185 80% 55% / 0.1), hsl(210 75% 60% / 0.06), transparent 60%)' },
+  };
+  const colors = sectionColors[section.id] || sectionColors['focuss-dev'];
+  const viceOverlay = colors.overlay;
 
   // Parallax effect on hero image
   useEffect(() => {
