@@ -385,8 +385,8 @@ function CinematicSection({ section, isVisible, onScrollUpAtTop }: { section: ty
             ))}
           </h2>
           <div className="absolute bottom-8 right-6 md:right-16 flex flex-col items-center gap-2 opacity-50">
-            <span className="font-[family-name:var(--font-display)] text-[9px] tracking-[0.25em] uppercase text-accent/60 [writing-mode:vertical-lr]">Role para baixo</span>
-            <div className="w-[1px] h-12 bg-accent/40 animate-pulse" />
+            <span className="font-[family-name:var(--font-display)] text-[9px] tracking-[0.25em] uppercase text-vice-sunset/60 [writing-mode:vertical-lr]">Role para baixo</span>
+            <div className="w-[1px] h-12 bg-vice-sunset/40 animate-pulse" />
           </div>
         </div>
       </div>
