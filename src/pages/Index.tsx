@@ -24,7 +24,7 @@ const Index = () => {
     <div className="relative h-screen overflow-hidden">
       <HamburgerMenu onNavigate={handleMenuNavigate} />
       <LuminaSlider />
-      <Suspense fallback={<div className="absolute inset-0 bg-background" />}>
+      <Suspense fallback={<div className="absolute inset-0 bg-background flex items-center justify-center"><div className="w-8 h-8 border-2 border-foreground/20 border-t-foreground/60 rounded-full animate-spin" /></div>}>
         <SectionsDetail />
       </Suspense>
     </div>
