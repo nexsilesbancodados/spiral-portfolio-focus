@@ -181,72 +181,72 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
     // Different hero entrance per effect type
     switch (effect) {
       case 'fade-slide':
-        gsap.fromTo(titleWords, { y: 80, opacity: 0, rotationX: 15 }, { y: 0, opacity: 1, rotationX: 0, duration: 1.2, stagger: 0.12, ease: 'power3.out', delay: 0.3 });
-        gsap.fromTo(subtitle, { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.8, ease: 'power2.out', delay: 0.2 });
+        gsap.fromTo(titleWords, { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, stagger: 0.08, ease: 'power3.out', delay: 0.3 });
+        gsap.fromTo(subtitle, { x: -30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.6, ease: 'power2.out', delay: 0.2 });
         break;
       case 'scale-reveal':
-        gsap.fromTo(titleWords, { scale: 1.4, opacity: 0, filter: 'blur(8px)' }, { scale: 1, opacity: 1, filter: 'blur(0px)', duration: 1.4, stagger: 0.15, ease: 'power2.out', delay: 0.3 });
-        gsap.fromTo(subtitle, { y: -20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, delay: 0.5 });
+        gsap.fromTo(titleWords, { scale: 1.2, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.9, stagger: 0.1, ease: 'power2.out', delay: 0.3 });
+        gsap.fromTo(subtitle, { y: -15, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, delay: 0.4 });
         break;
       case 'horizontal-wipe':
-        gsap.fromTo(titleWords, { x: -120, opacity: 0 }, { x: 0, opacity: 1, duration: 1, stagger: 0.1, ease: 'power4.out', delay: 0.3 });
-        gsap.fromTo(subtitle, { x: 60, opacity: 0 }, { x: 0, opacity: 1, duration: 0.8, ease: 'power3.out', delay: 0.2 });
+        gsap.fromTo(titleWords, { x: -80, opacity: 0 }, { x: 0, opacity: 1, duration: 0.7, stagger: 0.08, ease: 'power4.out', delay: 0.3 });
+        gsap.fromTo(subtitle, { x: 40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.6, ease: 'power3.out', delay: 0.2 });
         break;
       case 'clip-expand':
-        gsap.fromTo(titleWords, { y: 60, opacity: 0, skewY: 5 }, { y: 0, opacity: 1, skewY: 0, duration: 1, stagger: 0.12, ease: 'power3.out', delay: 0.4 });
-        gsap.fromTo(subtitle, { scaleX: 0, opacity: 0, transformOrigin: 'left' }, { scaleX: 1, opacity: 1, duration: 0.8, delay: 0.3 });
+        gsap.fromTo(titleWords, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, stagger: 0.08, ease: 'power3.out', delay: 0.4 });
+        gsap.fromTo(subtitle, { scaleX: 0, opacity: 0, transformOrigin: 'left' }, { scaleX: 1, opacity: 1, duration: 0.6, delay: 0.3 });
         break;
       case 'stagger-cascade':
-        gsap.fromTo(titleWords, { y: 100, opacity: 0, rotationZ: -3 }, { y: 0, opacity: 1, rotationZ: 0, duration: 1.2, stagger: 0.2, ease: 'back.out(1.2)', delay: 0.3 });
-        gsap.fromTo(subtitle, { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, delay: 0.2 });
+        gsap.fromTo(titleWords, { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, stagger: 0.12, ease: 'back.out(1.1)', delay: 0.3 });
+        gsap.fromTo(subtitle, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, delay: 0.2 });
         break;
     }
 
     // Description fade
     gsap.fromTo(desc, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: 'power2.out', delay: 0.6 });
 
-    // Scroll-triggered gallery animations
-    const scrollHandler = () => {
-      const scrollTop = el.scrollTop;
-      const vh = window.innerHeight;
-
-      galleryEls.forEach((item, i) => {
-        const rect = (item as HTMLElement).getBoundingClientRect();
-        const visible = rect.top < vh * 0.85;
-        if (!visible) return;
-        if ((item as HTMLElement).dataset.animated) return;
-        (item as HTMLElement).dataset.animated = 'true';
-
+    // IntersectionObserver for gallery & detail animations (much lighter than scroll handler)
+    const animateItem = (item: Element, i: number, isGallery: boolean) => {
+      if (isGallery) {
         switch (effect) {
           case 'fade-slide':
-            gsap.fromTo(item, { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, delay: i * 0.15, ease: 'power2.out' });
+            gsap.fromTo(item, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, delay: i * 0.1, ease: 'power2.out' });
             break;
           case 'scale-reveal':
-            gsap.fromTo(item, { scale: 0.85, opacity: 0 }, { scale: 1, opacity: 1, duration: 1, delay: i * 0.12, ease: 'power2.out' });
+            gsap.fromTo(item, { scale: 0.9, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.7, delay: i * 0.1, ease: 'power2.out' });
             break;
           case 'horizontal-wipe':
-            gsap.fromTo(item, { x: i % 2 === 0 ? -80 : 80, opacity: 0 }, { x: 0, opacity: 1, duration: 0.9, delay: i * 0.1, ease: 'power3.out' });
+            gsap.fromTo(item, { x: i % 2 === 0 ? -50 : 50, opacity: 0 }, { x: 0, opacity: 1, duration: 0.6, delay: i * 0.08, ease: 'power3.out' });
             break;
           case 'clip-expand':
-            gsap.fromTo(item, { clipPath: 'inset(20% 20% 20% 20%)', opacity: 0 }, { clipPath: 'inset(0% 0% 0% 0%)', opacity: 1, duration: 1.2, delay: i * 0.15, ease: 'power2.out' });
+            gsap.fromTo(item, { clipPath: 'inset(10% 10% 10% 10%)', opacity: 0 }, { clipPath: 'inset(0% 0% 0% 0%)', opacity: 1, duration: 0.8, delay: i * 0.1, ease: 'power2.out' });
             break;
           case 'stagger-cascade':
-            gsap.fromTo(item, { y: 80, opacity: 0, rotationZ: -2 }, { y: 0, opacity: 1, rotationZ: 0, duration: 0.9, delay: i * 0.18, ease: 'back.out(1.1)' });
+            gsap.fromTo(item, { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, delay: i * 0.12, ease: 'back.out(1.1)' });
             break;
         }
-      });
-
-      // Detail items scroll reveal
-      detailEls.forEach((item, i) => {
-        const rect = (item as HTMLElement).getBoundingClientRect();
-        if (rect.top > vh * 0.9 || (item as HTMLElement).dataset.animated) return;
-        (item as HTMLElement).dataset.animated = 'true';
-        gsap.fromTo(item, { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, delay: i * 0.08, ease: 'power2.out' });
-      });
+      } else {
+        gsap.fromTo(item, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, delay: i * 0.06, ease: 'power2.out' });
+      }
     };
 
-    el.addEventListener('scroll', scrollHandler, { passive: true });
-    return () => el.removeEventListener('scroll', scrollHandler);
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const target = entry.target as HTMLElement;
+        if (target.dataset.animated) return;
+        target.dataset.animated = 'true';
+        const idx = parseInt(target.dataset.animIdx || '0', 10);
+        const isGallery = target.classList.contains('gallery-item');
+        animateItem(target, idx, isGallery);
+        observer.unobserve(target);
+      });
+    }, { root: el, threshold: 0.15 });
+
+    galleryEls.forEach((item, i) => { (item as HTMLElement).dataset.animIdx = String(i); observer.observe(item); });
+    detailEls.forEach((item, i) => { (item as HTMLElement).dataset.animIdx = String(i); observer.observe(item); });
+
+    return () => observer.disconnect();
   }, [section.id, effect]);
 
   // Scroll-up at top → go back to slider
@@ -363,16 +363,21 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
   const colors = sectionColors[section.id] || sectionColors['focuss-dev'];
   const viceOverlay = colors.overlay;
 
-  // Parallax effect on hero image
+  // Parallax effect on hero image (RAF-throttled)
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
     const heroImg = el.querySelector('.parallax-hero img') as HTMLElement;
     if (!heroImg) return;
+    let ticking = false;
     const handleScroll = () => {
-      const scrollY = el.scrollTop;
-      const offset = scrollY * 0.3;
-      heroImg.style.transform = `translateY(${offset}px) scale(1.1)`;
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const offset = el.scrollTop * 0.25;
+        heroImg.style.transform = `translateY(${offset}px) scale(1.1)`;
+        ticking = false;
+      });
     };
     el.addEventListener('scroll', handleScroll, { passive: true });
     return () => el.removeEventListener('scroll', handleScroll);
