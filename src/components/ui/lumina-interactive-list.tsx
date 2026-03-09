@@ -333,7 +333,6 @@ export function LuminaSlider() {
       document.removeEventListener("visibilitychange", handleVisibility);
       clearTimeout(resizeTimer);
       if (animFrameId) cancelAnimationFrame(animFrameId);
-      videoElements.forEach(v => { v.pause(); v.src = ''; });
       if (renderer) renderer.dispose();
     };
   }, []);
