@@ -1,16 +1,12 @@
-import { lazy, Suspense, useState, useCallback } from 'react'
+import { lazy, Suspense } from 'react'
 import { LuminaSlider } from '@/components/ui/lumina-interactive-list'
 import { HamburgerMenu } from '@/components/HamburgerMenu'
-
-const FocussChat = lazy(() => import('@/components/FocussChat').then(m => ({ default: m.FocussChat })))
 
 const SectionsDetail = lazy(() => 
   import('@/components/SectionsDetail').then(m => ({ default: m.SectionsDetail }))
 )
 
 const Index = () => {
-  const [showChat, setShowChat] = useState(false);
-
   const handleMenuNavigate = (index: number) => {
     window.dispatchEvent(new CustomEvent('explore-slide', { detail: { slideIndex: index } }));
     setTimeout(() => {
@@ -31,45 +27,6 @@ const Index = () => {
       <Suspense fallback={<div className="absolute inset-0 bg-background" />}>
         <SectionsDetail />
       </Suspense>
-
-      {/* FOCUSS AI Chat floating button */}
-      <button
-        onClick={() => setShowChat(!showChat)}
-        className="fixed bottom-6 right-6 z-[60] w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-110"
-        style={{
-          background: showChat
-            ? 'linear-gradient(135deg, hsl(0 0% 30%), hsl(0 0% 20%))'
-            : 'linear-gradient(135deg, hsl(335 75% 55%), hsl(25 95% 55%))',
-          boxShadow: showChat
-            ? '0 4px 20px hsl(0 0% 0% / 0.3)'
-            : '0 4px 30px hsl(335 75% 55% / 0.4)',
-        }}
-      >
-        {showChat ? (
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round"><path d="M18 6L6 18M6 6l12 12" /></svg>
-        ) : (
-          <span className="text-white text-lg font-bold">F</span>
-        )}
-      </button>
-
-      {/* FOCUSS AI Chat panel */}
-      {showChat && (
-        <div
-          className="fixed bottom-24 right-6 z-[55] w-[90vw] max-w-[420px] h-[70vh] max-h-[600px] rounded-2xl border border-border/30 overflow-hidden flex flex-col"
-          style={{
-            background: 'hsl(var(--background) / 0.95)',
-            backdropFilter: 'blur(20px)',
-            boxShadow: '0 20px 60px hsl(0 0% 0% / 0.5), 0 0 40px hsl(335 75% 55% / 0.1)',
-            animation: 'chatSlideIn 0.3s ease-out',
-          }}
-        >
-          <div className="p-4 flex-1 overflow-hidden">
-            <Suspense fallback={<div className="flex items-center justify-center h-full text-muted-foreground text-sm">Carregando...</div>}>
-              <FocussChat />
-            </Suspense>
-          </div>
-        </div>
-      )}
     </div>
   )
 }
