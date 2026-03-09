@@ -138,6 +138,13 @@ const sectionGallery: Record<string, { images: { src: string; label: string }[];
       { src: '/images/mobile-detail-02.jpg', label: 'Lifestyle' },
     ],
   },
+  'servicos': {
+    layout: 'asymmetric',
+    images: [
+      { src: '/images/servicos-detail-01.jpg', label: 'Marketing Digital' },
+      { src: '/images/servicos-detail-02.jpg', label: 'Desenvolvimento' },
+    ],
+  },
   'skills': {
     layout: 'panoramic-duo',
     images: [
