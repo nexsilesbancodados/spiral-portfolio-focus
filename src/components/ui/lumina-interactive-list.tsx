@@ -112,7 +112,7 @@ export function LuminaSlider() {
         titleEl.innerHTML = splitText(slides[idx].title);
         descEl.textContent = slides[idx].description;
         if (skillsEl) {
-          skillsEl.innerHTML = slides[idx].skills.map(s => `<span class="skill-tag">${s}</span>`).join('');
+          skillsEl.innerHTML = slides[idx].skills.map(s => `<span class="skill-tag ${slideColors[idx] || ''}">${s}</span>`).join('');
         }
         gsap.set(titleEl.children, { opacity: 0 });
         gsap.set(descEl, { y: 20, opacity: 0 });
