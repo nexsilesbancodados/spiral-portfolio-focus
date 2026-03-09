@@ -63,12 +63,6 @@ const Index = () => {
             animation: 'chatSlideIn 0.3s ease-out',
           }}
         >
-          <style>{`
-            @keyframes chatSlideIn {
-              from { opacity: 0; transform: translateY(20px) scale(0.95); }
-              to { opacity: 1; transform: translateY(0) scale(1); }
-            }
-          `}</style>
           <div className="p-4 flex-1 overflow-hidden">
             <Suspense fallback={<div className="flex items-center justify-center h-full text-muted-foreground text-sm">Carregando...</div>}>
               <FocussChat />

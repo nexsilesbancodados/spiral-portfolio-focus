@@ -449,3 +449,14 @@ All colors MUST be HSL.
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(5px); }
 }
+
+/* Chat slide-in animation */
+@keyframes chatSlideIn {
+  from { opacity: 0; transform: translateY(20px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Performance: contain layout for heavy sections */
+#detail-section {
+  contain: layout style;
+}
