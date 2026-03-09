@@ -608,7 +608,7 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
       <div className="relative z-10 bg-background">
         <div className="w-full h-[1px]" style={{ background: `linear-gradient(90deg, transparent, hsl(${colors.accentHsl} / 0.3), hsl(${colors.accentHsl} / 0.15), transparent)` }} />
         
-        <div className="cin-desc px-6 md:px-16 lg:px-24 py-16 md:py-24" style={{ opacity: 0 }}>
+        <div className="cin-desc px-6 md:px-16 lg:px-24 py-16 md:py-24">
           <div className="max-w-5xl">
             <p className="text-xl md:text-2xl lg:text-3xl text-foreground/90 leading-relaxed font-light tracking-tight">{section.description}</p>
           </div>
