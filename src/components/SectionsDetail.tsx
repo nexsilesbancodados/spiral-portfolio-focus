@@ -590,7 +590,6 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               color: 'transparent',
-              filter: `drop-shadow(0 0 30px hsl(${colors.accentHsl} / 0.3)) drop-shadow(0 4px 20px hsl(0 0% 0% / 0.6))`,
             }}
           >
             {section.title.split(' ').map((word, i) => (
