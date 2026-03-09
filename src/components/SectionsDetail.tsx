@@ -140,8 +140,6 @@ const sectionGallery: Record<string, { images: { src: string; label: string }[];
     layout: 'panoramic-duo',
     images: [
       { src: '/images/skills-detail-01.jpg', label: 'Conferência' },
-      { src: '/images/skills-detail-02.jpg', label: 'Workspace' },
-      { src: '/images/slide-07.jpg', label: 'Ecossistema' },
     ],
   },
 };
