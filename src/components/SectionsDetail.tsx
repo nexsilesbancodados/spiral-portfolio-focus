@@ -101,22 +101,152 @@ const sections = [
   },
 ];
 
+// Per-section detail images
+const sectionGallery: Record<string, { images: { src: string; label: string }[]; layout: 'panoramic-duo' | 'trio' | 'asymmetric' | 'stacked' }> = {
+  'web-design': {
+    layout: 'panoramic-duo',
+    images: [
+      { src: '/images/webdesign-detail-03.jpg', label: 'Studio' },
+      { src: '/images/webdesign-detail-01.jpg', label: 'Prototipagem' },
+      { src: '/images/webdesign-detail-02.jpg', label: 'Criação' },
+    ],
+  },
+  'desenvolvimento': {
+    layout: 'asymmetric',
+    images: [
+      { src: '/images/dev-detail-01.jpg', label: 'Infraestrutura' },
+      { src: '/images/dev-detail-02.jpg', label: 'Código' },
+    ],
+  },
+  'inovacao-ia': {
+    layout: 'trio',
+    images: [
+      { src: '/images/ia-detail-01.jpg', label: 'Laboratório IA' },
+      { src: '/images/ia-detail-02.jpg', label: 'Automação' },
+      { src: '/images/slide-05.jpg', label: 'Futuro' },
+    ],
+  },
+  'mobile-web': {
+    layout: 'stacked',
+    images: [
+      { src: '/images/mobile-detail-01.jpg', label: 'Multiplataforma' },
+      { src: '/images/mobile-detail-02.jpg', label: 'Lifestyle' },
+    ],
+  },
+  'skills': {
+    layout: 'panoramic-duo',
+    images: [
+      { src: '/images/skills-detail-01.jpg', label: 'Conferência' },
+      { src: '/images/skills-detail-02.jpg', label: 'Workspace' },
+      { src: '/images/slide-07.jpg', label: 'Ecossistema' },
+    ],
+  },
+};
+
+// Per-section GSAP scroll animation type
+type ScrollEffectType = 'fade-slide' | 'scale-reveal' | 'horizontal-wipe' | 'stagger-cascade' | 'clip-expand';
+const sectionScrollEffect: Record<string, ScrollEffectType> = {
+  'web-design': 'fade-slide',
+  'desenvolvimento': 'scale-reveal',
+  'design-interface': 'horizontal-wipe',
+  'inovacao-ia': 'clip-expand',
+  'mobile-web': 'stagger-cascade',
+  'skills': 'horizontal-wipe',
+};
+
 // ─── Lightweight cinematic section layout ─────────────────────────
 function CinematicSection({ section, isVisible, onScrollUpAtTop }: { section: typeof sections[0]; isVisible: boolean; onScrollUpAtTop: () => void }) {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const galleryRef = useRef<HTMLDivElement>(null);
+  const detailsRef = useRef<HTMLDivElement>(null);
 
   const isWebDesign = section.id === 'web-design';
   const isDesenvolvimento = section.id === 'desenvolvimento';
+  const effect = sectionScrollEffect[section.id] || 'fade-slide';
+  const gallery = sectionGallery[section.id];
 
-  // Simple GSAP fade-in on mount
+  // Unique GSAP scroll-triggered effects per section
   useEffect(() => {
     if (typeof gsap === 'undefined' || !sectionRef.current) return;
-    const els = sectionRef.current.querySelectorAll('.cin-anim');
-    gsap.fromTo(els, 
-      { y: 30, opacity: 0 }, 
-      { y: 0, opacity: 1, duration: 0.7, stagger: 0.08, ease: 'power2.out', delay: 0.2 }
-    );
-  }, [section.id]);
+    const el = sectionRef.current;
+    
+    // Hero title entrance animation
+    const titleWords = el.querySelectorAll('.title-word');
+    const subtitle = el.querySelector('.cin-subtitle');
+    const desc = el.querySelector('.cin-desc');
+    const galleryEls = el.querySelectorAll('.gallery-item');
+    const detailEls = el.querySelectorAll('.detail-item');
+
+    // Different hero entrance per effect type
+    switch (effect) {
+      case 'fade-slide':
+        gsap.fromTo(titleWords, { y: 80, opacity: 0, rotationX: 15 }, { y: 0, opacity: 1, rotationX: 0, duration: 1.2, stagger: 0.12, ease: 'power3.out', delay: 0.3 });
+        gsap.fromTo(subtitle, { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.8, ease: 'power2.out', delay: 0.2 });
+        break;
+      case 'scale-reveal':
+        gsap.fromTo(titleWords, { scale: 1.4, opacity: 0, filter: 'blur(8px)' }, { scale: 1, opacity: 1, filter: 'blur(0px)', duration: 1.4, stagger: 0.15, ease: 'power2.out', delay: 0.3 });
+        gsap.fromTo(subtitle, { y: -20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, delay: 0.5 });
+        break;
+      case 'horizontal-wipe':
+        gsap.fromTo(titleWords, { x: -120, opacity: 0 }, { x: 0, opacity: 1, duration: 1, stagger: 0.1, ease: 'power4.out', delay: 0.3 });
+        gsap.fromTo(subtitle, { x: 60, opacity: 0 }, { x: 0, opacity: 1, duration: 0.8, ease: 'power3.out', delay: 0.2 });
+        break;
+      case 'clip-expand':
+        gsap.fromTo(titleWords, { y: 60, opacity: 0, skewY: 5 }, { y: 0, opacity: 1, skewY: 0, duration: 1, stagger: 0.12, ease: 'power3.out', delay: 0.4 });
+        gsap.fromTo(subtitle, { scaleX: 0, opacity: 0, transformOrigin: 'left' }, { scaleX: 1, opacity: 1, duration: 0.8, delay: 0.3 });
+        break;
+      case 'stagger-cascade':
+        gsap.fromTo(titleWords, { y: 100, opacity: 0, rotationZ: -3 }, { y: 0, opacity: 1, rotationZ: 0, duration: 1.2, stagger: 0.2, ease: 'back.out(1.2)', delay: 0.3 });
+        gsap.fromTo(subtitle, { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, delay: 0.2 });
+        break;
+    }
+
+    // Description fade
+    gsap.fromTo(desc, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: 'power2.out', delay: 0.6 });
+
+    // Scroll-triggered gallery animations
+    const scrollHandler = () => {
+      const scrollTop = el.scrollTop;
+      const vh = window.innerHeight;
+
+      galleryEls.forEach((item, i) => {
+        const rect = (item as HTMLElement).getBoundingClientRect();
+        const visible = rect.top < vh * 0.85;
+        if (!visible) return;
+        if ((item as HTMLElement).dataset.animated) return;
+        (item as HTMLElement).dataset.animated = 'true';
+
+        switch (effect) {
+          case 'fade-slide':
+            gsap.fromTo(item, { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, delay: i * 0.15, ease: 'power2.out' });
+            break;
+          case 'scale-reveal':
+            gsap.fromTo(item, { scale: 0.85, opacity: 0 }, { scale: 1, opacity: 1, duration: 1, delay: i * 0.12, ease: 'power2.out' });
+            break;
+          case 'horizontal-wipe':
+            gsap.fromTo(item, { x: i % 2 === 0 ? -80 : 80, opacity: 0 }, { x: 0, opacity: 1, duration: 0.9, delay: i * 0.1, ease: 'power3.out' });
+            break;
+          case 'clip-expand':
+            gsap.fromTo(item, { clipPath: 'inset(20% 20% 20% 20%)', opacity: 0 }, { clipPath: 'inset(0% 0% 0% 0%)', opacity: 1, duration: 1.2, delay: i * 0.15, ease: 'power2.out' });
+            break;
+          case 'stagger-cascade':
+            gsap.fromTo(item, { y: 80, opacity: 0, rotationZ: -2 }, { y: 0, opacity: 1, rotationZ: 0, duration: 0.9, delay: i * 0.18, ease: 'back.out(1.1)' });
+            break;
+        }
+      });
+
+      // Detail items scroll reveal
+      detailEls.forEach((item, i) => {
+        const rect = (item as HTMLElement).getBoundingClientRect();
+        if (rect.top > vh * 0.9 || (item as HTMLElement).dataset.animated) return;
+        (item as HTMLElement).dataset.animated = 'true';
+        gsap.fromTo(item, { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, delay: i * 0.08, ease: 'power2.out' });
+      });
+    };
+
+    el.addEventListener('scroll', scrollHandler, { passive: true });
+    return () => el.removeEventListener('scroll', scrollHandler);
+  }, [section.id, effect]);
 
   // Scroll-up at top → go back to slider
   useEffect(() => {
@@ -126,60 +256,122 @@ function CinematicSection({ section, isVisible, onScrollUpAtTop }: { section: ty
     const handleWheel = (e: WheelEvent) => {
       if (el.scrollTop <= 5 && e.deltaY < 0) {
         accum += Math.abs(e.deltaY);
-        if (accum > 100) {
-          accum = 0;
-          onScrollUpAtTop();
-        }
-      } else {
-        accum = 0;
-      }
+        if (accum > 100) { accum = 0; onScrollUpAtTop(); }
+      } else { accum = 0; }
     };
     el.addEventListener('wheel', handleWheel, { passive: true });
     return () => el.removeEventListener('wheel', handleWheel);
   }, [onScrollUpAtTop]);
 
+  // Render gallery based on layout type
+  const renderGallery = () => {
+    if (!gallery) {
+      return (
+        <div className="gallery-item relative w-full h-[40vh] md:h-[50vh] overflow-hidden" style={{ opacity: 0 }}>
+          <img src={section.image} alt="" loading="lazy" decoding="async" className="w-full h-full object-cover" style={{ filter: 'brightness(0.7) saturate(1.2)' }} />
+          <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/50" />
+        </div>
+      );
+    }
+
+    const imgs = gallery.images;
+    const imgStyle = { filter: 'brightness(0.75) saturate(1.2) contrast(1.05)' };
+    const labelCls = "font-[family-name:var(--font-display)] text-[10px] tracking-[0.2em] uppercase text-accent/70";
+
+    switch (gallery.layout) {
+      case 'panoramic-duo':
+        return (
+          <div className="space-y-0">
+            <div className="gallery-item relative w-full h-[40vh] md:h-[50vh] overflow-hidden" style={{ opacity: 0 }}>
+              <img src={imgs[0].src} alt={imgs[0].label} loading="lazy" decoding="async" className="w-full h-full object-cover" style={imgStyle} />
+              <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background" />
+              <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/40" />
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-[2px]">
+              {imgs.slice(1).map((img, i) => (
+                <div key={i} className="gallery-item relative h-[35vh] md:h-[45vh] overflow-hidden" style={{ opacity: 0 }}>
+                  <img src={img.src} alt={img.label} loading="lazy" decoding="async" className="w-full h-full object-cover" style={{ filter: 'brightness(0.8) saturate(1.15)' }} />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
+                  <div className="absolute bottom-6 left-6"><span className={labelCls}>{img.label}</span></div>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+      case 'asymmetric':
+        return (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-[2px]">
+            <div className="gallery-item md:col-span-2 relative h-[45vh] md:h-[60vh] overflow-hidden" style={{ opacity: 0 }}>
+              <img src={imgs[0].src} alt={imgs[0].label} loading="lazy" decoding="async" className="w-full h-full object-cover" style={imgStyle} />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent" />
+              <div className="absolute bottom-6 left-6"><span className={labelCls}>{imgs[0].label}</span></div>
+            </div>
+            <div className="gallery-item relative h-[45vh] md:h-[60vh] overflow-hidden" style={{ opacity: 0 }}>
+              <img src={imgs[1].src} alt={imgs[1].label} loading="lazy" decoding="async" className="w-full h-full object-cover" style={imgStyle} />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent" />
+              <div className="absolute bottom-6 left-6"><span className={labelCls}>{imgs[1].label}</span></div>
+            </div>
+          </div>
+        );
+      case 'trio':
+        return (
+          <div className="space-y-[2px]">
+            <div className="gallery-item relative w-full h-[35vh] md:h-[45vh] overflow-hidden" style={{ opacity: 0 }}>
+              <img src={imgs[0].src} alt={imgs[0].label} loading="lazy" decoding="async" className="w-full h-full object-cover" style={imgStyle} />
+              <div className="absolute inset-0 bg-gradient-to-r from-background/60 via-transparent to-background/60" />
+              <div className="absolute bottom-6 left-6"><span className={labelCls}>{imgs[0].label}</span></div>
+            </div>
+            <div className="grid grid-cols-2 gap-[2px]">
+              {imgs.slice(1).map((img, i) => (
+                <div key={i} className="gallery-item relative h-[30vh] md:h-[40vh] overflow-hidden" style={{ opacity: 0 }}>
+                  <img src={img.src} alt={img.label} loading="lazy" decoding="async" className="w-full h-full object-cover" style={{ filter: 'brightness(0.8) saturate(1.15)' }} />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent" />
+                  <div className="absolute bottom-6 left-6"><span className={labelCls}>{img.label}</span></div>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+      case 'stacked':
+        return (
+          <div className="space-y-[2px]">
+            {imgs.map((img, i) => (
+              <div key={i} className="gallery-item relative w-full h-[40vh] md:h-[50vh] overflow-hidden" style={{ opacity: 0 }}>
+                <img src={img.src} alt={img.label} loading="lazy" decoding="async" className="w-full h-full object-cover" style={imgStyle} />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-r from-background/40 via-transparent to-background/40" />
+                <div className="absolute bottom-6 left-6"><span className={labelCls}>{img.label}</span></div>
+              </div>
+            ))}
+          </div>
+        );
+    }
+  };
+
   return (
     <div ref={sectionRef} className="absolute inset-0 overflow-y-auto gta-vi-scroll">
-      {/* ── HERO: Full-viewport image ── */}
+      {/* ── HERO ── */}
       <div className="relative h-screen w-full overflow-hidden flex items-end">
         <div className="absolute inset-0">
-          <img
-            src={section.image}
-            alt={section.title}
-            loading="eager"
-            decoding="async"
-            className="w-full h-full object-cover"
-          />
-          {/* Clean gradient overlays */}
+          <img src={section.image} alt={section.title} loading="eager" decoding="async" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-r from-background/60 via-transparent to-transparent" />
-          <div className="absolute inset-0" style={{ 
-            background: 'linear-gradient(180deg, transparent 50%, hsl(var(--background)) 100%)',
-          }} />
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, transparent 50%, hsl(var(--background)) 100%)' }} />
         </div>
 
-        {/* Hero content */}
         <div className="relative z-10 w-full px-6 md:px-16 lg:px-24 pb-16 md:pb-24">
-          {/* Subtitle */}
-          <div className="cin-anim flex items-center gap-3 mb-6">
+          <div className="cin-subtitle flex items-center gap-3 mb-6" style={{ opacity: 0 }}>
             <div className="h-[1px] w-12 bg-accent" />
-            <span className="font-[family-name:var(--font-display)] text-[11px] md:text-xs tracking-[0.3em] uppercase text-accent">
-              {section.subtitle}
-            </span>
+            <span className="font-[family-name:var(--font-display)] text-[11px] md:text-xs tracking-[0.3em] uppercase text-accent">{section.subtitle}</span>
           </div>
-
-          {/* Large title */}
-          <h2 className="cin-anim font-[family-name:var(--font-display)] text-5xl sm:text-6xl md:text-8xl lg:text-[9rem] xl:text-[11rem] font-bold text-foreground leading-[0.85] tracking-tighter uppercase">
+          <h2 className="font-[family-name:var(--font-display)] text-5xl sm:text-6xl md:text-8xl lg:text-[9rem] xl:text-[11rem] font-bold text-foreground leading-[0.85] tracking-tighter uppercase">
             {section.title.split(' ').map((word, i) => (
-              <span key={i} className="block">{word}</span>
+              <span key={i} className="title-word block" style={{ opacity: 0 }}>{word}</span>
             ))}
           </h2>
-
-          {/* Scroll indicator */}
           <div className="absolute bottom-8 right-6 md:right-16 flex flex-col items-center gap-2 opacity-50">
-            <span className="font-[family-name:var(--font-display)] text-[9px] tracking-[0.25em] uppercase text-accent/60 [writing-mode:vertical-lr]">
-              Role para baixo
-            </span>
+            <span className="font-[family-name:var(--font-display)] text-[9px] tracking-[0.25em] uppercase text-accent/60 [writing-mode:vertical-lr]">Role para baixo</span>
             <div className="w-[1px] h-12 bg-accent/40 animate-pulse" />
           </div>
         </div>
@@ -188,64 +380,25 @@ function CinematicSection({ section, isVisible, onScrollUpAtTop }: { section: ty
       {/* ── CONTENT ── */}
       <div className="relative z-10 bg-background">
         <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-accent/30 to-transparent" />
-
-        {/* Description */}
-        <div className="cin-anim px-6 md:px-16 lg:px-24 py-16 md:py-24">
+        
+        <div className="cin-desc px-6 md:px-16 lg:px-24 py-16 md:py-24" style={{ opacity: 0 }}>
           <div className="max-w-5xl">
-            <p className="text-xl md:text-2xl lg:text-3xl text-foreground/90 leading-relaxed font-light tracking-tight">
-              {section.description}
-            </p>
+            <p className="text-xl md:text-2xl lg:text-3xl text-foreground/90 leading-relaxed font-light tracking-tight">{section.description}</p>
           </div>
         </div>
 
-        {/* Image gallery — cinematic warm tone strips */}
-        {isWebDesign ? (
-          <div className="space-y-0">
-            {/* Main panoramic strip */}
-            <div className="relative w-full h-[40vh] md:h-[50vh] overflow-hidden">
-              <img src="/images/webdesign-detail-03.jpg" alt="Design agency" loading="lazy" decoding="async" className="w-full h-full object-cover" style={{ filter: 'brightness(0.75) saturate(1.2) contrast(1.05)' }} />
-              <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background" />
-              <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/40" />
-            </div>
-            {/* Two-column gallery */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-[2px]">
-              <div className="relative h-[35vh] md:h-[45vh] overflow-hidden">
-                <img src="/images/webdesign-detail-01.jpg" alt="Figma workspace" loading="lazy" decoding="async" className="w-full h-full object-cover" style={{ filter: 'brightness(0.8) saturate(1.15)' }} />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
-                <div className="absolute bottom-6 left-6">
-                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.2em] uppercase text-accent/70">Prototipagem</span>
-                </div>
-              </div>
-              <div className="relative h-[35vh] md:h-[45vh] overflow-hidden">
-                <img src="/images/webdesign-detail-02.jpg" alt="Creative process" loading="lazy" decoding="async" className="w-full h-full object-cover" style={{ filter: 'brightness(0.8) saturate(1.15)' }} />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
-                <div className="absolute bottom-6 left-6">
-                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.2em] uppercase text-accent/70">Criação</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        ) : (
-          <div className="relative w-full h-[40vh] md:h-[50vh] overflow-hidden">
-            <img src={section.image} alt="" loading="lazy" decoding="async" className="w-full h-full object-cover" style={{ filter: 'brightness(0.7) saturate(1.2)' }} />
-            <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background" />
-            <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/50" />
-          </div>
-        )}
+        {/* Gallery */}
+        <div ref={galleryRef}>{renderGallery()}</div>
 
         {/* Details grid */}
-        <div className="px-6 md:px-16 lg:px-24 py-16 md:py-24">
+        <div ref={detailsRef} className="px-6 md:px-16 lg:px-24 py-16 md:py-24">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 max-w-6xl">
             {section.details.map((detail, i) => (
-              <div key={i} className="cin-anim group flex items-start gap-4">
-                <span className="font-[family-name:var(--font-display)] text-accent/40 text-sm tracking-widest mt-1">
-                  {String(i + 1).padStart(2, '0')}
-                </span>
+              <div key={i} className="detail-item group flex items-start gap-4" style={{ opacity: 0 }}>
+                <span className="font-[family-name:var(--font-display)] text-accent/40 text-sm tracking-widest mt-1">{String(i + 1).padStart(2, '0')}</span>
                 <div>
                   <div className="h-[1px] w-8 bg-accent/30 mb-4 group-hover:w-16 group-hover:bg-accent/60 transition-all duration-500" />
-                  <p className="text-foreground/80 text-base md:text-lg leading-relaxed">
-                    {detail}
-                  </p>
+                  <p className="text-foreground/80 text-base md:text-lg leading-relaxed">{detail}</p>
                 </div>
               </div>
             ))}
@@ -254,15 +407,10 @@ function CinematicSection({ section, isVisible, onScrollUpAtTop }: { section: ty
 
         {/* Section-specific content */}
         {isWebDesign && isVisible && (
-          <div className="px-6 md:px-16 lg:px-24 pb-24">
-            <WebDesignPortfolio />
-          </div>
+          <div className="px-6 md:px-16 lg:px-24 pb-24"><WebDesignPortfolio /></div>
         )}
-
         {isDesenvolvimento && isVisible && (
-          <div className="px-6 md:px-16 lg:px-24 pb-24 flex justify-center">
-            <PlatformerGame />
-          </div>
+          <div className="px-6 md:px-16 lg:px-24 pb-24 flex justify-center"><PlatformerGame /></div>
         )}
 
         <div className="h-16 md:h-24" />
