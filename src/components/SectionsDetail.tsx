@@ -138,6 +138,13 @@ const sectionGallery: Record<string, { images: { src: string; label: string }[];
       { src: '/images/mobile-detail-02.jpg', label: 'Lifestyle' },
     ],
   },
+  'servicos': {
+    layout: 'asymmetric',
+    images: [
+      { src: '/images/servicos-detail-01.jpg', label: 'Marketing Digital' },
+      { src: '/images/servicos-detail-02.jpg', label: 'Desenvolvimento' },
+    ],
+  },
   'skills': {
     layout: 'panoramic-duo',
     images: [
@@ -564,26 +571,64 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
       case 'servicos':
         return (
           <div className="px-6 md:px-16 lg:px-24 py-16 md:py-24">
+            {/* Cinematic gallery header */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-[2px] mb-16">
+              <div className="detail-item image-hover-zoom card-hover-glow relative h-[40vh] md:h-[50vh] overflow-hidden rounded-sm" style={{ opacity: 0 }}>
+                <img src="/images/servicos-detail-01.jpg" alt="Serviços Digitais" loading="lazy" decoding="async" className="w-full h-full object-cover" style={{ filter: 'brightness(0.7) saturate(1.3) contrast(1.05)' }} />
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
+                <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, hsl(270 70% 60% / 0.15), transparent 60%)' }} />
+                <div className="absolute bottom-6 left-6">
+                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.3em] uppercase text-vice-pink/80">DIGITAL MARKETING</span>
+                  <h4 className="font-[family-name:var(--font-display)] text-foreground text-xl font-bold mt-2">Resultados que Importam</h4>
+                </div>
+              </div>
+              <div className="detail-item image-hover-zoom card-hover-glow relative h-[40vh] md:h-[50vh] overflow-hidden rounded-sm" style={{ opacity: 0 }}>
+                <img src="/images/servicos-detail-02.jpg" alt="Desenvolvimento" loading="lazy" decoding="async" className="w-full h-full object-cover" style={{ filter: 'brightness(0.7) saturate(1.3) contrast(1.05)' }} />
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
+                <div className="absolute inset-0" style={{ background: 'linear-gradient(225deg, hsl(300 65% 55% / 0.12), transparent 60%)' }} />
+                <div className="absolute bottom-6 left-6">
+                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.3em] uppercase text-vice-teal/80">FULL-STACK DEV</span>
+                  <h4 className="font-[family-name:var(--font-display)] text-foreground text-xl font-bold mt-2">Tecnologia de Ponta</h4>
+                </div>
+              </div>
+            </div>
+
+            {/* Service cards grid - Vice City neon style */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl">
               {[
-                { icon: '📈', title: 'Tráfego Pago', desc: 'Campanhas estratégicas no Google Ads, Meta Ads e TikTok Ads. Maximizamos seu ROI com segmentação precisa e otimização contínua.' },
-                { icon: '🌐', title: 'Criação de Sites', desc: 'Sites modernos, responsivos e otimizados para SEO. Desenvolvidos com as melhores tecnologias para performance máxima.' },
-                { icon: '📱', title: 'Criação de Apps', desc: 'Aplicativos nativos e multiplataforma com experiência de usuário premium. iOS, Android e PWA.' },
-                { icon: '⚙️', title: 'Sistemas & SaaS', desc: 'Plataformas escaláveis sob medida. Painéis administrativos, ERPs, CRMs e soluções SaaS completas.' },
-                { icon: '🚀', title: 'Landing Pages', desc: 'Páginas de alta conversão com design persuasivo, copywriting estratégico e integração com funis de vendas.' },
-                { icon: '🎨', title: 'Design', desc: 'Identidade visual completa, UI/UX premium, design systems e prototipagem interativa no Figma.' },
+                { icon: '📈', title: 'Tráfego Pago', desc: 'Campanhas estratégicas no Google Ads, Meta Ads e TikTok Ads. Maximizamos seu ROI com segmentação precisa e otimização contínua.', accent: 'vice-pink' },
+                { icon: '🌐', title: 'Criação de Sites', desc: 'Sites modernos, responsivos e otimizados para SEO. Desenvolvidos com as melhores tecnologias para performance máxima.', accent: 'vice-teal' },
+                { icon: '📱', title: 'Criação de Apps', desc: 'Aplicativos nativos e multiplataforma com experiência de usuário premium. iOS, Android e PWA.', accent: 'vice-sunset' },
+                { icon: '⚙️', title: 'Sistemas & SaaS', desc: 'Plataformas escaláveis sob medida. Painéis administrativos, ERPs, CRMs e soluções SaaS completas.', accent: 'vice-sky' },
+                { icon: '🚀', title: 'Landing Pages', desc: 'Páginas de alta conversão com design persuasivo, copywriting estratégico e integração com funis de vendas.', accent: 'vice-gold' },
+                { icon: '🎨', title: 'Design', desc: 'Identidade visual completa, UI/UX premium, design systems e prototipagem interativa no Figma.', accent: 'vice-palm' },
               ].map((card, i) => (
-                <div key={i} className="detail-item card-hover-glow relative p-8 rounded-sm border border-border/20 backdrop-blur-sm group cursor-pointer" 
-                  style={{ opacity: 0, background: 'hsl(var(--card) / 0.5)' }}>
-                  <div className="absolute inset-0 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{ background: 'linear-gradient(135deg, hsl(270 70% 60% / 0.08), hsl(300 65% 55% / 0.05))' }} />
+                <div key={i} className="detail-item card-hover-glow relative p-8 rounded-sm overflow-hidden group cursor-pointer" 
+                  style={{ opacity: 0, background: 'hsl(var(--card) / 0.4)', border: '1px solid hsl(var(--border) / 0.15)' }}>
+                  {/* Neon glow border on hover */}
+                  <div className="absolute inset-0 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+                    style={{ 
+                      background: `linear-gradient(135deg, hsl(270 70% 60% / 0.1), hsl(335 75% 55% / 0.06), transparent)`,
+                      boxShadow: 'inset 0 0 30px hsl(270 70% 60% / 0.05)'
+                    }} />
+                  {/* Top accent line */}
+                  <div className="absolute top-0 left-0 right-0 h-[2px] opacity-60 group-hover:opacity-100 transition-opacity duration-500"
+                    style={{ background: 'linear-gradient(90deg, transparent, hsl(270 70% 60% / 0.6), hsl(335 75% 55% / 0.4), transparent)' }} />
                   <div className="relative z-10">
-                    <span className="text-3xl mb-4 block">{card.icon}</span>
-                    <h4 className="font-[family-name:var(--font-display)] text-foreground text-base font-semibold tracking-wide uppercase mb-3">{card.title}</h4>
+                    <span className="text-4xl mb-5 block drop-shadow-lg">{card.icon}</span>
+                    <h4 className="font-[family-name:var(--font-display)] text-foreground text-base font-semibold tracking-[0.15em] uppercase mb-3">{card.title}</h4>
                     <p className="text-muted-foreground text-sm leading-relaxed">{card.desc}</p>
-                    <div className="h-[1px] w-12 mt-6 bg-purple-400/30 group-hover:w-full group-hover:bg-purple-400/60 transition-all duration-700" />
+                    <div className="h-[1px] w-12 mt-6 transition-all duration-700 group-hover:w-full"
+                      style={{ background: 'linear-gradient(90deg, hsl(270 70% 60% / 0.5), hsl(335 75% 55% / 0.3))' }} />
                   </div>
                 </div>
               ))}
+            </div>
+
+            {/* Bottom CTA area */}
+            <div className="mt-20 text-center">
+              <p className="font-[family-name:var(--font-display)] text-[11px] tracking-[0.3em] uppercase text-muted-foreground/60 mb-4">PRONTO PARA COMEÇAR?</p>
+              <div className="h-[1px] w-24 mx-auto" style={{ background: 'linear-gradient(90deg, transparent, hsl(270 70% 60% / 0.5), transparent)' }} />
             </div>
           </div>
         );
