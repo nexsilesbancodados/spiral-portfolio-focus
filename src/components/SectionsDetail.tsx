@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState, useCallback, lazy, Suspense, memo }
 const ScrollExpandMedia = lazy(() => import('@/components/ScrollExpandMedia').then(m => ({ default: m.ScrollExpandMedia })));
 const PlatformerGame = lazy(() => import('@/components/PlatformerGame').then(m => ({ default: m.PlatformerGame })));
 const FocussChat = lazy(() => import('@/components/FocussChat').then(m => ({ default: m.FocussChat })));
+const TechLogosMarquee = lazy(() => import('@/components/TechLogosMarquee'));
 
 declare const gsap: any;
 
@@ -540,6 +541,8 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
                 </div>
               ))}
             </div>
+            {/* Animated tech logos marquee */}
+            <Suspense fallback={null}><TechLogosMarquee /></Suspense>
             {/* Tech badges */}
             <div className="max-w-5xl mx-auto mt-16 flex flex-wrap gap-3">
               {['React', 'Next.js', 'TypeScript', 'Node.js', 'Python', 'Go', 'PostgreSQL', 'MongoDB', 'Redis', 'AWS', 'Docker', 'Figma', 'GSAP', 'Three.js', 'Tailwind CSS', 'GraphQL'].map((tech, i) => (
