@@ -1,7 +1,9 @@
-import React, { useEffect, useRef, useState, lazy, Suspense } from 'react';
+import React, { useEffect, useRef, useState, lazy, Suspense, useCallback } from 'react';
 import { WebDesignPortfolio } from '@/components/WebDesignPortfolio';
 import { ScrollExpandMedia } from '@/components/ScrollExpandMedia';
 import { PlatformerGame } from '@/components/PlatformerGame';
+import { motion, AnimatePresence } from 'framer-motion';
+
 declare const gsap: any;
 
 const InteractiveGlobe = lazy(() => import('@/components/ui/interactive-globe').then(m => ({ default: m.InteractiveGlobe })));
@@ -103,6 +105,212 @@ const sections = [
   },
 ];
 
+// ─── GTA VI-inspired cinematic section layout ─────────────────────────
+function GtaViSection({ section, isVisible }: { section: typeof sections[0]; isVisible: boolean }) {
+  const [scrollY, setScrollY] = useState(0);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const handleScroll = () => setScrollY(el.scrollTop);
+    el.addEventListener('scroll', handleScroll, { passive: true });
+    return () => el.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const parallaxOffset = scrollY * 0.4;
+  const heroOpacity = Math.max(0, 1 - scrollY / 500);
+  const titleScale = 1 + scrollY * 0.0005;
+
+  const isWebDesign = section.id === 'web-design';
+  const isDesenvolvimento = section.id === 'desenvolvimento';
+  const isInovacao = section.id === 'inovacao-ia';
+
+  return (
+    <div ref={sectionRef} className="absolute inset-0 overflow-y-auto gta-vi-scroll">
+      {/* ── HERO: Full-viewport cinematic image ── */}
+      <div className="relative h-screen w-full overflow-hidden flex items-end">
+        {/* Background with parallax */}
+        <div className="absolute inset-0" style={{ transform: `translateY(${parallaxOffset}px)` }}>
+          {isInovacao && isVisible ? (
+            <Suspense fallback={<div className="absolute inset-0 bg-background" />}>
+              <WebGLShader />
+            </Suspense>
+          ) : (
+            <img
+              src={section.image}
+              alt={section.title}
+              loading="lazy"
+              decoding="async"
+              className="w-full h-full object-cover"
+              style={{ transform: `scale(${titleScale})` }}
+            />
+          )}
+          {/* Cinematic gradient overlays — GTA VI style */}
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-background/70 via-transparent to-transparent" />
+          <div className="absolute inset-0" style={{ 
+            background: 'linear-gradient(180deg, transparent 40%, hsl(var(--background)) 95%)',
+            opacity: 0.9 
+          }} />
+          {/* Warm cinematic color wash */}
+          <div className="absolute inset-0 mix-blend-soft-light" style={{
+            background: 'linear-gradient(135deg, hsl(45 100% 55% / 0.08), transparent 60%, hsl(200 80% 40% / 0.05))'
+          }} />
+        </div>
+
+        {/* Hero content — large dramatic title at bottom */}
+        <div className="relative z-10 w-full px-6 md:px-16 lg:px-24 pb-16 md:pb-24">
+          <motion.div
+            initial={{ opacity: 0, y: 60 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, ease: [0.25, 0.1, 0.25, 1], delay: 0.3 }}
+            style={{ opacity: heroOpacity }}
+          >
+            {/* Subtitle badge */}
+            <div className="flex items-center gap-3 mb-6">
+              <div className="h-[1px] w-12 bg-accent" />
+              <span className="font-[family-name:var(--font-display)] text-[11px] md:text-xs tracking-[0.3em] uppercase text-accent">
+                {section.subtitle}
+              </span>
+            </div>
+
+            {/* Massive title — GTA VI style */}
+            <h2 className="font-[family-name:var(--font-display)] text-5xl sm:text-6xl md:text-8xl lg:text-[9rem] xl:text-[11rem] font-bold text-foreground leading-[0.85] tracking-tighter uppercase">
+              {section.title.split(' ').map((word, i) => (
+                <motion.span
+                  key={i}
+                  className="block"
+                  initial={{ opacity: 0, x: -80 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1], delay: 0.4 + i * 0.15 }}
+                >
+                  {word}
+                </motion.span>
+              ))}
+            </h2>
+          </motion.div>
+
+          {/* Scroll indicator */}
+          <motion.div
+            className="absolute bottom-8 right-6 md:right-16 flex flex-col items-center gap-2"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: heroOpacity * 0.7 }}
+            transition={{ delay: 1.5 }}
+          >
+            <span className="font-[family-name:var(--font-display)] text-[9px] tracking-[0.25em] uppercase text-accent/60 [writing-mode:vertical-lr]">
+              Role para baixo
+            </span>
+            <motion.div
+              className="w-[1px] h-12 bg-accent/40"
+              animate={{ scaleY: [0.3, 1, 0.3] }}
+              transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+              style={{ transformOrigin: 'top' }}
+            />
+          </motion.div>
+        </div>
+      </div>
+
+      {/* ── CONTENT: Below the hero ── */}
+      <div className="relative z-10 bg-background">
+        {/* Cinematic thin accent line */}
+        <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-accent/30 to-transparent" />
+
+        {/* Description block — wide cinematic layout */}
+        <motion.div
+          className="px-6 md:px-16 lg:px-24 py-16 md:py-24"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 0.8 }}
+        >
+          <div className="max-w-5xl">
+            <p className="text-xl md:text-2xl lg:text-3xl text-foreground/90 leading-relaxed font-light tracking-tight">
+              {section.description}
+            </p>
+          </div>
+        </motion.div>
+
+        {/* Full-width image strip — cinematic break */}
+        <motion.div
+          className="relative w-full h-[40vh] md:h-[50vh] overflow-hidden"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: 1 }}
+        >
+          <img
+            src={section.image}
+            alt=""
+            loading="lazy"
+            decoding="async"
+            className="w-full h-full object-cover"
+            style={{ filter: 'brightness(0.7) saturate(1.3) contrast(1.1)' }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/50" />
+        </motion.div>
+
+        {/* Details grid — GTA VI character bio style */}
+        <div className="px-6 md:px-16 lg:px-24 py-16 md:py-24">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 max-w-6xl">
+            {section.details.map((detail, i) => (
+              <motion.div
+                key={i}
+                className="group"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-50px' }}
+                transition={{ duration: 0.6, delay: i * 0.1 }}
+              >
+                <div className="flex items-start gap-4">
+                  <span className="font-[family-name:var(--font-display)] text-accent/40 text-sm tracking-widest mt-1">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <div>
+                    <div className="h-[1px] w-8 bg-accent/30 mb-4 group-hover:w-16 group-hover:bg-accent/60 transition-all duration-500" />
+                    <p className="text-foreground/80 text-base md:text-lg leading-relaxed">
+                      {detail}
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Section-specific interactive content */}
+        {isWebDesign && isVisible && (
+          <motion.div
+            className="px-6 md:px-16 lg:px-24 pb-24"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <WebDesignPortfolio />
+          </motion.div>
+        )}
+
+        {isDesenvolvimento && isVisible && (
+          <motion.div
+            className="px-6 md:px-16 lg:px-24 pb-24 flex justify-center"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <PlatformerGame />
+          </motion.div>
+        )}
+
+        {/* Bottom spacer with cinematic fade */}
+        <div className="h-16 md:h-24 bg-gradient-to-b from-background to-background/80" />
+      </div>
+    </div>
+  );
+}
+
 export function SectionsDetail() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeSlide, setActiveSlide] = useState(0);
@@ -121,41 +329,20 @@ export function SectionsDetail() {
     if (typeof gsap === 'undefined') return;
     const container = containerRef.current;
     if (!container) return;
-
     const innerEls = container.querySelectorAll('.anim-el');
     gsap.set(innerEls, { y: 40, opacity: 0 });
   }, [activeSlide]);
 
   const section = sections[activeSlide];
+  const isFocussDev = section.id === 'focuss-dev';
+  const isDesignInterface = section.id === 'design-interface';
 
   return (
     <div ref={containerRef} id="detail-section" className="fixed inset-0 z-20 bg-background" style={{ transform: 'translateY(100%)', opacity: 0 }}>
       <div className="relative h-screen overflow-hidden">
-        {/* Background */}
-        <div className="absolute inset-0">
-          {section.id === 'inovacao-ia' && isVisible ? (
-            <Suspense fallback={<div className="absolute inset-0 bg-background" />}>
-              <WebGLShader />
-              <div className="absolute inset-0 bg-background/60" />
-            </Suspense>
-          ) : (
-            <>
-              <img
-                src={section.image}
-                alt={section.title}
-                loading="lazy"
-                decoding="async"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" />
-              <div className="absolute inset-0 opacity-20" style={{ background: `linear-gradient(135deg, hsl(45, 100%, 55%, 0.2) 0%, transparent 60%)` }} />
-            </>
-          )}
-        </div>
-
-        {/* Back button */}
+        {/* Back button — always on top */}
         <button
-          className="absolute top-6 left-6 z-30 flex items-center gap-2 text-foreground/60 hover:text-foreground transition-colors duration-300 font-[family-name:var(--font-display)] text-xs tracking-[0.15em] uppercase"
+          className="absolute top-6 left-6 z-50 flex items-center gap-2 text-foreground/60 hover:text-foreground transition-colors duration-300 font-[family-name:var(--font-display)] text-xs tracking-[0.15em] uppercase backdrop-blur-sm bg-background/20 px-3 py-2 rounded-sm border border-border/20 hover:border-accent/30"
           onClick={() => {
             if (typeof gsap !== 'undefined') {
               const slider = document.querySelector('.slider-wrapper');
@@ -168,20 +355,22 @@ export function SectionsDetail() {
           Voltar
         </button>
 
-        {/* Content */}
-        {section.id === 'design-interface' && isVisible ? (
-          <ScrollExpandMedia
-            mediaSrc="/images/slide-04.jpg"
-            bgImageSrc="/images/slide-04.jpg"
-            title={section.title}
-            subtitle={section.subtitle}
-            details={section.details}
-          />
-        ) : (
-          /* All other sections — original layout */
-          <div className={`relative flex items-center h-full px-6 md:px-16 lg:px-24 ${section.id === 'web-design' ? 'overflow-y-auto pt-20 pb-10 items-start' : ''}`}>
-            <div className={`w-full ${(section.id === 'desenvolvimento' || section.id === 'inovacao-ia') ? 'flex flex-col lg:flex-row items-center gap-8' : section.id === 'web-design' ? 'max-w-6xl mx-auto' : 'max-w-4xl mx-auto'}`}>
-              <div className={(section.id === 'desenvolvimento' || section.id === 'inovacao-ia') ? 'flex-1' : ''}>
+        {/* ── FOCUSS DEV: Original layout (unchanged) ── */}
+        {isFocussDev && (
+          <>
+            <div className="absolute inset-0">
+              <img
+                src={section.image}
+                alt={section.title}
+                loading="lazy"
+                decoding="async"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" />
+              <div className="absolute inset-0 opacity-20" style={{ background: `linear-gradient(135deg, hsl(45, 100%, 55%, 0.2) 0%, transparent 60%)` }} />
+            </div>
+            <div className="relative flex items-center h-full px-6 md:px-16 lg:px-24">
+              <div className="w-full max-w-4xl mx-auto">
                 <div className="anim-el h-[2px] w-16 mb-6 origin-left bg-accent" />
                 <span className="anim-el block font-[family-name:var(--font-display)] text-xs tracking-[0.2em] uppercase mb-3 text-accent">
                   {section.subtitle}
@@ -192,25 +381,33 @@ export function SectionsDetail() {
                 <p className="anim-el text-muted-foreground text-base md:text-lg leading-relaxed mb-8 max-w-2xl">
                   {section.description}
                 </p>
-                {section.id !== 'web-design' && (
-                  <ul className="space-y-3">
-                    {section.details.map((detail, i) => (
-                      <li key={i} className="anim-el flex items-start gap-3 text-muted-foreground text-sm md:text-base">
-                        <span className="mt-2 block w-1.5 h-1.5 rounded-full shrink-0 bg-accent" />
-                        {detail}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-                {section.id === 'web-design' && isVisible && <WebDesignPortfolio />}
+                <ul className="space-y-3">
+                  {section.details.map((detail, i) => (
+                    <li key={i} className="anim-el flex items-start gap-3 text-muted-foreground text-sm md:text-base">
+                      <span className="mt-2 block w-1.5 h-1.5 rounded-full shrink-0 bg-accent" />
+                      {detail}
+                    </li>
+                  ))}
+                </ul>
               </div>
-              {section.id === 'desenvolvimento' && isVisible && (
-                <div className="anim-el flex-1 flex justify-center">
-                  <PlatformerGame />
-                </div>
-              )}
             </div>
-          </div>
+          </>
+        )}
+
+        {/* ── Design de Interface: ScrollExpandMedia (unchanged) ── */}
+        {isDesignInterface && isVisible && (
+          <ScrollExpandMedia
+            mediaSrc="/images/slide-04.jpg"
+            bgImageSrc="/images/slide-04.jpg"
+            title={section.title}
+            subtitle={section.subtitle}
+            details={section.details}
+          />
+        )}
+
+        {/* ── All other sections: GTA VI cinematic style ── */}
+        {!isFocussDev && !isDesignInterface && (
+          <GtaViSection section={section} isVisible={isVisible} />
         )}
       </div>
     </div>
