@@ -156,7 +156,7 @@ const sectionScrollEffect: Record<string, ScrollEffectType> = {
 };
 
 // ─── Lightweight cinematic section layout ─────────────────────────
-function CinematicSection({ section, isVisible, onScrollUpAtTop }: { section: typeof sections[0]; isVisible: boolean; onScrollUpAtTop: () => void }) {
+const CinematicSection = memo(function CinematicSection({ section, isVisible, onScrollUpAtTop }: { section: typeof sections[0]; isVisible: boolean; onScrollUpAtTop: () => void }) {
   const sectionRef = useRef<HTMLDivElement>(null);
   const galleryRef = useRef<HTMLDivElement>(null);
   const detailsRef = useRef<HTMLDivElement>(null);
