@@ -569,7 +569,7 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
       {/* ── HERO with parallax ── */}
       <div className="relative h-screen w-full overflow-hidden flex items-end parallax-hero">
         <div className="absolute inset-0">
-          <img src={section.image} alt={section.title} loading="eager" decoding="async" className="w-full h-full object-cover" style={{ filter: 'saturate(1.15) contrast(1.05)', transform: 'scale(1.1)' }} />
+          <img src={section.image} alt={section.title} loading="eager" decoding="async" width={1920} height={1080} className="w-full h-full object-cover" style={{ filter: 'saturate(1.15) contrast(1.05)', transform: 'scale(1.1)' }} />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-r from-background/60 via-transparent to-transparent" />
           <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, transparent 50%, hsl(var(--background)) 100%)' }} />
