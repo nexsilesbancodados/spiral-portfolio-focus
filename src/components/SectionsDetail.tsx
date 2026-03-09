@@ -1,7 +1,8 @@
-import React, { useEffect, useRef, useState, useCallback, lazy, Suspense } from 'react';
-import { ScrollExpandMedia } from '@/components/ScrollExpandMedia';
-import { PlatformerGame } from '@/components/PlatformerGame';
-import { FocussChat } from '@/components/FocussChat';
+import React, { useEffect, useRef, useState, useCallback, lazy, Suspense, memo } from 'react';
+
+const ScrollExpandMedia = lazy(() => import('@/components/ScrollExpandMedia').then(m => ({ default: m.ScrollExpandMedia })));
+const PlatformerGame = lazy(() => import('@/components/PlatformerGame').then(m => ({ default: m.PlatformerGame })));
+const FocussChat = lazy(() => import('@/components/FocussChat').then(m => ({ default: m.FocussChat })));
 
 declare const gsap: any;
 

@@ -1,7 +1,8 @@
-import { lazy, Suspense, useState, useEffect } from 'react'
+import { lazy, Suspense, useState, useCallback } from 'react'
 import { LuminaSlider } from '@/components/ui/lumina-interactive-list'
 import { HamburgerMenu } from '@/components/HamburgerMenu'
-import { FocussChat } from '@/components/FocussChat'
+
+const FocussChat = lazy(() => import('@/components/FocussChat').then(m => ({ default: m.FocussChat })))
 
 const SectionsDetail = lazy(() => 
   import('@/components/SectionsDetail').then(m => ({ default: m.SectionsDetail }))
