@@ -137,12 +137,18 @@ export function WebDesignPortfolio() {
   const idleAnimRef = useRef<any>(null);
   const scrambleCancels = useRef<(() => void)[]>([]);
 
-  // Preload images
+  // Lazy preload images on hover
   useEffect(() => {
-    PROJECTS.forEach((p) => {
+    const preloadImage = (src: string) => {
       const img = new Image();
-      img.src = p.image;
-    });
+      img.src = src;
+    };
+    
+    const timeout = setTimeout(() => {
+      PROJECTS.slice(0, 3).forEach(p => preloadImage(p.image));
+    }, 2000);
+
+    return () => clearTimeout(timeout);
   }, []);
 
   const startIdleAnimation = useCallback(() => {

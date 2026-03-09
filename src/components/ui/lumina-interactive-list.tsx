@@ -236,19 +236,27 @@ export function LuminaSlider() {
       video.muted = true;
       video.playsInline = true;
       video.crossOrigin = 'anonymous';
-      video.preload = index === 0 ? 'auto' : 'metadata';
-      video.addEventListener('loadeddata', () => {
+      video.preload = index === 0 ? 'auto' : 'none';
+      
+      const loadHandler = () => {
         const t = new THREE.VideoTexture(video);
         t.minFilter = THREE.LinearFilter;
         t.magFilter = THREE.LinearFilter;
-        t.userData = { size: new THREE.Vector2(video.videoWidth, video.videoHeight), video };
+        t.userData = { size: new THREE.Vector2(video.videoWidth || 1920, video.videoHeight || 1080), video };
         videoElements.push(video);
-        // Only auto-play the first video, others play on demand
-        if (index <= 1) video.play().catch(() => {});
+        if (index === 0) video.play().catch(() => {});
         resolve(t);
-      });
+      };
+
+      if (index === 0) {
+        video.addEventListener('loadeddata', loadHandler);
+        video.load();
+      } else {
+        video.addEventListener('loadedmetadata', loadHandler);
+        setTimeout(() => video.load(), index * 300);
+      }
+      
       video.addEventListener('error', () => reject(new Error(`Failed video: ${src}`)));
-      video.load();
     });
 
     const initRenderer = async () => {
@@ -304,11 +312,13 @@ export function LuminaSlider() {
     const handleResize = () => {
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(() => {
-        if (renderer) {
-          renderer.setSize(window.innerWidth, window.innerHeight);
-          shaderMaterial.uniforms.uResolution.value.set(window.innerWidth, window.innerHeight);
+        if (renderer && shaderMaterial) {
+          const w = window.innerWidth;
+          const h = window.innerHeight;
+          renderer.setSize(w, h, false);
+          shaderMaterial.uniforms.uResolution.value.set(w, h);
         }
-      }, 150);
+      }, 200);
     };
 
     // Pause render when tab is hidden
