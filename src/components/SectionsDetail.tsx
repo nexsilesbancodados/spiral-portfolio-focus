@@ -4,6 +4,7 @@ const ScrollExpandMedia = lazy(() => import('@/components/ScrollExpandMedia').th
 const PlatformerGame = lazy(() => import('@/components/PlatformerGame').then(m => ({ default: m.PlatformerGame })));
 const FocussChat = lazy(() => import('@/components/FocussChat').then(m => ({ default: m.FocussChat })));
 const TechLogosMarquee = lazy(() => import('@/components/TechLogosMarquee'));
+const MultiOrbitSemiCircle = lazy(() => import('@/components/ui/multi-orbit-semi-circle'));
 
 declare const gsap: any;
 
