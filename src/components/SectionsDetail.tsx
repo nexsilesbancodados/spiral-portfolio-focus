@@ -350,17 +350,18 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
     }
   };
 
-  // Per-section Vice City color overlay
-  const viceOverlay = (() => {
-    switch (section.id) {
-      case 'web-design': return 'linear-gradient(135deg, hsl(25 95% 55% / 0.12), hsl(335 75% 55% / 0.08), transparent 70%)';
-      case 'desenvolvimento': return 'linear-gradient(225deg, hsl(175 70% 45% / 0.12), hsl(200 60% 50% / 0.08), transparent 60%)';
-      case 'inovacao-ia': return 'linear-gradient(180deg, hsl(335 75% 55% / 0.1), hsl(25 95% 55% / 0.08), transparent)';
-      case 'mobile-web': return 'linear-gradient(135deg, hsl(40 100% 50% / 0.1), hsl(175 70% 45% / 0.06), transparent 70%)';
-      case 'skills': return 'linear-gradient(225deg, hsl(25 95% 55% / 0.1), hsl(335 75% 55% / 0.06), transparent 60%)';
-      default: return 'none';
-    }
-  })();
+  // Per-section color palette
+  const sectionColors: Record<string, { accent: string; accentHsl: string; gradient: string; overlay: string }> = {
+    'focuss-dev':       { accent: 'text-blue-400',      accentHsl: '210 90% 60%',   gradient: 'linear-gradient(90deg, hsl(210 90% 60%), hsl(230 80% 65%))',          overlay: 'none' },
+    'web-design':       { accent: 'text-orange-400',     accentHsl: '25 95% 55%',    gradient: 'linear-gradient(90deg, hsl(25 95% 55%), hsl(335 75% 55%))',           overlay: 'linear-gradient(135deg, hsl(25 95% 55% / 0.12), hsl(335 75% 55% / 0.08), transparent 70%)' },
+    'desenvolvimento':  { accent: 'text-emerald-400',    accentHsl: '160 70% 50%',   gradient: 'linear-gradient(90deg, hsl(160 70% 50%), hsl(190 80% 55%))',          overlay: 'linear-gradient(225deg, hsl(160 70% 50% / 0.12), hsl(190 80% 55% / 0.08), transparent 60%)' },
+    'design-interface': { accent: 'text-purple-400',     accentHsl: '270 70% 60%',   gradient: 'linear-gradient(90deg, hsl(270 70% 60%), hsl(300 65% 55%))',          overlay: 'linear-gradient(180deg, hsl(270 70% 60% / 0.1), hsl(300 65% 55% / 0.06), transparent)' },
+    'inovacao-ia':      { accent: 'text-pink-400',       accentHsl: '335 75% 55%',   gradient: 'linear-gradient(90deg, hsl(335 75% 55%), hsl(355 85% 60%))',          overlay: 'linear-gradient(180deg, hsl(335 75% 55% / 0.1), hsl(25 95% 55% / 0.08), transparent)' },
+    'mobile-web':       { accent: 'text-amber-400',      accentHsl: '40 100% 50%',   gradient: 'linear-gradient(90deg, hsl(40 100% 50%), hsl(30 95% 55%))',           overlay: 'linear-gradient(135deg, hsl(40 100% 50% / 0.1), hsl(175 70% 45% / 0.06), transparent 70%)' },
+    'skills':           { accent: 'text-cyan-400',       accentHsl: '185 80% 55%',   gradient: 'linear-gradient(90deg, hsl(185 80% 55%), hsl(210 75% 60%))',          overlay: 'linear-gradient(225deg, hsl(185 80% 55% / 0.1), hsl(210 75% 60% / 0.06), transparent 60%)' },
+  };
+  const colors = sectionColors[section.id] || sectionColors['focuss-dev'];
+  const viceOverlay = colors.overlay;
 
   // Parallax effect on hero image
   useEffect(() => {
@@ -571,8 +572,8 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
 
         <div className="relative z-10 w-full px-6 md:px-16 lg:px-24 pb-16 md:pb-24">
           <div className="cin-subtitle flex items-center gap-3 mb-6" style={{ opacity: 0 }}>
-            <div className="h-[1px] w-12" style={{ background: 'linear-gradient(90deg, hsl(25 95% 55%), hsl(335 75% 55%))' }} />
-            <span className="font-[family-name:var(--font-display)] text-[11px] md:text-xs tracking-[0.3em] uppercase text-vice-sunset">{section.subtitle}</span>
+            <div className="h-[1px] w-12" style={{ background: colors.gradient }} />
+            <span className={`font-[family-name:var(--font-display)] text-[11px] md:text-xs tracking-[0.3em] uppercase ${colors.accent}`}>{section.subtitle}</span>
           </div>
           <h2 className="font-[family-name:var(--font-display)] text-5xl sm:text-6xl md:text-8xl lg:text-[9rem] xl:text-[11rem] font-bold text-foreground leading-[0.85] tracking-tighter uppercase">
             {section.title.split(' ').map((word, i) => (
@@ -580,15 +581,15 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
             ))}
           </h2>
           <div className="absolute bottom-8 right-6 md:right-16 flex flex-col items-center gap-2 opacity-50">
-            <span className="font-[family-name:var(--font-display)] text-[9px] tracking-[0.25em] uppercase text-vice-sunset/60 [writing-mode:vertical-lr]">Role para baixo</span>
-            <div className="w-[1px] h-12 bg-vice-sunset/40 animate-pulse" />
+            <span className={`font-[family-name:var(--font-display)] text-[9px] tracking-[0.25em] uppercase ${colors.accent} opacity-60 [writing-mode:vertical-lr]`}>Role para baixo</span>
+            <div className="w-[1px] h-12 animate-pulse" style={{ background: `hsl(${colors.accentHsl} / 0.4)` }} />
           </div>
         </div>
       </div>
 
       {/* ── CONTENT ── */}
       <div className="relative z-10 bg-background">
-        <div className="w-full h-[1px]" style={{ background: 'linear-gradient(90deg, transparent, hsl(25 95% 55% / 0.3), hsl(335 75% 55% / 0.2), transparent)' }} />
+        <div className="w-full h-[1px]" style={{ background: `linear-gradient(90deg, transparent, hsl(${colors.accentHsl} / 0.3), hsl(${colors.accentHsl} / 0.15), transparent)` }} />
         
         <div className="cin-desc px-6 md:px-16 lg:px-24 py-16 md:py-24" style={{ opacity: 0 }}>
           <div className="max-w-5xl">
@@ -604,9 +605,9 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 max-w-6xl">
             {section.details.map((detail, i) => (
               <div key={i} className="detail-item group flex items-start gap-4" style={{ opacity: 0 }}>
-                <span className="font-[family-name:var(--font-display)] text-vice-sunset/40 text-sm tracking-widest mt-1">{String(i + 1).padStart(2, '0')}</span>
+                <span className={`font-[family-name:var(--font-display)] ${colors.accent} opacity-40 text-sm tracking-widest mt-1`}>{String(i + 1).padStart(2, '0')}</span>
                 <div>
-                  <div className="h-[1px] w-8 bg-vice-pink/30 mb-4 group-hover:w-16 group-hover:bg-vice-sunset/60 transition-all duration-500" />
+                  <div className="h-[1px] w-8 mb-4 group-hover:w-16 transition-all duration-500" style={{ background: `hsl(${colors.accentHsl} / 0.3)` }} />
                   <p className="text-foreground/80 text-base md:text-lg leading-relaxed">{detail}</p>
                 </div>
               </div>
