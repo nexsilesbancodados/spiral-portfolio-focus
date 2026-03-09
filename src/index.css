@@ -45,6 +45,14 @@ All colors MUST be HSL.
     --font-display: 'Space Grotesk', sans-serif;
     --font-body: 'Inter', sans-serif;
 
+    /* GTA VI Tropical Vice palette */
+    --vice-teal: 175 70% 45%;
+    --vice-sunset: 25 95% 55%;
+    --vice-pink: 335 75% 55%;
+    --vice-palm: 145 50% 35%;
+    --vice-sky: 200 60% 50%;
+    --vice-gold: 40 100% 50%;
+
     --sidebar-background: 0 0% 98%;
 
     --sidebar-foreground: 240 5.3% 26.1%;
