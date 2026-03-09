@@ -578,7 +578,7 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
         </div>
 
         <div className="relative z-10 w-full px-6 md:px-16 lg:px-24 pb-16 md:pb-24">
-          <div className="cin-subtitle flex items-center gap-3 mb-6" style={{ opacity: 0 }}>
+          <div className="cin-subtitle flex items-center gap-3 mb-6">
             <div className="h-[1px] w-12" style={{ background: colors.gradient }} />
             <span className={`font-[family-name:var(--font-display)] text-[11px] md:text-xs tracking-[0.3em] uppercase ${colors.accent}`}>{section.subtitle}</span>
           </div>
