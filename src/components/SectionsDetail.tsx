@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, lazy, Suspense } from 'react';
+import React, { useEffect, useRef, useState, useCallback, lazy, Suspense } from 'react';
 import { WebDesignPortfolio } from '@/components/WebDesignPortfolio';
 import { ScrollExpandMedia } from '@/components/ScrollExpandMedia';
 import { PlatformerGame } from '@/components/PlatformerGame';
@@ -102,7 +102,7 @@ const sections = [
 ];
 
 // ─── Lightweight cinematic section layout ─────────────────────────
-function CinematicSection({ section, isVisible }: { section: typeof sections[0]; isVisible: boolean }) {
+function CinematicSection({ section, isVisible, onScrollUpAtTop }: { section: typeof sections[0]; isVisible: boolean; onScrollUpAtTop: () => void }) {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   const isWebDesign = section.id === 'web-design';
@@ -117,6 +117,26 @@ function CinematicSection({ section, isVisible }: { section: typeof sections[0];
       { y: 0, opacity: 1, duration: 0.7, stagger: 0.08, ease: 'power2.out', delay: 0.2 }
     );
   }, [section.id]);
+
+  // Scroll-up at top → go back to slider
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    let accum = 0;
+    const handleWheel = (e: WheelEvent) => {
+      if (el.scrollTop <= 5 && e.deltaY < 0) {
+        accum += Math.abs(e.deltaY);
+        if (accum > 100) {
+          accum = 0;
+          onScrollUpAtTop();
+        }
+      } else {
+        accum = 0;
+      }
+    };
+    el.addEventListener('wheel', handleWheel, { passive: true });
+    return () => el.removeEventListener('wheel', handleWheel);
+  }, [onScrollUpAtTop]);
 
   return (
     <div ref={sectionRef} className="absolute inset-0 overflow-y-auto gta-vi-scroll">
@@ -235,6 +255,14 @@ export function SectionsDetail() {
   const [activeSlide, setActiveSlide] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
 
+  const goBack = useCallback(() => {
+    if (typeof gsap !== 'undefined') {
+      const slider = document.querySelector('.slider-wrapper');
+      gsap.to(containerRef.current, { y: '100%', opacity: 0, duration: 1.4, ease: 'power3.inOut' });
+      gsap.to(slider, { y: '0%', opacity: 1, duration: 1.4, ease: 'power3.inOut' });
+    }
+  }, []);
+
   useEffect(() => {
     const handleExplore = (e: CustomEvent) => {
       setActiveSlide(e.detail.slideIndex);
@@ -252,6 +280,23 @@ export function SectionsDetail() {
     gsap.set(innerEls, { y: 40, opacity: 0 });
   }, [activeSlide]);
 
+  // Scroll-up at top for focuss-dev section → go back
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+    let accum = 0;
+    const handleWheel = (e: WheelEvent) => {
+      // Only for focuss-dev (non-scrollable section)
+      if (sections[activeSlide].id !== 'focuss-dev') return;
+      if (e.deltaY < 0) {
+        accum += Math.abs(e.deltaY);
+        if (accum > 100) { accum = 0; goBack(); }
+      } else { accum = 0; }
+    };
+    container.addEventListener('wheel', handleWheel, { passive: true });
+    return () => container.removeEventListener('wheel', handleWheel);
+  }, [activeSlide, goBack]);
+
   const section = sections[activeSlide];
   const isFocussDev = section.id === 'focuss-dev';
   const isDesignInterface = section.id === 'design-interface';
@@ -262,13 +307,7 @@ export function SectionsDetail() {
         {/* Back button */}
         <button
           className="absolute top-6 left-6 z-50 flex items-center gap-2 text-foreground/60 hover:text-foreground transition-colors duration-300 font-[family-name:var(--font-display)] text-xs tracking-[0.15em] uppercase backdrop-blur-sm bg-background/20 px-3 py-2 rounded-sm border border-border/20 hover:border-accent/30"
-          onClick={() => {
-            if (typeof gsap !== 'undefined') {
-              const slider = document.querySelector('.slider-wrapper');
-              gsap.to(containerRef.current, { y: '100%', opacity: 0, duration: 1.4, ease: 'power3.inOut' });
-              gsap.to(slider, { y: '0%', opacity: 1, duration: 1.4, ease: 'power3.inOut' });
-            }
-          }}
+          onClick={goBack}
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 19V5m7 7l-7-7-7 7" /></svg>
           Voltar
@@ -314,7 +353,7 @@ export function SectionsDetail() {
 
         {/* All other sections: Lightweight cinematic style */}
         {!isFocussDev && !isDesignInterface && (
-          <CinematicSection section={section} isVisible={isVisible} />
+          <CinematicSection section={section} isVisible={isVisible} onScrollUpAtTop={goBack} />
         )}
       </div>
     </div>
