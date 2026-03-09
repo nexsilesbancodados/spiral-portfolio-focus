@@ -49,15 +49,17 @@ const sections = [
     image: '/images/slide-03.jpg',
   },
   {
-    id: 'design-interface',
-    subtitle: 'UI/UX Premium',
-    title: 'Design de Interface',
-    description: 'Design centrado no usuário com estética cinematográfica e animações fluidas. Cada pixel é pensado para criar experiências memoráveis e intuitivas.',
+    id: 'servicos',
+    subtitle: 'Nossos Serviços',
+    title: 'Serviços',
+    description: 'Soluções digitais completas para impulsionar seu negócio. Do tráfego pago à criação de sistemas complexos, oferecemos tudo o que você precisa para dominar o digital.',
     details: [
-      'Animações fluidas com GSAP e Framer Motion',
-      'Interfaces 3D interativas com Three.js',
-      'Estilização avançada com Tailwind CSS',
-      'Micro-interações que encantam o usuário',
+      'Tráfego Pago — Campanhas estratégicas no Google Ads e Meta Ads',
+      'Criação de Sites — Sites modernos, rápidos e otimizados para SEO',
+      'Criação de Apps — Aplicativos nativos e multiplataforma',
+      'Sistemas & SaaS — Plataformas escaláveis sob medida',
+      'Landing Pages — Páginas de alta conversão',
+      'Design — Identidade visual e interfaces premium',
     ],
     image: '/images/slide-04.jpg',
   },
@@ -149,7 +151,7 @@ type ScrollEffectType = 'fade-slide' | 'scale-reveal' | 'horizontal-wipe' | 'sta
 const sectionScrollEffect: Record<string, ScrollEffectType> = {
   'web-design': 'fade-slide',
   'desenvolvimento': 'scale-reveal',
-  'design-interface': 'horizontal-wipe',
+  'servicos': 'horizontal-wipe',
   'inovacao-ia': 'clip-expand',
   'mobile-web': 'stagger-cascade',
   'skills': 'horizontal-wipe',
@@ -355,7 +357,7 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
     'focuss-dev':       { accent: 'text-blue-400',      accentHsl: '210 90% 60%',   gradient: 'linear-gradient(90deg, hsl(210 90% 60%), hsl(230 80% 65%))',          overlay: 'none', titleBg: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=900&auto=format&fit=crop&q=60' },
     'web-design':       { accent: 'text-orange-400',     accentHsl: '25 95% 55%',    gradient: 'linear-gradient(90deg, hsl(25 95% 55%), hsl(335 75% 55%))',           overlay: 'linear-gradient(135deg, hsl(25 95% 55% / 0.12), hsl(335 75% 55% / 0.08), transparent 70%)', titleBg: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=900&auto=format&fit=crop&q=60' },
     'desenvolvimento':  { accent: 'text-emerald-400',    accentHsl: '160 70% 50%',   gradient: 'linear-gradient(90deg, hsl(160 70% 50%), hsl(190 80% 55%))',          overlay: 'linear-gradient(225deg, hsl(160 70% 50% / 0.12), hsl(190 80% 55% / 0.08), transparent 60%)', titleBg: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=900&auto=format&fit=crop&q=60' },
-    'design-interface': { accent: 'text-purple-400',     accentHsl: '270 70% 60%',   gradient: 'linear-gradient(90deg, hsl(270 70% 60%), hsl(300 65% 55%))',          overlay: 'linear-gradient(180deg, hsl(270 70% 60% / 0.1), hsl(300 65% 55% / 0.06), transparent)', titleBg: 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=900&auto=format&fit=crop&q=60' },
+    'servicos':         { accent: 'text-purple-400',     accentHsl: '270 70% 60%',   gradient: 'linear-gradient(90deg, hsl(270 70% 60%), hsl(300 65% 55%))',          overlay: 'linear-gradient(180deg, hsl(270 70% 60% / 0.1), hsl(300 65% 55% / 0.06), transparent)', titleBg: '' },
     'inovacao-ia':      { accent: 'text-pink-400',       accentHsl: '335 75% 55%',   gradient: 'linear-gradient(90deg, hsl(335 75% 55%), hsl(355 85% 60%))',          overlay: 'linear-gradient(180deg, hsl(335 75% 55% / 0.1), hsl(25 95% 55% / 0.08), transparent)', titleBg: 'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=900&auto=format&fit=crop&q=60' },
     'mobile-web':       { accent: 'text-amber-400',      accentHsl: '40 100% 50%',   gradient: 'linear-gradient(90deg, hsl(40 100% 50%), hsl(30 95% 55%))',           overlay: 'linear-gradient(135deg, hsl(40 100% 50% / 0.1), hsl(175 70% 45% / 0.06), transparent 70%)', titleBg: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=900&auto=format&fit=crop&q=60' },
     'skills':           { accent: 'text-cyan-400',       accentHsl: '185 80% 55%',   gradient: 'linear-gradient(90deg, hsl(185 80% 55%), hsl(210 75% 60%))',          overlay: 'linear-gradient(225deg, hsl(185 80% 55% / 0.1), hsl(210 75% 60% / 0.06), transparent 60%)', titleBg: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&auto=format&fit=crop&q=60' },
@@ -559,6 +561,33 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
           </div>
         );
 
+      case 'servicos':
+        return (
+          <div className="px-6 md:px-16 lg:px-24 py-16 md:py-24">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl">
+              {[
+                { icon: '📈', title: 'Tráfego Pago', desc: 'Campanhas estratégicas no Google Ads, Meta Ads e TikTok Ads. Maximizamos seu ROI com segmentação precisa e otimização contínua.' },
+                { icon: '🌐', title: 'Criação de Sites', desc: 'Sites modernos, responsivos e otimizados para SEO. Desenvolvidos com as melhores tecnologias para performance máxima.' },
+                { icon: '📱', title: 'Criação de Apps', desc: 'Aplicativos nativos e multiplataforma com experiência de usuário premium. iOS, Android e PWA.' },
+                { icon: '⚙️', title: 'Sistemas & SaaS', desc: 'Plataformas escaláveis sob medida. Painéis administrativos, ERPs, CRMs e soluções SaaS completas.' },
+                { icon: '🚀', title: 'Landing Pages', desc: 'Páginas de alta conversão com design persuasivo, copywriting estratégico e integração com funis de vendas.' },
+                { icon: '🎨', title: 'Design', desc: 'Identidade visual completa, UI/UX premium, design systems e prototipagem interativa no Figma.' },
+              ].map((card, i) => (
+                <div key={i} className="detail-item card-hover-glow relative p-8 rounded-sm border border-border/20 backdrop-blur-sm group cursor-pointer" 
+                  style={{ opacity: 0, background: 'hsl(var(--card) / 0.5)' }}>
+                  <div className="absolute inset-0 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{ background: 'linear-gradient(135deg, hsl(270 70% 60% / 0.08), hsl(300 65% 55% / 0.05))' }} />
+                  <div className="relative z-10">
+                    <span className="text-3xl mb-4 block">{card.icon}</span>
+                    <h4 className="font-[family-name:var(--font-display)] text-foreground text-base font-semibold tracking-wide uppercase mb-3">{card.title}</h4>
+                    <p className="text-muted-foreground text-sm leading-relaxed">{card.desc}</p>
+                    <div className="h-[1px] w-12 mt-6 bg-purple-400/30 group-hover:w-full group-hover:bg-purple-400/60 transition-all duration-700" />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+
       default:
         return null;
     }
@@ -682,7 +711,7 @@ export function SectionsDetail() {
 
   const section = sections[activeSlide];
   const isFocussDev = section.id === 'focuss-dev';
-  const isDesignInterface = section.id === 'design-interface';
+  const isServicos = section.id === 'servicos';
 
   return (
     <div ref={containerRef} id="detail-section" className="fixed inset-0 z-20 bg-background" style={{ transform: 'translateY(100%)', opacity: 0 }}>
@@ -723,21 +752,8 @@ export function SectionsDetail() {
           </>
         )}
 
-        {/* Design de Interface: ScrollExpandMedia */}
-        {isDesignInterface && isVisible && (
-          <Suspense fallback={null}>
-            <ScrollExpandMedia
-              mediaSrc="/images/slide-04.jpg"
-              bgImageSrc="/images/slide-04.jpg"
-              title={section.title}
-              subtitle={section.subtitle}
-              details={section.details}
-            />
-          </Suspense>
-        )}
-
         {/* All other sections: Lightweight cinematic style */}
-        {!isFocussDev && !isDesignInterface && (
+        {!isFocussDev && (
           <CinematicSection section={section} isVisible={isVisible} onScrollUpAtTop={goBack} />
         )}
       </div>

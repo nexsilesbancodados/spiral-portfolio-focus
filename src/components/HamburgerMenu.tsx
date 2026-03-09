@@ -5,7 +5,7 @@ const menuItems = [
   { id: 'focuss-dev', label: 'FOCUSS DEV', index: 0 },
   { id: 'web-design', label: 'WEB DESIGN', index: 1 },
   { id: 'desenvolvimento', label: 'DESENVOLVIMENTO', index: 2 },
-  { id: 'design-interface', label: 'DESIGN DE INTERFACE', index: 3 },
+  { id: 'servicos', label: 'SERVIÇOS', index: 3 },
   { id: 'inovacao-ia', label: 'INOVAÇÃO E IA', index: 4 },
   { id: 'mobile-web', label: 'MOBILE E WEB', index: 5 },
   { id: 'skills', label: 'SKILLS', index: 6 },
