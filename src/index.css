@@ -201,6 +201,20 @@ All colors MUST be HSL.
   transform: translateZ(0);
 }
 
+@media (max-width: 640px) {
+  .slide-content {
+    bottom: 6rem;
+    left: 1.25rem;
+    right: 1.25rem;
+    max-width: none;
+  }
+  .slide-number, .slide-total {
+    top: 1rem;
+  }
+  .slide-number { left: 1.25rem; }
+  .slide-total { right: 1.25rem; }
+}
+
 .slide-title {
   font-family: 'Cormorant Garamond', serif;
   font-size: clamp(2.8rem, 6vw, 5.5rem);
