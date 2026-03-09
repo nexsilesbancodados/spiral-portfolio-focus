@@ -140,7 +140,13 @@ export function SectionsDetail() {
             </Suspense>
           ) : (
             <>
-              <img src={section.image} alt={section.title} className="w-full h-full object-cover" />
+              <img
+                src={section.image}
+                alt={section.title}
+                loading="lazy"
+                decoding="async"
+                className="w-full h-full object-cover"
+              />
               <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" />
               <div className="absolute inset-0 opacity-20" style={{ background: `linear-gradient(135deg, hsl(45, 100%, 55%, 0.2) 0%, transparent 60%)` }} />
             </>
