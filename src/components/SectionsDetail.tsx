@@ -363,16 +363,21 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
   const colors = sectionColors[section.id] || sectionColors['focuss-dev'];
   const viceOverlay = colors.overlay;
 
-  // Parallax effect on hero image
+  // Parallax effect on hero image (RAF-throttled)
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
     const heroImg = el.querySelector('.parallax-hero img') as HTMLElement;
     if (!heroImg) return;
+    let ticking = false;
     const handleScroll = () => {
-      const scrollY = el.scrollTop;
-      const offset = scrollY * 0.3;
-      heroImg.style.transform = `translateY(${offset}px) scale(1.1)`;
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const offset = el.scrollTop * 0.25;
+        heroImg.style.transform = `translateY(${offset}px) scale(1.1)`;
+        ticking = false;
+      });
     };
     el.addEventListener('scroll', handleScroll, { passive: true });
     return () => el.removeEventListener('scroll', handleScroll);
