@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState, useCallback, lazy, Suspense } from 'react';
 import { ScrollExpandMedia } from '@/components/ScrollExpandMedia';
 import { PlatformerGame } from '@/components/PlatformerGame';
+import { FocussChat } from '@/components/FocussChat';
 
 declare const gsap: any;
 
