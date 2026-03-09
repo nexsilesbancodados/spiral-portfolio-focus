@@ -276,8 +276,8 @@ function CinematicSection({ section, isVisible, onScrollUpAtTop }: { section: ty
     }
 
     const imgs = gallery.images;
-    const imgStyle = { filter: 'brightness(0.75) saturate(1.2) contrast(1.05)' };
-    const labelCls = "font-[family-name:var(--font-display)] text-[10px] tracking-[0.2em] uppercase text-accent/70";
+    const imgStyle = { filter: 'brightness(0.75) saturate(1.25) contrast(1.08)' };
+    const labelCls = "font-[family-name:var(--font-display)] text-[10px] tracking-[0.2em] uppercase text-vice-sunset/80";
 
     switch (gallery.layout) {
       case 'panoramic-duo':
@@ -349,21 +349,35 @@ function CinematicSection({ section, isVisible, onScrollUpAtTop }: { section: ty
     }
   };
 
+  // Per-section Vice City color overlay
+  const viceOverlay = (() => {
+    switch (section.id) {
+      case 'web-design': return 'linear-gradient(135deg, hsl(25 95% 55% / 0.12), hsl(335 75% 55% / 0.08), transparent 70%)';
+      case 'desenvolvimento': return 'linear-gradient(225deg, hsl(175 70% 45% / 0.12), hsl(200 60% 50% / 0.08), transparent 60%)';
+      case 'inovacao-ia': return 'linear-gradient(180deg, hsl(335 75% 55% / 0.1), hsl(25 95% 55% / 0.08), transparent)';
+      case 'mobile-web': return 'linear-gradient(135deg, hsl(40 100% 50% / 0.1), hsl(175 70% 45% / 0.06), transparent 70%)';
+      case 'skills': return 'linear-gradient(225deg, hsl(25 95% 55% / 0.1), hsl(335 75% 55% / 0.06), transparent 60%)';
+      default: return 'none';
+    }
+  })();
+
   return (
     <div ref={sectionRef} className="absolute inset-0 overflow-y-auto gta-vi-scroll">
       {/* ── HERO ── */}
       <div className="relative h-screen w-full overflow-hidden flex items-end">
         <div className="absolute inset-0">
-          <img src={section.image} alt={section.title} loading="eager" decoding="async" className="w-full h-full object-cover" />
+          <img src={section.image} alt={section.title} loading="eager" decoding="async" className="w-full h-full object-cover" style={{ filter: 'saturate(1.15) contrast(1.05)' }} />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-r from-background/60 via-transparent to-transparent" />
           <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, transparent 50%, hsl(var(--background)) 100%)' }} />
+          {/* Vice City color wash */}
+          <div className="absolute inset-0" style={{ background: viceOverlay }} />
         </div>
 
         <div className="relative z-10 w-full px-6 md:px-16 lg:px-24 pb-16 md:pb-24">
           <div className="cin-subtitle flex items-center gap-3 mb-6" style={{ opacity: 0 }}>
-            <div className="h-[1px] w-12 bg-accent" />
-            <span className="font-[family-name:var(--font-display)] text-[11px] md:text-xs tracking-[0.3em] uppercase text-accent">{section.subtitle}</span>
+            <div className="h-[1px] w-12" style={{ background: 'linear-gradient(90deg, hsl(25 95% 55%), hsl(335 75% 55%))' }} />
+            <span className="font-[family-name:var(--font-display)] text-[11px] md:text-xs tracking-[0.3em] uppercase text-vice-sunset">{section.subtitle}</span>
           </div>
           <h2 className="font-[family-name:var(--font-display)] text-5xl sm:text-6xl md:text-8xl lg:text-[9rem] xl:text-[11rem] font-bold text-foreground leading-[0.85] tracking-tighter uppercase">
             {section.title.split(' ').map((word, i) => (
@@ -371,15 +385,15 @@ function CinematicSection({ section, isVisible, onScrollUpAtTop }: { section: ty
             ))}
           </h2>
           <div className="absolute bottom-8 right-6 md:right-16 flex flex-col items-center gap-2 opacity-50">
-            <span className="font-[family-name:var(--font-display)] text-[9px] tracking-[0.25em] uppercase text-accent/60 [writing-mode:vertical-lr]">Role para baixo</span>
-            <div className="w-[1px] h-12 bg-accent/40 animate-pulse" />
+            <span className="font-[family-name:var(--font-display)] text-[9px] tracking-[0.25em] uppercase text-vice-sunset/60 [writing-mode:vertical-lr]">Role para baixo</span>
+            <div className="w-[1px] h-12 bg-vice-sunset/40 animate-pulse" />
           </div>
         </div>
       </div>
 
       {/* ── CONTENT ── */}
       <div className="relative z-10 bg-background">
-        <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-accent/30 to-transparent" />
+        <div className="w-full h-[1px]" style={{ background: 'linear-gradient(90deg, transparent, hsl(25 95% 55% / 0.3), hsl(335 75% 55% / 0.2), transparent)' }} />
         
         <div className="cin-desc px-6 md:px-16 lg:px-24 py-16 md:py-24" style={{ opacity: 0 }}>
           <div className="max-w-5xl">
@@ -395,9 +409,9 @@ function CinematicSection({ section, isVisible, onScrollUpAtTop }: { section: ty
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 max-w-6xl">
             {section.details.map((detail, i) => (
               <div key={i} className="detail-item group flex items-start gap-4" style={{ opacity: 0 }}>
-                <span className="font-[family-name:var(--font-display)] text-accent/40 text-sm tracking-widest mt-1">{String(i + 1).padStart(2, '0')}</span>
+                <span className="font-[family-name:var(--font-display)] text-vice-sunset/40 text-sm tracking-widest mt-1">{String(i + 1).padStart(2, '0')}</span>
                 <div>
-                  <div className="h-[1px] w-8 bg-accent/30 mb-4 group-hover:w-16 group-hover:bg-accent/60 transition-all duration-500" />
+                  <div className="h-[1px] w-8 bg-vice-pink/30 mb-4 group-hover:w-16 group-hover:bg-vice-sunset/60 transition-all duration-500" />
                   <p className="text-foreground/80 text-base md:text-lg leading-relaxed">{detail}</p>
                 </div>
               </div>

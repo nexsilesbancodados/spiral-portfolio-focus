@@ -45,6 +45,14 @@ All colors MUST be HSL.
     --font-display: 'Space Grotesk', sans-serif;
     --font-body: 'Inter', sans-serif;
 
+    /* GTA VI Tropical Vice palette */
+    --vice-teal: 175 70% 45%;
+    --vice-sunset: 25 95% 55%;
+    --vice-pink: 335 75% 55%;
+    --vice-palm: 145 50% 35%;
+    --vice-sky: 200 60% 50%;
+    --vice-gold: 40 100% 50%;
+
     --sidebar-background: 0 0% 98%;
 
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -342,12 +350,29 @@ All colors MUST be HSL.
 }
 
 .gta-vi-scroll::-webkit-scrollbar-thumb {
-  background: hsl(45 100% 55% / 0.2);
+  background: hsl(var(--vice-sunset) / 0.25);
   border-radius: 2px;
 }
 
 .gta-vi-scroll::-webkit-scrollbar-thumb:hover {
-  background: hsl(45 100% 55% / 0.4);
+  background: hsl(var(--vice-sunset) / 0.5);
+}
+
+/* Vice City inspired overlays */
+.vice-overlay-sunset {
+  background: linear-gradient(135deg, hsl(var(--vice-sunset) / 0.12), hsl(var(--vice-pink) / 0.08), transparent 70%);
+}
+
+.vice-overlay-teal {
+  background: linear-gradient(225deg, hsl(var(--vice-teal) / 0.1), hsl(var(--vice-sky) / 0.08), transparent 70%);
+}
+
+.vice-overlay-warm {
+  background: linear-gradient(180deg, hsl(var(--vice-gold) / 0.06), hsl(var(--vice-sunset) / 0.1), transparent);
+}
+
+.vice-glow {
+  box-shadow: 0 0 60px hsl(var(--vice-pink) / 0.08), 0 0 120px hsl(var(--vice-sunset) / 0.05);
 }
 
 /* Explore Button */
