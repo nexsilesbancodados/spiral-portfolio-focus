@@ -1,7 +1,8 @@
-import React, { useEffect, useRef, useState, useCallback, lazy, Suspense } from 'react';
-import { ScrollExpandMedia } from '@/components/ScrollExpandMedia';
-import { PlatformerGame } from '@/components/PlatformerGame';
-import { FocussChat } from '@/components/FocussChat';
+import React, { useEffect, useRef, useState, useCallback, lazy, Suspense, memo } from 'react';
+
+const ScrollExpandMedia = lazy(() => import('@/components/ScrollExpandMedia').then(m => ({ default: m.ScrollExpandMedia })));
+const PlatformerGame = lazy(() => import('@/components/PlatformerGame').then(m => ({ default: m.PlatformerGame })));
+const FocussChat = lazy(() => import('@/components/FocussChat').then(m => ({ default: m.FocussChat })));
 
 declare const gsap: any;
 
@@ -155,7 +156,7 @@ const sectionScrollEffect: Record<string, ScrollEffectType> = {
 };
 
 // ─── Lightweight cinematic section layout ─────────────────────────
-function CinematicSection({ section, isVisible, onScrollUpAtTop }: { section: typeof sections[0]; isVisible: boolean; onScrollUpAtTop: () => void }) {
+const CinematicSection = memo(function CinematicSection({ section, isVisible, onScrollUpAtTop }: { section: typeof sections[0]; isVisible: boolean; onScrollUpAtTop: () => void }) {
   const sectionRef = useRef<HTMLDivElement>(null);
   const galleryRef = useRef<HTMLDivElement>(null);
   const detailsRef = useRef<HTMLDivElement>(null);
@@ -428,7 +429,7 @@ function CinematicSection({ section, isVisible, onScrollUpAtTop }: { section: ty
               ))}
             </div>
             {isVisible && (
-              <div className="mt-16 flex justify-center"><PlatformerGame /></div>
+              <div className="mt-16 flex justify-center"><Suspense fallback={null}><PlatformerGame /></Suspense></div>
             )}
           </div>
         );
@@ -438,7 +439,7 @@ function CinematicSection({ section, isVisible, onScrollUpAtTop }: { section: ty
           <div className="px-6 md:px-16 lg:px-24 py-16 md:py-24">
             {/* FOCUSS AI Chat */}
             <div className="mb-16">
-              <FocussChat />
+              <Suspense fallback={null}><FocussChat /></Suspense>
             </div>
             {/* Futuristic grid */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 max-w-7xl">
@@ -618,7 +619,7 @@ function CinematicSection({ section, isVisible, onScrollUpAtTop }: { section: ty
       </div>
     </div>
   );
-}
+});
 
 export function SectionsDetail() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -712,13 +713,15 @@ export function SectionsDetail() {
 
         {/* Design de Interface: ScrollExpandMedia */}
         {isDesignInterface && isVisible && (
-          <ScrollExpandMedia
-            mediaSrc="/images/slide-04.jpg"
-            bgImageSrc="/images/slide-04.jpg"
-            title={section.title}
-            subtitle={section.subtitle}
-            details={section.details}
-          />
+          <Suspense fallback={null}>
+            <ScrollExpandMedia
+              mediaSrc="/images/slide-04.jpg"
+              bgImageSrc="/images/slide-04.jpg"
+              title={section.title}
+              subtitle={section.subtitle}
+              details={section.details}
+            />
+          </Suspense>
         )}
 
         {/* All other sections: Lightweight cinematic style */}

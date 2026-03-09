@@ -1,7 +1,8 @@
-import { lazy, Suspense, useState, useEffect } from 'react'
+import { lazy, Suspense, useState, useCallback } from 'react'
 import { LuminaSlider } from '@/components/ui/lumina-interactive-list'
 import { HamburgerMenu } from '@/components/HamburgerMenu'
-import { FocussChat } from '@/components/FocussChat'
+
+const FocussChat = lazy(() => import('@/components/FocussChat').then(m => ({ default: m.FocussChat })))
 
 const SectionsDetail = lazy(() => 
   import('@/components/SectionsDetail').then(m => ({ default: m.SectionsDetail }))
@@ -62,14 +63,10 @@ const Index = () => {
             animation: 'chatSlideIn 0.3s ease-out',
           }}
         >
-          <style>{`
-            @keyframes chatSlideIn {
-              from { opacity: 0; transform: translateY(20px) scale(0.95); }
-              to { opacity: 1; transform: translateY(0) scale(1); }
-            }
-          `}</style>
           <div className="p-4 flex-1 overflow-hidden">
-            <FocussChat />
+            <Suspense fallback={<div className="flex items-center justify-center h-full text-muted-foreground text-sm">Carregando...</div>}>
+              <FocussChat />
+            </Suspense>
           </div>
         </div>
       )}
