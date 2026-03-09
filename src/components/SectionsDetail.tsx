@@ -102,7 +102,7 @@ const sections = [
 ];
 
 // ─── Lightweight cinematic section layout ─────────────────────────
-function CinematicSection({ section, isVisible }: { section: typeof sections[0]; isVisible: boolean }) {
+function CinematicSection({ section, isVisible, onScrollUpAtTop }: { section: typeof sections[0]; isVisible: boolean; onScrollUpAtTop: () => void }) {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   const isWebDesign = section.id === 'web-design';
@@ -117,6 +117,26 @@ function CinematicSection({ section, isVisible }: { section: typeof sections[0];
       { y: 0, opacity: 1, duration: 0.7, stagger: 0.08, ease: 'power2.out', delay: 0.2 }
     );
   }, [section.id]);
+
+  // Scroll-up at top → go back to slider
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    let accum = 0;
+    const handleWheel = (e: WheelEvent) => {
+      if (el.scrollTop <= 5 && e.deltaY < 0) {
+        accum += Math.abs(e.deltaY);
+        if (accum > 100) {
+          accum = 0;
+          onScrollUpAtTop();
+        }
+      } else {
+        accum = 0;
+      }
+    };
+    el.addEventListener('wheel', handleWheel, { passive: true });
+    return () => el.removeEventListener('wheel', handleWheel);
+  }, [onScrollUpAtTop]);
 
   return (
     <div ref={sectionRef} className="absolute inset-0 overflow-y-auto gta-vi-scroll">
