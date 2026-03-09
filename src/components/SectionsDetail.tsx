@@ -668,7 +668,7 @@ export function SectionsDetail() {
     const container = containerRef.current;
     if (!container) return;
     const innerEls = container.querySelectorAll('.anim-el');
-    gsap.set(innerEls, { y: 40, opacity: 0 });
+    gsap.fromTo(innerEls, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: 'power3.out', delay: 0.3 });
   }, [activeSlide]);
 
   // Scroll-up at top for focuss-dev section → go back
