@@ -713,13 +713,15 @@ export function SectionsDetail() {
 
         {/* Design de Interface: ScrollExpandMedia */}
         {isDesignInterface && isVisible && (
-          <ScrollExpandMedia
-            mediaSrc="/images/slide-04.jpg"
-            bgImageSrc="/images/slide-04.jpg"
-            title={section.title}
-            subtitle={section.subtitle}
-            details={section.details}
-          />
+          <Suspense fallback={null}>
+            <ScrollExpandMedia
+              mediaSrc="/images/slide-04.jpg"
+              bgImageSrc="/images/slide-04.jpg"
+              title={section.title}
+              subtitle={section.subtitle}
+              details={section.details}
+            />
+          </Suspense>
         )}
 
         {/* All other sections: Lightweight cinematic style */}

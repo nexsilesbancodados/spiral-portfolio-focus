@@ -70,7 +70,9 @@ const Index = () => {
             }
           `}</style>
           <div className="p-4 flex-1 overflow-hidden">
-            <FocussChat />
+            <Suspense fallback={<div className="flex items-center justify-center h-full text-muted-foreground text-sm">Carregando...</div>}>
+              <FocussChat />
+            </Suspense>
           </div>
         </div>
       )}
