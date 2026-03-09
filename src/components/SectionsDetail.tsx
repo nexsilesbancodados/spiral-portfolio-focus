@@ -349,15 +349,29 @@ function CinematicSection({ section, isVisible, onScrollUpAtTop }: { section: ty
     }
   };
 
+  // Per-section Vice City color overlay
+  const viceOverlay = (() => {
+    switch (section.id) {
+      case 'web-design': return 'linear-gradient(135deg, hsl(25 95% 55% / 0.12), hsl(335 75% 55% / 0.08), transparent 70%)';
+      case 'desenvolvimento': return 'linear-gradient(225deg, hsl(175 70% 45% / 0.12), hsl(200 60% 50% / 0.08), transparent 60%)';
+      case 'inovacao-ia': return 'linear-gradient(180deg, hsl(335 75% 55% / 0.1), hsl(25 95% 55% / 0.08), transparent)';
+      case 'mobile-web': return 'linear-gradient(135deg, hsl(40 100% 50% / 0.1), hsl(175 70% 45% / 0.06), transparent 70%)';
+      case 'skills': return 'linear-gradient(225deg, hsl(25 95% 55% / 0.1), hsl(335 75% 55% / 0.06), transparent 60%)';
+      default: return 'none';
+    }
+  })();
+
   return (
     <div ref={sectionRef} className="absolute inset-0 overflow-y-auto gta-vi-scroll">
       {/* ── HERO ── */}
       <div className="relative h-screen w-full overflow-hidden flex items-end">
         <div className="absolute inset-0">
-          <img src={section.image} alt={section.title} loading="eager" decoding="async" className="w-full h-full object-cover" />
+          <img src={section.image} alt={section.title} loading="eager" decoding="async" className="w-full h-full object-cover" style={{ filter: 'saturate(1.15) contrast(1.05)' }} />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-r from-background/60 via-transparent to-transparent" />
           <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, transparent 50%, hsl(var(--background)) 100%)' }} />
+          {/* Vice City color wash */}
+          <div className="absolute inset-0" style={{ background: viceOverlay }} />
         </div>
 
         <div className="relative z-10 w-full px-6 md:px-16 lg:px-24 pb-16 md:pb-24">
