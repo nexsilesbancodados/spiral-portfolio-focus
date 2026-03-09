@@ -256,10 +256,9 @@ export function LuminaSlider() {
       scene.add(new THREE.Mesh(new THREE.PlaneGeometry(2, 2), shaderMaterial));
 
       for (let i = 0; i < slides.length; i++) {
-        const s = slides[i];
         try {
-          slideTextures.push(s.isVideo ? await loadVideoTexture(s.media, i) : await loadImageTexture(s.media));
-        } catch { console.warn("Failed texture:", s.media); }
+          slideTextures.push(await loadImageTexture(slides[i].media));
+        } catch { console.warn("Failed texture:", slides[i].media); }
       }
 
       if (slideTextures.length >= 2) {
