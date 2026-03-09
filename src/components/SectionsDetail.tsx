@@ -198,19 +198,40 @@ function CinematicSection({ section, isVisible, onScrollUpAtTop }: { section: ty
           </div>
         </div>
 
-        {/* Image strip */}
-        <div className="relative w-full h-[40vh] md:h-[50vh] overflow-hidden">
-          <img
-            src={section.image}
-            alt=""
-            loading="lazy"
-            decoding="async"
-            className="w-full h-full object-cover"
-            style={{ filter: 'brightness(0.7) saturate(1.2)' }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background" />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/50" />
-        </div>
+        {/* Image gallery — cinematic warm tone strips */}
+        {isWebDesign ? (
+          <div className="space-y-0">
+            {/* Main panoramic strip */}
+            <div className="relative w-full h-[40vh] md:h-[50vh] overflow-hidden">
+              <img src="/images/webdesign-detail-03.jpg" alt="Design agency" loading="lazy" decoding="async" className="w-full h-full object-cover" style={{ filter: 'brightness(0.75) saturate(1.2) contrast(1.05)' }} />
+              <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background" />
+              <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/40" />
+            </div>
+            {/* Two-column gallery */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-[2px]">
+              <div className="relative h-[35vh] md:h-[45vh] overflow-hidden">
+                <img src="/images/webdesign-detail-01.jpg" alt="Figma workspace" loading="lazy" decoding="async" className="w-full h-full object-cover" style={{ filter: 'brightness(0.8) saturate(1.15)' }} />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
+                <div className="absolute bottom-6 left-6">
+                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.2em] uppercase text-accent/70">Prototipagem</span>
+                </div>
+              </div>
+              <div className="relative h-[35vh] md:h-[45vh] overflow-hidden">
+                <img src="/images/webdesign-detail-02.jpg" alt="Creative process" loading="lazy" decoding="async" className="w-full h-full object-cover" style={{ filter: 'brightness(0.8) saturate(1.15)' }} />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
+                <div className="absolute bottom-6 left-6">
+                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.2em] uppercase text-accent/70">Criação</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="relative w-full h-[40vh] md:h-[50vh] overflow-hidden">
+            <img src={section.image} alt="" loading="lazy" decoding="async" className="w-full h-full object-cover" style={{ filter: 'brightness(0.7) saturate(1.2)' }} />
+            <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background" />
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/50" />
+          </div>
+        )}
 
         {/* Details grid */}
         <div className="px-6 md:px-16 lg:px-24 py-16 md:py-24">
