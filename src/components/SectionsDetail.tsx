@@ -436,6 +436,10 @@ function CinematicSection({ section, isVisible, onScrollUpAtTop }: { section: ty
       case 'inovacao-ia':
         return (
           <div className="px-6 md:px-16 lg:px-24 py-16 md:py-24">
+            {/* FOCUSS AI Chat */}
+            <div className="mb-16">
+              <FocussChat />
+            </div>
             {/* Futuristic grid */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 max-w-7xl">
               <div className="detail-item lg:col-span-7 image-hover-zoom card-hover-glow relative h-[50vh] rounded-sm overflow-hidden border border-vice-pink/10" style={{ opacity: 0 }}>
