@@ -54,12 +54,12 @@ const sections = [
     title: 'Serviços',
     description: 'Soluções digitais completas para impulsionar seu negócio. Do tráfego pago à criação de sistemas complexos, oferecemos tudo o que você precisa para dominar o digital.',
     details: [
-      'Tráfego Pago — Campanhas estratégicas no Google Ads e Meta Ads',
-      'Criação de Sites — Sites modernos, rápidos e otimizados para SEO',
-      'Criação de Apps — Aplicativos nativos e multiplataforma',
-      'Sistemas & SaaS — Plataformas escaláveis sob medida',
-      'Landing Pages — Páginas de alta conversão',
-      'Design — Identidade visual e interfaces premium',
+      '📈 Tráfego Pago — Campanhas estratégicas no Google Ads, Meta Ads e TikTok Ads com ROI maximizado',
+      '🌐 Criação de Sites — Sites modernos, responsivos e otimizados para SEO com tecnologias de ponta',
+      '📱 Criação de Apps — Aplicativos nativos e multiplataforma para iOS, Android e PWA',
+      '⚙️ Sistemas & SaaS — Plataformas escaláveis sob medida, ERPs, CRMs e dashboards',
+      '🚀 Landing Pages — Páginas de alta conversão com design persuasivo e funis otimizados',
+      '🎨 Design — Identidade visual completa, UI/UX premium e prototipagem interativa',
     ],
     image: '/images/slide-04.jpg',
   },
@@ -685,17 +685,55 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
 
         {/* Details grid */}
         <div ref={detailsRef} className="px-6 md:px-16 lg:px-24 py-16 md:py-24">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 max-w-6xl">
-            {section.details.map((detail, i) => (
-              <div key={i} className="detail-item group flex items-start gap-4" style={{ opacity: 0 }}>
-                <span className={`font-[family-name:var(--font-display)] ${colors.accent} opacity-40 text-sm tracking-widest mt-1`}>{String(i + 1).padStart(2, '0')}</span>
-                <div>
-                  <div className="h-[1px] w-8 mb-4 group-hover:w-16 transition-all duration-500" style={{ background: `hsl(${colors.accentHsl} / 0.3)` }} />
-                  <p className="text-foreground/80 text-base md:text-lg leading-relaxed">{detail}</p>
+          {section.id === 'servicos' ? (
+            /* Serviços: Premium card grid */
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-7xl">
+              {section.details.map((detail, i) => {
+                const emoji = detail.slice(0, 2)
+                const rest = detail.slice(3)
+                const [title, desc] = rest.split(' — ')
+                const cardAccents = [
+                  'hsl(335 75% 55%)', 'hsl(185 80% 55%)', 'hsl(25 95% 55%)',
+                  'hsl(210 90% 60%)', 'hsl(45 100% 55%)', 'hsl(270 70% 60%)'
+                ]
+                const accent = cardAccents[i] || cardAccents[0]
+                return (
+                  <div key={i} className="detail-item group relative p-7 rounded-sm overflow-hidden cursor-pointer transition-all duration-500 hover:translate-y-[-2px]"
+                    style={{ opacity: 0, background: 'hsl(var(--card) / 0.35)', border: '1px solid hsl(var(--border) / 0.1)' }}>
+                    {/* Top accent line */}
+                    <div className="absolute top-0 left-0 right-0 h-[2px] opacity-50 group-hover:opacity-100 transition-opacity duration-500"
+                      style={{ background: `linear-gradient(90deg, transparent, ${accent}, transparent)` }} />
+                    {/* Hover glow */}
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+                      style={{ background: `radial-gradient(ellipse at top, ${accent}08, transparent 70%)` }} />
+                    <div className="relative z-10">
+                      <div className="flex items-center gap-3 mb-4">
+                        <span className="text-2xl">{emoji}</span>
+                        <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.25em] uppercase opacity-40" style={{ color: accent }}>{String(i + 1).padStart(2, '0')}</span>
+                      </div>
+                      <h4 className="font-[family-name:var(--font-display)] text-foreground text-sm font-semibold tracking-[0.12em] uppercase mb-2">{title}</h4>
+                      <p className="text-muted-foreground text-xs leading-relaxed">{desc}</p>
+                      <div className="h-[1px] w-10 mt-5 group-hover:w-full transition-all duration-700"
+                        style={{ background: `linear-gradient(90deg, ${accent}80, transparent)` }} />
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          ) : (
+            /* Default details grid */
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 max-w-6xl">
+              {section.details.map((detail, i) => (
+                <div key={i} className="detail-item group flex items-start gap-4" style={{ opacity: 0 }}>
+                  <span className={`font-[family-name:var(--font-display)] ${colors.accent} opacity-40 text-sm tracking-widest mt-1`}>{String(i + 1).padStart(2, '0')}</span>
+                  <div>
+                    <div className="h-[1px] w-8 mb-4 group-hover:w-16 transition-all duration-500" style={{ background: `hsl(${colors.accentHsl} / 0.3)` }} />
+                    <p className="text-foreground/80 text-base md:text-lg leading-relaxed">{detail}</p>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Section-specific content */}
