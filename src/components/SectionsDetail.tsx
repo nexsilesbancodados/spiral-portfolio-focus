@@ -583,16 +583,10 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
             <span className={`font-[family-name:var(--font-display)] text-[11px] md:text-xs tracking-[0.3em] uppercase ${colors.accent}`}>{section.subtitle}</span>
           </div>
           <h2 
-            className="font-[family-name:var(--font-display)] text-5xl sm:text-6xl md:text-8xl lg:text-[9rem] xl:text-[11rem] font-bold leading-[0.85] tracking-tighter uppercase"
-            style={{ 
-              backgroundImage: colors.gradient,
-              backgroundClip: 'text',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-            }}
+            className="font-[family-name:var(--font-display)] text-5xl sm:text-6xl md:text-8xl lg:text-[9rem] xl:text-[11rem] font-bold leading-[0.85] tracking-tighter uppercase text-foreground"
           >
             {section.title.split(' ').map((word, i) => (
-              <span key={i} className="title-word inline-block">{word}&nbsp;</span>
+              <span key={i} className="title-word block" style={{ color: `hsl(${colors.accentHsl})` }}>{word}</span>
             ))}
           </h2>
           <div className="absolute bottom-8 right-6 md:right-16 flex flex-col items-center gap-2 opacity-50">
