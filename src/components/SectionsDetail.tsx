@@ -276,8 +276,8 @@ function CinematicSection({ section, isVisible, onScrollUpAtTop }: { section: ty
     }
 
     const imgs = gallery.images;
-    const imgStyle = { filter: 'brightness(0.75) saturate(1.2) contrast(1.05)' };
-    const labelCls = "font-[family-name:var(--font-display)] text-[10px] tracking-[0.2em] uppercase text-accent/70";
+    const imgStyle = { filter: 'brightness(0.75) saturate(1.25) contrast(1.08)' };
+    const labelCls = "font-[family-name:var(--font-display)] text-[10px] tracking-[0.2em] uppercase text-vice-sunset/80";
 
     switch (gallery.layout) {
       case 'panoramic-duo':
