@@ -144,6 +144,8 @@ export function ScrollExpandMedia({
         <img
           src={bgImageSrc}
           alt=""
+          loading="lazy"
+          decoding="async"
           className="w-full h-full object-cover transition-transform duration-500"
           style={{ transform: `scale(${bgScale})` }}
         />
@@ -211,6 +213,8 @@ export function ScrollExpandMedia({
           <img
             src={mediaSrc}
             alt={title}
+            loading="lazy"
+            decoding="async"
             className="w-full h-full object-cover"
           />
           {/* Dark overlay that fades */}
