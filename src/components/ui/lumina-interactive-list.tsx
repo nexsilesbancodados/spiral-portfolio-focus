@@ -24,7 +24,7 @@ export function LuminaSlider() {
     let isTransitioning = false;
     let texturesLoaded = false;
     let animFrameId: number;
-    const videoElements: HTMLVideoElement[] = [];
+    // No video elements needed — all slides are images
 
     const TRANSITION_DURATION = 2.5;
 
