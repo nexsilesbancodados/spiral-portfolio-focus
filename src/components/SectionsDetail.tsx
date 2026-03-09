@@ -541,6 +541,8 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
                 </div>
               ))}
             </div>
+            {/* Animated tech logos marquee */}
+            <Suspense fallback={null}><TechLogosMarquee /></Suspense>
             {/* Tech badges */}
             <div className="max-w-5xl mx-auto mt-16 flex flex-wrap gap-3">
               {['React', 'Next.js', 'TypeScript', 'Node.js', 'Python', 'Go', 'PostgreSQL', 'MongoDB', 'Redis', 'AWS', 'Docker', 'Figma', 'GSAP', 'Three.js', 'Tailwind CSS', 'GraphQL'].map((tech, i) => (
