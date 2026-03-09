@@ -393,7 +393,7 @@ function CinematicSection({ section, isVisible, onScrollUpAtTop }: { section: ty
 
       {/* ── CONTENT ── */}
       <div className="relative z-10 bg-background">
-        <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-accent/30 to-transparent" />
+        <div className="w-full h-[1px]" style={{ background: 'linear-gradient(90deg, transparent, hsl(25 95% 55% / 0.3), hsl(335 75% 55% / 0.2), transparent)' }} />
         
         <div className="cin-desc px-6 md:px-16 lg:px-24 py-16 md:py-24" style={{ opacity: 0 }}>
           <div className="max-w-5xl">
