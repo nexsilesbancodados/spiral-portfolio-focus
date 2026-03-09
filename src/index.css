@@ -448,7 +448,15 @@ All colors MUST be HSL.
 /* Parallax container */
 .parallax-hero img {
   will-change: transform;
-  transition: transform 0.1s linear;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Disable parallax on mobile for performance */
+@media (max-width: 768px) {
+  .parallax-hero img {
+    will-change: auto;
+  }
 }
 
 /* Explore Button */
