@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState, useCallback, lazy, Suspense } from 'react';
-import { WebDesignPortfolio } from '@/components/WebDesignPortfolio';
 import { ScrollExpandMedia } from '@/components/ScrollExpandMedia';
 import { PlatformerGame } from '@/components/PlatformerGame';
 
