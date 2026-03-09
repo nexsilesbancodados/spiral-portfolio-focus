@@ -409,9 +409,9 @@ function CinematicSection({ section, isVisible, onScrollUpAtTop }: { section: ty
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 max-w-6xl">
             {section.details.map((detail, i) => (
               <div key={i} className="detail-item group flex items-start gap-4" style={{ opacity: 0 }}>
-                <span className="font-[family-name:var(--font-display)] text-accent/40 text-sm tracking-widest mt-1">{String(i + 1).padStart(2, '0')}</span>
+                <span className="font-[family-name:var(--font-display)] text-vice-sunset/40 text-sm tracking-widest mt-1">{String(i + 1).padStart(2, '0')}</span>
                 <div>
-                  <div className="h-[1px] w-8 bg-accent/30 mb-4 group-hover:w-16 group-hover:bg-accent/60 transition-all duration-500" />
+                  <div className="h-[1px] w-8 bg-vice-pink/30 mb-4 group-hover:w-16 group-hover:bg-vice-sunset/60 transition-all duration-500" />
                   <p className="text-foreground/80 text-base md:text-lg leading-relaxed">{detail}</p>
                 </div>
               </div>
