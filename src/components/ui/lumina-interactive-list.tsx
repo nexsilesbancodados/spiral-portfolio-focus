@@ -3,6 +3,8 @@ import { useEffect, useRef } from 'react';
 declare const gsap: any;
 declare const THREE: any;
 
+const slideColors = ['color-blue', 'color-orange', 'color-emerald', 'color-purple', 'color-pink', 'color-amber', 'color-cyan'];
+
 const slides = [
   { title: "FOCUSS DEV", description: "Transformando ideias em experiências digitais extraordinárias. Desenvolvimento web de alto nível.", media: "/images/slide-01.jpg", skills: ["React", "TypeScript", "Node.js", "Next.js"] },
   { title: "Web Design", description: "Interfaces modernas e elegantes que conectam marcas ao futuro digital com impacto visual.", media: "/videos/slide-02.mp4", skills: ["Figma", "UI/UX", "Prototipagem", "Design System"] },
