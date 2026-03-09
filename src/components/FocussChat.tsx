@@ -131,7 +131,7 @@ export function FocussChat() {
   ];
 
   return (
-    <div className="w-full max-w-4xl mx-auto flex flex-col h-[70vh] md:h-[65vh]">
+    <div className="w-full max-w-4xl mx-auto flex flex-col h-full">
       {/* Header */}
       <div className="text-center mb-6">
         <div className="inline-flex items-center gap-2 mb-2">
