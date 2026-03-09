@@ -187,13 +187,13 @@ All colors MUST be HSL.
 
 .slide-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(2.5rem, 5vw, 4.5rem);
-  font-weight: 300;
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  font-weight: 400;
   color: #ffffff;
-  line-height: 1.1;
+  line-height: 1.05;
   margin: 0 0 0.75rem 0;
   letter-spacing: -0.02em;
-  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 0 30px rgba(255, 255, 255, 0.15), 0 2px 30px rgba(0, 0, 0, 0.8), 0 4px 60px rgba(0, 0, 0, 0.5);
 }
 
 .slide-description {
