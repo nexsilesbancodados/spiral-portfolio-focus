@@ -151,7 +151,7 @@ type ScrollEffectType = 'fade-slide' | 'scale-reveal' | 'horizontal-wipe' | 'sta
 const sectionScrollEffect: Record<string, ScrollEffectType> = {
   'web-design': 'fade-slide',
   'desenvolvimento': 'scale-reveal',
-  'design-interface': 'horizontal-wipe',
+  'servicos': 'horizontal-wipe',
   'inovacao-ia': 'clip-expand',
   'mobile-web': 'stagger-cascade',
   'skills': 'horizontal-wipe',
