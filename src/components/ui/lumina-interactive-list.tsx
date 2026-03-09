@@ -5,7 +5,7 @@ declare const THREE: any;
 
 const slides = [
   { title: "FOCUSS DEV", description: "Transformando ideias em experiências digitais extraordinárias. Desenvolvimento web de alto nível.", media: "/images/slide-01.jpg", skills: ["React", "TypeScript", "Node.js", "Next.js"] },
-  { title: "Web Design", description: "Interfaces modernas e elegantes que conectam marcas ao futuro digital com impacto visual.", media: "/images/slide-02.jpg", skills: ["Figma", "UI/UX", "Prototipagem", "Design System"] },
+  { title: "Web Design", description: "Interfaces modernas e elegantes que conectam marcas ao futuro digital com impacto visual.", media: "/videos/slide-02.mp4", skills: ["Figma", "UI/UX", "Prototipagem", "Design System"] },
   { title: "Desenvolvimento", description: "Código limpo, performance máxima e arquitetura escalável para projetos robustos.", media: "/images/slide-03.jpg", skills: ["JavaScript", "Python", "APIs REST", "PostgreSQL"] },
   { title: "Design de Interface", description: "Design centrado no usuário com estética cinematográfica e animações fluidas.", media: "/images/slide-04.jpg", skills: ["Tailwind CSS", "Framer Motion", "GSAP", "Three.js"] },
   { title: "Inovação e IA", description: "Tecnologias de ponta e inteligência artificial para soluções que fazem a diferença.", media: "/images/slide-05.jpg", skills: ["IA", "Machine Learning", "Cloud", "AWS"] },
@@ -229,7 +229,32 @@ export function LuminaSlider() {
       }, undefined, reject);
     });
 
-    // Video textures removed for performance — all slides use images now
+    const loadVideoTexture = (src: string) => new Promise<any>((resolve) => {
+      const video = document.createElement('video');
+      video.src = src;
+      video.loop = true;
+      video.muted = true;
+      video.playsInline = true;
+      video.crossOrigin = 'anonymous';
+      video.preload = 'auto';
+      video.addEventListener('loadeddata', () => {
+        const t = new THREE.VideoTexture(video);
+        t.minFilter = t.magFilter = THREE.LinearFilter;
+        t.userData = { size: new THREE.Vector2(video.videoWidth, video.videoHeight), video };
+        video.play().catch(() => {});
+        resolve(t);
+      });
+      video.addEventListener('error', () => {
+        console.warn('Video failed, falling back to image');
+        loadImageTexture(src.replace('/videos/', '/images/').replace('.mp4', '.jpg')).then(resolve);
+      });
+      video.load();
+    });
+
+    const loadTexture = (src: string) => {
+      if (src.endsWith('.mp4') || src.endsWith('.webm')) return loadVideoTexture(src);
+      return loadImageTexture(src);
+    };
 
     const initRenderer = async () => {
       const canvas = document.querySelector(".webgl-canvas") as HTMLCanvasElement;
@@ -257,7 +282,7 @@ export function LuminaSlider() {
 
       for (let i = 0; i < slides.length; i++) {
         try {
-          slideTextures.push(await loadImageTexture(slides[i].media));
+          slideTextures.push(await loadTexture(slides[i].media));
         } catch { console.warn("Failed texture:", slides[i].media); }
       }
 
