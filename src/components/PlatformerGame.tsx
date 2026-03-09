@@ -12,10 +12,12 @@ const GRAVITY = 0.55;
 const JUMP_FORCE = -13;
 const MOVE_SPEED = 4.5;
 const COIN_SIZE = 16;
+const TARGET_FPS = 60;
+const FRAME_TIME = 1000 / TARGET_FPS;
 
 function lerp(a: number, b: number, t: number) { return a + (b - a) * t; }
 
-const STARS = Array.from({ length: 60 }, (_, i) => ({
+const STARS = Array.from({ length: 40 }, (_, i) => ({
   x: (i * 137.5) % CANVAS_WIDTH,
   y: (i * 73.3) % CANVAS_HEIGHT,
   size: Math.random() * 1.5 + 0.5,
@@ -68,6 +70,9 @@ const INITIAL_ENEMIES: Enemy[] = [
   { x: 1550, y: 268, width: 22, height: 22, direction: -1, speed: 1.2 },
 ];
 
+// Pre-create gradient (optimization)
+let bgGradient: CanvasGradient | null = null;
+
 export const PlatformerGame = memo(function PlatformerGame() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [score, setScore] = useState(0);
@@ -92,6 +97,8 @@ export const PlatformerGame = memo(function PlatformerGame() {
   const livesRef = useRef(3);
   const gameActiveRef = useRef(true);
   const ctxRef = useRef<CanvasRenderingContext2D | null>(null);
+  const lastFrameTimeRef = useRef(0);
+  const isVisibleRef = useRef(true);
 
   const initLevel = useCallback(() => {
     coinsRef.current = INITIAL_COINS.map(c => ({ ...c, collected: false }));
@@ -112,47 +119,42 @@ export const PlatformerGame = memo(function PlatformerGame() {
     const cameraX = cameraXRef.current;
     const W = CANVAS_WIDTH, H = CANVAS_HEIGHT;
 
-    // Background gradient
-    const grad = ctx.createLinearGradient(0, 0, 0, H);
-    grad.addColorStop(0, 'hsl(230, 50%, 18%)');
-    grad.addColorStop(1, 'hsl(240, 40%, 8%)');
-    ctx.fillStyle = grad;
+    // Background gradient (cached)
+    if (!bgGradient) {
+      bgGradient = ctx.createLinearGradient(0, 0, 0, H);
+      bgGradient.addColorStop(0, 'hsl(230, 50%, 18%)');
+      bgGradient.addColorStop(1, 'hsl(240, 40%, 8%)');
+    }
+    ctx.fillStyle = bgGradient;
     ctx.fillRect(0, 0, W, H);
 
-    // Stars (static, no recalculation per frame)
-    ctx.save();
+    // Stars (optimized - no shadows)
+    ctx.fillStyle = '#ffffff';
     for (const star of STARS) {
       ctx.globalAlpha = star.opacity;
-      ctx.fillStyle = '#ffffff';
       ctx.fillRect(star.x, star.y, star.size, star.size);
     }
     ctx.globalAlpha = 1;
-    ctx.restore();
 
     ctx.save();
     ctx.translate(-cameraX, 0);
 
-    // Platforms
+    // Platforms (optimized culling)
+    const leftBound = cameraX - 50;
+    const rightBound = cameraX + W + 50;
+    
     for (const platform of PLATFORMS) {
-      const screenX = platform.x - cameraX;
-      if (screenX > W + 50 || screenX + platform.width < -50) continue;
-
+      if (platform.x + platform.width < leftBound || platform.x > rightBound) continue;
       ctx.fillStyle = 'hsl(145, 60%, 30%)';
       ctx.fillRect(platform.x, platform.y, platform.width, platform.height);
       ctx.fillStyle = 'hsl(145, 60%, 42%)';
       ctx.fillRect(platform.x, platform.y, platform.width, 3);
-      ctx.fillStyle = 'rgba(0,0,0,0.3)';
-      ctx.fillRect(platform.x, platform.y + platform.height, platform.width, 4);
     }
 
-    // Coins with simple glow
-    ctx.shadowBlur = 8;
-    ctx.shadowColor = 'hsl(45, 100%, 55%)';
+    // Coins (removed glow for performance)
+    ctx.fillStyle = 'hsl(45, 100%, 55%)';
     for (const coin of coinsRef.current) {
-      if (coin.collected) continue;
-      const screenX = coin.x - cameraX;
-      if (screenX > W + 30 || screenX < -30) continue;
-      ctx.fillStyle = 'hsl(45, 100%, 55%)';
+      if (coin.collected || coin.x < leftBound || coin.x > rightBound) continue;
       ctx.beginPath();
       ctx.arc(coin.x + COIN_SIZE / 2, coin.y + COIN_SIZE / 2, COIN_SIZE / 2, 0, Math.PI * 2);
       ctx.fill();
@@ -160,36 +162,27 @@ export const PlatformerGame = memo(function PlatformerGame() {
       ctx.beginPath();
       ctx.arc(coin.x + COIN_SIZE / 2 - 2, coin.y + COIN_SIZE / 2 - 2, 3, 0, Math.PI * 2);
       ctx.fill();
+      ctx.fillStyle = 'hsl(45, 100%, 55%)';
     }
-    ctx.shadowBlur = 0;
 
-    // Enemies
+    // Enemies (simplified rendering)
     for (const enemy of enemiesRef.current) {
-      if (enemy.x < -100) continue;
-      const screenX = enemy.x - cameraX;
-      if (screenX > W + 50 || screenX < -50) continue;
-
-      ctx.shadowBlur = 6;
-      ctx.shadowColor = 'hsl(0, 80%, 50%)';
+      if (enemy.x < -100 || enemy.x < leftBound || enemy.x > rightBound) continue;
       // Body
       ctx.fillStyle = 'hsl(0, 80%, 45%)';
       ctx.fillRect(enemy.x, enemy.y, enemy.width, enemy.height);
-      // Top detail (mushroom cap)
+      // Cap
       ctx.fillStyle = 'hsl(0, 70%, 35%)';
       ctx.fillRect(enemy.x - 2, enemy.y, enemy.width + 4, 8);
       // Eyes
-      ctx.shadowBlur = 0;
       ctx.fillStyle = '#fff';
       const eyeOffX = enemy.direction > 0 ? enemy.width - 8 : 2;
       ctx.fillRect(enemy.x + eyeOffX, enemy.y + 7, 5, 5);
       ctx.fillStyle = '#000';
       ctx.fillRect(enemy.x + eyeOffX + 1, enemy.y + 8, 3, 3);
     }
-    ctx.shadowBlur = 0;
 
-    // Player
-    ctx.shadowBlur = 12;
-    ctx.shadowColor = 'hsl(200, 80%, 55%)';
+    // Player (simplified - no shadows)
     // Body
     ctx.fillStyle = 'hsl(200, 80%, 55%)';
     ctx.fillRect(player.x, player.y + 8, PLAYER_WIDTH, PLAYER_HEIGHT - 8);
@@ -198,7 +191,6 @@ export const PlatformerGame = memo(function PlatformerGame() {
     ctx.fillRect(player.x - 2, player.y, PLAYER_WIDTH + 4, 10);
     ctx.fillRect(player.x + 4, player.y - 10, PLAYER_WIDTH - 8, 12);
     // Face
-    ctx.shadowBlur = 0;
     ctx.fillStyle = 'hsl(30, 90%, 75%)';
     ctx.fillRect(player.x + 4, player.y + 10, PLAYER_WIDTH - 8, 10);
     ctx.fillStyle = '#000';
@@ -213,7 +205,7 @@ export const PlatformerGame = memo(function PlatformerGame() {
 
     ctx.restore();
 
-    // HUD
+    // HUD (simplified)
     ctx.fillStyle = 'rgba(0,0,0,0.5)';
     ctx.fillRect(0, 0, W, 52);
     ctx.fillStyle = 'hsl(45, 100%, 55%)';
@@ -237,8 +229,16 @@ export const PlatformerGame = memo(function PlatformerGame() {
     ctx.fillText(`${collected}/${INITIAL_COINS.length} moedas`, 14, 50);
   }, []);
 
-  const runGameLoop = useCallback(() => {
-    if (!gameActiveRef.current) return;
+  const runGameLoop = useCallback((timestamp: number) => {
+    if (!gameActiveRef.current || !isVisibleRef.current) return;
+
+    // Frame rate limiting
+    const deltaTime = timestamp - lastFrameTimeRef.current;
+    if (deltaTime < FRAME_TIME) {
+      animFrameRef.current = requestAnimationFrame(runGameLoop);
+      return;
+    }
+    lastFrameTimeRef.current = timestamp;
 
     const player = playerRef.current;
     const keys = keysRef.current;
@@ -278,23 +278,28 @@ export const PlatformerGame = memo(function PlatformerGame() {
         }
       }
 
-      // Coins
+      // Coins (batched state update)
+      let coinsCollected = false;
       for (const coin of coinsRef.current) {
         if (coin.collected) continue;
         if (player.x + PLAYER_WIDTH > coin.x && player.x < coin.x + COIN_SIZE &&
             player.y + PLAYER_HEIGHT > coin.y && player.y < coin.y + COIN_SIZE) {
           coin.collected = true;
           scoreRef.current += 10;
-          setScore(scoreRef.current);
-          if (scoreRef.current > highScoreRef.current) {
-            highScoreRef.current = scoreRef.current;
-            setCurrentHighScore(scoreRef.current);
-            localStorage.setItem('platformerHighScore', scoreRef.current.toString());
-          }
+          coinsCollected = true;
+        }
+      }
+      if (coinsCollected) {
+        setScore(scoreRef.current);
+        if (scoreRef.current > highScoreRef.current) {
+          highScoreRef.current = scoreRef.current;
+          setCurrentHighScore(scoreRef.current);
+          localStorage.setItem('platformerHighScore', scoreRef.current.toString());
         }
       }
 
       // Enemies
+      let enemyHit = false;
       for (const enemy of enemiesRef.current) {
         if (enemy.x < -100) continue;
         enemy.x += enemy.direction * enemy.speed;
@@ -309,17 +314,21 @@ export const PlatformerGame = memo(function PlatformerGame() {
             scoreRef.current += 20;
             setScore(scoreRef.current);
           } else {
-            livesRef.current = Math.max(0, livesRef.current - 1);
-            setLives(livesRef.current);
-            if (livesRef.current <= 0) { setGameOver(true); return; }
-            resetPlayer();
+            enemyHit = true;
           }
         }
       }
+      
+      if (enemyHit) {
+        livesRef.current = Math.max(0, livesRef.current - 1);
+        setLives(livesRef.current);
+        if (livesRef.current <= 0) { setGameOver(true); return; }
+        resetPlayer();
+      }
 
-      // Camera
+      // Camera (optimized lerp)
       const targetCam = Math.max(0, player.x - CANVAS_WIDTH / 3);
-      cameraXRef.current = lerp(cameraXRef.current, targetCam, 0.12);
+      cameraXRef.current += (targetCam - cameraXRef.current) * 0.12;
 
       // Win
       if (player.x > 2050) { scoreRef.current += 100; setScore(scoreRef.current); setWon(true); return; }
@@ -332,13 +341,30 @@ export const PlatformerGame = memo(function PlatformerGame() {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    ctxRef.current = canvas.getContext('2d', { alpha: false });
+    ctxRef.current = canvas.getContext('2d', { alpha: false, desynchronized: true });
     initLevel();
   }, [initLevel]);
+
+  // Intersection Observer to pause when not visible
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisibleRef.current = entry.isIntersecting;
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(canvas);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     if (gameOver || won) return;
     gameActiveRef.current = true;
+    lastFrameTimeRef.current = performance.now();
     animFrameRef.current = requestAnimationFrame(runGameLoop);
     return () => {
       gameActiveRef.current = false;
