@@ -363,10 +363,15 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
   const colors = sectionColors[section.id] || sectionColors['focuss-dev'];
   const viceOverlay = colors.overlay;
 
-  // Parallax effect on hero image (RAF-throttled)
+  // Parallax effect on hero image (RAF-throttled, desktop only)
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
+    // Skip parallax on mobile for performance
+    const isMobile = window.innerWidth < 768;
+    if (isMobile) return;
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) return;
     const heroImg = el.querySelector('.parallax-hero img') as HTMLElement;
     if (!heroImg) return;
     let ticking = false;
@@ -374,8 +379,8 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
       if (ticking) return;
       ticking = true;
       requestAnimationFrame(() => {
-        const offset = el.scrollTop * 0.25;
-        heroImg.style.transform = `translateY(${offset}px) scale(1.1)`;
+        const offset = el.scrollTop * 0.2;
+        heroImg.style.transform = `translate3d(0, ${offset}px, 0) scale(1.1)`;
         ticking = false;
       });
     };
@@ -564,7 +569,7 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
       {/* ── HERO with parallax ── */}
       <div className="relative h-screen w-full overflow-hidden flex items-end parallax-hero">
         <div className="absolute inset-0">
-          <img src={section.image} alt={section.title} loading="eager" decoding="async" className="w-full h-full object-cover" style={{ filter: 'saturate(1.15) contrast(1.05)', transform: 'scale(1.1)' }} />
+          <img src={section.image} alt={section.title} loading="eager" decoding="async" width={1920} height={1080} className="w-full h-full object-cover" style={{ filter: 'saturate(1.15) contrast(1.05)', transform: 'scale(1.1)' }} />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-r from-background/60 via-transparent to-transparent" />
           <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, transparent 50%, hsl(var(--background)) 100%)' }} />

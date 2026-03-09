@@ -118,10 +118,26 @@ All colors MUST be HSL.
     font-family: var(--font-body);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    -webkit-tap-highlight-color: transparent;
+    text-rendering: optimizeSpeed;
   }
 
   img, video {
     content-visibility: auto;
+    contain-intrinsic-size: auto 300px;
+  }
+}
+
+/* Accessibility: reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .animate-text-fill, .animate-pulse, .explore-btn-arrow {
+    animation: none !important;
   }
 }
 
@@ -185,6 +201,20 @@ All colors MUST be HSL.
   transform: translateZ(0);
 }
 
+@media (max-width: 640px) {
+  .slide-content {
+    bottom: 6rem;
+    left: 1.25rem;
+    right: 1.25rem;
+    max-width: none;
+  }
+  .slide-number, .slide-total {
+    top: 1rem;
+  }
+  .slide-number { left: 1.25rem; }
+  .slide-total { right: 1.25rem; }
+}
+
 .slide-title {
   font-family: 'Cormorant Garamond', serif;
   font-size: clamp(2.8rem, 6vw, 5.5rem);
@@ -215,7 +245,8 @@ All colors MUST be HSL.
 
 .skill-tag {
   display: inline-block;
-  padding: 0.35rem 0.9rem;
+  padding: 0.45rem 0.9rem;
+  min-height: 36px;
   border: 1px solid hsl(45 100% 55% / 0.4);
   color: hsl(45 100% 65%);
   font-family: 'Space Grotesk', monospace;
@@ -432,7 +463,15 @@ All colors MUST be HSL.
 /* Parallax container */
 .parallax-hero img {
   will-change: transform;
-  transition: transform 0.1s linear;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Disable parallax on mobile for performance */
+@media (max-width: 768px) {
+  .parallax-hero img {
+    will-change: auto;
+  }
 }
 
 /* Explore Button */
