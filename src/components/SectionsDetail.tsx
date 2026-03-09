@@ -593,7 +593,7 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
             }}
           >
             {section.title.split(' ').map((word, i) => (
-              <span key={i} className="title-word block" style={{ opacity: 0 }}>{word}</span>
+              <span key={i} className="title-word block">{word}</span>
             ))}
           </h2>
           <div className="absolute bottom-8 right-6 md:right-16 flex flex-col items-center gap-2 opacity-50">
