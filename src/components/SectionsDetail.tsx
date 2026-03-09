@@ -429,7 +429,7 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
               ))}
             </div>
             {isVisible && (
-              <div className="mt-16 flex justify-center"><PlatformerGame /></div>
+              <div className="mt-16 flex justify-center"><Suspense fallback={null}><PlatformerGame /></Suspense></div>
             )}
           </div>
         );
