@@ -578,23 +578,15 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
         </div>
 
         <div className="relative z-10 w-full px-6 md:px-16 lg:px-24 pb-16 md:pb-24">
-          <div className="cin-subtitle flex items-center gap-3 mb-6" style={{ opacity: 0 }}>
+          <div className="cin-subtitle flex items-center gap-3 mb-6">
             <div className="h-[1px] w-12" style={{ background: colors.gradient }} />
             <span className={`font-[family-name:var(--font-display)] text-[11px] md:text-xs tracking-[0.3em] uppercase ${colors.accent}`}>{section.subtitle}</span>
           </div>
           <h2 
-            className="font-[family-name:var(--font-display)] text-5xl sm:text-6xl md:text-8xl lg:text-[9rem] xl:text-[11rem] font-bold leading-[0.85] tracking-tighter uppercase"
-            style={{ 
-              background: colors.gradient,
-              backgroundClip: 'text',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              color: 'transparent',
-              filter: `drop-shadow(0 0 30px hsl(${colors.accentHsl} / 0.3)) drop-shadow(0 4px 20px hsl(0 0% 0% / 0.6))`,
-            }}
+            className="font-[family-name:var(--font-display)] text-5xl sm:text-6xl md:text-8xl lg:text-[9rem] xl:text-[11rem] font-bold leading-[0.85] tracking-tighter uppercase text-foreground"
           >
             {section.title.split(' ').map((word, i) => (
-              <span key={i} className="title-word block">{word}</span>
+              <span key={i} className="title-word block" style={{ color: `hsl(${colors.accentHsl})` }}>{word}</span>
             ))}
           </h2>
           <div className="absolute bottom-8 right-6 md:right-16 flex flex-col items-center gap-2 opacity-50">
@@ -608,7 +600,7 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
       <div className="relative z-10 bg-background">
         <div className="w-full h-[1px]" style={{ background: `linear-gradient(90deg, transparent, hsl(${colors.accentHsl} / 0.3), hsl(${colors.accentHsl} / 0.15), transparent)` }} />
         
-        <div className="cin-desc px-6 md:px-16 lg:px-24 py-16 md:py-24" style={{ opacity: 0 }}>
+        <div className="cin-desc px-6 md:px-16 lg:px-24 py-16 md:py-24">
           <div className="max-w-5xl">
             <p className="text-xl md:text-2xl lg:text-3xl text-foreground/90 leading-relaxed font-light tracking-tight">{section.description}</p>
           </div>
@@ -668,7 +660,7 @@ export function SectionsDetail() {
     const container = containerRef.current;
     if (!container) return;
     const innerEls = container.querySelectorAll('.anim-el');
-    gsap.set(innerEls, { y: 40, opacity: 0 });
+    gsap.fromTo(innerEls, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: 'power3.out', delay: 0.3 });
   }, [activeSlide]);
 
   // Scroll-up at top for focuss-dev section → go back
