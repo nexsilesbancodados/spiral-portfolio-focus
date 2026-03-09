@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState, lazy, Suspense } from 'react';
 import { WebDesignPortfolio } from '@/components/WebDesignPortfolio';
 import { ScrollExpandMedia } from '@/components/ScrollExpandMedia';
+import { SnakeGame } from '@/components/SnakeGame';
 declare const gsap: any;
 
 const InteractiveGlobe = lazy(() => import('@/components/ui/interactive-globe').then(m => ({ default: m.InteractiveGlobe })));
@@ -198,17 +199,9 @@ export function SectionsDetail() {
                 {section.id === 'web-design' && isVisible && <WebDesignPortfolio />}
               </div>
               {section.id === 'desenvolvimento' && isVisible && (
-                <Suspense fallback={null}>
-                  <div className="anim-el flex-1 flex justify-center">
-                    <InteractiveGlobe
-                      size={400}
-                      dotColor="rgba(200, 170, 80, ALPHA)"
-                      arcColor="rgba(200, 170, 80, 0.4)"
-                      markerColor="rgba(230, 200, 100, 1)"
-                      autoRotateSpeed={0.003}
-                    />
-                  </div>
-                </Suspense>
+                <div className="anim-el flex-1 flex justify-center">
+                  <SnakeGame />
+                </div>
               )}
             </div>
           </div>
