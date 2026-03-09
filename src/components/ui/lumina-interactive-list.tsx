@@ -3,6 +3,8 @@ import { useEffect, useRef } from 'react';
 declare const gsap: any;
 declare const THREE: any;
 
+const slideColors = ['color-blue', 'color-orange', 'color-emerald', 'color-purple', 'color-pink', 'color-amber', 'color-cyan'];
+
 const slides = [
   { title: "FOCUSS DEV", description: "Transformando ideias em experiências digitais extraordinárias. Desenvolvimento web de alto nível.", media: "/images/slide-01.jpg", skills: ["React", "TypeScript", "Node.js", "Next.js"] },
   { title: "Web Design", description: "Interfaces modernas e elegantes que conectam marcas ao futuro digital com impacto visual.", media: "/videos/slide-02.mp4", skills: ["Figma", "UI/UX", "Prototipagem", "Design System"] },
@@ -110,7 +112,7 @@ export function LuminaSlider() {
         titleEl.innerHTML = splitText(slides[idx].title);
         descEl.textContent = slides[idx].description;
         if (skillsEl) {
-          skillsEl.innerHTML = slides[idx].skills.map(s => `<span class="skill-tag">${s}</span>`).join('');
+          skillsEl.innerHTML = slides[idx].skills.map(s => `<span class="skill-tag ${slideColors[idx] || ''}">${s}</span>`).join('');
         }
         gsap.set(titleEl.children, { opacity: 0 });
         gsap.set(descEl, { y: 20, opacity: 0 });
@@ -340,7 +342,7 @@ export function LuminaSlider() {
       if (tEl && dEl) {
         tEl.innerHTML = splitText(slides[0].title);
         dEl.textContent = slides[0].description;
-        if (sEl) sEl.innerHTML = slides[0].skills.map(s => `<span class="skill-tag">${s}</span>`).join('');
+        if (sEl) sEl.innerHTML = slides[0].skills.map(s => `<span class="skill-tag ${slideColors[0]}">${s}</span>`).join('');
         gsap.fromTo(tEl.children, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 1, stagger: 0.03, ease: "power3.out", delay: 0.5 });
         gsap.fromTo(dEl, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: "power3.out", delay: 0.8 });
         if (sEl) gsap.fromTo(sEl.children, { y: 15, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, stagger: 0.1, ease: "power3.out", delay: 1.1 });
