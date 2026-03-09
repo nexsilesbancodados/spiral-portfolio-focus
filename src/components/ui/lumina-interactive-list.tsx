@@ -5,9 +5,9 @@ declare const THREE: any;
 
 const slides = [
   { title: "FOCUSS DEV", description: "Transformando ideias em experiências digitais extraordinárias. Desenvolvimento web de alto nível.", media: "/images/slide-01.jpg", skills: ["React", "TypeScript", "Node.js", "Next.js"] },
-  { title: "Web Design", description: "Interfaces modernas e elegantes que conectam marcas ao futuro digital com impacto visual.", media: "/videos/slide-02.mp4", skills: ["Figma", "UI/UX", "Prototipagem", "Design System"], isVideo: true },
-  { title: "Desenvolvimento", description: "Código limpo, performance máxima e arquitetura escalável para projetos robustos.", media: "/videos/slide-03.mp4", skills: ["JavaScript", "Python", "APIs REST", "PostgreSQL"], isVideo: true },
-  { title: "Design de Interface", description: "Design centrado no usuário com estética cinematográfica e animações fluidas.", media: "/videos/slide-04.mp4", skills: ["Tailwind CSS", "Framer Motion", "GSAP", "Three.js"], isVideo: true },
+  { title: "Web Design", description: "Interfaces modernas e elegantes que conectam marcas ao futuro digital com impacto visual.", media: "/images/slide-02.jpg", skills: ["Figma", "UI/UX", "Prototipagem", "Design System"] },
+  { title: "Desenvolvimento", description: "Código limpo, performance máxima e arquitetura escalável para projetos robustos.", media: "/images/slide-03.jpg", skills: ["JavaScript", "Python", "APIs REST", "PostgreSQL"] },
+  { title: "Design de Interface", description: "Design centrado no usuário com estética cinematográfica e animações fluidas.", media: "/images/slide-04.jpg", skills: ["Tailwind CSS", "Framer Motion", "GSAP", "Three.js"] },
   { title: "Inovação e IA", description: "Tecnologias de ponta e inteligência artificial para soluções que fazem a diferença.", media: "/images/slide-05.jpg", skills: ["IA", "Machine Learning", "Cloud", "AWS"] },
   { title: "Mobile e Web", description: "Aplicações responsivas e multiplataforma que funcionam perfeitamente em qualquer dispositivo.", media: "/images/slide-06.jpg", skills: ["React Native", "PWA", "Responsivo", "Docker"] },
   { title: "Skills", description: "Domínio completo do ecossistema moderno — front-end, back-end, cloud e design em um só lugar.", media: "/images/slide-07.jpg", skills: ["React", "Node.js", "Python", "AWS", "Figma", "Docker"] }
@@ -24,7 +24,7 @@ export function LuminaSlider() {
     let isTransitioning = false;
     let texturesLoaded = false;
     let animFrameId: number;
-    const videoElements: HTMLVideoElement[] = [];
+    // No video elements needed — all slides are images
 
     const TRANSITION_DURATION = 2.5;
 
@@ -229,35 +229,7 @@ export function LuminaSlider() {
       }, undefined, reject);
     });
 
-    const loadVideoTexture = (src: string, index: number) => new Promise<any>((resolve, reject) => {
-      const video = document.createElement('video');
-      video.src = src;
-      video.loop = true;
-      video.muted = true;
-      video.playsInline = true;
-      video.crossOrigin = 'anonymous';
-      video.preload = index === 0 ? 'auto' : 'none';
-      
-      const loadHandler = () => {
-        const t = new THREE.VideoTexture(video);
-        t.minFilter = THREE.LinearFilter;
-        t.magFilter = THREE.LinearFilter;
-        t.userData = { size: new THREE.Vector2(video.videoWidth || 1920, video.videoHeight || 1080), video };
-        videoElements.push(video);
-        if (index === 0) video.play().catch(() => {});
-        resolve(t);
-      };
-
-      if (index === 0) {
-        video.addEventListener('loadeddata', loadHandler);
-        video.load();
-      } else {
-        video.addEventListener('loadedmetadata', loadHandler);
-        setTimeout(() => video.load(), index * 300);
-      }
-      
-      video.addEventListener('error', () => reject(new Error(`Failed video: ${src}`)));
-    });
+    // Video textures removed for performance — all slides use images now
 
     const initRenderer = async () => {
       const canvas = document.querySelector(".webgl-canvas") as HTMLCanvasElement;
@@ -284,10 +256,9 @@ export function LuminaSlider() {
       scene.add(new THREE.Mesh(new THREE.PlaneGeometry(2, 2), shaderMaterial));
 
       for (let i = 0; i < slides.length; i++) {
-        const s = slides[i];
         try {
-          slideTextures.push(s.isVideo ? await loadVideoTexture(s.media, i) : await loadImageTexture(s.media));
-        } catch { console.warn("Failed texture:", s.media); }
+          slideTextures.push(await loadImageTexture(slides[i].media));
+        } catch { console.warn("Failed texture:", slides[i].media); }
       }
 
       if (slideTextures.length >= 2) {
@@ -323,11 +294,7 @@ export function LuminaSlider() {
 
     // Pause render when tab is hidden
     const handleVisibility = () => {
-      if (document.hidden) {
-        videoElements.forEach(v => v.pause());
-      } else {
-        videoElements.forEach(v => v.play().catch(() => {}));
-      }
+      // No video elements to manage
     };
 
     const init = async () => {
@@ -366,7 +333,6 @@ export function LuminaSlider() {
       document.removeEventListener("visibilitychange", handleVisibility);
       clearTimeout(resizeTimer);
       if (animFrameId) cancelAnimationFrame(animFrameId);
-      videoElements.forEach(v => { v.pause(); v.src = ''; });
       if (renderer) renderer.dispose();
     };
   }, []);
