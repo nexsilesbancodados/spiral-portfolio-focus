@@ -711,7 +711,7 @@ export function SectionsDetail() {
 
   const section = sections[activeSlide];
   const isFocussDev = section.id === 'focuss-dev';
-  const isDesignInterface = section.id === 'design-interface';
+  const isServicos = section.id === 'servicos';
 
   return (
     <div ref={containerRef} id="detail-section" className="fixed inset-0 z-20 bg-background" style={{ transform: 'translateY(100%)', opacity: 0 }}>
