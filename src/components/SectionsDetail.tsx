@@ -619,7 +619,7 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
       </div>
     </div>
   );
-}
+});
 
 export function SectionsDetail() {
   const containerRef = useRef<HTMLDivElement>(null);
