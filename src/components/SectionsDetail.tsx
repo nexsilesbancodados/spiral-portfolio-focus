@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState, lazy, Suspense } from 'react';
 import { WebDesignPortfolio } from '@/components/WebDesignPortfolio';
 import { ScrollExpandMedia } from '@/components/ScrollExpandMedia';
-import { SnakeGame } from '@/components/SnakeGame';
+import { PlatformerGame } from '@/components/PlatformerGame';
 declare const gsap: any;
 
 const InteractiveGlobe = lazy(() => import('@/components/ui/interactive-globe').then(m => ({ default: m.InteractiveGlobe })));
@@ -200,7 +200,7 @@ export function SectionsDetail() {
               </div>
               {section.id === 'desenvolvimento' && isVisible && (
                 <div className="anim-el flex-1 flex justify-center">
-                  <SnakeGame />
+                  <PlatformerGame />
                 </div>
               )}
             </div>
