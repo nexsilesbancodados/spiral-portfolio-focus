@@ -181,24 +181,24 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
     // Different hero entrance per effect type
     switch (effect) {
       case 'fade-slide':
-        gsap.fromTo(titleWords, { y: 80, opacity: 0, rotationX: 15 }, { y: 0, opacity: 1, rotationX: 0, duration: 1.2, stagger: 0.12, ease: 'power3.out', delay: 0.3 });
-        gsap.fromTo(subtitle, { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.8, ease: 'power2.out', delay: 0.2 });
+        gsap.fromTo(titleWords, { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, stagger: 0.08, ease: 'power3.out', delay: 0.3 });
+        gsap.fromTo(subtitle, { x: -30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.6, ease: 'power2.out', delay: 0.2 });
         break;
       case 'scale-reveal':
-        gsap.fromTo(titleWords, { scale: 1.4, opacity: 0, filter: 'blur(8px)' }, { scale: 1, opacity: 1, filter: 'blur(0px)', duration: 1.4, stagger: 0.15, ease: 'power2.out', delay: 0.3 });
-        gsap.fromTo(subtitle, { y: -20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, delay: 0.5 });
+        gsap.fromTo(titleWords, { scale: 1.2, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.9, stagger: 0.1, ease: 'power2.out', delay: 0.3 });
+        gsap.fromTo(subtitle, { y: -15, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, delay: 0.4 });
         break;
       case 'horizontal-wipe':
-        gsap.fromTo(titleWords, { x: -120, opacity: 0 }, { x: 0, opacity: 1, duration: 1, stagger: 0.1, ease: 'power4.out', delay: 0.3 });
-        gsap.fromTo(subtitle, { x: 60, opacity: 0 }, { x: 0, opacity: 1, duration: 0.8, ease: 'power3.out', delay: 0.2 });
+        gsap.fromTo(titleWords, { x: -80, opacity: 0 }, { x: 0, opacity: 1, duration: 0.7, stagger: 0.08, ease: 'power4.out', delay: 0.3 });
+        gsap.fromTo(subtitle, { x: 40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.6, ease: 'power3.out', delay: 0.2 });
         break;
       case 'clip-expand':
-        gsap.fromTo(titleWords, { y: 60, opacity: 0, skewY: 5 }, { y: 0, opacity: 1, skewY: 0, duration: 1, stagger: 0.12, ease: 'power3.out', delay: 0.4 });
-        gsap.fromTo(subtitle, { scaleX: 0, opacity: 0, transformOrigin: 'left' }, { scaleX: 1, opacity: 1, duration: 0.8, delay: 0.3 });
+        gsap.fromTo(titleWords, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, stagger: 0.08, ease: 'power3.out', delay: 0.4 });
+        gsap.fromTo(subtitle, { scaleX: 0, opacity: 0, transformOrigin: 'left' }, { scaleX: 1, opacity: 1, duration: 0.6, delay: 0.3 });
         break;
       case 'stagger-cascade':
-        gsap.fromTo(titleWords, { y: 100, opacity: 0, rotationZ: -3 }, { y: 0, opacity: 1, rotationZ: 0, duration: 1.2, stagger: 0.2, ease: 'back.out(1.2)', delay: 0.3 });
-        gsap.fromTo(subtitle, { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, delay: 0.2 });
+        gsap.fromTo(titleWords, { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, stagger: 0.12, ease: 'back.out(1.1)', delay: 0.3 });
+        gsap.fromTo(subtitle, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, delay: 0.2 });
         break;
     }
 
