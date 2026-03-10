@@ -653,16 +653,33 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
 
         <div className="relative z-10 w-full px-6 md:px-16 lg:px-24 pb-16 md:pb-24">
           <div className="cin-subtitle flex items-center gap-3 mb-6">
-            <div className="h-[1px] w-12" style={{ background: colors.gradient }} />
-            <span className={`font-[family-name:var(--font-display)] text-[11px] md:text-xs tracking-[0.3em] uppercase ${colors.accent}`}>{section.subtitle}</span>
+            <div className="h-[2px] w-16" style={{ background: colors.gradient }} />
+            <span className={`font-[family-name:var(--font-display)] text-[11px] md:text-xs tracking-[0.4em] uppercase ${colors.accent}`} style={{ textShadow: `0 0 20px ${colors.glowColor}` }}>{section.subtitle}</span>
+            <div className="h-[2px] w-8" style={{ background: colors.gradient, opacity: 0.4 }} />
           </div>
-          <h2 
-            className="font-[family-name:var(--font-display)] text-5xl sm:text-6xl md:text-8xl lg:text-[9rem] xl:text-[11rem] font-bold leading-[0.85] tracking-tighter uppercase text-foreground"
-          >
-            {section.title.split(' ').map((word, i) => (
-              <span key={i} className="title-word block" style={{ color: `hsl(${colors.accentHsl})` }}>{word}</span>
-            ))}
-          </h2>
+          <div className="relative">
+            {/* Glow layer behind title */}
+            <div className="absolute inset-0 -z-10 pointer-events-none" style={{
+              filter: 'blur(60px)',
+              background: `radial-gradient(ellipse 80% 60% at 20% 60%, ${colors.glowColor}, transparent 70%)`,
+            }} />
+            <h2 className="font-[family-name:var(--font-display)] text-5xl sm:text-6xl md:text-8xl lg:text-[9rem] xl:text-[11rem] font-black leading-[0.85] tracking-tighter uppercase">
+              {section.title.split(' ').map((word, i) => (
+                <span 
+                  key={i} 
+                  className="title-word block"
+                  style={{
+                    background: colors.titleGradient,
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    filter: `drop-shadow(0 0 30px ${colors.glowColor}) drop-shadow(0 4px 20px hsl(0 0% 0% / 0.5))`,
+                  }}
+                >
+                  {word}
+                </span>
+              ))}
+            </h2>
+          </div>
           <div className="absolute bottom-8 right-6 md:right-16 flex flex-col items-center gap-2 opacity-50">
             <span className={`font-[family-name:var(--font-display)] text-[9px] tracking-[0.25em] uppercase ${colors.accent} opacity-60 [writing-mode:vertical-lr]`}>Role para baixo</span>
             <div className="w-[1px] h-12 animate-pulse" style={{ background: `hsl(${colors.accentHsl} / 0.4)` }} />
