@@ -30,9 +30,9 @@ const GlitchText = ({ children, active, className = '', style = {} }: { children
 /* ── Skyline silhouette ── */
 const Skyline = () => (
   <motion.div
-    className="absolute bottom-[18%] left-0 right-0 z-[3] pointer-events-none"
+    className="absolute bottom-[14%] left-0 right-0 z-[3] pointer-events-none"
     initial={{ opacity: 0, y: 30 }}
-    animate={{ opacity: 0.12, y: 0 }}
+    animate={{ opacity: 0.18, y: 0 }}
     transition={{ duration: 3, delay: 1 }}
   >
     <svg viewBox="0 0 1200 200" className="w-full h-auto" preserveAspectRatio="none">
