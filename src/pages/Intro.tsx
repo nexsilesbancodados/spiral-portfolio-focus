@@ -240,7 +240,7 @@ const IntroPage = () => {
             transition={{ duration: 3, delay: 1 }} />
 
           {/* ── WATER REFLECTION ── */}
-          <motion.div className="absolute bottom-0 left-0 right-0 h-[22%] z-[2]"
+          <motion.div className="absolute bottom-0 left-0 right-0 h-[16%] z-[2]"
             initial={{ opacity: 0 }} animate={{ opacity: 0.7 }}
             transition={{ duration: 3, delay: 1 }}>
             <div className="absolute inset-0" style={{
