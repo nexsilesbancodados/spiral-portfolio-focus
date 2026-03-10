@@ -30,9 +30,9 @@ const GlitchText = ({ children, active, className = '', style = {} }: { children
 /* ── Skyline silhouette ── */
 const Skyline = () => (
   <motion.div
-    className="absolute bottom-[18%] left-0 right-0 z-[3] pointer-events-none"
+    className="absolute bottom-[14%] left-0 right-0 z-[3] pointer-events-none"
     initial={{ opacity: 0, y: 30 }}
-    animate={{ opacity: 0.12, y: 0 }}
+    animate={{ opacity: 0.18, y: 0 }}
     transition={{ duration: 3, delay: 1 }}
   >
     <svg viewBox="0 0 1200 200" className="w-full h-auto" preserveAspectRatio="none">
@@ -212,29 +212,35 @@ const IntroPage = () => {
 
           {/* ── SUN ── */}
           <motion.div className="absolute z-[1] pointer-events-none"
-            style={{ bottom: '20%', left: '50%', transform: 'translateX(-50%)', width: 360, height: 360, borderRadius: '50%' }}
+            style={{ bottom: '12%', left: '50%', transform: 'translateX(-50%)', width: 320, height: 320, borderRadius: '50%', overflow: 'hidden' }}
             initial={{ opacity: 0, scale: 0.3 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 3, delay: 0.8, ease: [0.22, 1, 0.36, 1] }}>
             {/* Sun body */}
             <div className="absolute inset-0 rounded-full" style={{
-              background: `radial-gradient(circle, hsl(45 100% 70% / 0.9) 0%, hsl(35 100% 55% / 0.6) 35%, hsl(25 95% 50% / 0.3) 55%, hsl(335 75% 45% / 0.1) 75%, transparent 100%)`,
+              background: `radial-gradient(circle, hsl(45 100% 70% / 0.95) 0%, hsl(35 100% 55% / 0.7) 30%, hsl(25 95% 50% / 0.4) 50%, hsl(335 75% 45% / 0.15) 70%, transparent 100%)`,
             }} />
-            {/* Sun horizontal lines (retro) */}
-            {[30, 38, 45, 51, 56, 60, 63, 66, 68, 70].map((top, i) => (
-              <motion.div key={i} className="absolute left-[10%] right-[10%]" style={{ top: `${top}%`, height: `${2 + i * 0.5}%`, background: 'hsl(220 40% 4% / 0.6)' }}
+            {/* Retro horizontal lines — only bottom half */}
+            {[52, 57, 61, 65, 68, 71, 74, 76, 78, 80].map((top, i) => (
+              <motion.div key={i} className="absolute left-0 right-0" style={{ top: `${top}%`, height: `${1.5 + i * 0.4}%`, background: 'hsl(220 40% 4% / 0.55)' }}
                 initial={{ scaleX: 0 }} animate={{ scaleX: 1 }}
-                transition={{ duration: 1, delay: 1.5 + i * 0.08, ease: [0.22, 1, 0.36, 1] }} />
+                transition={{ duration: 0.8, delay: 1.5 + i * 0.06, ease: [0.22, 1, 0.36, 1] }} />
             ))}
             {/* Lens flare */}
-            <motion.div className="absolute -inset-[50%] rounded-full pointer-events-none"
-              style={{ background: 'radial-gradient(circle, hsl(40 100% 60% / 0.08), transparent 50%)' }}
-              animate={{ scale: [1, 1.15, 1], opacity: [0.5, 0.8, 0.5] }}
-              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }} />
+            <motion.div className="absolute -inset-[60%] rounded-full pointer-events-none"
+              style={{ background: 'radial-gradient(circle, hsl(40 100% 60% / 0.1), transparent 50%)' }}
+              animate={{ scale: [1, 1.2, 1], opacity: [0.4, 0.7, 0.4] }}
+              transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }} />
           </motion.div>
+          {/* Sun outer glow */}
+          <motion.div className="absolute z-[0] pointer-events-none"
+            style={{ bottom: '8%', left: '50%', transform: 'translateX(-50%)', width: 600, height: 400, borderRadius: '50%',
+              background: 'radial-gradient(ellipse, hsl(40 100% 55% / 0.15) 0%, hsl(25 95% 45% / 0.08) 40%, transparent 70%)', filter: 'blur(30px)' }}
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+            transition={{ duration: 3, delay: 1 }} />
 
           {/* ── WATER REFLECTION ── */}
-          <motion.div className="absolute bottom-0 left-0 right-0 h-[22%] z-[2]"
+          <motion.div className="absolute bottom-0 left-0 right-0 h-[16%] z-[2]"
             initial={{ opacity: 0 }} animate={{ opacity: 0.7 }}
             transition={{ duration: 3, delay: 1 }}>
             <div className="absolute inset-0" style={{
