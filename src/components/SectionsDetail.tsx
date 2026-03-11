@@ -127,7 +127,7 @@ const sectionGallery: Record<string, { images: { src: string; label: string }[];
     layout: 'trio',
     images: [
       { src: '/images/ia-detail-01.jpg', label: 'Laboratório IA' },
-      { src: '/images/ia-detail-02.jpg', label: 'Automação' },
+      { src: '/images/automacao-hero.png', label: 'Automação' },
       { src: '/images/slide-05.jpg', label: 'Futuro' },
     ],
   },
