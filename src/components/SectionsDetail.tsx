@@ -167,88 +167,23 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
   const effect = sectionScrollEffect[section.id] || 'fade-slide';
   const gallery = sectionGallery[section.id];
 
-  // Unique GSAP scroll-triggered effects per section
+  // Lightweight reveal (sem animações pesadas em scroll)
   useEffect(() => {
-    if (typeof gsap === 'undefined' || !sectionRef.current) return;
     const el = sectionRef.current;
-    
-    // Hero title entrance animation
-    const titleWords = el.querySelectorAll('.title-word');
-    const subtitle = el.querySelector('.cin-subtitle');
-    const desc = el.querySelector('.cin-desc');
-    const galleryEls = el.querySelectorAll('.gallery-item');
-    const detailEls = el.querySelectorAll('.detail-item');
+    if (!el) return;
 
-    // Different hero entrance per effect type
-    switch (effect) {
-      case 'fade-slide':
-        gsap.fromTo(titleWords, { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, stagger: 0.08, ease: 'power3.out', delay: 0.3 });
-        gsap.fromTo(subtitle, { x: -30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.6, ease: 'power2.out', delay: 0.2 });
-        break;
-      case 'scale-reveal':
-        gsap.fromTo(titleWords, { scale: 1.2, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.9, stagger: 0.1, ease: 'power2.out', delay: 0.3 });
-        gsap.fromTo(subtitle, { y: -15, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, delay: 0.4 });
-        break;
-      case 'horizontal-wipe':
-        gsap.fromTo(titleWords, { x: -80, opacity: 0 }, { x: 0, opacity: 1, duration: 0.7, stagger: 0.08, ease: 'power4.out', delay: 0.3 });
-        gsap.fromTo(subtitle, { x: 40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.6, ease: 'power3.out', delay: 0.2 });
-        break;
-      case 'clip-expand':
-        gsap.fromTo(titleWords, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, stagger: 0.08, ease: 'power3.out', delay: 0.4 });
-        gsap.fromTo(subtitle, { scaleX: 0, opacity: 0, transformOrigin: 'left' }, { scaleX: 1, opacity: 1, duration: 0.6, delay: 0.3 });
-        break;
-      case 'stagger-cascade':
-        gsap.fromTo(titleWords, { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, stagger: 0.12, ease: 'back.out(1.1)', delay: 0.3 });
-        gsap.fromTo(subtitle, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, delay: 0.2 });
-        break;
-    }
-
-    // Description fade
-    gsap.fromTo(desc, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: 'power2.out', delay: 0.6 });
-
-    // IntersectionObserver for gallery & detail animations (much lighter than scroll handler)
-    const animateItem = (item: Element, i: number, isGallery: boolean) => {
-      if (isGallery) {
-        switch (effect) {
-          case 'fade-slide':
-            gsap.fromTo(item, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, delay: i * 0.1, ease: 'power2.out' });
-            break;
-          case 'scale-reveal':
-            gsap.fromTo(item, { scale: 0.9, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.7, delay: i * 0.1, ease: 'power2.out' });
-            break;
-          case 'horizontal-wipe':
-            gsap.fromTo(item, { x: i % 2 === 0 ? -50 : 50, opacity: 0 }, { x: 0, opacity: 1, duration: 0.6, delay: i * 0.08, ease: 'power3.out' });
-            break;
-          case 'clip-expand':
-            gsap.fromTo(item, { clipPath: 'inset(10% 10% 10% 10%)', opacity: 0 }, { clipPath: 'inset(0% 0% 0% 0%)', opacity: 1, duration: 0.8, delay: i * 0.1, ease: 'power2.out' });
-            break;
-          case 'stagger-cascade':
-            gsap.fromTo(item, { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, delay: i * 0.12, ease: 'back.out(1.1)' });
-            break;
-        }
-      } else {
-        gsap.fromTo(item, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, delay: i * 0.06, ease: 'power2.out' });
-      }
+    const revealAll = () => {
+      const nodes = el.querySelectorAll<HTMLElement>('.title-word, .cin-subtitle, .cin-desc, .gallery-item, .detail-item');
+      nodes.forEach((node) => {
+        node.style.opacity = '1';
+        node.style.transform = 'none';
+        node.style.clipPath = 'none';
+      });
     };
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        const target = entry.target as HTMLElement;
-        if (target.dataset.animated) return;
-        target.dataset.animated = 'true';
-        const idx = parseInt(target.dataset.animIdx || '0', 10);
-        const isGallery = target.classList.contains('gallery-item');
-        animateItem(target, idx, isGallery);
-        observer.unobserve(target);
-      });
-    }, { root: el, threshold: 0.15 });
-
-    galleryEls.forEach((item, i) => { (item as HTMLElement).dataset.animIdx = String(i); observer.observe(item); });
-    detailEls.forEach((item, i) => { (item as HTMLElement).dataset.animIdx = String(i); observer.observe(item); });
-
-    return () => observer.disconnect();
-  }, [section.id, effect]);
+    const rafId = window.requestAnimationFrame(revealAll);
+    return () => window.cancelAnimationFrame(rafId);
+  }, [section.id]);
 
   // Scroll-up at top → go back to slider
   useEffect(() => {
