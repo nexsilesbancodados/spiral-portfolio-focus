@@ -61,7 +61,7 @@ const sections = [
       '🚀 Landing Pages — Páginas de alta conversão com design persuasivo e funis otimizados',
       '🎨 Design — Identidade visual completa, UI/UX premium e prototipagem interativa',
     ],
-    image: '/images/slide-04.jpg',
+    image: '/images/hero-servicos.jpg',
   },
   {
     id: 'inovacao-ia',
