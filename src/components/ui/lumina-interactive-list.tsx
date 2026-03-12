@@ -1,26 +1,90 @@
 import { useEffect, useMemo, useRef, useState, useCallback } from 'react';
 
-const slides = [
+interface Slide {
+  title: string;
+  description: string;
+  media: string;
+  video?: string;
+  skills: string[];
+}
+
+const slides: Slide[] = [
   { title: 'FOCUSS DEV', description: 'Transformando ideias em experiências digitais extraordinárias. Desenvolvimento web de alto nível.', media: '/images/slide-01.jpg', skills: ['React', 'TypeScript', 'Node.js', 'Next.js'] },
-  { title: 'Web Design', description: 'Interfaces modernas e elegantes que conectam marcas ao futuro digital com impacto visual.', media: '/images/hero-webdesign.jpg', skills: ['Figma', 'UI/UX', 'Prototipagem', 'Design System'] },
-  { title: 'Desenvolvimento', description: 'Código limpo, performance máxima e arquitetura escalável para projetos robustos.', media: '/images/hero-dev.jpg', skills: ['JavaScript', 'Python', 'APIs REST', 'PostgreSQL'] },
-  { title: 'Serviços', description: 'Soluções digitais completas — tráfego pago, sites, apps, SaaS e design premium.', media: '/images/hero-servicos.jpg', skills: ['Tráfego Pago', 'Sites', 'Apps', 'SaaS'] },
+  { title: 'Web Design', description: 'Interfaces modernas e elegantes que conectam marcas ao futuro digital com impacto visual.', media: '/images/hero-webdesign.jpg', video: '/videos/slide-02.mp4', skills: ['Figma', 'UI/UX', 'Prototipagem', 'Design System'] },
+  { title: 'Desenvolvimento', description: 'Código limpo, performance máxima e arquitetura escalável para projetos robustos.', media: '/images/hero-dev.jpg', video: '/videos/slide-03.mp4', skills: ['JavaScript', 'Python', 'APIs REST', 'PostgreSQL'] },
+  { title: 'Serviços', description: 'Soluções digitais completas — tráfego pago, sites, apps, SaaS e design premium.', media: '/images/hero-servicos.jpg', video: '/videos/slide-04.mp4', skills: ['Tráfego Pago', 'Sites', 'Apps', 'SaaS'] },
   { title: 'Inovação e IA', description: 'Tecnologias de ponta e inteligência artificial para soluções que fazem a diferença.', media: '/images/hero-ia.jpg', skills: ['IA', 'Automação', 'Chatbots', 'Cloud'] },
   { title: 'Mobile e Web', description: 'Aplicações responsivas e multiplataforma que funcionam perfeitamente em qualquer dispositivo.', media: '/images/hero-mobile.jpg', skills: ['React Native', 'PWA', 'Responsivo', 'Docker'] },
   { title: 'Skills', description: 'Domínio completo do ecossistema moderno — front-end, back-end, cloud e design em um só lugar.', media: '/images/hero-skills.jpg', skills: ['React', 'Node.js', 'Python', 'AWS'] },
 ];
 
+function SlideMedia({ slide, isActive, eager }: { slide: Slide; isActive: boolean; eager?: boolean }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (isActive) {
+      video.play().catch(() => {});
+    } else {
+      video.pause();
+    }
+  }, [isActive]);
+
+  const baseStyle = {
+    opacity: isActive ? 1 : 0,
+    transition: 'opacity 0.4s ease',
+    filter: 'saturate(1.08) contrast(1.03)',
+  };
+
+  if (slide.video) {
+    return (
+      <div className="absolute inset-0" style={{ opacity: isActive ? 1 : 0, transition: 'opacity 0.4s ease' }}>
+        {/* Fallback image shown while video loads */}
+        <img
+          src={slide.media}
+          alt={slide.title}
+          loading={eager ? 'eager' : 'lazy'}
+          decoding="async"
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ filter: 'saturate(1.08) contrast(1.03)' }}
+        />
+        <video
+          ref={videoRef}
+          src={slide.video}
+          muted
+          loop
+          playsInline
+          preload={eager ? 'auto' : 'none'}
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ filter: 'saturate(1.08) contrast(1.03)' }}
+        />
+      </div>
+    );
+  }
+
+  return (
+    <img
+      src={slide.media}
+      alt={slide.title}
+      loading={eager ? 'eager' : 'lazy'}
+      decoding="async"
+      className="absolute inset-0 w-full h-full object-cover"
+      style={baseStyle}
+    />
+  );
+}
+
 export function LuminaSlider() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
-  // Track which images have been loaded (for lazy rendering)
-  const [loadedImages, setLoadedImages] = useState<Set<number>>(() => new Set([0]));
+  const [loadedSlides, setLoadedSlides] = useState<Set<number>>(() => new Set([0]));
 
   const current = useMemo(() => slides[currentSlide], [currentSlide]);
 
   const goToSlide = useCallback((index: number) => {
     const bounded = (index + slides.length) % slides.length;
-    setLoadedImages(prev => {
+    setLoadedSlides(prev => {
       if (prev.has(bounded)) return prev;
       const next = new Set(prev);
       next.add(bounded);
@@ -50,7 +114,6 @@ export function LuminaSlider() {
         wheelAccum = 0;
         window.setTimeout(() => { wheelCooldown = false; }, 900);
       }
-
       if (wheelAccum < 0) { wheelAccum = 0; }
     };
 
@@ -58,12 +121,11 @@ export function LuminaSlider() {
     return () => el.removeEventListener('wheel', handleWheel);
   }, [triggerExplore]);
 
-  // Preload adjacent slides after initial render
+  // Preload adjacent slides after 1s
   useEffect(() => {
     const timer = setTimeout(() => {
-      setLoadedImages(prev => {
+      setLoadedSlides(prev => {
         const next = new Set(prev);
-        // Preload neighbors of current
         next.add((currentSlide + 1) % slides.length);
         if (currentSlide > 0) next.add(currentSlide - 1);
         return next;
@@ -76,23 +138,13 @@ export function LuminaSlider() {
     <main className="slider-wrapper loaded" ref={containerRef}>
       <div className="absolute inset-0">
         {slides.map((slide, index) => {
-          // Only render images that have been visited/preloaded
-          if (!loadedImages.has(index)) return null;
-          const isActive = index === currentSlide;
+          if (!loadedSlides.has(index)) return null;
           return (
-            <img
+            <SlideMedia
               key={slide.title}
-              src={slide.media}
-              alt={slide.title}
-              loading={index === 0 ? 'eager' : 'lazy'}
-              decoding="async"
-              className="absolute inset-0 w-full h-full object-cover"
-              style={{
-                opacity: isActive ? 1 : 0,
-                transition: 'opacity 0.4s ease',
-                filter: 'saturate(1.08) contrast(1.03)',
-                willChange: isActive ? 'opacity' : 'auto',
-              }}
+              slide={slide}
+              isActive={index === currentSlide}
+              eager={index === 0}
             />
           );
         })}
