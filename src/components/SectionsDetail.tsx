@@ -690,7 +690,7 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
         <div ref={galleryRef}>{renderGallery()}</div>
 
         {/* Details grid */}
-        <div ref={detailsRef} className="px-6 md:px-16 lg:px-24 py-16 md:py-24">
+        <div ref={detailsRef} style={{ padding: `clamp(1rem, 3vw, 1.5rem) clamp(1.5rem, 4vw, 6rem)` }}>
           {section.id === 'servicos' ? (
             /* Serviços: Premium card grid */
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-7xl">
