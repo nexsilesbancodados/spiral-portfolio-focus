@@ -111,9 +111,9 @@ const sectionGallery: Record<string, { images: { src: string; label: string }[];
   'web-design': {
     layout: 'panoramic-duo',
     images: [
-      { src: '/images/webdesign-detail-03.jpg', label: 'Studio' },
-      { src: '/images/webdesign-detail-01.jpg', label: 'Prototipagem' },
-      { src: '/images/webdesign-detail-02.jpg', label: 'Criação' },
+      { src: '/images/webdesign-gallery-03.jpg', label: 'Studio' },
+      { src: '/images/webdesign-gallery-01.jpg', label: 'Prototipagem' },
+      { src: '/images/webdesign-gallery-02.jpg', label: 'Criação' },
     ],
   },
   'desenvolvimento': {
