@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState, useCallback } from 'react';
 
 const slides = [
   { title: 'FOCUSS DEV', description: 'Transformando ideias em experiências digitais extraordinárias. Desenvolvimento web de alto nível.', media: '/images/slide-01.jpg', skills: ['React', 'TypeScript', 'Node.js', 'Next.js'] },
@@ -13,17 +13,25 @@ const slides = [
 export function LuminaSlider() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
+  // Track which images have been loaded (for lazy rendering)
+  const [loadedImages, setLoadedImages] = useState<Set<number>>(() => new Set([0]));
 
   const current = useMemo(() => slides[currentSlide], [currentSlide]);
 
-  const goToSlide = (index: number) => {
+  const goToSlide = useCallback((index: number) => {
     const bounded = (index + slides.length) % slides.length;
+    setLoadedImages(prev => {
+      if (prev.has(bounded)) return prev;
+      const next = new Set(prev);
+      next.add(bounded);
+      return next;
+    });
     setCurrentSlide(bounded);
-  };
+  }, []);
 
-  const triggerExplore = () => {
+  const triggerExplore = useCallback(() => {
     window.dispatchEvent(new CustomEvent('explore-slide', { detail: { slideIndex: currentSlide } }));
-  };
+  }, [currentSlide]);
 
   useEffect(() => {
     const el = containerRef.current;
@@ -40,37 +48,54 @@ export function LuminaSlider() {
         wheelCooldown = true;
         triggerExplore();
         wheelAccum = 0;
-        window.setTimeout(() => {
-          wheelCooldown = false;
-        }, 900);
+        window.setTimeout(() => { wheelCooldown = false; }, 900);
       }
 
-      if (wheelAccum < 0) {
-        wheelAccum = 0;
-      }
+      if (wheelAccum < 0) { wheelAccum = 0; }
     };
 
     el.addEventListener('wheel', handleWheel, { passive: true });
     return () => el.removeEventListener('wheel', handleWheel);
+  }, [triggerExplore]);
+
+  // Preload adjacent slides after initial render
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoadedImages(prev => {
+        const next = new Set(prev);
+        // Preload neighbors of current
+        next.add((currentSlide + 1) % slides.length);
+        if (currentSlide > 0) next.add(currentSlide - 1);
+        return next;
+      });
+    }, 1000);
+    return () => clearTimeout(timer);
   }, [currentSlide]);
 
   return (
     <main className="slider-wrapper loaded" ref={containerRef}>
       <div className="absolute inset-0">
-        {slides.map((slide, index) => (
-          <img
-            key={slide.title}
-            src={slide.media}
-            alt={slide.title}
-            loading={index === 0 ? 'eager' : 'lazy'}
-            decoding="async"
-            className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
-            style={{
-              opacity: index === currentSlide ? 1 : 0,
-              filter: 'saturate(1.08) contrast(1.03)',
-            }}
-          />
-        ))}
+        {slides.map((slide, index) => {
+          // Only render images that have been visited/preloaded
+          if (!loadedImages.has(index)) return null;
+          const isActive = index === currentSlide;
+          return (
+            <img
+              key={slide.title}
+              src={slide.media}
+              alt={slide.title}
+              loading={index === 0 ? 'eager' : 'lazy'}
+              decoding="async"
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{
+                opacity: isActive ? 1 : 0,
+                transition: 'opacity 0.4s ease',
+                filter: 'saturate(1.08) contrast(1.03)',
+                willChange: isActive ? 'opacity' : 'auto',
+              }}
+            />
+          );
+        })}
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/45 to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-r from-background/55 via-transparent to-transparent" />
       </div>
@@ -78,7 +103,7 @@ export function LuminaSlider() {
       <span className="slide-number">{String(currentSlide + 1).padStart(2, '0')}</span>
       <span className="slide-total">{String(slides.length).padStart(2, '0')}</span>
 
-      <div className="slide-content animate-fade-in">
+      <div className="slide-content animate-fade-in" key={currentSlide}>
         <h1 className="slide-title">{current.title}</h1>
         <p className="slide-description">{current.description}</p>
         <div className="slide-skills">
