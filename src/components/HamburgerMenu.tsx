@@ -70,9 +70,9 @@ export function HamburgerMenu({ onNavigate }: { onNavigate: (index: number) => v
             </nav>
 
             {/* Bottom info */}
-            <div className="absolute bottom-8 left-8 right-8 flex justify-between items-end">
-              <span className="font-[family-name:var(--font-display)] text-[9px] tracking-[0.2em] uppercase text-muted-foreground">FOCUSS DEV © 2024</span>
-              <span className="font-[family-name:var(--font-display)] text-[9px] tracking-[0.2em] uppercase text-vice-sunset/40">PORTFÓLIO</span>
+            <div className="absolute left-8 right-8 flex justify-between items-end" style={{ bottom: 'clamp(1rem, 2vw, 2rem)' }}>
+              <span className="font-[family-name:var(--font-display)] tracking-[0.2em] uppercase text-muted-foreground" style={{ fontSize: 'clamp(7px, 0.6vw, 9px)' }}>FOCUSS DEV © 2024</span>
+              <span className="font-[family-name:var(--font-display)] tracking-[0.2em] uppercase text-vice-sunset/40" style={{ fontSize: 'clamp(7px, 0.6vw, 9px)' }}>PORTFÓLIO</span>
             </div>
           </motion.div>
         )}
