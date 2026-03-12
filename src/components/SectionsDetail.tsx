@@ -652,7 +652,7 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
               filter: 'blur(60px)',
               background: `radial-gradient(ellipse 80% 60% at 20% 60%, ${colors.glowColor}, transparent 70%)`,
             }} />
-            <h2 className="font-[family-name:var(--font-display)] text-5xl sm:text-6xl md:text-8xl lg:text-[9rem] xl:text-[11rem] font-black leading-[0.85] tracking-tighter uppercase">
+            <h2 className="font-[family-name:var(--font-display)] font-black leading-[0.85] tracking-tighter uppercase" style={{ fontSize: 'clamp(2.5rem, 9vw, 11rem)' }}>
               {section.title.split(' ').map((word, i) => (
                 <span 
                   key={i} 
