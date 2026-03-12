@@ -47,8 +47,8 @@ export function HamburgerMenu({ onNavigate }: { onNavigate: (index: number) => v
             <div className="absolute inset-0 vice-overlay-sunset opacity-40" />
             <div className="absolute inset-0" style={{ background: 'radial-gradient(circle at 80% 20%, hsl(var(--vice-sunset) / 0.08), transparent 60%)' }} />
 
-            <nav className="relative z-10 flex flex-col gap-2 items-start px-8 md:px-16">
-              <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.3em] uppercase text-vice-sunset/60 mb-6">NAVEGAÇÃO</span>
+            <nav className="relative z-10 flex flex-col gap-2 items-start" style={{ padding: `0 clamp(2rem, 4vw, 4rem)` }}>
+              <span className="font-[family-name:var(--font-display)] tracking-[0.3em] uppercase text-vice-sunset/60 mb-6" style={{ fontSize: 'clamp(8px, 0.7vw, 10px)' }}>NAVEGAÇÃO</span>
               {menuItems.map((item, i) => (
                 <motion.button
                   key={item.id}
