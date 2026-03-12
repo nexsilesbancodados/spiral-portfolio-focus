@@ -9,7 +9,7 @@ const slides = [
   { title: "FOCUSS DEV", description: "Transformando ideias em experiências digitais extraordinárias. Desenvolvimento web de alto nível.", media: "/images/slide-01.jpg", skills: ["React", "TypeScript", "Node.js", "Next.js"] },
   { title: "Web Design", description: "Interfaces modernas e elegantes que conectam marcas ao futuro digital com impacto visual.", media: "/videos/slide-02.mp4", skills: ["Figma", "UI/UX", "Prototipagem", "Design System"] },
   { title: "Desenvolvimento", description: "Código limpo, performance máxima e arquitetura escalável para projetos robustos.", media: "/images/slide-03.jpg", skills: ["JavaScript", "Python", "APIs REST", "PostgreSQL"] },
-  { title: "Serviços", description: "Soluções digitais completas — tráfego pago, sites, apps, SaaS e design premium.", media: "/images/slide-04.jpg", skills: ["Tráfego Pago", "Sites", "Apps", "SaaS"] },
+  { title: "Serviços", description: "Soluções digitais completas — tráfego pago, sites, apps, SaaS e design premium.", media: "/videos/servicos.mp4", skills: ["Tráfego Pago", "Sites", "Apps", "SaaS"] },
   { title: "Inovação e IA", description: "Tecnologias de ponta e inteligência artificial para soluções que fazem a diferença.", media: "/images/slide-05.jpg", skills: ["IA", "Machine Learning", "Cloud", "AWS"] },
   { title: "Mobile e Web", description: "Aplicações responsivas e multiplataforma que funcionam perfeitamente em qualquer dispositivo.", media: "/images/slide-06.jpg", skills: ["React Native", "PWA", "Responsivo", "Docker"] },
   { title: "Skills", description: "Domínio completo do ecossistema moderno — front-end, back-end, cloud e design em um só lugar.", media: "/images/slide-07.jpg", skills: ["React", "Node.js", "Python", "AWS", "Figma", "Docker"] }
