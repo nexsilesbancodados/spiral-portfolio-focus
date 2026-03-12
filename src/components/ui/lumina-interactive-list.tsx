@@ -234,8 +234,8 @@ export function LuminaSlider() {
       </button>
 
       <div className="slide-content" key={currentSlide}>
-        <h1 className="slide-title slide-transition-title">{current.title}</h1>
-        <p className="slide-description slide-transition-desc">{current.description}</p>
+        <h1 className="slide-title slide-transition-title" style={{ textShadow: '0 2px 40px hsl(0 0% 0% / 0.5)' }}>{current.title}</h1>
+        <p className="slide-description slide-transition-desc" style={{ textShadow: '0 1px 20px hsl(0 0% 0% / 0.4)' }}>{current.description}</p>
         <div className="slide-skills slide-transition-skills">
           {current.skills.map((skill) => (
             <span key={skill} className="skill-tag">{skill}</span>
