@@ -634,20 +634,43 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
 
 export function SectionsDetail() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [activeSlide, setActiveSlide] = useState(0);
+  const openFrameRef = useRef<number | null>(null);
+  const [activeSlide, setActiveSlide] = useState<number | null>(null);
   const [isVisible, setIsVisible] = useState(false);
 
   const goBack = useCallback(() => {
     setIsVisible(false);
   }, []);
 
+  const openSlide = useCallback((slideIndex: number) => {
+    if (openFrameRef.current !== null) {
+      window.cancelAnimationFrame(openFrameRef.current);
+    }
+
+    setIsVisible(false);
+    setActiveSlide(slideIndex);
+
+    openFrameRef.current = window.requestAnimationFrame(() => {
+      setIsVisible(true);
+      openFrameRef.current = null;
+    });
+  }, []);
+
   useEffect(() => {
     const handleExplore = (e: CustomEvent) => {
-      setActiveSlide(e.detail.slideIndex);
-      setIsVisible(true);
+      openSlide(e.detail.slideIndex);
     };
+
     window.addEventListener('explore-slide', handleExplore as EventListener);
     return () => window.removeEventListener('explore-slide', handleExplore as EventListener);
+  }, [openSlide]);
+
+  useEffect(() => {
+    return () => {
+      if (openFrameRef.current !== null) {
+        window.cancelAnimationFrame(openFrameRef.current);
+      }
+    };
   }, []);
 
   // Scroll-up at top for focuss-dev section → go back
@@ -656,8 +679,7 @@ export function SectionsDetail() {
     if (!container) return;
     let accum = 0;
     const handleWheel = (e: WheelEvent) => {
-      // Only for focuss-dev (non-scrollable section)
-      if (sections[activeSlide].id !== 'focuss-dev') return;
+      if (activeSlide === null || sections[activeSlide].id !== 'focuss-dev') return;
       if (e.deltaY < 0) {
         accum += Math.abs(e.deltaY);
         if (accum > 100) { accum = 0; goBack(); }
@@ -667,59 +689,61 @@ export function SectionsDetail() {
     return () => container.removeEventListener('wheel', handleWheel);
   }, [activeSlide, goBack]);
 
-  const section = sections[activeSlide];
-  const isFocussDev = section.id === 'focuss-dev';
+  const section = activeSlide === null ? null : sections[activeSlide];
+  const isFocussDev = section?.id === 'focuss-dev';
 
   return (
     <div
       ref={containerRef}
       id="detail-section"
-      className={`fixed inset-0 z-20 bg-background transition-all duration-500 ease-out ${
-        isVisible ? 'translate-y-0 opacity-100 pointer-events-auto' : 'translate-y-full opacity-0 pointer-events-none'
+      className={`fixed inset-0 z-20 bg-background transition-opacity duration-150 ease-out ${
+        isVisible ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
       }`}
     >
-      <div className="relative h-screen overflow-hidden">
-        {/* Back button */}
-        <button
-          className="absolute top-6 left-6 z-50 flex items-center gap-2 text-foreground/60 hover:text-foreground transition-colors duration-300 font-[family-name:var(--font-display)] text-xs tracking-[0.15em] uppercase bg-background/40 px-3 py-2 rounded-sm border border-border/20 hover:border-accent/30"
-          onClick={goBack}
-        >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 19V5m7 7l-7-7-7 7" /></svg>
-          Voltar
-        </button>
+      {section && (
+        <div key={section.id} className="relative h-screen overflow-hidden">
+          {/* Back button */}
+          <button
+            className="absolute top-6 left-6 z-50 flex items-center gap-2 text-foreground/60 hover:text-foreground transition-colors duration-300 font-[family-name:var(--font-display)] text-xs tracking-[0.15em] uppercase bg-background/40 px-3 py-2 rounded-sm border border-border/20 hover:border-accent/30"
+            onClick={goBack}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 19V5m7 7l-7-7-7 7" /></svg>
+            Voltar
+          </button>
 
-        {/* FOCUSS DEV: Original layout (unchanged) */}
-        {isFocussDev && (
-          <>
-            <div className="absolute inset-0">
-              <img src={section.image} alt={section.title} loading="lazy" decoding="async" className="w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-background/80" />
-              <div className="absolute inset-0 opacity-20" style={{ background: `linear-gradient(135deg, hsl(45 100% 55% / 0.2) 0%, transparent 60%)` }} />
-            </div>
-            <div className="relative flex items-center h-full px-6 md:px-16 lg:px-24">
-              <div className="w-full max-w-4xl mx-auto">
-                <div className="anim-el h-[2px] w-16 mb-6 origin-left bg-accent" />
-                <span className="anim-el block font-[family-name:var(--font-display)] text-xs tracking-[0.2em] uppercase mb-3 text-accent">{section.subtitle}</span>
-                <h2 className="anim-el font-[family-name:var(--font-display)] text-4xl md:text-6xl lg:text-7xl font-light text-foreground mb-6 leading-tight tracking-tight">{section.title}</h2>
-                <p className="anim-el text-muted-foreground text-base md:text-lg leading-relaxed mb-8 max-w-2xl">{section.description}</p>
-                <ul className="space-y-3">
-                  {section.details.map((detail, i) => (
-                    <li key={i} className="anim-el flex items-start gap-3 text-muted-foreground text-sm md:text-base">
-                      <span className="mt-2 block w-1.5 h-1.5 rounded-full shrink-0 bg-accent" />
-                      {detail}
-                    </li>
-                  ))}
-                </ul>
+          {/* FOCUSS DEV: Original layout (unchanged) */}
+          {isFocussDev && (
+            <>
+              <div className="absolute inset-0">
+                <img src={section.image} alt={section.title} loading="lazy" decoding="async" className="w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-background/80" />
+                <div className="absolute inset-0 opacity-20" style={{ background: `linear-gradient(135deg, hsl(45 100% 55% / 0.2) 0%, transparent 60%)` }} />
               </div>
-            </div>
-          </>
-        )}
+              <div className="relative flex items-center h-full px-6 md:px-16 lg:px-24">
+                <div className="w-full max-w-4xl mx-auto">
+                  <div className="anim-el h-[2px] w-16 mb-6 origin-left bg-accent" />
+                  <span className="anim-el block font-[family-name:var(--font-display)] text-xs tracking-[0.2em] uppercase mb-3 text-accent">{section.subtitle}</span>
+                  <h2 className="anim-el font-[family-name:var(--font-display)] text-4xl md:text-6xl lg:text-7xl font-light text-foreground mb-6 leading-tight tracking-tight">{section.title}</h2>
+                  <p className="anim-el text-muted-foreground text-base md:text-lg leading-relaxed mb-8 max-w-2xl">{section.description}</p>
+                  <ul className="space-y-3">
+                    {section.details.map((detail, i) => (
+                      <li key={i} className="anim-el flex items-start gap-3 text-muted-foreground text-sm md:text-base">
+                        <span className="mt-2 block w-1.5 h-1.5 rounded-full shrink-0 bg-accent" />
+                        {detail}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </>
+          )}
 
-        {/* All other sections: Lightweight cinematic style */}
-        {!isFocussDev && (
-          <CinematicSection section={section} onScrollUpAtTop={goBack} />
-        )}
-      </div>
+          {/* All other sections: Lightweight cinematic style */}
+          {!isFocussDev && (
+            <CinematicSection section={section} onScrollUpAtTop={goBack} />
+          )}
+        </div>
+      )}
     </div>
   );
 }
