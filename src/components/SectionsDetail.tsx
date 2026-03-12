@@ -669,14 +669,19 @@ export function SectionsDetail() {
 
   const section = sections[activeSlide];
   const isFocussDev = section.id === 'focuss-dev';
-  const isServicos = section.id === 'servicos';
 
   return (
-    <div ref={containerRef} id="detail-section" className="fixed inset-0 z-20 bg-background" style={{ transform: 'translateY(100%)', opacity: 0 }}>
+    <div
+      ref={containerRef}
+      id="detail-section"
+      className={`fixed inset-0 z-20 bg-background transition-all duration-500 ease-out ${
+        isVisible ? 'translate-y-0 opacity-100 pointer-events-auto' : 'translate-y-full opacity-0 pointer-events-none'
+      }`}
+    >
       <div className="relative h-screen overflow-hidden">
         {/* Back button */}
         <button
-          className="absolute top-6 left-6 z-50 flex items-center gap-2 text-foreground/60 hover:text-foreground transition-colors duration-300 font-[family-name:var(--font-display)] text-xs tracking-[0.15em] uppercase backdrop-blur-sm bg-background/20 px-3 py-2 rounded-sm border border-border/20 hover:border-accent/30"
+          className="absolute top-6 left-6 z-50 flex items-center gap-2 text-foreground/60 hover:text-foreground transition-colors duration-300 font-[family-name:var(--font-display)] text-xs tracking-[0.15em] uppercase bg-background/40 px-3 py-2 rounded-sm border border-border/20 hover:border-accent/30"
           onClick={goBack}
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 19V5m7 7l-7-7-7 7" /></svg>
@@ -688,8 +693,8 @@ export function SectionsDetail() {
           <>
             <div className="absolute inset-0">
               <img src={section.image} alt={section.title} loading="lazy" decoding="async" className="w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" />
-              <div className="absolute inset-0 opacity-20" style={{ background: `linear-gradient(135deg, hsl(45, 100%, 55%, 0.2) 0%, transparent 60%)` }} />
+              <div className="absolute inset-0 bg-background/80" />
+              <div className="absolute inset-0 opacity-20" style={{ background: `linear-gradient(135deg, hsl(45 100% 55% / 0.2) 0%, transparent 60%)` }} />
             </div>
             <div className="relative flex items-center h-full px-6 md:px-16 lg:px-24">
               <div className="w-full max-w-4xl mx-auto">
@@ -712,7 +717,7 @@ export function SectionsDetail() {
 
         {/* All other sections: Lightweight cinematic style */}
         {!isFocussDev && (
-          <CinematicSection section={section} isVisible={isVisible} onScrollUpAtTop={goBack} />
+          <CinematicSection section={section} onScrollUpAtTop={goBack} />
         )}
       </div>
     </div>
