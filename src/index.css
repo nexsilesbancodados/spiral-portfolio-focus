@@ -494,6 +494,11 @@ All colors MUST be HSL.
   contain: layout style;
 }
 
+/* Fluid responsive padding utility */
+.fluid-section-pad {
+  padding: clamp(1rem, 3vw, 1.5rem) clamp(1.5rem, 4vw, 6rem);
+}
+
 /* Tech logos marquee */
 @keyframes marquee-left {
   0% { transform: translateX(0); }
