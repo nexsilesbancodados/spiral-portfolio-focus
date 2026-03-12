@@ -335,7 +335,6 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
                 <div key={i} className="gallery-item relative h-[30vh] md:h-[40vh] overflow-hidden" style={{ opacity: 0 }}>
                   <img src={img.src} alt={img.label} loading="lazy" decoding="async" className="w-full h-full object-cover" style={{ filter: 'brightness(0.8) saturate(1.15)' }} />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent" />
-                  <div className="absolute bottom-6 left-6"><span className={labelCls}>{img.label}</span></div>
                 </div>
               ))}
             </div>
