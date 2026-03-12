@@ -735,12 +735,31 @@ export function SectionsDetail() {
                   <div className="anim-el h-[2px] w-16 mb-6 origin-left bg-accent" />
                   <span className="anim-el block font-[family-name:var(--font-display)] text-xs tracking-[0.2em] uppercase mb-3 text-accent">{section.subtitle}</span>
                   <h2 className="anim-el font-[family-name:var(--font-display)] text-4xl md:text-6xl lg:text-7xl font-light text-foreground mb-6 leading-tight tracking-tight">{section.title}</h2>
-                  <p className="anim-el text-muted-foreground text-base md:text-lg leading-relaxed mb-8 max-w-2xl">{section.description}</p>
-                  <ul className="space-y-3">
+                  <p className="anim-el text-muted-foreground text-base md:text-lg leading-relaxed mb-10 max-w-2xl">{section.description}</p>
+                  
+                  {/* Stats / highlights grid */}
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+                    {[
+                      { value: '5+', label: 'Anos de Experiência' },
+                      { value: '50+', label: 'Projetos Entregues' },
+                      { value: '100%', label: 'Foco em Performance' },
+                      { value: '∞', label: 'Inovação Contínua' },
+                    ].map((stat, i) => (
+                      <div key={i} className="anim-el relative p-5 rounded-md overflow-hidden group"
+                        style={{ background: 'hsl(var(--card) / 0.4)', border: '1px solid hsl(var(--border) / 0.15)' }}>
+                        <div className="absolute top-0 left-0 right-0 h-[1px] opacity-60"
+                          style={{ background: 'linear-gradient(90deg, transparent, hsl(var(--accent) / 0.5), transparent)' }} />
+                        <span className="block font-[family-name:var(--font-display)] text-2xl md:text-3xl font-bold text-accent mb-1">{stat.value}</span>
+                        <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.15em] uppercase text-muted-foreground">{stat.label}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <ul className="space-y-4">
                     {section.details.map((detail, i) => (
-                      <li key={i} className="anim-el flex items-start gap-3 text-muted-foreground text-sm md:text-base">
-                        <span className="mt-2 block w-1.5 h-1.5 rounded-full shrink-0 bg-accent" />
-                        {detail}
+                      <li key={i} className="anim-el flex items-start gap-4 text-muted-foreground text-sm md:text-base group">
+                        <span className="mt-1 flex items-center justify-center w-6 h-6 rounded-full shrink-0 border border-accent/30 text-accent font-[family-name:var(--font-display)] text-[10px]">{String(i + 1).padStart(2, '0')}</span>
+                        <span className="group-hover:text-foreground/90 transition-colors duration-300">{detail}</span>
                       </li>
                     ))}
                   </ul>
