@@ -102,7 +102,7 @@ const sections = [
       'Figma, GSAP, Three.js — Design e animações cinematográficas',
       'Git, Scrum, TDD — Processos ágeis e código confiável',
     ],
-    image: '/images/slide-07.jpg',
+    image: '/images/hero-skills.jpg',
   },
 ];
 
