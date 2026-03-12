@@ -24,12 +24,13 @@ export function HamburgerMenu({ onNavigate }: { onNavigate: (index: number) => v
       {/* Hamburger button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed top-6 right-6 z-[60] w-10 h-10 flex flex-col items-center justify-center gap-[6px] group"
+        className="fixed z-[60] flex flex-col items-center justify-center group"
+        style={{ top: 'clamp(1rem, 2vw, 1.5rem)', right: 'clamp(1rem, 2vw, 1.5rem)', width: 'clamp(2rem, 3vw, 2.5rem)', height: 'clamp(2rem, 3vw, 2.5rem)' }}
         aria-label="Menu"
       >
-        <span className={`block w-7 h-[2px] bg-foreground/80 transition-all duration-300 ${isOpen ? 'rotate-45 translate-y-[8px]' : 'group-hover:w-5 group-hover:bg-vice-sunset'}`} />
-        <span className={`block w-7 h-[2px] bg-foreground/80 transition-all duration-300 ${isOpen ? 'opacity-0 scale-0' : 'group-hover:bg-vice-sunset'}`} />
-        <span className={`block w-7 h-[2px] bg-foreground/80 transition-all duration-300 ${isOpen ? '-rotate-45 -translate-y-[8px]' : 'group-hover:w-5 group-hover:bg-vice-sunset'}`} />
+        <span className={`block h-[2px] bg-foreground/80 transition-all duration-300 ${isOpen ? 'rotate-45 translate-y-[8px]' : 'group-hover:bg-vice-sunset'}`} style={{ width: 'clamp(1.2rem, 2vw, 1.75rem)', marginBottom: isOpen ? 0 : 'clamp(4px, 0.4vw, 6px)' }} />
+        <span className={`block h-[2px] bg-foreground/80 transition-all duration-300 ${isOpen ? 'opacity-0 scale-0' : 'group-hover:bg-vice-sunset'}`} style={{ width: 'clamp(1.2rem, 2vw, 1.75rem)', marginBottom: isOpen ? 0 : 'clamp(4px, 0.4vw, 6px)' }} />
+        <span className={`block h-[2px] bg-foreground/80 transition-all duration-300 ${isOpen ? '-rotate-45 -translate-y-[8px]' : 'group-hover:bg-vice-sunset'}`} style={{ width: 'clamp(1.2rem, 2vw, 1.75rem)' }} />
       </button>
 
       {/* Fullscreen drawer */}
