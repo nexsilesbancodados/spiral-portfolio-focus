@@ -183,13 +183,7 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
   // Render gallery based on layout type
   const renderGallery = () => {
     if (!gallery) {
-      return (
-        <div className="gallery-item relative w-full h-[40vh] md:h-[50vh] overflow-hidden" style={{ opacity: 0 }}>
-          <img src={section.image} alt="" loading="lazy" decoding="async" className="w-full h-full object-cover" style={{ filter: 'brightness(0.7) saturate(1.2)' }} />
-          <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background" />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/50" />
-        </div>
-      );
+      return null;
     }
 
     const imgs = gallery.images;
