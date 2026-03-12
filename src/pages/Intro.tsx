@@ -52,7 +52,7 @@ const Intro = () => {
         src="/videos/intro.mp4"
         autoPlay
         muted
-        loop
+        playsInline
         playsInline
       />
 
