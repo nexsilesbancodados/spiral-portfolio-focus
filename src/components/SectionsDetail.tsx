@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState, useCallback, lazy, Suspense, memo }
 
 const FocussChat = lazy(() => import('@/components/FocussChat').then(m => ({ default: m.FocussChat })));
 const TechLogosMarquee = lazy(() => import('@/components/TechLogosMarquee'));
+const SkillsOrbit = lazy(() => import('@/components/ui/skills-orbit'));
 const sections = [
   {
     id: 'focuss-dev',
