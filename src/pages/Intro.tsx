@@ -8,22 +8,37 @@ const Intro = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    const duration = 6000;
-    const interval = 40;
-    const step = (100 / duration) * interval;
-    const timer = setInterval(() => {
-      setProgress(prev => {
-        const next = prev + step + Math.random() * 0.5;
-        if (next >= 100) {
-          clearInterval(timer);
-          setTimeout(() => setFadeOut(true), 400);
-          setTimeout(() => navigate('/home'), 1200);
-          return 100;
-        }
-        return next;
-      });
-    }, interval);
-    return () => clearInterval(timer);
+    const video = videoRef.current;
+    if (!video) return;
+
+    // Wait for video metadata to get duration, then sync loading bar
+    const startLoading = () => {
+      const duration = (video.duration || 6) * 1000; // video duration in ms
+      const interval = 40;
+      const step = (100 / duration) * interval;
+      const timer = setInterval(() => {
+        setProgress(prev => {
+          const next = prev + step;
+          if (next >= 100) {
+            clearInterval(timer);
+            setTimeout(() => setFadeOut(true), 400);
+            setTimeout(() => navigate('/home'), 1200);
+            return 100;
+          }
+          return next;
+        });
+      }, interval);
+      return timer;
+    };
+
+    let timer: ReturnType<typeof setInterval>;
+    if (video.readyState >= 1) {
+      timer = startLoading();
+    } else {
+      video.addEventListener('loadedmetadata', () => { timer = startLoading(); }, { once: true });
+    }
+
+    return () => { if (timer) clearInterval(timer); };
   }, [navigate]);
 
   return (
@@ -37,7 +52,6 @@ const Intro = () => {
         src="/videos/intro.mp4"
         autoPlay
         muted
-        loop
         playsInline
       />
 
