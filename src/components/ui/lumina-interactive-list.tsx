@@ -18,7 +18,7 @@ const slides: Slide[] = [
   { title: 'Skills', description: 'Domínio completo do ecossistema moderno — front-end, back-end, cloud e design em um só lugar.', media: '/images/hero-skills.jpg', skills: ['React', 'Node.js', 'Python', 'AWS'] },
 ];
 
-function SlideMedia({ slide, isActive, eager }: { slide: Slide; isActive: boolean; eager?: boolean }) {
+function SlideMedia({ slide, isActive, eager, style }: { slide: Slide; isActive: boolean; eager?: boolean; style?: React.CSSProperties }) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -31,23 +31,18 @@ function SlideMedia({ slide, isActive, eager }: { slide: Slide; isActive: boolea
     }
   }, [isActive]);
 
-  const baseStyle = {
-    opacity: isActive ? 1 : 0,
-    transition: 'opacity 0.4s ease',
-    filter: 'saturate(1.08) contrast(1.03)',
-  };
+  const filter = 'saturate(1.08) contrast(1.03)';
 
   if (slide.video) {
     return (
-      <div className="absolute inset-0" style={{ opacity: isActive ? 1 : 0, transition: 'opacity 0.4s ease' }}>
-        {/* Fallback image shown while video loads */}
+      <div className="absolute inset-0" style={style}>
         <img
           src={slide.media}
           alt={slide.title}
           loading={eager ? 'eager' : 'lazy'}
           decoding="async"
           className="absolute inset-0 w-full h-full object-cover"
-          style={{ filter: 'saturate(1.08) contrast(1.03)' }}
+          style={{ filter }}
         />
         <video
           ref={videoRef}
@@ -57,7 +52,7 @@ function SlideMedia({ slide, isActive, eager }: { slide: Slide; isActive: boolea
           playsInline
           preload={eager ? 'auto' : 'none'}
           className="absolute inset-0 w-full h-full object-cover"
-          style={{ filter: 'saturate(1.08) contrast(1.03)' }}
+          style={{ filter }}
         />
       </div>
     );
@@ -70,7 +65,7 @@ function SlideMedia({ slide, isActive, eager }: { slide: Slide; isActive: boolea
       loading={eager ? 'eager' : 'lazy'}
       decoding="async"
       className="absolute inset-0 w-full h-full object-cover"
-      style={baseStyle}
+      style={{ filter, ...style }}
     />
   );
 }
