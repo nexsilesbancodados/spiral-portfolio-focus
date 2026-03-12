@@ -53,7 +53,6 @@ const Intro = () => {
         autoPlay
         muted
         playsInline
-        playsInline
       />
 
       {/* Dark overlay */}
