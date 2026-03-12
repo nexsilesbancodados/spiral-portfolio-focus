@@ -33,7 +33,7 @@ const sections = [
       'Criação de Design Systems consistentes',
       'Testes de usabilidade e iteração contínua',
     ],
-    image: '/images/slide-02.jpg',
+    image: '/images/hero-webdesign.jpg',
   },
   {
     id: 'desenvolvimento',
@@ -46,7 +46,7 @@ const sections = [
       'Integração contínua e deploy automatizado',
       'Banco de dados otimizados com PostgreSQL',
     ],
-    image: '/images/slide-03.jpg',
+    image: '/images/hero-dev.jpg',
   },
   {
     id: 'servicos',
@@ -61,7 +61,7 @@ const sections = [
       '🚀 Landing Pages — Páginas de alta conversão com design persuasivo e funis otimizados',
       '🎨 Design — Identidade visual completa, UI/UX premium e prototipagem interativa',
     ],
-    image: '/images/slide-04.jpg',
+    image: '/images/hero-servicos.jpg',
   },
   {
     id: 'inovacao-ia',
@@ -74,7 +74,7 @@ const sections = [
       'Infraestrutura cloud escalável na AWS',
       'Chatbots e assistentes virtuais customizados',
     ],
-    image: '/images/slide-05.jpg',
+    image: '/images/hero-ia.jpg',
   },
   {
     id: 'mobile-web',
@@ -87,7 +87,7 @@ const sections = [
       'Layouts 100% responsivos',
       'Deploy containerizado com Docker',
     ],
-    image: '/images/slide-06.jpg',
+    image: '/images/hero-mobile.jpg',
   },
   {
     id: 'skills',
@@ -102,7 +102,7 @@ const sections = [
       'Figma, GSAP, Three.js — Design e animações cinematográficas',
       'Git, Scrum, TDD — Processos ágeis e código confiável',
     ],
-    image: '/images/slide-07.jpg',
+    image: '/images/hero-skills.jpg',
   },
 ];
 
