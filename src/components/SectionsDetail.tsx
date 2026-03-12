@@ -402,7 +402,7 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
     switch (section.id) {
       case 'web-design':
         return (
-          <div className="px-6 md:px-16 lg:px-24 py-16 md:py-24">
+          <div className="fluid-section-pad">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {[
                 { src: '/images/webdesign-detail-01.jpg', title: 'Prototipagem UI', desc: 'Wireframes e protótipos interativos' },
@@ -428,7 +428,7 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
 
       case 'desenvolvimento':
         return (
-          <div className="px-6 md:px-16 lg:px-24 py-16 md:py-24">
+          <div className="fluid-section-pad">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl">
               {[
                 { icon: '⚡', title: 'APIs REST & GraphQL', desc: 'Endpoints performáticos com autenticação JWT, rate limiting e documentação OpenAPI completa.' },
@@ -453,7 +453,7 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
 
       case 'inovacao-ia':
         return (
-          <div className="px-6 md:px-16 lg:px-24 py-16 md:py-24">
+          <div className="fluid-section-pad">
             {/* FOCUSS AI Chat */}
             <div className="mb-16">
               <Suspense fallback={null}><FocussChat /></Suspense>
@@ -489,7 +489,7 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
 
       case 'mobile-web':
         return (
-          <div className="px-6 md:px-16 lg:px-24 py-16 md:py-24">
+          <div className="fluid-section-pad">
             {/* Mockup showcase */}
             <div className="max-w-6xl mx-auto">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -542,7 +542,7 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
           { name: 'CI/CD / Git', level: 90, category: 'DevOps' },
         ];
         return (
-          <div className="px-6 md:px-16 lg:px-24 py-16 md:py-24">
+          <div className="fluid-section-pad">
             <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-8">
               {skills.map((skill, i) => (
                 <div key={i} className="detail-item group" style={{ opacity: 0 }}>
@@ -570,7 +570,7 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
 
       case 'servicos':
         return (
-          <div className="px-6 md:px-16 lg:px-24 py-16 md:py-24">
+          <div className="fluid-section-pad">
             {/* Cinematic video header */}
             <div className="detail-item relative w-full h-[50vh] md:h-[60vh] overflow-hidden rounded-sm mb-16" style={{ opacity: 0 }}>
               <video src="/videos/servicos.mp4" autoPlay muted loop playsInline className="w-full h-full object-cover" style={{ filter: 'brightness(0.75) saturate(1.3) contrast(1.05)' }} />
