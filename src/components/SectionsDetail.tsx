@@ -445,10 +445,6 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
                 </div>
               ))}
             </div>
-            {/* Orbit animation */}
-            <div className="mt-16">
-              <Suspense fallback={null}><SkillsOrbit /></Suspense>
-            </div>
             {/* Animated tech logos marquee */}
             <Suspense fallback={null}><TechLogosMarquee /></Suspense>
             {/* Tech badges */}
