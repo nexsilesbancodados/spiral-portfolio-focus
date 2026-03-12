@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState, useCallback, lazy, Suspense, memo }
 
 const FocussChat = lazy(() => import('@/components/FocussChat').then(m => ({ default: m.FocussChat })));
 const TechLogosMarquee = lazy(() => import('@/components/TechLogosMarquee'));
+const SkillsOrbit = lazy(() => import('@/components/ui/skills-orbit'));
 const sections = [
   {
     id: 'focuss-dev',
@@ -443,6 +444,10 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
                   <span className="font-[family-name:var(--font-display)] text-[9px] tracking-[0.2em] uppercase text-muted-foreground/60 mt-1 block">{skill.category}</span>
                 </div>
               ))}
+            </div>
+            {/* Orbit animation */}
+            <div className="mt-16">
+              <Suspense fallback={null}><SkillsOrbit /></Suspense>
             </div>
             {/* Animated tech logos marquee */}
             <Suspense fallback={null}><TechLogosMarquee /></Suspense>
