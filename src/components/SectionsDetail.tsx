@@ -638,11 +638,7 @@ export function SectionsDetail() {
   const [isVisible, setIsVisible] = useState(false);
 
   const goBack = useCallback(() => {
-    if (typeof gsap !== 'undefined') {
-      const slider = document.querySelector('.slider-wrapper');
-      gsap.to(containerRef.current, { y: '100%', opacity: 0, duration: 1.4, ease: 'power3.inOut' });
-      gsap.to(slider, { y: '0%', opacity: 1, duration: 1.4, ease: 'power3.inOut' });
-    }
+    setIsVisible(false);
   }, []);
 
   useEffect(() => {
@@ -653,14 +649,6 @@ export function SectionsDetail() {
     window.addEventListener('explore-slide', handleExplore as EventListener);
     return () => window.removeEventListener('explore-slide', handleExplore as EventListener);
   }, []);
-
-  useEffect(() => {
-    if (typeof gsap === 'undefined') return;
-    const container = containerRef.current;
-    if (!container) return;
-    const innerEls = container.querySelectorAll('.anim-el');
-    gsap.fromTo(innerEls, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: 'power3.out', delay: 0.3 });
-  }, [activeSlide]);
 
   // Scroll-up at top for focuss-dev section → go back
   useEffect(() => {
