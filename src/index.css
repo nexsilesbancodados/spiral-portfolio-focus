@@ -225,19 +225,19 @@ All colors MUST be HSL.
 
 .slide-skills {
   display: flex;
-  gap: 0.6rem;
-  margin-top: 1rem;
+  gap: clamp(0.4rem, 0.6vw, 0.6rem);
+  margin-top: clamp(0.6rem, 1vw, 1rem);
   flex-wrap: wrap;
 }
 
 .skill-tag {
   display: inline-block;
-  padding: 0.45rem 0.9rem;
-  min-height: 36px;
+  padding: clamp(0.3rem, 0.5vw, 0.45rem) clamp(0.5rem, 0.8vw, 0.9rem);
+  min-height: clamp(28px, 2.5vw, 36px);
   border: 1px solid hsl(45 100% 55% / 0.4);
   color: hsl(45 100% 65%);
   font-family: 'Space Grotesk', monospace;
-  font-size: clamp(10px, 1vw, 12px);
+  font-size: clamp(8px, 0.75vw, 12px);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   background: hsl(45 100% 55% / 0.05);
