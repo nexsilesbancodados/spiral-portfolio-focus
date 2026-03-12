@@ -520,16 +520,16 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
       {/* ── HERO with parallax ── */}
       <div className="relative h-screen w-full overflow-hidden flex items-end parallax-hero">
         <div className="absolute inset-0">
-          <img src={section.image} alt={section.title} loading="eager" decoding="async" width={1920} height={1080} className="w-full h-full object-cover" style={{ filter: 'saturate(1.15) contrast(1.05)', transform: 'scale(1.1)' }} />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
+          <img src={section.image} alt={section.title} loading="eager" decoding="async" width={1920} height={1080} className="w-full h-full object-cover ken-burns-hero" style={{ filter: 'saturate(1.15) contrast(1.05)' }} />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-background/10" />
           <div className="absolute inset-0 bg-gradient-to-r from-background/60 via-transparent to-transparent" />
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, transparent 50%, hsl(var(--background)) 100%)' }} />
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, transparent 30%, hsl(var(--background) / 0.6) 70%, hsl(var(--background)) 95%)' }} />
           {/* Vice City color wash */}
           <div className="absolute inset-0" style={{ background: viceOverlay }} />
         </div>
 
         <div className="relative z-10 w-full" style={{ padding: `0 clamp(1.5rem, 4vw, 6rem) clamp(1rem, 3vw, 1.5rem)` }}>
-          <div className="cin-subtitle flex items-center gap-3 mb-[clamp(0.5rem,1vw,1.5rem)]">
+          <div className="cin-subtitle hero-reveal hero-reveal-delay-1 flex items-center gap-3 mb-[clamp(0.5rem,1vw,1.5rem)]">
             <div className="h-[2px]" style={{ width: 'clamp(2rem, 3vw, 4rem)', background: colors.gradient }} />
             <span className={`font-[family-name:var(--font-display)] tracking-[0.4em] uppercase ${colors.accent}`} style={{ fontSize: 'clamp(9px, 0.8vw, 12px)', textShadow: `0 0 20px ${colors.glowColor}` }}>{section.subtitle}</span>
             <div className="h-[2px]" style={{ width: 'clamp(1rem, 1.5vw, 2rem)', background: colors.gradient, opacity: 0.4 }} />
@@ -540,7 +540,7 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
               filter: 'blur(60px)',
               background: `radial-gradient(ellipse 80% 60% at 20% 60%, ${colors.glowColor}, transparent 70%)`,
             }} />
-            <h2 className="font-[family-name:var(--font-display)] font-black leading-[0.85] tracking-tighter uppercase" style={{ fontSize: 'clamp(2.5rem, 9vw, 11rem)' }}>
+            <h2 className="hero-reveal hero-reveal-delay-2 font-[family-name:var(--font-display)] font-black leading-[0.85] tracking-tighter uppercase" style={{ fontSize: 'clamp(2.5rem, 9vw, 11rem)' }}>
               {section.title.split(' ').map((word, i) => (
                 <span 
                   key={i} 
@@ -557,7 +557,7 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
               ))}
             </h2>
           </div>
-          <div className="absolute bottom-8 flex flex-col items-center gap-2 opacity-50" style={{ right: 'clamp(1.5rem, 3vw, 4rem)' }}>
+          <div className="hero-reveal hero-reveal-delay-3 absolute bottom-8 flex flex-col items-center gap-2 opacity-50" style={{ right: 'clamp(1.5rem, 3vw, 4rem)' }}>
             <span className={`font-[family-name:var(--font-display)] tracking-[0.25em] uppercase ${colors.accent} opacity-60 [writing-mode:vertical-lr]`} style={{ fontSize: 'clamp(7px, 0.6vw, 9px)' }}>Role para baixo</span>
             <div className="w-[1px] animate-pulse" style={{ height: 'clamp(2rem, 3vw, 3rem)', background: `hsl(${colors.accentHsl} / 0.4)` }} />
           </div>
@@ -644,9 +644,14 @@ export function SectionsDetail() {
   const openFrameRef = useRef<number | null>(null);
   const [activeSlide, setActiveSlide] = useState<number | null>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   const goBack = useCallback(() => {
-    setIsVisible(false);
+    setIsAnimating(true);
+    setTimeout(() => {
+      setIsVisible(false);
+      setIsAnimating(false);
+    }, 350);
   }, []);
 
   const openSlide = useCallback((slideIndex: number) => {
@@ -703,8 +708,10 @@ export function SectionsDetail() {
     <div
       ref={containerRef}
       id="detail-section"
-      className={`fixed inset-0 z-20 bg-background transition-opacity duration-150 ease-out ${
-        isVisible ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+      className={`fixed inset-0 z-20 bg-background ${
+        isVisible 
+          ? isAnimating ? 'detail-section-exit pointer-events-none' : 'detail-section-enter pointer-events-auto' 
+          : 'opacity-0 pointer-events-none'
       }`}
     >
       {section && (
