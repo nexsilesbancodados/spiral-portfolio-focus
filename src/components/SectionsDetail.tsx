@@ -2,10 +2,6 @@ import React, { useEffect, useRef, useState, useCallback, lazy, Suspense, memo }
 
 const FocussChat = lazy(() => import('@/components/FocussChat').then(m => ({ default: m.FocussChat })));
 const TechLogosMarquee = lazy(() => import('@/components/TechLogosMarquee'));
-const MultiOrbitSemiCircle = lazy(() => import('@/components/ui/multi-orbit-semi-circle'));
-
-declare const gsap: any;
-
 const sections = [
   {
     id: 'focuss-dev',
