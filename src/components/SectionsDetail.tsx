@@ -1,7 +1,5 @@
 import React, { useEffect, useRef, useState, useCallback, lazy, Suspense, memo } from 'react';
 
-const ScrollExpandMedia = lazy(() => import('@/components/ScrollExpandMedia').then(m => ({ default: m.ScrollExpandMedia })));
-
 const FocussChat = lazy(() => import('@/components/FocussChat').then(m => ({ default: m.FocussChat })));
 const TechLogosMarquee = lazy(() => import('@/components/TechLogosMarquee'));
 const MultiOrbitSemiCircle = lazy(() => import('@/components/ui/multi-orbit-semi-circle'));
