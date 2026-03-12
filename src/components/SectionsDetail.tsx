@@ -308,23 +308,35 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
         );
 
       case 'desenvolvimento':
+        const devCards = [
+          { icon: '⚡', title: 'APIs REST & GraphQL', desc: 'Endpoints performáticos com autenticação JWT, rate limiting e documentação OpenAPI completa.', accent: 'var(--vice-sunset)' },
+          { icon: '🏗️', title: 'Arquitetura Escalável', desc: 'Microserviços, clean architecture e patterns SOLID para projetos que crescem.', accent: 'var(--vice-teal)' },
+          { icon: '🔄', title: 'CI/CD Automatizado', desc: 'Pipelines de deploy com GitHub Actions, Docker e monitoramento em tempo real.', accent: 'var(--vice-gold)' },
+          { icon: '🗄️', title: 'Banco de Dados', desc: 'PostgreSQL otimizado com migrations, índices inteligentes e queries performáticas.', accent: 'var(--vice-sky)' },
+        ];
         return (
           <div className="fluid-section-pad">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl">
-              {[
-                { icon: '⚡', title: 'APIs REST & GraphQL', desc: 'Endpoints performáticos com autenticação JWT, rate limiting e documentação OpenAPI completa.' },
-                { icon: '🏗️', title: 'Arquitetura Escalável', desc: 'Microserviços, clean architecture e patterns SOLID para projetos que crescem.' },
-                { icon: '🔄', title: 'CI/CD Automatizado', desc: 'Pipelines de deploy com GitHub Actions, Docker e monitoramento em tempo real.' },
-                { icon: '🗄️', title: 'Banco de Dados', desc: 'PostgreSQL otimizado com migrations, índices inteligentes e queries performáticas.' },
-              ].map((card, i) => (
-                <div key={i} className="detail-item card-hover-glow relative p-8 rounded-sm border border-border/20 backdrop-blur-sm group cursor-pointer" 
-                  style={{ opacity: 0, background: 'hsl(var(--card) / 0.5)' }}>
-                  <div className="absolute inset-0 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{ background: 'linear-gradient(135deg, hsl(var(--vice-teal) / 0.06), hsl(var(--vice-sunset) / 0.04))' }} />
-                  <div className="relative z-10">
-                    <span className="text-2xl mb-4 block">{card.icon}</span>
-                    <h4 className="font-[family-name:var(--font-display)] text-foreground text-base font-semibold tracking-wide uppercase mb-3">{card.title}</h4>
-                    <p className="text-muted-foreground text-sm leading-relaxed">{card.desc}</p>
-                    <div className="h-[1px] w-12 mt-6 bg-vice-teal/30 group-hover:w-full group-hover:bg-vice-teal/60 transition-all duration-700" />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-6xl">
+              {devCards.map((card, i) => (
+                <div key={i} className="detail-item group relative rounded-md overflow-hidden cursor-pointer transition-transform duration-300 hover:-translate-y-1"
+                  style={{ opacity: 0, background: 'hsl(var(--card) / 0.6)', border: '1px solid hsl(var(--border) / 0.15)' }}>
+                  {/* Subtle gradient overlay on hover */}
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+                    style={{ background: `linear-gradient(160deg, hsl(${card.accent} / 0.08), transparent 60%)` }} />
+                  {/* Top accent glow line */}
+                  <div className="absolute top-0 left-0 right-0 h-[1px] opacity-0 group-hover:opacity-60 transition-opacity duration-500"
+                    style={{ background: `linear-gradient(90deg, transparent, hsl(${card.accent} / 0.6), transparent)` }} />
+                  <div className="relative z-10 p-8 md:p-10">
+                    {/* Icon with glow bg */}
+                    <div className="w-11 h-11 rounded-lg flex items-center justify-center mb-6 text-xl"
+                      style={{ background: `hsl(${card.accent} / 0.12)`, boxShadow: `0 0 20px hsl(${card.accent} / 0.08)` }}>
+                      {card.icon}
+                    </div>
+                    <h4 className="font-[family-name:var(--font-display)] text-foreground text-sm md:text-base font-bold tracking-[0.12em] uppercase mb-3">{card.title}</h4>
+                    <p className="text-muted-foreground text-sm leading-relaxed mb-8">{card.desc}</p>
+                    {/* Accent bar */}
+                    <div className="h-[2px] w-10 group-hover:w-20 transition-all duration-700"
+                      style={{ background: `hsl(${card.accent} / 0.5)` }} />
                   </div>
                 </div>
               ))}
