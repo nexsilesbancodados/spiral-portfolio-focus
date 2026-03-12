@@ -116,13 +116,6 @@ const sectionGallery: Record<string, { images: { src: string; label: string }[];
       { src: '/images/webdesign-gallery-02.jpg', label: 'Criação' },
     ],
   },
-  'desenvolvimento': {
-    layout: 'asymmetric',
-    images: [
-      { src: '/images/dev-detail-01.jpg', label: 'Infraestrutura' },
-      { src: '/images/dev-detail-02.jpg', label: 'Código' },
-    ],
-  },
   'inovacao-ia': {
     layout: 'trio',
     images: [
