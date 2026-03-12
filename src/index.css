@@ -440,6 +440,33 @@ All colors MUST be HSL.
   background-size: 200% auto;
 }
 
+/* Slide content stagger transitions */
+.slide-transition-title {
+  animation: slide-text-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 0.05s;
+}
+.slide-transition-desc {
+  animation: slide-text-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 0.15s;
+}
+.slide-transition-skills {
+  animation: slide-text-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 0.25s;
+}
+
+@keyframes slide-text-in {
+  0% {
+    opacity: 0;
+    transform: translateY(16px);
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
 /* Skills orbit animation */
 @keyframes orbit-spin {
   from { transform: rotate(0deg); }
