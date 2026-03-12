@@ -33,7 +33,7 @@ const sections = [
       'Criação de Design Systems consistentes',
       'Testes de usabilidade e iteração contínua',
     ],
-    image: '/images/slide-02.jpg',
+    image: '/images/hero-webdesign.jpg',
   },
   {
     id: 'desenvolvimento',
