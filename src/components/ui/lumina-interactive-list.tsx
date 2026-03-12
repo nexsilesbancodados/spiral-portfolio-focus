@@ -78,20 +78,32 @@ function SlideMedia({ slide, isActive, eager }: { slide: Slide; isActive: boolea
 export function LuminaSlider() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [prevSlide, setPrevSlide] = useState<number | null>(null);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const [loadedSlides, setLoadedSlides] = useState<Set<number>>(() => new Set([0]));
 
   const current = useMemo(() => slides[currentSlide], [currentSlide]);
 
   const goToSlide = useCallback((index: number) => {
     const bounded = (index + slides.length) % slides.length;
+    if (bounded === currentSlide || isTransitioning) return;
+
     setLoadedSlides(prev => {
       if (prev.has(bounded)) return prev;
       const next = new Set(prev);
       next.add(bounded);
       return next;
     });
+
+    setIsTransitioning(true);
+    setPrevSlide(currentSlide);
     setCurrentSlide(bounded);
-  }, []);
+
+    setTimeout(() => {
+      setPrevSlide(null);
+      setIsTransitioning(false);
+    }, 600);
+  }, [currentSlide, isTransitioning]);
 
   const triggerExplore = useCallback(() => {
     window.dispatchEvent(new CustomEvent('explore-slide', { detail: { slideIndex: currentSlide } }));
