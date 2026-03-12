@@ -186,8 +186,10 @@ export function LuminaSlider() {
               eager={index === 0}
               style={{
                 opacity: isActive ? 1 : isLeaving ? 0 : 0,
-                transform: isActive ? 'scale(1)' : isLeaving ? 'scale(1.08)' : 'scale(1)',
-                transition: 'opacity 0.6s ease, transform 0.8s ease',
+                transform: isActive ? 'scale(1)' : isLeaving ? 'scale(1.06)' : 'scale(1.02)',
+                transition: isActive 
+                  ? 'opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1)' 
+                  : 'opacity 0.5s ease-out, transform 0.7s ease-out',
                 zIndex: isActive ? 2 : isLeaving ? 1 : 0,
               }}
             />
