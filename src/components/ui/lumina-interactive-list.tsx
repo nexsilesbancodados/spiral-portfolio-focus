@@ -18,7 +18,7 @@ const slides: Slide[] = [
   { title: 'Skills', description: 'Domínio completo do ecossistema moderno — front-end, back-end, cloud e design em um só lugar.', media: '/images/hero-skills.jpg', skills: ['React', 'Node.js', 'Python', 'AWS'] },
 ];
 
-function SlideMedia({ slide, isActive, eager }: { slide: Slide; isActive: boolean; eager?: boolean }) {
+function SlideMedia({ slide, isActive, eager, style }: { slide: Slide; isActive: boolean; eager?: boolean; style?: React.CSSProperties }) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -31,23 +31,18 @@ function SlideMedia({ slide, isActive, eager }: { slide: Slide; isActive: boolea
     }
   }, [isActive]);
 
-  const baseStyle = {
-    opacity: isActive ? 1 : 0,
-    transition: 'opacity 0.4s ease',
-    filter: 'saturate(1.08) contrast(1.03)',
-  };
+  const filter = 'saturate(1.08) contrast(1.03)';
 
   if (slide.video) {
     return (
-      <div className="absolute inset-0" style={{ opacity: isActive ? 1 : 0, transition: 'opacity 0.4s ease' }}>
-        {/* Fallback image shown while video loads */}
+      <div className="absolute inset-0" style={style}>
         <img
           src={slide.media}
           alt={slide.title}
           loading={eager ? 'eager' : 'lazy'}
           decoding="async"
           className="absolute inset-0 w-full h-full object-cover"
-          style={{ filter: 'saturate(1.08) contrast(1.03)' }}
+          style={{ filter }}
         />
         <video
           ref={videoRef}
@@ -57,7 +52,7 @@ function SlideMedia({ slide, isActive, eager }: { slide: Slide; isActive: boolea
           playsInline
           preload={eager ? 'auto' : 'none'}
           className="absolute inset-0 w-full h-full object-cover"
-          style={{ filter: 'saturate(1.08) contrast(1.03)' }}
+          style={{ filter }}
         />
       </div>
     );
@@ -70,7 +65,7 @@ function SlideMedia({ slide, isActive, eager }: { slide: Slide; isActive: boolea
       loading={eager ? 'eager' : 'lazy'}
       decoding="async"
       className="absolute inset-0 w-full h-full object-cover"
-      style={baseStyle}
+      style={{ filter, ...style }}
     />
   );
 }
@@ -78,20 +73,32 @@ function SlideMedia({ slide, isActive, eager }: { slide: Slide; isActive: boolea
 export function LuminaSlider() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [prevSlide, setPrevSlide] = useState<number | null>(null);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const [loadedSlides, setLoadedSlides] = useState<Set<number>>(() => new Set([0]));
 
   const current = useMemo(() => slides[currentSlide], [currentSlide]);
 
   const goToSlide = useCallback((index: number) => {
     const bounded = (index + slides.length) % slides.length;
+    if (bounded === currentSlide || isTransitioning) return;
+
     setLoadedSlides(prev => {
       if (prev.has(bounded)) return prev;
       const next = new Set(prev);
       next.add(bounded);
       return next;
     });
+
+    setIsTransitioning(true);
+    setPrevSlide(currentSlide);
     setCurrentSlide(bounded);
-  }, []);
+
+    setTimeout(() => {
+      setPrevSlide(null);
+      setIsTransitioning(false);
+    }, 600);
+  }, [currentSlide, isTransitioning]);
 
   const triggerExplore = useCallback(() => {
     window.dispatchEvent(new CustomEvent('explore-slide', { detail: { slideIndex: currentSlide } }));
@@ -139,26 +146,34 @@ export function LuminaSlider() {
       <div className="absolute inset-0">
         {slides.map((slide, index) => {
           if (!loadedSlides.has(index)) return null;
+          const isActive = index === currentSlide;
+          const isLeaving = index === prevSlide;
           return (
             <SlideMedia
               key={slide.title}
               slide={slide}
-              isActive={index === currentSlide}
+              isActive={isActive || isLeaving}
               eager={index === 0}
+              style={{
+                opacity: isActive ? 1 : isLeaving ? 0 : 0,
+                transform: isActive ? 'scale(1)' : isLeaving ? 'scale(1.08)' : 'scale(1)',
+                transition: 'opacity 0.6s ease, transform 0.8s ease',
+                zIndex: isActive ? 2 : isLeaving ? 1 : 0,
+              }}
             />
           );
         })}
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/45 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-r from-background/55 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/45 to-transparent" style={{ zIndex: 3 }} />
+        <div className="absolute inset-0 bg-gradient-to-r from-background/55 via-transparent to-transparent" style={{ zIndex: 3 }} />
       </div>
 
       <span className="slide-number">{String(currentSlide + 1).padStart(2, '0')}</span>
       <span className="slide-total">{String(slides.length).padStart(2, '0')}</span>
 
-      <div className="slide-content animate-fade-in" key={currentSlide}>
-        <h1 className="slide-title">{current.title}</h1>
-        <p className="slide-description">{current.description}</p>
-        <div className="slide-skills">
+      <div className="slide-content" key={currentSlide}>
+        <h1 className="slide-title slide-transition-title">{current.title}</h1>
+        <p className="slide-description slide-transition-desc">{current.description}</p>
+        <div className="slide-skills slide-transition-skills">
           {current.skills.map((skill) => (
             <span key={skill} className="skill-tag">{skill}</span>
           ))}
