@@ -111,9 +111,9 @@ const sectionGallery: Record<string, { images: { src: string; label: string }[];
   'web-design': {
     layout: 'panoramic-duo',
     images: [
-      { src: '/images/webdesign-detail-03.jpg', label: 'Studio' },
-      { src: '/images/webdesign-detail-01.jpg', label: 'Prototipagem' },
-      { src: '/images/webdesign-detail-02.jpg', label: 'Criação' },
+      { src: '/images/webdesign-gallery-03.jpg', label: 'Studio' },
+      { src: '/images/webdesign-gallery-01.jpg', label: 'Prototipagem' },
+      { src: '/images/webdesign-gallery-02.jpg', label: 'Criação' },
     ],
   },
   'desenvolvimento': {
@@ -126,15 +126,15 @@ const sectionGallery: Record<string, { images: { src: string; label: string }[];
   'inovacao-ia': {
     layout: 'trio',
     images: [
-      { src: '/images/ia-detail-01.jpg', label: 'Laboratório IA' },
-      { src: '/images/automacao-hero.png', label: 'Automação' },
+      { src: '/images/ia-gallery-01.jpg', label: 'Laboratório IA' },
+      { src: '/images/ia-gallery-02.jpg', label: 'Automação' },
       { src: '/images/ia-detail-02.jpg', label: 'Futuro' },
     ],
   },
   'mobile-web': {
     layout: 'stacked',
     images: [
-      { src: '/images/mobile-detail-01.jpg', label: 'Multiplataforma' },
+      { src: '/images/mobile-gallery-01.jpg', label: 'Multiplataforma' },
     ],
   },
   'servicos': {
