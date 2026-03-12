@@ -149,9 +149,6 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
   const galleryRef = useRef<HTMLDivElement>(null);
   const detailsRef = useRef<HTMLDivElement>(null);
 
-  const isWebDesign = section.id === 'web-design';
-  const isDesenvolvimento = section.id === 'desenvolvimento';
-  const effect = sectionScrollEffect[section.id] || 'fade-slide';
   const gallery = sectionGallery[section.id];
 
   // Lightweight reveal (sem animações pesadas em scroll)
