@@ -59,28 +59,29 @@ const Intro = () => {
       <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
 
       {/* Bottom loading section */}
-      <div className="relative z-10 w-full px-8 pb-12 md:pb-16 space-y-4">
+      <div className="relative z-10 w-full space-y-4" style={{ padding: `0 clamp(1.5rem, 4vw, 3rem) clamp(2rem, 3vw, 4rem)` }}>
         {/* Loading text */}
         <div className="flex items-center justify-between">
           <span
-            className="text-xs md:text-sm tracking-[0.3em] uppercase"
+            className="tracking-[0.3em] uppercase"
             style={{
               fontFamily: 'var(--font-display)',
               color: 'hsl(var(--foreground) / 0.6)',
+              fontSize: 'clamp(9px, 0.8vw, 14px)',
             }}
           >
             Carregando...
           </span>
           <span
-            className="text-xs md:text-sm font-mono"
-            style={{ color: 'hsl(var(--primary))' }}
+            className="font-mono"
+            style={{ color: 'hsl(var(--primary))', fontSize: 'clamp(9px, 0.8vw, 14px)' }}
           >
             {Math.min(Math.round(progress), 100)}%
           </span>
         </div>
 
         {/* GTA-style loading bar */}
-        <div className="relative w-full h-[6px] rounded-full overflow-hidden bg-secondary/60 border border-border/30">
+        <div className="relative w-full rounded-full overflow-hidden bg-secondary/60 border border-border/30" style={{ height: 'clamp(4px, 0.4vw, 6px)' }}>
           <div
             className="h-full rounded-full transition-all duration-100 ease-linear"
             style={{
@@ -93,10 +94,11 @@ const Intro = () => {
 
         {/* Brand */}
         <p
-          className="text-center text-[10px] md:text-xs tracking-[0.5em] uppercase"
+          className="text-center tracking-[0.5em] uppercase"
           style={{
             fontFamily: 'var(--font-display)',
             color: 'hsl(var(--muted-foreground))',
+            fontSize: 'clamp(8px, 0.7vw, 12px)',
           }}
         >
           Focuss Dev Studio
