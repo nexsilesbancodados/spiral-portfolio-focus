@@ -404,7 +404,7 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
                 { src: '/images/webdesign-detail-01.jpg', title: 'Prototipagem UI', desc: 'Wireframes e protótipos interativos' },
                 { src: '/images/webdesign-detail-02.jpg', title: 'Criação Visual', desc: 'Design systems e identidade visual' },
                 { src: '/images/webdesign-detail-03.jpg', title: 'Studio Criativo', desc: 'Ambientes de design profissional' },
-                { src: '/images/slide-02.jpg', title: 'Web Premium', desc: 'Sites de alto impacto visual' },
+                { src: '/images/webdesign-detail-04.jpg', title: 'Web Premium', desc: 'Sites de alto impacto visual' },
                 { src: '/images/ui-detail-01.jpg', title: 'Interface 3D', desc: 'Elementos holográficos e futuristas' },
                 { src: '/images/ui-detail-02.jpg', title: 'Design Mobile', desc: 'Experiências mobile-first' },
               ].map((item, i) => (
