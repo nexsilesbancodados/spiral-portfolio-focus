@@ -128,6 +128,36 @@ export function LuminaSlider() {
     return () => el.removeEventListener('wheel', handleWheel);
   }, [triggerExplore]);
 
+  // Touch swipe support
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    let startX = 0;
+    let startY = 0;
+    const onStart = (e: TouchEvent) => { startX = e.touches[0].clientX; startY = e.touches[0].clientY; };
+    const onEnd = (e: TouchEvent) => {
+      const dx = e.changedTouches[0].clientX - startX;
+      const dy = e.changedTouches[0].clientY - startY;
+      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
+        if (dx < 0) goToSlide(currentSlide + 1);
+        else goToSlide(currentSlide - 1);
+      }
+    };
+    el.addEventListener('touchstart', onStart, { passive: true });
+    el.addEventListener('touchend', onEnd, { passive: true });
+    return () => { el.removeEventListener('touchstart', onStart); el.removeEventListener('touchend', onEnd); };
+  }, [currentSlide, goToSlide]);
+
+  // Keyboard navigation
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowRight') goToSlide(currentSlide + 1);
+      else if (e.key === 'ArrowLeft') goToSlide(currentSlide - 1);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [currentSlide, goToSlide]);
+
   // Preload adjacent slides after 1s
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -167,8 +197,41 @@ export function LuminaSlider() {
         <div className="absolute inset-0 bg-gradient-to-r from-background/55 via-transparent to-transparent" style={{ zIndex: 3 }} />
       </div>
 
-      <span className="slide-number">{String(currentSlide + 1).padStart(2, '0')}</span>
-      <span className="slide-total">{String(slides.length).padStart(2, '0')}</span>
+      {/* Ambient glow that follows slide accent */}
+      <div className="absolute top-0 right-0 w-1/2 h-1/2 pointer-events-none" style={{ 
+        zIndex: 4,
+        background: 'radial-gradient(ellipse at 90% 10%, hsl(var(--primary) / 0.06), transparent 60%)',
+        transition: 'opacity 0.8s ease',
+      }} />
+
+      {/* Slide counter - vertical style */}
+      <div className="absolute z-10 flex items-center gap-3" style={{ top: 'clamp(1rem, 2vw, 2rem)', left: 'clamp(1.25rem, 2.5vw, 2.5rem)' }}>
+        <span className="font-[family-name:var(--font-display)] text-primary tracking-wider" style={{ fontSize: 'clamp(11px, 1vw, 16px)' }}>
+          {String(currentSlide + 1).padStart(2, '0')}
+        </span>
+        <div className="h-[1px] bg-foreground/20" style={{ width: 'clamp(1.5rem, 2vw, 3rem)' }} />
+        <span className="font-[family-name:var(--font-display)] text-foreground/30 tracking-wider" style={{ fontSize: 'clamp(9px, 0.8vw, 12px)' }}>
+          {String(slides.length).padStart(2, '0')}
+        </span>
+      </div>
+
+      {/* Side navigation arrows */}
+      <button
+        onClick={() => goToSlide(currentSlide - 1)}
+        className="absolute z-10 hidden md:flex items-center justify-center w-10 h-10 rounded-full border border-foreground/10 bg-background/20 text-foreground/50 hover:text-foreground hover:border-foreground/30 hover:bg-background/40 transition-all duration-300 backdrop-blur-sm"
+        style={{ left: 'clamp(1.25rem, 2.5vw, 2.5rem)', top: '50%', transform: 'translateY(-50%)' }}
+        aria-label="Slide anterior"
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M15 18l-6-6 6-6" /></svg>
+      </button>
+      <button
+        onClick={() => goToSlide(currentSlide + 1)}
+        className="absolute z-10 hidden md:flex items-center justify-center w-10 h-10 rounded-full border border-foreground/10 bg-background/20 text-foreground/50 hover:text-foreground hover:border-foreground/30 hover:bg-background/40 transition-all duration-300 backdrop-blur-sm"
+        style={{ right: 'clamp(1.25rem, 2.5vw, 2.5rem)', top: '50%', transform: 'translateY(-50%)' }}
+        aria-label="Próximo slide"
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M9 18l6-6-6-6" /></svg>
+      </button>
 
       <div className="slide-content" key={currentSlide}>
         <h1 className="slide-title slide-transition-title">{current.title}</h1>
@@ -180,6 +243,7 @@ export function LuminaSlider() {
         </div>
       </div>
 
+      {/* Bottom navigation with animated progress */}
       <nav className="slides-navigation" aria-label="Navegação de seções">
         {slides.map((slide, index) => (
           <button
@@ -189,7 +253,10 @@ export function LuminaSlider() {
             aria-label={`Ir para ${slide.title}`}
           >
             <div className="slide-progress-line">
-              <div className="slide-progress-fill" style={{ width: index === currentSlide ? '100%' : '0%' }} />
+              <div className="slide-progress-fill" style={{ 
+                width: index === currentSlide ? '100%' : '0%',
+                transition: index === currentSlide ? 'width 0.4s cubic-bezier(0.22, 1, 0.36, 1)' : 'width 0.2s ease',
+              }} />
             </div>
             <div className="slide-nav-title">{slide.title}</div>
           </button>
