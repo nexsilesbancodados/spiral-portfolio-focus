@@ -128,7 +128,7 @@ const sectionGallery: Record<string, { images: { src: string; label: string }[];
     images: [
       { src: '/images/ia-detail-01.jpg', label: 'Laboratório IA' },
       { src: '/images/automacao-hero.png', label: 'Automação' },
-      { src: '/images/slide-05.jpg', label: 'Futuro' },
+      { src: '/images/ia-detail-02.jpg', label: 'Futuro' },
     ],
   },
   'mobile-web': {
@@ -404,7 +404,7 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
                 { src: '/images/webdesign-detail-01.jpg', title: 'Prototipagem UI', desc: 'Wireframes e protótipos interativos' },
                 { src: '/images/webdesign-detail-02.jpg', title: 'Criação Visual', desc: 'Design systems e identidade visual' },
                 { src: '/images/webdesign-detail-03.jpg', title: 'Studio Criativo', desc: 'Ambientes de design profissional' },
-                { src: '/images/slide-02.jpg', title: 'Web Premium', desc: 'Sites de alto impacto visual' },
+                { src: '/images/webdesign-detail-04.jpg', title: 'Web Premium', desc: 'Sites de alto impacto visual' },
                 { src: '/images/ui-detail-01.jpg', title: 'Interface 3D', desc: 'Elementos holográficos e futuristas' },
                 { src: '/images/ui-detail-02.jpg', title: 'Design Mobile', desc: 'Experiências mobile-first' },
               ].map((item, i) => (
@@ -507,7 +507,7 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
                 {/* Desktop mockup */}
                 <div className="detail-item card-hover-glow flex flex-col items-center p-8 rounded-sm border border-border/10" style={{ opacity: 0, background: 'hsl(var(--card) / 0.3)' }}>
                   <div className="relative w-full h-[220px] rounded-t-lg border-2 border-foreground/20 overflow-hidden shadow-2xl">
-                    <img src="/images/slide-06.jpg" alt="Desktop" loading="lazy" className="w-full h-full object-cover" style={{ filter: 'brightness(0.85) saturate(1.2)' }} />
+                    <img src="/images/mobile-detail-03.jpg" alt="Desktop" loading="lazy" className="w-full h-full object-cover" style={{ filter: 'brightness(0.85) saturate(1.2)' }} />
                   </div>
                   <div className="w-24 h-3 bg-foreground/10 rounded-b-lg" />
                   <div className="w-16 h-1 bg-foreground/10 mt-1 rounded" />
