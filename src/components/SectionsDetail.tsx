@@ -135,7 +135,6 @@ const sectionGallery: Record<string, { images: { src: string; label: string }[];
     layout: 'stacked',
     images: [
       { src: '/images/mobile-detail-01.jpg', label: 'Multiplataforma' },
-      { src: '/images/mobile-detail-02.jpg', label: 'Lifestyle' },
     ],
   },
   'servicos': {
