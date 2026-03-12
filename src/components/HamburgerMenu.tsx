@@ -58,10 +58,10 @@ export function HamburgerMenu({ onNavigate }: { onNavigate: (index: number) => v
                   onClick={() => handleClick(item.index)}
                   className="group flex items-center gap-4 py-2"
                 >
-                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-widest text-vice-sunset/30 group-hover:text-vice-sunset transition-colors duration-300">
+                  <span className="font-[family-name:var(--font-display)] tracking-widest text-vice-sunset/30 group-hover:text-vice-sunset transition-colors duration-300" style={{ fontSize: 'clamp(8px, 0.7vw, 10px)' }}>
                     {String(i + 1).padStart(2, '0')}
                   </span>
-                  <span className="font-[family-name:var(--font-display)] text-2xl md:text-4xl lg:text-5xl font-bold text-foreground/80 tracking-tight uppercase group-hover:text-foreground transition-all duration-300 group-hover:translate-x-2">
+                  <span className="font-[family-name:var(--font-display)] font-bold text-foreground/80 tracking-tight uppercase group-hover:text-foreground transition-all duration-300 group-hover:translate-x-2" style={{ fontSize: 'clamp(1.25rem, 3.5vw, 3rem)' }}>
                     {item.label}
                   </span>
                   <div className="h-[1px] w-0 group-hover:w-12 bg-vice-sunset transition-all duration-500" />
