@@ -640,11 +640,11 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
           <div className="absolute inset-0" style={{ background: viceOverlay }} />
         </div>
 
-        <div className="relative z-10 w-full px-6 md:px-16 lg:px-24 pb-16 md:pb-24">
-          <div className="cin-subtitle flex items-center gap-3 mb-6">
-            <div className="h-[2px] w-16" style={{ background: colors.gradient }} />
-            <span className={`font-[family-name:var(--font-display)] text-[11px] md:text-xs tracking-[0.4em] uppercase ${colors.accent}`} style={{ textShadow: `0 0 20px ${colors.glowColor}` }}>{section.subtitle}</span>
-            <div className="h-[2px] w-8" style={{ background: colors.gradient, opacity: 0.4 }} />
+        <div className="relative z-10 w-full" style={{ padding: `0 clamp(1.5rem, 4vw, 6rem) clamp(1rem, 3vw, 1.5rem)` }}>
+          <div className="cin-subtitle flex items-center gap-3 mb-[clamp(0.5rem,1vw,1.5rem)]">
+            <div className="h-[2px]" style={{ width: 'clamp(2rem, 3vw, 4rem)', background: colors.gradient }} />
+            <span className={`font-[family-name:var(--font-display)] tracking-[0.4em] uppercase ${colors.accent}`} style={{ fontSize: 'clamp(9px, 0.8vw, 12px)', textShadow: `0 0 20px ${colors.glowColor}` }}>{section.subtitle}</span>
+            <div className="h-[2px]" style={{ width: 'clamp(1rem, 1.5vw, 2rem)', background: colors.gradient, opacity: 0.4 }} />
           </div>
           <div className="relative">
             {/* Glow layer behind title */}
