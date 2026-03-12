@@ -204,22 +204,22 @@ All colors MUST be HSL.
 
 .slide-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  font-size: clamp(2.2rem, 5.5vw, 5.5rem);
   font-weight: 400;
   color: #ffffff;
   line-height: 1.05;
-  margin: 0 0 0.75rem 0;
+  margin: 0 0 clamp(0.5rem, 1vw, 0.75rem) 0;
   letter-spacing: -0.02em;
   text-shadow: 0 0 30px rgba(255, 255, 255, 0.15), 0 2px 30px rgba(0, 0, 0, 0.8), 0 4px 60px rgba(0, 0, 0, 0.5);
 }
 
 .slide-description {
   font-family: 'Inter', sans-serif;
-  font-size: clamp(0.85rem, 1.2vw, 1rem);
+  font-size: clamp(0.75rem, 1.1vw, 1rem);
   color: rgba(255, 255, 255, 0.6);
   font-weight: 300;
   line-height: 1.6;
-  max-width: 450px;
+  max-width: clamp(280px, 32vw, 450px);
   margin: 0;
 }
 
