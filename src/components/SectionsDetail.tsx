@@ -140,7 +140,7 @@ const sectionGallery: Record<string, { images: { src: string; label: string }[];
 };
 
 // ─── Lightweight cinematic section layout ─────────────────────────
-const CinematicSection = memo(function CinematicSection({ section, isVisible, onScrollUpAtTop }: { section: typeof sections[0]; isVisible: boolean; onScrollUpAtTop: () => void }) {
+const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtTop }: { section: typeof sections[0]; onScrollUpAtTop: () => void }) {
   const sectionRef = useRef<HTMLDivElement>(null);
   const galleryRef = useRef<HTMLDivElement>(null);
   const detailsRef = useRef<HTMLDivElement>(null);
