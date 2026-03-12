@@ -303,7 +303,6 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
                 <div key={i} className="gallery-item relative h-[35vh] md:h-[45vh] overflow-hidden" style={{ opacity: 0 }}>
                   <img src={img.src} alt={img.label} loading="lazy" decoding="async" className="w-full h-full object-cover" style={{ filter: 'brightness(0.8) saturate(1.15)' }} />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
-                  <div className="absolute bottom-6 left-6"><span className={labelCls}>{img.label}</span></div>
                 </div>
               ))}
             </div>
@@ -315,12 +314,11 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
             <div className="gallery-item md:col-span-2 relative h-[45vh] md:h-[60vh] overflow-hidden" style={{ opacity: 0 }}>
               <img src={imgs[0].src} alt={imgs[0].label} loading="lazy" decoding="async" className="w-full h-full object-cover" style={imgStyle} />
               <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent" />
-              <div className="absolute bottom-6 left-6"><span className={labelCls}>{imgs[0].label}</span></div>
             </div>
             <div className="gallery-item relative h-[45vh] md:h-[60vh] overflow-hidden" style={{ opacity: 0 }}>
               <img src={imgs[1].src} alt={imgs[1].label} loading="lazy" decoding="async" className="w-full h-full object-cover" style={imgStyle} />
               <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent" />
-              <div className="absolute bottom-6 left-6"><span className={labelCls}>{imgs[1].label}</span></div>
+              
             </div>
           </div>
         );
@@ -330,14 +328,13 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
             <div className="gallery-item relative w-full h-[35vh] md:h-[45vh] overflow-hidden" style={{ opacity: 0 }}>
               <img src={imgs[0].src} alt={imgs[0].label} loading="lazy" decoding="async" className="w-full h-full object-cover" style={imgStyle} />
               <div className="absolute inset-0 bg-gradient-to-r from-background/60 via-transparent to-background/60" />
-              <div className="absolute bottom-6 left-6"><span className={labelCls}>{imgs[0].label}</span></div>
+              
             </div>
             <div className="grid grid-cols-2 gap-[2px]">
               {imgs.slice(1).map((img, i) => (
                 <div key={i} className="gallery-item relative h-[30vh] md:h-[40vh] overflow-hidden" style={{ opacity: 0 }}>
                   <img src={img.src} alt={img.label} loading="lazy" decoding="async" className="w-full h-full object-cover" style={{ filter: 'brightness(0.8) saturate(1.15)' }} />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent" />
-                  <div className="absolute bottom-6 left-6"><span className={labelCls}>{img.label}</span></div>
                 </div>
               ))}
             </div>
@@ -351,7 +348,7 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
                 <img src={img.src} alt={img.label} loading="lazy" decoding="async" className="w-full h-full object-cover" style={imgStyle} />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent" />
                 <div className="absolute inset-0 bg-gradient-to-r from-background/40 via-transparent to-background/40" />
-                <div className="absolute bottom-6 left-6"><span className={labelCls}>{img.label}</span></div>
+                
               </div>
             ))}
           </div>
