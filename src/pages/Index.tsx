@@ -9,15 +9,6 @@ const SectionsDetail = lazy(() =>
 const Index = () => {
   const handleMenuNavigate = (index: number) => {
     window.dispatchEvent(new CustomEvent('explore-slide', { detail: { slideIndex: index } }));
-    setTimeout(() => {
-      const detail = document.getElementById('detail-section');
-      const slider = document.querySelector('.slider-wrapper');
-      if (detail && slider && typeof (window as any).gsap !== 'undefined') {
-        const gsap = (window as any).gsap;
-        gsap.to(detail, { y: '0%', opacity: 1, duration: 1.4, ease: 'power3.inOut' });
-        gsap.to(slider, { y: '-8%', opacity: 0, duration: 1.4, ease: 'power3.inOut' });
-      }
-    }, 50);
   };
 
   return (

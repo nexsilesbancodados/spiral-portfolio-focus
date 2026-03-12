@@ -147,25 +147,14 @@ All colors MUST be HSL.
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background: #0a0a0a;
+  background: hsl(var(--background));
   opacity: 0;
-  transition: opacity 0.8s ease;
-  will-change: transform, opacity;
+  transition: opacity 0.35s ease;
   contain: layout style paint;
-  transform: translateZ(0);
 }
 
 .slider-wrapper.loaded {
   opacity: 1;
-}
-
-.webgl-canvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
-  will-change: contents;
 }
 
 .slide-number {
@@ -175,7 +164,7 @@ All colors MUST be HSL.
   font-family: 'Space Grotesk', monospace;
   font-size: clamp(9px, 0.8vw, 12px);
   letter-spacing: 0.15em;
-  color: hsl(45 100% 55%);
+  color: hsl(var(--primary));
   opacity: 0.7;
   z-index: 10;
 }
@@ -187,7 +176,7 @@ All colors MUST be HSL.
   font-family: 'Space Grotesk', monospace;
   font-size: clamp(9px, 0.8vw, 12px);
   letter-spacing: 0.15em;
-  color: rgba(255, 255, 255, 0.4);
+  color: hsl(var(--foreground) / 0.45);
   z-index: 10;
 }
 
@@ -198,25 +187,22 @@ All colors MUST be HSL.
   right: clamp(1.25rem, 2.5vw, auto);
   z-index: 10;
   max-width: clamp(300px, 42vw, 600px);
-  will-change: transform, opacity;
-  transform: translateZ(0);
 }
 
 .slide-title {
   font-family: 'Cormorant Garamond', serif;
   font-size: clamp(2.2rem, 5.5vw, 5.5rem);
   font-weight: 400;
-  color: #ffffff;
+  color: hsl(var(--foreground));
   line-height: 1.05;
   margin: 0 0 clamp(0.5rem, 1vw, 0.75rem) 0;
   letter-spacing: -0.02em;
-  text-shadow: 0 0 30px rgba(255, 255, 255, 0.15), 0 2px 30px rgba(0, 0, 0, 0.8), 0 4px 60px rgba(0, 0, 0, 0.5);
 }
 
 .slide-description {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-body);
   font-size: clamp(0.75rem, 1.1vw, 1rem);
-  color: rgba(255, 255, 255, 0.6);
+  color: hsl(var(--foreground) / 0.7);
   font-weight: 300;
   line-height: 1.6;
   max-width: clamp(280px, 32vw, 450px);
@@ -234,43 +220,19 @@ All colors MUST be HSL.
   display: inline-block;
   padding: clamp(0.3rem, 0.5vw, 0.45rem) clamp(0.5rem, 0.8vw, 0.9rem);
   min-height: clamp(28px, 2.5vw, 36px);
-  border: 1px solid hsl(45 100% 55% / 0.4);
-  color: hsl(45 100% 65%);
+  border: 1px solid hsl(var(--primary) / 0.4);
+  color: hsl(var(--primary));
   font-family: 'Space Grotesk', monospace;
   font-size: clamp(8px, 0.75vw, 12px);
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  background: hsl(45 100% 55% / 0.05);
-  backdrop-filter: blur(4px);
-  transition: all 0.3s ease;
+  background: hsl(var(--primary) / 0.08);
+  transition: border-color 0.2s ease, background-color 0.2s ease;
 }
 .skill-tag:hover {
-  background: hsl(45 100% 55% / 0.15);
-  border-color: hsl(45 100% 55% / 0.7);
+  background: hsl(var(--primary) / 0.16);
+  border-color: hsl(var(--primary) / 0.7);
 }
-
-/* Per-slide skill tag colors */
-.skill-tag.color-blue { border-color: hsl(210 90% 60% / 0.5); color: hsl(210 90% 70%); background: hsl(210 90% 60% / 0.08); }
-.skill-tag.color-blue:hover { border-color: hsl(210 90% 60% / 0.8); background: hsl(210 90% 60% / 0.18); }
-
-.skill-tag.color-orange { border-color: hsl(25 95% 55% / 0.5); color: hsl(25 95% 65%); background: hsl(25 95% 55% / 0.08); }
-.skill-tag.color-orange:hover { border-color: hsl(25 95% 55% / 0.8); background: hsl(25 95% 55% / 0.18); }
-
-.skill-tag.color-emerald { border-color: hsl(160 70% 50% / 0.5); color: hsl(160 70% 65%); background: hsl(160 70% 50% / 0.08); }
-.skill-tag.color-emerald:hover { border-color: hsl(160 70% 50% / 0.8); background: hsl(160 70% 50% / 0.18); }
-
-.skill-tag.color-purple { border-color: hsl(270 70% 60% / 0.5); color: hsl(270 70% 75%); background: hsl(270 70% 60% / 0.08); }
-.skill-tag.color-purple:hover { border-color: hsl(270 70% 60% / 0.8); background: hsl(270 70% 60% / 0.18); }
-
-.skill-tag.color-pink { border-color: hsl(335 75% 55% / 0.5); color: hsl(335 75% 70%); background: hsl(335 75% 55% / 0.08); }
-.skill-tag.color-pink:hover { border-color: hsl(335 75% 55% / 0.8); background: hsl(335 75% 55% / 0.18); }
-
-.skill-tag.color-amber { border-color: hsl(40 100% 50% / 0.5); color: hsl(40 100% 65%); background: hsl(40 100% 50% / 0.08); }
-.skill-tag.color-amber:hover { border-color: hsl(40 100% 50% / 0.8); background: hsl(40 100% 50% / 0.18); }
-
-.skill-tag.color-cyan { border-color: hsl(185 80% 55% / 0.5); color: hsl(185 80% 70%); background: hsl(185 80% 55% / 0.08); }
-.skill-tag.color-cyan:hover { border-color: hsl(185 80% 55% / 0.8); background: hsl(185 80% 55% / 0.18); }
-
 
 .slides-navigation {
   position: absolute;
@@ -286,22 +248,21 @@ All colors MUST be HSL.
   flex: 1;
   cursor: pointer;
   padding: clamp(0.3rem, 0.5vw, 0.5rem) 0;
-  transition: opacity 0.3s ease;
-  opacity: 0.4;
+  transition: opacity 0.2s ease;
+  opacity: 0.55;
+  background: transparent;
+  border: 0;
+  text-align: left;
 }
 
 .slide-nav-item.active {
   opacity: 1;
 }
 
-.slide-nav-item:hover {
-  opacity: 0.8;
-}
-
 .slide-progress-line {
   width: 100%;
   height: 1px;
-  background: rgba(255, 255, 255, 0.15);
+  background: hsl(var(--foreground) / 0.2);
   margin-bottom: clamp(0.3rem, 0.5vw, 0.5rem);
   position: relative;
   overflow: hidden;
@@ -310,8 +271,8 @@ All colors MUST be HSL.
 .slide-progress-fill {
   height: 100%;
   width: 0%;
-  background: hsl(45 100% 55%);
-  transition: width 0.1s ease, opacity 0.3s ease;
+  background: hsl(var(--primary));
+  transition: width 0.2s ease;
 }
 
 .slide-nav-title {
@@ -319,38 +280,7 @@ All colors MUST be HSL.
   font-size: clamp(7px, 0.7vw, 11px);
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.5);
-}
-
-.slide-nav-item.active .slide-nav-title {
-  color: rgba(255, 255, 255, 0.9);
-}
-
-.slide-nav-explore {
-  display: none;
-  align-items: center;
-  gap: clamp(2px, 0.3vw, 4px);
-  margin-top: clamp(3px, 0.4vw, 6px);
-  padding: clamp(2px, 0.3vw, 3px) clamp(6px, 0.7vw, 10px);
-  font-family: 'Space Grotesk', monospace;
-  font-size: clamp(7px, 0.6vw, 9px);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: hsl(45 100% 55%);
-  background: hsla(45, 100%, 55%, 0.1);
-  border: 1px solid hsla(45, 100%, 55%, 0.3);
-  border-radius: 3px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.slide-nav-explore:hover {
-  background: hsla(45, 100%, 55%, 0.2);
-  border-color: hsla(45, 100%, 55%, 0.6);
-}
-
-.slide-nav-item.active .slide-nav-explore {
-  display: inline-flex;
+  color: hsl(var(--foreground) / 0.65);
 }
 
 @media (max-width: 768px) {
@@ -361,7 +291,6 @@ All colors MUST be HSL.
 
 /* GTA VI Cinematic Scroll */
 .gta-vi-scroll {
-  scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
 }
 
@@ -374,12 +303,12 @@ All colors MUST be HSL.
 }
 
 .gta-vi-scroll::-webkit-scrollbar-thumb {
-  background: hsl(var(--vice-sunset) / 0.25);
+  background: hsl(var(--vice-sunset) / 0.2);
   border-radius: 2px;
 }
 
 .gta-vi-scroll::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--vice-sunset) / 0.5);
+  background: hsl(var(--vice-sunset) / 0.35);
 }
 
 /* Vice City inspired overlays */
@@ -396,27 +325,25 @@ All colors MUST be HSL.
 }
 
 .vice-glow {
-  box-shadow: 0 0 60px hsl(var(--vice-pink) / 0.08), 0 0 120px hsl(var(--vice-sunset) / 0.05);
+  box-shadow: 0 0 40px hsl(var(--vice-pink) / 0.05);
 }
 
 /* Card hover effects */
 .card-hover-glow {
-  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease;
+  transition: transform 0.25s ease;
 }
 .card-hover-glow:hover {
-  transform: scale(1.03);
-  box-shadow: 0 0 30px hsl(var(--vice-sunset) / 0.15), 0 0 60px hsl(var(--vice-pink) / 0.08), 0 8px 32px rgba(0,0,0,0.4);
+  transform: translateY(-2px);
 }
 
 .image-hover-zoom {
   overflow: hidden;
 }
 .image-hover-zoom img {
-  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.6s ease;
+  transition: transform 0.3s ease;
 }
 .image-hover-zoom:hover img {
-  transform: scale(1.08);
-  filter: brightness(1.1) saturate(1.2);
+  transform: scale(1.02);
 }
 
 /* Skills progress bar */
@@ -430,21 +357,13 @@ All colors MUST be HSL.
   height: 100%;
   border-radius: 2px;
   background: linear-gradient(90deg, hsl(var(--vice-sunset)), hsl(var(--vice-pink)));
-  transition: width 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: width 0.6s ease;
 }
 
 /* Parallax container */
 .parallax-hero img {
-  will-change: transform;
   transform: translateZ(0);
   backface-visibility: hidden;
-}
-
-/* Disable parallax on mobile for performance */
-@media (max-width: 768px) {
-  .parallax-hero img {
-    will-change: auto;
-  }
 }
 
 /* Explore Button */
@@ -461,13 +380,13 @@ All colors MUST be HSL.
   background: none;
   border: none;
   cursor: pointer;
-  color: hsl(45 100% 55%);
-  opacity: 0.7;
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  color: hsl(var(--primary));
+  opacity: 0.75;
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 .explore-btn:hover {
   opacity: 1;
-  transform: translateX(-50%) translateY(-3px);
+  transform: translateX(-50%) translateY(-2px);
 }
 .explore-btn-text {
   font-family: 'Space Grotesk', sans-serif;
@@ -476,11 +395,11 @@ All colors MUST be HSL.
   text-transform: uppercase;
 }
 .explore-btn-arrow {
-  animation: bounceDown 2s ease-in-out infinite;
+  animation: bounceDown 1.6s ease-in-out infinite;
 }
 @keyframes bounceDown {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(5px); }
+  50% { transform: translateY(3px); }
 }
 
 /* Chat slide-in animation */
