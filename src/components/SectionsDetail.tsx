@@ -669,9 +669,9 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
               ))}
             </h2>
           </div>
-          <div className="absolute bottom-8 right-6 md:right-16 flex flex-col items-center gap-2 opacity-50">
-            <span className={`font-[family-name:var(--font-display)] text-[9px] tracking-[0.25em] uppercase ${colors.accent} opacity-60 [writing-mode:vertical-lr]`}>Role para baixo</span>
-            <div className="w-[1px] h-12 animate-pulse" style={{ background: `hsl(${colors.accentHsl} / 0.4)` }} />
+          <div className="absolute bottom-8 flex flex-col items-center gap-2 opacity-50" style={{ right: 'clamp(1.5rem, 3vw, 4rem)' }}>
+            <span className={`font-[family-name:var(--font-display)] tracking-[0.25em] uppercase ${colors.accent} opacity-60 [writing-mode:vertical-lr]`} style={{ fontSize: 'clamp(7px, 0.6vw, 9px)' }}>Role para baixo</span>
+            <div className="w-[1px] animate-pulse" style={{ height: 'clamp(2rem, 3vw, 3rem)', background: `hsl(${colors.accentHsl} / 0.4)` }} />
           </div>
         </div>
       </div>
