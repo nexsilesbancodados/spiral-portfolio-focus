@@ -402,7 +402,7 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
     switch (section.id) {
       case 'web-design':
         return (
-          <div className="px-6 md:px-16 lg:px-24 py-16 md:py-24">
+          <div className="fluid-section-pad">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {[
                 { src: '/images/webdesign-detail-01.jpg', title: 'Prototipagem UI', desc: 'Wireframes e protótipos interativos' },
@@ -428,7 +428,7 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
 
       case 'desenvolvimento':
         return (
-          <div className="px-6 md:px-16 lg:px-24 py-16 md:py-24">
+          <div className="fluid-section-pad">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl">
               {[
                 { icon: '⚡', title: 'APIs REST & GraphQL', desc: 'Endpoints performáticos com autenticação JWT, rate limiting e documentação OpenAPI completa.' },
@@ -453,7 +453,7 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
 
       case 'inovacao-ia':
         return (
-          <div className="px-6 md:px-16 lg:px-24 py-16 md:py-24">
+          <div className="fluid-section-pad">
             {/* FOCUSS AI Chat */}
             <div className="mb-16">
               <Suspense fallback={null}><FocussChat /></Suspense>
@@ -489,7 +489,7 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
 
       case 'mobile-web':
         return (
-          <div className="px-6 md:px-16 lg:px-24 py-16 md:py-24">
+          <div className="fluid-section-pad">
             {/* Mockup showcase */}
             <div className="max-w-6xl mx-auto">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -542,7 +542,7 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
           { name: 'CI/CD / Git', level: 90, category: 'DevOps' },
         ];
         return (
-          <div className="px-6 md:px-16 lg:px-24 py-16 md:py-24">
+          <div className="fluid-section-pad">
             <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-8">
               {skills.map((skill, i) => (
                 <div key={i} className="detail-item group" style={{ opacity: 0 }}>
@@ -570,7 +570,7 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
 
       case 'servicos':
         return (
-          <div className="px-6 md:px-16 lg:px-24 py-16 md:py-24">
+          <div className="fluid-section-pad">
             {/* Cinematic video header */}
             <div className="detail-item relative w-full h-[50vh] md:h-[60vh] overflow-hidden rounded-sm mb-16" style={{ opacity: 0 }}>
               <video src="/videos/servicos.mp4" autoPlay muted loop playsInline className="w-full h-full object-cover" style={{ filter: 'brightness(0.75) saturate(1.3) contrast(1.05)' }} />
@@ -640,11 +640,11 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
           <div className="absolute inset-0" style={{ background: viceOverlay }} />
         </div>
 
-        <div className="relative z-10 w-full px-6 md:px-16 lg:px-24 pb-16 md:pb-24">
-          <div className="cin-subtitle flex items-center gap-3 mb-6">
-            <div className="h-[2px] w-16" style={{ background: colors.gradient }} />
-            <span className={`font-[family-name:var(--font-display)] text-[11px] md:text-xs tracking-[0.4em] uppercase ${colors.accent}`} style={{ textShadow: `0 0 20px ${colors.glowColor}` }}>{section.subtitle}</span>
-            <div className="h-[2px] w-8" style={{ background: colors.gradient, opacity: 0.4 }} />
+        <div className="relative z-10 w-full" style={{ padding: `0 clamp(1.5rem, 4vw, 6rem) clamp(1rem, 3vw, 1.5rem)` }}>
+          <div className="cin-subtitle flex items-center gap-3 mb-[clamp(0.5rem,1vw,1.5rem)]">
+            <div className="h-[2px]" style={{ width: 'clamp(2rem, 3vw, 4rem)', background: colors.gradient }} />
+            <span className={`font-[family-name:var(--font-display)] tracking-[0.4em] uppercase ${colors.accent}`} style={{ fontSize: 'clamp(9px, 0.8vw, 12px)', textShadow: `0 0 20px ${colors.glowColor}` }}>{section.subtitle}</span>
+            <div className="h-[2px]" style={{ width: 'clamp(1rem, 1.5vw, 2rem)', background: colors.gradient, opacity: 0.4 }} />
           </div>
           <div className="relative">
             {/* Glow layer behind title */}
@@ -652,7 +652,7 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
               filter: 'blur(60px)',
               background: `radial-gradient(ellipse 80% 60% at 20% 60%, ${colors.glowColor}, transparent 70%)`,
             }} />
-            <h2 className="font-[family-name:var(--font-display)] text-5xl sm:text-6xl md:text-8xl lg:text-[9rem] xl:text-[11rem] font-black leading-[0.85] tracking-tighter uppercase">
+            <h2 className="font-[family-name:var(--font-display)] font-black leading-[0.85] tracking-tighter uppercase" style={{ fontSize: 'clamp(2.5rem, 9vw, 11rem)' }}>
               {section.title.split(' ').map((word, i) => (
                 <span 
                   key={i} 
@@ -669,9 +669,9 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
               ))}
             </h2>
           </div>
-          <div className="absolute bottom-8 right-6 md:right-16 flex flex-col items-center gap-2 opacity-50">
-            <span className={`font-[family-name:var(--font-display)] text-[9px] tracking-[0.25em] uppercase ${colors.accent} opacity-60 [writing-mode:vertical-lr]`}>Role para baixo</span>
-            <div className="w-[1px] h-12 animate-pulse" style={{ background: `hsl(${colors.accentHsl} / 0.4)` }} />
+          <div className="absolute bottom-8 flex flex-col items-center gap-2 opacity-50" style={{ right: 'clamp(1.5rem, 3vw, 4rem)' }}>
+            <span className={`font-[family-name:var(--font-display)] tracking-[0.25em] uppercase ${colors.accent} opacity-60 [writing-mode:vertical-lr]`} style={{ fontSize: 'clamp(7px, 0.6vw, 9px)' }}>Role para baixo</span>
+            <div className="w-[1px] animate-pulse" style={{ height: 'clamp(2rem, 3vw, 3rem)', background: `hsl(${colors.accentHsl} / 0.4)` }} />
           </div>
         </div>
       </div>
@@ -680,9 +680,9 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
       <div className="relative z-10 bg-background">
         <div className="w-full h-[1px]" style={{ background: `linear-gradient(90deg, transparent, hsl(${colors.accentHsl} / 0.3), hsl(${colors.accentHsl} / 0.15), transparent)` }} />
         
-        <div className="cin-desc px-6 md:px-16 lg:px-24 py-16 md:py-24">
+        <div className="cin-desc" style={{ padding: `clamp(1rem, 3vw, 1.5rem) clamp(1.5rem, 4vw, 6rem)` }}>
           <div className="max-w-5xl">
-            <p className="text-xl md:text-2xl lg:text-3xl text-foreground/90 leading-relaxed font-light tracking-tight">{section.description}</p>
+            <p className="text-foreground/90 leading-relaxed font-light tracking-tight" style={{ fontSize: 'clamp(1rem, 2vw, 1.875rem)' }}>{section.description}</p>
           </div>
         </div>
 
@@ -690,7 +690,7 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
         <div ref={galleryRef}>{renderGallery()}</div>
 
         {/* Details grid */}
-        <div ref={detailsRef} className="px-6 md:px-16 lg:px-24 py-16 md:py-24">
+        <div ref={detailsRef} style={{ padding: `clamp(1rem, 3vw, 1.5rem) clamp(1.5rem, 4vw, 6rem)` }}>
           {section.id === 'servicos' ? (
             /* Serviços: Premium card grid */
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-7xl">
