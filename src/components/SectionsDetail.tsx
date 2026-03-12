@@ -87,7 +87,7 @@ const sections = [
       'Layouts 100% responsivos',
       'Deploy containerizado com Docker',
     ],
-    image: '/images/slide-06.jpg',
+    image: '/images/hero-mobile.jpg',
   },
   {
     id: 'skills',
