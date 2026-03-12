@@ -708,8 +708,10 @@ export function SectionsDetail() {
     <div
       ref={containerRef}
       id="detail-section"
-      className={`fixed inset-0 z-20 bg-background transition-opacity duration-150 ease-out ${
-        isVisible ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+      className={`fixed inset-0 z-20 bg-background ${
+        isVisible 
+          ? isAnimating ? 'detail-section-exit pointer-events-none' : 'detail-section-enter pointer-events-auto' 
+          : 'opacity-0 pointer-events-none'
       }`}
     >
       {section && (
