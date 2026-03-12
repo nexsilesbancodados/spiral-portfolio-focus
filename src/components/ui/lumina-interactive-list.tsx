@@ -151,26 +151,34 @@ export function LuminaSlider() {
       <div className="absolute inset-0">
         {slides.map((slide, index) => {
           if (!loadedSlides.has(index)) return null;
+          const isActive = index === currentSlide;
+          const isLeaving = index === prevSlide;
           return (
             <SlideMedia
               key={slide.title}
               slide={slide}
-              isActive={index === currentSlide}
+              isActive={isActive || isLeaving}
               eager={index === 0}
+              style={{
+                opacity: isActive ? 1 : isLeaving ? 0 : 0,
+                transform: isActive ? 'scale(1)' : isLeaving ? 'scale(1.08)' : 'scale(1)',
+                transition: 'opacity 0.6s ease, transform 0.8s ease',
+                zIndex: isActive ? 2 : isLeaving ? 1 : 0,
+              }}
             />
           );
         })}
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/45 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-r from-background/55 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/45 to-transparent" style={{ zIndex: 3 }} />
+        <div className="absolute inset-0 bg-gradient-to-r from-background/55 via-transparent to-transparent" style={{ zIndex: 3 }} />
       </div>
 
       <span className="slide-number">{String(currentSlide + 1).padStart(2, '0')}</span>
       <span className="slide-total">{String(slides.length).padStart(2, '0')}</span>
 
-      <div className="slide-content animate-fade-in" key={currentSlide}>
-        <h1 className="slide-title">{current.title}</h1>
-        <p className="slide-description">{current.description}</p>
-        <div className="slide-skills">
+      <div className="slide-content" key={currentSlide}>
+        <h1 className="slide-title slide-transition-title">{current.title}</h1>
+        <p className="slide-description slide-transition-desc">{current.description}</p>
+        <div className="slide-skills slide-transition-skills">
           {current.skills.map((skill) => (
             <span key={skill} className="skill-tag">{skill}</span>
           ))}
