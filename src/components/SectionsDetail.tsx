@@ -571,25 +571,14 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
       case 'servicos':
         return (
           <div className="px-6 md:px-16 lg:px-24 py-16 md:py-24">
-            {/* Cinematic gallery header */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-[2px] mb-16">
-              <div className="detail-item image-hover-zoom card-hover-glow relative h-[40vh] md:h-[50vh] overflow-hidden rounded-sm" style={{ opacity: 0 }}>
-                <img src="/images/servicos-detail-01.jpg" alt="Serviços Digitais" loading="lazy" decoding="async" className="w-full h-full object-cover" style={{ filter: 'brightness(0.7) saturate(1.3) contrast(1.05)' }} />
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
-                <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, hsl(270 70% 60% / 0.15), transparent 60%)' }} />
-                <div className="absolute bottom-6 left-6">
-                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.3em] uppercase text-vice-pink/80">DIGITAL MARKETING</span>
-                  <h4 className="font-[family-name:var(--font-display)] text-foreground text-xl font-bold mt-2">Resultados que Importam</h4>
-                </div>
-              </div>
-              <div className="detail-item image-hover-zoom card-hover-glow relative h-[40vh] md:h-[50vh] overflow-hidden rounded-sm" style={{ opacity: 0 }}>
-                <img src="/images/servicos-detail-02.jpg" alt="Desenvolvimento" loading="lazy" decoding="async" className="w-full h-full object-cover" style={{ filter: 'brightness(0.7) saturate(1.3) contrast(1.05)' }} />
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
-                <div className="absolute inset-0" style={{ background: 'linear-gradient(225deg, hsl(300 65% 55% / 0.12), transparent 60%)' }} />
-                <div className="absolute bottom-6 left-6">
-                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.3em] uppercase text-vice-teal/80">FULL-STACK DEV</span>
-                  <h4 className="font-[family-name:var(--font-display)] text-foreground text-xl font-bold mt-2">Tecnologia de Ponta</h4>
-                </div>
+            {/* Cinematic video header */}
+            <div className="detail-item relative w-full h-[50vh] md:h-[60vh] overflow-hidden rounded-sm mb-16" style={{ opacity: 0 }}>
+              <video src="/videos/servicos.mp4" autoPlay muted loop playsInline className="w-full h-full object-cover" style={{ filter: 'brightness(0.75) saturate(1.3) contrast(1.05)' }} />
+              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent" />
+              <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, hsl(270 70% 60% / 0.12), transparent 60%)' }} />
+              <div className="absolute bottom-8 left-8">
+                <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.3em] uppercase text-vice-pink/80">SOLUÇÕES DIGITAIS</span>
+                <h4 className="font-[family-name:var(--font-display)] text-foreground text-2xl font-bold mt-2">Serviços Completos</h4>
               </div>
             </div>
 
