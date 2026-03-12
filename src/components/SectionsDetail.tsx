@@ -507,7 +507,7 @@ const CinematicSection = memo(function CinematicSection({ section, isVisible, on
                 {/* Desktop mockup */}
                 <div className="detail-item card-hover-glow flex flex-col items-center p-8 rounded-sm border border-border/10" style={{ opacity: 0, background: 'hsl(var(--card) / 0.3)' }}>
                   <div className="relative w-full h-[220px] rounded-t-lg border-2 border-foreground/20 overflow-hidden shadow-2xl">
-                    <img src="/images/slide-06.jpg" alt="Desktop" loading="lazy" className="w-full h-full object-cover" style={{ filter: 'brightness(0.85) saturate(1.2)' }} />
+                    <img src="/images/mobile-detail-03.jpg" alt="Desktop" loading="lazy" className="w-full h-full object-cover" style={{ filter: 'brightness(0.85) saturate(1.2)' }} />
                   </div>
                   <div className="w-24 h-3 bg-foreground/10 rounded-b-lg" />
                   <div className="w-16 h-1 bg-foreground/10 mt-1 rounded" />
