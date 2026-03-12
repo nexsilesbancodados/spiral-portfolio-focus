@@ -644,9 +644,14 @@ export function SectionsDetail() {
   const openFrameRef = useRef<number | null>(null);
   const [activeSlide, setActiveSlide] = useState<number | null>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   const goBack = useCallback(() => {
-    setIsVisible(false);
+    setIsAnimating(true);
+    setTimeout(() => {
+      setIsVisible(false);
+      setIsAnimating(false);
+    }, 350);
   }, []);
 
   const openSlide = useCallback((slideIndex: number) => {
