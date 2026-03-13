@@ -823,12 +823,20 @@ export function SectionsDetail() {
     return () => container.removeEventListener('wheel', handleWheel);
   }, [activeSlide, goBack, isVisible]);
 
-  // Animated stat counters for focuss-dev
+  // Animated entrance + stat counters for focuss-dev
   useEffect(() => {
     if (!isVisible || activeSlide === null) return;
     if (sections[activeSlide].id !== 'focuss-dev') return;
 
     const timer = setTimeout(() => {
+      // Stagger entrance for all .anim-el
+      const animEls = document.querySelectorAll('.anim-el');
+      gsap.fromTo(animEls,
+        { opacity: 0, y: 30, filter: 'blur(4px)' },
+        { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.7, stagger: 0.08, ease: 'power3.out' }
+      );
+
+      // Animated stat counters
       const statEls = document.querySelectorAll('.stat-value-animated');
       statEls.forEach((el) => {
         const target = parseInt(el.getAttribute('data-target') || '0', 10);
@@ -837,15 +845,16 @@ export function SectionsDetail() {
           { val: 0 },
           {
             val: target,
-            duration: 1.5,
+            duration: 1.8,
             ease: 'power2.out',
+            delay: 0.5,
             onUpdate: function () {
               el.textContent = Math.round(this.targets()[0].val) + (el.getAttribute('data-suffix') || '');
             },
           }
         );
       });
-    }, 300);
+    }, 100);
 
     return () => clearTimeout(timer);
   }, [activeSlide, isVisible]);
@@ -884,10 +893,10 @@ export function SectionsDetail() {
               </div>
               <div className="relative flex items-center h-full px-6 md:px-16 lg:px-24">
                 <div className="w-full max-w-4xl mx-auto">
-                  <div className="anim-el h-[2px] w-16 mb-6 origin-left bg-accent" />
-                  <span className="anim-el block font-[family-name:var(--font-display)] text-xs tracking-[0.2em] uppercase mb-3 text-accent">{section.subtitle}</span>
-                  <h2 className="anim-el font-[family-name:var(--font-display)] text-4xl md:text-6xl lg:text-7xl font-light text-foreground mb-6 leading-tight tracking-tight">{section.title}</h2>
-                  <p className="anim-el text-muted-foreground text-base md:text-lg leading-relaxed mb-10 max-w-2xl">{section.description}</p>
+                  <div className="anim-el h-[2px] w-16 mb-6 origin-left bg-accent" style={{ opacity: 0 }} />
+                  <span className="anim-el block font-[family-name:var(--font-display)] text-xs tracking-[0.2em] uppercase mb-3 text-accent" style={{ opacity: 0 }}>{section.subtitle}</span>
+                  <h2 className="anim-el font-[family-name:var(--font-display)] text-4xl md:text-6xl lg:text-7xl font-light text-foreground mb-6 leading-tight tracking-tight" style={{ opacity: 0 }}>{section.title}</h2>
+                  <p className="anim-el text-muted-foreground text-base md:text-lg leading-relaxed mb-10 max-w-2xl" style={{ opacity: 0 }}>{section.description}</p>
                   
                   {/* Stats with animated counters */}
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
@@ -898,7 +907,7 @@ export function SectionsDetail() {
                       { value: '∞', suffix: '', label: 'Inovação Contínua', target: null },
                     ].map((stat, i) => (
                       <div key={i} className="anim-el relative p-5 rounded-md overflow-hidden group"
-                        style={{ background: 'hsl(var(--card) / 0.4)', border: '1px solid hsl(var(--border) / 0.15)' }}>
+                        style={{ opacity: 0, background: 'hsl(var(--card) / 0.4)', border: '1px solid hsl(var(--border) / 0.15)' }}>
                         <div className="absolute top-0 left-0 right-0 h-[1px] opacity-60"
                           style={{ background: 'linear-gradient(90deg, transparent, hsl(var(--accent) / 0.5), transparent)' }} />
                         {stat.target !== null ? (
@@ -914,7 +923,7 @@ export function SectionsDetail() {
 
                   <ul className="space-y-4">
                     {section.details.map((detail, i) => (
-                      <li key={i} className="anim-el flex items-start gap-4 text-muted-foreground text-sm md:text-base group">
+                      <li key={i} className="anim-el flex items-start gap-4 text-muted-foreground text-sm md:text-base group" style={{ opacity: 0 }}>
                         <span className="mt-1 flex items-center justify-center w-6 h-6 rounded-full shrink-0 border border-accent/30 text-accent font-[family-name:var(--font-display)] text-[10px]">{String(i + 1).padStart(2, '0')}</span>
                         <span className="group-hover:text-foreground/90 transition-colors duration-300">{detail}</span>
                       </li>

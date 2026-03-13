@@ -87,11 +87,20 @@ const fragmentShader = `
   }
 `;
 
+const AUTO_SLIDE_DURATION = 6000;
+
 export function LuminaSlider() {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [contentKey, setContentKey] = useState(0); // for re-triggering text animations
+
+  // Progress bar
+  const [progress, setProgress] = useState(0);
+  const progressRef = useRef(0);
+  const progressRafRef = useRef<number>(0);
+  const progressStartRef = useRef(Date.now());
 
   // WebGL refs
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
@@ -169,7 +178,6 @@ export function LuminaSlider() {
         try {
           textures.push(await loadTexture(slide.media));
         } catch {
-          // Create a fallback 1x1 black texture
           const fallback = new THREE.DataTexture(new Uint8Array([0, 0, 0, 255]), 1, 1);
           fallback.userData = { size: new THREE.Vector2(1, 1) };
           fallback.needsUpdate = true;
@@ -180,10 +188,13 @@ export function LuminaSlider() {
 
       if (textures.length >= 2) {
         material.uniforms.uTexture1.value = textures[0];
-        material.uniforms.uTexture2.value = textures[0]; // same initially
+        material.uniforms.uTexture2.value = textures[0];
         material.uniforms.uTexture1Size.value = textures[0].userData.size;
         material.uniforms.uTexture2Size.value = textures[0].userData.size;
         webglReadyRef.current = true;
+
+        // Mark loaded
+        containerRef.current?.classList.add('loaded');
       }
     };
 
@@ -248,6 +259,12 @@ export function LuminaSlider() {
 
     currentSlideRef.current = targetIndex;
     setCurrentSlide(targetIndex);
+    setContentKey(k => k + 1);
+
+    // Reset progress
+    progressRef.current = 0;
+    setProgress(0);
+    progressStartRef.current = Date.now();
   }, []);
 
   const goToSlide = useCallback((index: number) => {
@@ -270,6 +287,34 @@ export function LuminaSlider() {
       window.dispatchEvent(new CustomEvent('explore-slide', { detail: { slideIndex: currentSlideRef.current } }));
     }
   }, []);
+
+  // ── Auto-slide progress timer ─────────────────────────────────────
+  useEffect(() => {
+    progressStartRef.current = Date.now();
+
+    const tick = () => {
+      if (isTransitioningRef.current) {
+        progressRafRef.current = requestAnimationFrame(tick);
+        return;
+      }
+      const elapsed = Date.now() - progressStartRef.current;
+      const pct = Math.min((elapsed / AUTO_SLIDE_DURATION) * 100, 100);
+      progressRef.current = pct;
+      setProgress(pct);
+
+      if (pct >= 100) {
+        // Trigger next slide
+        if (webglReadyRef.current) {
+          goToSlide(currentSlideRef.current + 1);
+        }
+        return;
+      }
+      progressRafRef.current = requestAnimationFrame(tick);
+    };
+
+    progressRafRef.current = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(progressRafRef.current);
+  }, [goToSlide, contentKey]);
 
   // ── Wheel handler ─────────────────────────────────────────────────
   const wheelAccumRef = useRef(0);
@@ -336,18 +381,25 @@ export function LuminaSlider() {
     return () => window.removeEventListener('navigate-slide', handler);
   }, [goToSlide]);
 
-  // ── Auto-slide timer ──────────────────────────────────────────────
+  // ── Animate content on slide change ───────────────────────────────
   useEffect(() => {
-    const timer = setInterval(() => {
-      if (!isTransitioningRef.current && webglReadyRef.current) {
-        goToSlide(currentSlideRef.current + 1);
-      }
-    }, 6000);
-    return () => clearInterval(timer);
-  }, [goToSlide]);
+    const contentEl = containerRef.current?.querySelector('.slide-content-inner');
+    if (!contentEl) return;
+
+    const title = contentEl.querySelector('.slide-title');
+    const desc = contentEl.querySelector('.slide-description');
+    const skills = contentEl.querySelector('.slide-skills');
+
+    const tl = gsap.timeline();
+    tl.fromTo(title, { y: 30, opacity: 0, filter: 'blur(6px)' }, { y: 0, opacity: 1, filter: 'blur(0px)', duration: 0.7, ease: 'power3.out' }, 0);
+    tl.fromTo(desc, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: 'power3.out' }, 0.15);
+    tl.fromTo(skills?.children ? Array.from(skills.children) : [], { y: 12, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power2.out' }, 0.3);
+
+    return () => { tl.kill(); };
+  }, [contentKey]);
 
   return (
-    <main className="slider-wrapper loaded" ref={containerRef}>
+    <main className="slider-wrapper" ref={containerRef}>
       {/* WebGL canvas */}
       <canvas
         ref={canvasRef}
@@ -356,8 +408,14 @@ export function LuminaSlider() {
       />
 
       {/* Gradient overlays */}
-      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/45 to-transparent" style={{ zIndex: 3 }} />
-      <div className="absolute inset-0 bg-gradient-to-r from-background/55 via-transparent to-transparent" style={{ zIndex: 3 }} />
+      <div className="absolute inset-0 pointer-events-none" style={{
+        zIndex: 3,
+        background: 'linear-gradient(to top, hsl(var(--background)) 0%, hsl(var(--background) / 0.7) 15%, hsl(var(--background) / 0.35) 35%, transparent 60%)',
+      }} />
+      <div className="absolute inset-0 pointer-events-none" style={{
+        zIndex: 3,
+        background: 'linear-gradient(to right, hsl(var(--background) / 0.6) 0%, hsl(var(--background) / 0.2) 25%, transparent 50%)',
+      }} />
 
       {/* Ambient glow */}
       <div className="absolute top-0 right-0 w-1/2 h-1/2 pointer-events-none" style={{
@@ -395,18 +453,20 @@ export function LuminaSlider() {
       </button>
 
       {/* Slide content */}
-      <div className="slide-content" key={currentSlide}>
-        <h1 className="slide-title slide-transition-title" style={{ textShadow: '0 2px 40px hsl(0 0% 0% / 0.5)' }}>{current.title}</h1>
-        <p className="slide-description slide-transition-desc" style={{ textShadow: '0 1px 20px hsl(0 0% 0% / 0.4)' }}>{current.description}</p>
-        <div className="slide-skills slide-transition-skills">
-          {current.skills.map((skill) => (
-            <span key={skill} className="skill-tag">{skill}</span>
-          ))}
+      <div className="slide-content" style={{ zIndex: 10 }}>
+        <div className="slide-content-inner" key={contentKey}>
+          <h1 className="slide-title" style={{ textShadow: '0 2px 40px hsl(0 0% 0% / 0.6), 0 4px 80px hsl(0 0% 0% / 0.4)' }}>{current.title}</h1>
+          <p className="slide-description" style={{ textShadow: '0 1px 20px hsl(0 0% 0% / 0.5)' }}>{current.description}</p>
+          <div className="slide-skills">
+            {current.skills.map((skill) => (
+              <span key={skill} className="skill-tag">{skill}</span>
+            ))}
+          </div>
         </div>
       </div>
 
-      {/* Bottom navigation */}
-      <nav className="slides-navigation" aria-label="Navegação de seções">
+      {/* Bottom navigation with animated progress */}
+      <nav className="slides-navigation" aria-label="Navegação de seções" style={{ zIndex: 10 }}>
         {slides.map((slide, index) => (
           <button
             key={slide.title}
@@ -416,8 +476,8 @@ export function LuminaSlider() {
           >
             <div className="slide-progress-line">
               <div className="slide-progress-fill" style={{
-                width: index === currentSlide ? '100%' : '0%',
-                transition: index === currentSlide ? 'width 0.4s cubic-bezier(0.22, 1, 0.36, 1)' : 'width 0.2s ease',
+                width: index === currentSlide ? `${progress}%` : '0%',
+                transition: index === currentSlide ? 'none' : 'width 0.3s ease',
               }} />
             </div>
             <div className="slide-nav-title">{slide.title}</div>
@@ -425,7 +485,7 @@ export function LuminaSlider() {
         ))}
       </nav>
 
-      <button className="explore-btn" onClick={triggerExplore} aria-label="Explorar seção atual">
+      <button className="explore-btn" onClick={triggerExplore} aria-label="Explorar seção atual" style={{ zIndex: 15 }}>
         <span className="explore-btn-text">Explorar</span>
         <svg className="explore-btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
           <path d="M12 5v14m-7-7l7 7 7-7" />
