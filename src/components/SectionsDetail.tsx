@@ -15,7 +15,7 @@ const sections = [
       'Foco em performance, acessibilidade e experiência do usuário',
       'Metodologias ágeis e entrega contínua',
     ],
-    image: '/images/slide-01.jpg',
+    image: '/images/slide-01.jpg', // FOCUSS DEV preservada
   },
   {
     id: 'web-design',
