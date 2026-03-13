@@ -1164,55 +1164,66 @@ export function SectionsDetail() {
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 19V5m7 7l-7-7-7 7" /></svg>
             Voltar
           </button>
-          {/* FOCUSS DEV: Original layout */}
+          {/* FOCUSS DEV: Original layout + deep dive (scrollable) */}
           {isFocussDev && (
-            <>
-              <div className="absolute inset-0">
-                <img src={section.image} alt={section.title} loading="lazy" decoding="async" className="w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-background/80" />
-                <div className="absolute inset-0 opacity-20" style={{ background: `linear-gradient(135deg, hsl(45 100% 55% / 0.2) 0%, transparent 60%)` }} />
-              </div>
-              <div className="relative flex items-center h-full px-6 md:px-16 lg:px-24">
-                <div className="w-full max-w-4xl mx-auto">
-                  <div className="anim-el h-[2px] w-16 mb-6 origin-left bg-accent" style={{ opacity: 0 }} />
-                  <span className="anim-el block font-[family-name:var(--font-display)] text-xs tracking-[0.2em] uppercase mb-3 text-accent" style={{ opacity: 0 }}>{section.subtitle}</span>
-                  <h2 className="anim-el font-[family-name:var(--font-display)] text-4xl md:text-6xl lg:text-7xl font-light text-foreground mb-6 leading-tight tracking-tight" style={{ opacity: 0 }}>{section.title}</h2>
-                  <p className="anim-el text-muted-foreground text-base md:text-lg leading-relaxed mb-10 max-w-2xl" style={{ opacity: 0 }}>{section.description}</p>
-                  
-                  {/* Stats with animated counters */}
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
-                    {[
-                      { value: '5', suffix: '+', label: 'Anos de Experiência', target: 5 },
-                      { value: '50', suffix: '+', label: 'Projetos Entregues', target: 50 },
-                      { value: '100', suffix: '%', label: 'Foco em Performance', target: 100 },
-                      { value: '∞', suffix: '', label: 'Inovação Contínua', target: null },
-                    ].map((stat, i) => (
-                      <div key={i} className="anim-el relative p-5 rounded-md overflow-hidden group"
-                        style={{ opacity: 0, background: 'hsl(var(--card) / 0.4)', border: '1px solid hsl(var(--border) / 0.15)' }}>
-                        <div className="absolute top-0 left-0 right-0 h-[1px] opacity-60"
-                          style={{ background: 'linear-gradient(90deg, transparent, hsl(var(--accent) / 0.5), transparent)' }} />
-                        {stat.target !== null ? (
-                          <span className="stat-value-animated block font-[family-name:var(--font-display)] text-2xl md:text-3xl font-bold text-accent mb-1"
-                            data-target={stat.target} data-suffix={stat.suffix}>0{stat.suffix}</span>
-                        ) : (
-                          <span className="block font-[family-name:var(--font-display)] text-2xl md:text-3xl font-bold text-accent mb-1">∞</span>
-                        )}
-                        <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.15em] uppercase text-muted-foreground">{stat.label}</span>
-                      </div>
-                    ))}
-                  </div>
+            <div className="absolute inset-0 overflow-y-auto gta-vi-scroll">
+              <div className="relative min-h-screen flex items-center">
+                <div className="absolute inset-0">
+                  <img src={section.image} alt={section.title} loading="lazy" decoding="async" className="w-full h-full object-cover" style={{ position: 'sticky', top: 0 }} />
+                  <div className="absolute inset-0 bg-background/80" />
+                  <div className="absolute inset-0 opacity-20" style={{ background: `linear-gradient(135deg, hsl(45 100% 55% / 0.2) 0%, transparent 60%)` }} />
+                </div>
+                <div className="relative z-10 w-full px-6 md:px-16 lg:px-24 py-24">
+                  <div className="w-full max-w-4xl mx-auto">
+                    <div className="anim-el h-[2px] w-16 mb-6 origin-left bg-accent" style={{ opacity: 0 }} />
+                    <span className="anim-el block font-[family-name:var(--font-display)] text-xs tracking-[0.2em] uppercase mb-3 text-accent" style={{ opacity: 0 }}>{section.subtitle}</span>
+                    <h2 className="anim-el font-[family-name:var(--font-display)] text-4xl md:text-6xl lg:text-7xl font-light text-foreground mb-6 leading-tight tracking-tight" style={{ opacity: 0 }}>{section.title}</h2>
+                    <p className="anim-el text-muted-foreground text-base md:text-lg leading-relaxed mb-10 max-w-2xl" style={{ opacity: 0 }}>{section.description}</p>
+                    
+                    {/* Stats with animated counters */}
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+                      {[
+                        { value: '5', suffix: '+', label: 'Anos de Experiência', target: 5 },
+                        { value: '50', suffix: '+', label: 'Projetos Entregues', target: 50 },
+                        { value: '100', suffix: '%', label: 'Foco em Performance', target: 100 },
+                        { value: '∞', suffix: '', label: 'Inovação Contínua', target: null },
+                      ].map((stat, i) => (
+                        <div key={i} className="anim-el relative p-5 rounded-md overflow-hidden group"
+                          style={{ opacity: 0, background: 'hsl(var(--card) / 0.4)', border: '1px solid hsl(var(--border) / 0.15)' }}>
+                          <div className="absolute top-0 left-0 right-0 h-[1px] opacity-60"
+                            style={{ background: 'linear-gradient(90deg, transparent, hsl(var(--accent) / 0.5), transparent)' }} />
+                          {stat.target !== null ? (
+                            <span className="stat-value-animated block font-[family-name:var(--font-display)] text-2xl md:text-3xl font-bold text-accent mb-1"
+                              data-target={stat.target} data-suffix={stat.suffix}>0{stat.suffix}</span>
+                          ) : (
+                            <span className="block font-[family-name:var(--font-display)] text-2xl md:text-3xl font-bold text-accent mb-1">∞</span>
+                          )}
+                          <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.15em] uppercase text-muted-foreground">{stat.label}</span>
+                        </div>
+                      ))}
+                    </div>
 
-                  <ul className="space-y-4">
-                    {section.details.map((detail, i) => (
-                      <li key={i} className="anim-el flex items-start gap-4 text-muted-foreground text-sm md:text-base group" style={{ opacity: 0 }}>
-                        <span className="mt-1 flex items-center justify-center w-6 h-6 rounded-full shrink-0 border border-accent/30 text-accent font-[family-name:var(--font-display)] text-[10px]">{String(i + 1).padStart(2, '0')}</span>
-                        <span className="group-hover:text-foreground/90 transition-colors duration-300">{detail}</span>
-                      </li>
-                    ))}
-                  </ul>
+                    <ul className="space-y-4">
+                      {section.details.map((detail, i) => (
+                        <li key={i} className="anim-el flex items-start gap-4 text-muted-foreground text-sm md:text-base group" style={{ opacity: 0 }}>
+                          <span className="mt-1 flex items-center justify-center w-6 h-6 rounded-full shrink-0 border border-accent/30 text-accent font-[family-name:var(--font-display)] text-[10px]">{String(i + 1).padStart(2, '0')}</span>
+                          <span className="group-hover:text-foreground/90 transition-colors duration-300">{detail}</span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    {/* Scroll hint */}
+                    <div className="flex flex-col items-center mt-16 opacity-50">
+                      <span className="font-[family-name:var(--font-display)] text-[9px] tracking-[0.3em] uppercase text-accent/60 mb-2">Role para saber mais</span>
+                      <div className="w-[1px] h-8 bg-accent/30 animate-pulse" />
+                    </div>
+                  </div>
                 </div>
               </div>
-            </>
+
+              {/* Deep dive content */}
+              <DeepDiveContent sectionId="focuss-dev" accentHsl={focussDevColors.accentHsl} gradient={focussDevColors.gradient} />
+            </div>
           )}
 
           {/* All other sections: Lightweight cinematic style */}
@@ -1220,7 +1231,8 @@ export function SectionsDetail() {
             <CinematicSection section={section} onScrollUpAtTop={goBack} />
           )}
         </div>
-      )}
+        );
+      })()}
     </div>
   );
 }
