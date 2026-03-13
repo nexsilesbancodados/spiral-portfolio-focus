@@ -164,6 +164,23 @@ type DeepDiveBlock = {
 };
 
 const sectionDeepDive: Record<string, DeepDiveBlock[]> = {
+  'focuss-dev': [
+    {
+      heading: 'Nossa Missão',
+      body: 'Acreditamos que tecnologia de ponta deve ser acessível a todos. Nossa missão é democratizar o desenvolvimento digital de alta qualidade, oferecendo soluções que combinam estética premium com engenharia robusta — transformando ideias em produtos que impactam vidas.',
+      highlights: ['Inovação', 'Qualidade', 'Acessibilidade', 'Impacto Real'],
+    },
+    {
+      heading: 'Como Trabalhamos',
+      body: 'Nosso processo é transparente e colaborativo. Começamos entendendo profundamente o desafio do cliente, definimos uma estratégia técnica sólida e executamos em sprints curtos com entregas frequentes. Cada decisão é guiada por dados e feedback real.',
+      stat: { value: '100%', label: 'Transparência' },
+      highlights: ['Discovery', 'Estratégia', 'Execução Ágil', 'Feedback Loop', 'Entrega Contínua'],
+    },
+    {
+      heading: 'Valores que nos Guiam',
+      body: 'Excelência técnica, comunicação clara, prazos respeitados e um compromisso inabalável com a qualidade. Não entregamos apenas código — entregamos soluções que funcionam, escalam e encantam.',
+    },
+  ],
   'web-design': [
     {
       heading: 'Nosso Processo de Design',
