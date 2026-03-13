@@ -234,8 +234,8 @@ export function LuminaSlider() {
       { value: 0 },
       {
         value: 1,
-        duration: 2.4,
-        ease: 'power3.inOut',
+        duration: 2.2,
+        ease: 'power2.inOut',
         onComplete: () => {
           mat.uniforms.uProgress.value = 0;
           mat.uniforms.uTexture1.value = toTex;
@@ -257,9 +257,18 @@ export function LuminaSlider() {
   }, [transitionToSlide]);
 
   const triggerExplore = useCallback(() => {
-    const idx = currentSlideRef.current;
-    // Simple direct transition — no WebGL overlay
-    window.dispatchEvent(new CustomEvent('explore-slide', { detail: { slideIndex: idx } }));
+    const btn = document.querySelector('.explore-btn') as HTMLElement;
+    if (btn) {
+      gsap.to(btn, {
+        y: 8, opacity: 0, duration: 0.3, ease: 'power2.in',
+        onComplete: () => {
+          window.dispatchEvent(new CustomEvent('explore-slide', { detail: { slideIndex: currentSlideRef.current } }));
+          gsap.set(btn, { y: 0, opacity: 0.75 });
+        },
+      });
+    } else {
+      window.dispatchEvent(new CustomEvent('explore-slide', { detail: { slideIndex: currentSlideRef.current } }));
+    }
   }, []);
 
   // ── Wheel handler ─────────────────────────────────────────────────
@@ -327,6 +336,15 @@ export function LuminaSlider() {
     return () => window.removeEventListener('navigate-slide', handler);
   }, [goToSlide]);
 
+  // ── Auto-slide timer ──────────────────────────────────────────────
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (!isTransitioningRef.current && webglReadyRef.current) {
+        goToSlide(currentSlideRef.current + 1);
+      }
+    }, 6000);
+    return () => clearInterval(timer);
+  }, [goToSlide]);
 
   return (
     <main className="slider-wrapper loaded" ref={containerRef}>

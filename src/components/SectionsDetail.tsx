@@ -180,74 +180,72 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
         );
       }
 
-      // Hero content parallax — smoother scrub
+      // Hero content parallax
       const heroImg = el.querySelector('.ken-burns-hero');
       if (heroImg) {
         gsap.to(heroImg, {
-          yPercent: 15,
-          scale: 1.12,
+          yPercent: 20,
+          scale: 1.15,
           ease: 'none',
           scrollTrigger: {
             trigger: el.querySelector('.parallax-hero'),
             scroller: el,
             start: 'top top',
             end: 'bottom top',
-            scrub: 0.8, // smooth scrub with 0.8s lag
+            scrub: true,
           },
         });
       }
 
-      // Subtitle, description fade-in — smoother with GPU
+      // Subtitle, description fade-in
       gsap.utils.toArray<HTMLElement>(el.querySelectorAll('.cin-subtitle, .cin-desc')).forEach((node) => {
         gsap.fromTo(node,
-          { opacity: 0, y: 25, willChange: 'transform, opacity' },
+          { opacity: 0, y: 30 },
           {
-            opacity: 1, y: 0, duration: 0.9, ease: 'power3.out',
-            scrollTrigger: { trigger: node, scroller: el, start: 'top 92%', toggleActions: 'play none none none' },
-            clearProps: 'willChange',
+            opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
+            scrollTrigger: { trigger: node, scroller: el, start: 'top 90%', toggleActions: 'play none none none' },
           }
         );
       });
 
-      // Gallery items clipPath reveal — smoother easing
+      // Gallery items clipPath reveal
       const galleryItems = el.querySelectorAll('.gallery-item');
       if (galleryItems.length) {
         gsap.fromTo(galleryItems,
           { clipPath: 'inset(0 100% 0 0)', opacity: 1 },
           {
             clipPath: 'inset(0 0% 0 0)',
-            duration: 1.3,
-            stagger: 0.15,
-            ease: 'power2.inOut',
+            duration: 1.1,
+            stagger: 0.18,
+            ease: 'power3.inOut',
             scrollTrigger: {
               trigger: galleryItems[0],
               scroller: el,
-              start: 'top 88%',
+              start: 'top 85%',
               toggleActions: 'play none none none',
             },
           }
         );
       }
 
-      // Detail items staggered reveal — smoother with GPU-friendly transforms
+      // Detail items staggered reveal
       const detailItems = el.querySelectorAll('.detail-item');
       if (detailItems.length) {
         gsap.fromTo(detailItems,
-          { opacity: 0, y: 40, willChange: 'transform, opacity' },
+          { opacity: 0, y: 50, filter: 'blur(4px)' },
           {
-            opacity: 1, y: 0, duration: 0.8, stagger: 0.08, ease: 'power2.out',
-            scrollTrigger: { trigger: detailItems[0], scroller: el, start: 'top 90%', toggleActions: 'play none none none' },
-            clearProps: 'willChange',
+            opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.7, stagger: 0.1, ease: 'power2.out',
+            scrollTrigger: { trigger: detailItems[0], scroller: el, start: 'top 88%', toggleActions: 'play none none none' },
           }
         );
       }
 
-      // Title words cinematic reveal
+      // Title words cinematic reveal with clip
       const titleWords = el.querySelectorAll('.title-word');
       if (titleWords.length) {
         gsap.fromTo(titleWords,
           { y: '110%', opacity: 0 },
-          { y: '0%', opacity: 1, duration: 1, stagger: 0.08, ease: 'power4.out', delay: 0.1 }
+          { y: '0%', opacity: 1, duration: 0.9, stagger: 0.1, ease: 'power4.out', delay: 0.15 }
         );
       }
 
@@ -758,13 +756,11 @@ export function SectionsDetail() {
   const [isAnimating, setIsAnimating] = useState(false);
 
   const goBack = useCallback(() => {
-    // Simple fade out — no WebGL overlay
-    setIsVisible(false);
+    setIsAnimating(true);
     setTimeout(() => {
-      setActiveSlide(null);
+      setIsVisible(false);
       setIsAnimating(false);
     }, 350);
-    setIsAnimating(true);
   }, []);
 
   const openSlide = useCallback((slideIndex: number) => {
@@ -863,10 +859,9 @@ export function SectionsDetail() {
       id="detail-section"
       className={`fixed inset-0 z-20 bg-background ${
         isVisible 
-          ? 'opacity-100 pointer-events-auto' 
+          ? isAnimating ? 'detail-section-exit pointer-events-none' : 'detail-section-enter pointer-events-auto' 
           : 'opacity-0 pointer-events-none'
       }`}
-      style={{ transition: 'opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1)' }}
     >
       {section && (
         <div key={section.id} className="relative h-screen overflow-hidden">

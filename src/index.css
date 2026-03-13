@@ -234,8 +234,6 @@ All colors MUST be HSL.
 /* GTA VI Cinematic Scroll */
 .gta-vi-scroll {
   -webkit-overflow-scrolling: touch;
-  scroll-behavior: smooth;
-  overscroll-behavior: contain;
 }
 
 .gta-vi-scroll::-webkit-scrollbar {
@@ -274,30 +272,25 @@ All colors MUST be HSL.
 
 /* Card hover effects */
 .card-hover-glow {
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: transform;
+  transition: transform 0.25s ease;
 }
 .card-hover-glow:hover {
-  transform: translateY(-2px) translateZ(0);
+  transform: translateY(-2px);
 }
 
 /* Magnetic card effect */
 .magnetic-card {
-  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-  will-change: transform;
-  transform: translateZ(0);
+  transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .image-hover-zoom {
   overflow: hidden;
 }
 .image-hover-zoom img {
-  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: transform;
-  transform: translateZ(0);
+  transition: transform 0.3s ease;
 }
 .image-hover-zoom:hover img {
-  transform: scale(1.03) translateZ(0);
+  transform: scale(1.02);
 }
 
 /* Skills progress bar */
@@ -315,9 +308,8 @@ All colors MUST be HSL.
 
 /* Parallax container */
 .parallax-hero img {
-  transform: translate3d(0, 0, 0);
+  transform: translateZ(0);
   backface-visibility: hidden;
-  will-change: transform;
 }
 
 /* Explore Button */
@@ -365,8 +357,6 @@ All colors MUST be HSL.
 /* Performance: contain layout for heavy sections */
 #detail-section {
   contain: layout style;
-  will-change: opacity;
-  transform: translateZ(0);
 }
 
 /* Fluid responsive padding utility */
@@ -427,15 +417,12 @@ All colors MUST be HSL.
 @keyframes detail-enter {
   0% {
     opacity: 0;
-    transform: translate3d(0, 30px, 0) scale(0.985);
-    filter: blur(4px);
-  }
-  40% {
-    filter: blur(1px);
+    transform: translateY(40px) scale(0.98);
+    filter: blur(6px);
   }
   100% {
     opacity: 1;
-    transform: translate3d(0, 0, 0) scale(1);
+    transform: translateY(0) scale(1);
     filter: blur(0);
   }
 }
@@ -443,45 +430,42 @@ All colors MUST be HSL.
 @keyframes detail-exit {
   0% {
     opacity: 1;
-    transform: translate3d(0, 0, 0) scale(1);
+    transform: translateY(0) scale(1);
     filter: blur(0);
   }
   100% {
     opacity: 0;
-    transform: translate3d(0, -15px, 0) scale(0.995);
-    filter: blur(3px);
+    transform: translateY(-20px) scale(0.99);
+    filter: blur(4px);
   }
 }
 
 .detail-section-enter {
-  animation: detail-enter 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  will-change: opacity, transform;
+  animation: detail-enter 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  will-change: opacity, transform, filter;
 }
 
 .detail-section-exit {
-  animation: detail-exit 0.4s cubic-bezier(0.55, 0, 1, 0.45) forwards;
-  will-change: opacity, transform;
+  animation: detail-exit 0.35s cubic-bezier(0.55, 0, 1, 0.45) forwards;
+  will-change: opacity, transform, filter;
 }
 
 /* Cinematic hero content reveal */
 @keyframes hero-content-reveal {
   0% {
     opacity: 0;
-    transform: translate3d(0, 25px, 0);
-    filter: blur(3px);
-  }
-  50% {
-    filter: blur(0);
+    transform: translateY(30px);
+    filter: blur(4px);
   }
   100% {
     opacity: 1;
-    transform: translate3d(0, 0, 0);
+    transform: translateY(0);
     filter: blur(0);
   }
 }
 
 .hero-reveal {
-  animation: hero-content-reveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: hero-content-reveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 .hero-reveal-delay-1 { animation-delay: 0.1s; opacity: 0; }
@@ -490,14 +474,13 @@ All colors MUST be HSL.
 
 /* Ken Burns subtle effect on hero images */
 @keyframes ken-burns {
-  0% { transform: scale(1.05) translate3d(0, 0, 0); }
-  100% { transform: scale(1.12) translate3d(0, 0, 0); }
+  0% { transform: scale(1.05); }
+  100% { transform: scale(1.12); }
 }
 
 .ken-burns-hero {
   animation: ken-burns 20s ease-in-out alternate infinite;
   will-change: transform;
-  backface-visibility: hidden;
 }
 
 /* Title split wrapper for clip reveal */
