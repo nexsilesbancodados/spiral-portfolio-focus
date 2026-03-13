@@ -1001,6 +1001,9 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
         {/* Section-specific content */}
         {renderSectionContent()}
 
+        {/* Deep-dive extended content */}
+        <DeepDiveContent sectionId={section.id} accentHsl={colors.accentHsl} gradient={colors.gradient} />
+
         <div className="h-16 md:h-24" />
       </div>
     </div>
