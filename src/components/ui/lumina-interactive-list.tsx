@@ -279,33 +279,6 @@ export function LuminaSlider() {
     }
   }, []);
 
-  // ── Auto-slide progress timer ─────────────────────────────────────
-  useEffect(() => {
-    progressStartRef.current = Date.now();
-
-    const tick = () => {
-      if (isTransitioningRef.current) {
-        progressRafRef.current = requestAnimationFrame(tick);
-        return;
-      }
-      const elapsed = Date.now() - progressStartRef.current;
-      const pct = Math.min((elapsed / AUTO_SLIDE_DURATION) * 100, 100);
-      progressRef.current = pct;
-      setProgress(pct);
-
-      if (pct >= 100) {
-        // Trigger next slide
-        if (webglReadyRef.current) {
-          goToSlide(currentSlideRef.current + 1);
-        }
-        return;
-      }
-      progressRafRef.current = requestAnimationFrame(tick);
-    };
-
-    progressRafRef.current = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(progressRafRef.current);
-  }, [goToSlide, contentKey]);
 
   // ── Wheel handler ─────────────────────────────────────────────────
   const wheelAccumRef = useRef(0);
