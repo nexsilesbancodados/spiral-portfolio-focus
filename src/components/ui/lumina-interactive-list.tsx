@@ -87,7 +87,7 @@ const fragmentShader = `
   }
 `;
 
-const AUTO_SLIDE_DURATION = 6000;
+
 
 export function LuminaSlider() {
   const containerRef = useRef<HTMLDivElement>(null);
