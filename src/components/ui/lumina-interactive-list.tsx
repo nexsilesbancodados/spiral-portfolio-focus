@@ -280,31 +280,6 @@ export function LuminaSlider() {
   }, []);
 
 
-  // ── Wheel handler ─────────────────────────────────────────────────
-  const wheelAccumRef = useRef(0);
-  const wheelCooldownRef = useRef(false);
-  const wheelTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-    const handleWheel = (e: WheelEvent) => {
-      if (wheelCooldownRef.current) return;
-      wheelAccumRef.current += e.deltaY;
-      if (wheelAccumRef.current > 120) {
-        wheelCooldownRef.current = true;
-        triggerExplore();
-        wheelAccumRef.current = 0;
-        wheelTimerRef.current = setTimeout(() => { wheelCooldownRef.current = false; }, 900);
-      }
-      if (wheelAccumRef.current < 0) wheelAccumRef.current = 0;
-    };
-    el.addEventListener('wheel', handleWheel, { passive: true });
-    return () => {
-      el.removeEventListener('wheel', handleWheel);
-      if (wheelTimerRef.current) clearTimeout(wheelTimerRef.current);
-    };
-  }, [triggerExplore]);
 
   // ── Touch swipe ───────────────────────────────────────────────────
   useEffect(() => {
