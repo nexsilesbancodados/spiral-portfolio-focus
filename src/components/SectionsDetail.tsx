@@ -15,7 +15,7 @@ const sections = [
       'Foco em performance, acessibilidade e experiência do usuário',
       'Metodologias ágeis e entrega contínua',
     ],
-    image: '/images/slide-01.jpg',
+    image: '/images/slide-01.jpg', // FOCUSS DEV preservada
   },
   {
     id: 'web-design',
@@ -28,7 +28,7 @@ const sections = [
       'Criação de Design Systems consistentes',
       'Testes de usabilidade e iteração contínua',
     ],
-    image: '/images/hero-webdesign.jpg',
+    image: '/images/webdesign-detail-01.jpg',
   },
   {
     id: 'desenvolvimento',
@@ -41,7 +41,7 @@ const sections = [
       'Integração contínua e deploy automatizado',
       'Banco de dados otimizados com PostgreSQL',
     ],
-    image: '/images/hero-dev.jpg',
+    image: '/images/dev-detail-01.jpg',
   },
   {
     id: 'servicos',
@@ -56,7 +56,7 @@ const sections = [
       '🚀 Landing Pages — Páginas de alta conversão com design persuasivo e funis otimizados',
       '🎨 Design — Identidade visual completa, UI/UX premium e prototipagem interativa',
     ],
-    image: '/images/hero-servicos.jpg',
+    image: '/images/servicos-detail-01.jpg',
   },
   {
     id: 'inovacao-ia',
@@ -69,7 +69,7 @@ const sections = [
       'Infraestrutura cloud escalável na AWS',
       'Chatbots e assistentes virtuais customizados',
     ],
-    image: '/images/hero-ia.jpg',
+    image: '/images/ia-detail-01.jpg',
   },
   {
     id: 'mobile-web',
@@ -82,7 +82,7 @@ const sections = [
       'Layouts 100% responsivos',
       'Deploy containerizado com Docker',
     ],
-    image: '/images/hero-mobile.jpg',
+    image: '/images/mobile-detail-01.jpg',
   },
   {
     id: 'skills',
@@ -97,7 +97,7 @@ const sections = [
       'Figma, GSAP, Three.js — Design e animações cinematográficas',
       'Git, Scrum, TDD — Processos ágeis e código confiável',
     ],
-    image: '/images/hero-skills.jpg',
+    image: '/images/skills-detail-01.jpg',
   },
 ];
 
