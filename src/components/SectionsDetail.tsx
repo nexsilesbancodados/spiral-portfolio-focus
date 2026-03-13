@@ -1092,8 +1092,10 @@ export function SectionsDetail() {
     if (sections[activeSlide].id !== 'focuss-dev') return;
 
     let accum = 0;
+    const scroller = container.querySelector('.gta-vi-scroll');
     const handleWheel = (e: WheelEvent) => {
-      if (e.deltaY < 0) {
+      const scrollEl = scroller || container;
+      if ((scrollEl as HTMLElement).scrollTop <= 5 && e.deltaY < 0) {
         accum += Math.abs(e.deltaY);
         if (accum > 100) { accum = 0; goBack(); }
       } else { accum = 0; }
