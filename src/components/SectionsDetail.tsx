@@ -758,25 +758,14 @@ export function SectionsDetail() {
   const [isAnimating, setIsAnimating] = useState(false);
 
   const goBack = useCallback(() => {
-    const idx = activeSlide;
-    const slideMedia = idx !== null ? sections[idx]?.image : undefined;
-
-    // Dispatch WebGL glass transition (backward: dark → slide)
-    window.dispatchEvent(new CustomEvent('webgl-transition', {
-      detail: {
-        fromImage: slideMedia,
-        direction: 'backward',
-        duration: 1.8,
-        onMidpoint: () => {
-          setIsVisible(false);
-        },
-        onComplete: () => {
-          setIsAnimating(false);
-        },
-      },
-    }));
+    // Simple fade out — no WebGL overlay
+    setIsVisible(false);
+    setTimeout(() => {
+      setActiveSlide(null);
+      setIsAnimating(false);
+    }, 350);
     setIsAnimating(true);
-  }, [activeSlide]);
+  }, []);
 
   const openSlide = useCallback((slideIndex: number) => {
     if (openFrameRef.current !== null) {
