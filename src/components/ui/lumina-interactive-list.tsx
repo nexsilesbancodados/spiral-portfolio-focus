@@ -440,8 +440,8 @@ export function LuminaSlider() {
           >
             <div className="slide-progress-line">
               <div className="slide-progress-fill" style={{
-                width: index === currentSlide ? `${progress}%` : '0%',
-                transition: index === currentSlide ? 'none' : 'width 0.3s ease',
+                width: index === currentSlide ? '100%' : '0%',
+                transition: 'width 0.3s ease',
               }} />
             </div>
             <div className="slide-nav-title">{slide.title}</div>
