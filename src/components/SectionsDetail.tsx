@@ -41,7 +41,7 @@ const sections = [
       'Integração contínua e deploy automatizado',
       'Banco de dados otimizados com PostgreSQL',
     ],
-    image: '/images/hero-dev.jpg',
+    image: '/images/dev-detail-01.jpg',
   },
   {
     id: 'servicos',
