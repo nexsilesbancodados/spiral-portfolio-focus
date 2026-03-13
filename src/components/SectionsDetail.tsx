@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState, useCallback, lazy, Suspense, memo }
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-gsap.registerPlugin(ScrollTrigger); // v2
+gsap.registerPlugin(ScrollTrigger);
 
 const FocussChat = lazy(() => import('@/components/FocussChat').then(m => ({ default: m.FocussChat })));
 const TechLogosMarquee = lazy(() => import('@/components/TechLogosMarquee'));
@@ -10,102 +10,101 @@ const TechLogosMarquee = lazy(() => import('@/components/TechLogosMarquee'));
 const sections = [
   {
     id: 'focuss-dev',
-    subtitle: 'Quem Somos',
+    subtitle: 'Studio Digital',
     title: 'FOCUSS DEV',
-    description: 'Somos uma equipe apaixonada por tecnologia e inovação. Na FOCUSS DEV, transformamos ideias em experiências digitais extraordinárias, combinando design de alto impacto com código robusto e escalável.',
+    description: 'Nascemos da obsessão por criar experiências digitais que quebram padrões. Somos um studio boutique onde cada pixel é intencional, cada linha de código é arquitetada para escalar, e cada projeto é tratado como uma obra de arte tecnológica.',
     details: [
-      'Mais de 5 anos de experiência em desenvolvimento web',
-      'Projetos entregues para startups e grandes empresas',
-      'Foco em performance, acessibilidade e experiência do usuário',
-      'Metodologias ágeis e entrega contínua',
+      'Projetos premiados em UX e inovação digital desde 2019',
+      'Time multidisciplinar: designers, engenheiros e estrategistas sob o mesmo teto',
+      'Metodologia proprietária que reduz o time-to-market em até 40%',
+      'Parceiros certificados AWS, Google Cloud e Vercel',
     ],
     image: '/images/slide-01.jpg',
   },
   {
     id: 'web-design',
-    subtitle: 'Criação Visual',
+    subtitle: 'Arte & Interface',
     title: 'Web Design',
-    description: 'Interfaces modernas e elegantes que conectam marcas ao futuro digital. Nosso processo de design combina pesquisa de usuário, prototipagem rápida e uma estética visual impactante.',
+    description: 'Design não é decoração — é comunicação estratégica. Criamos interfaces que contam histórias, guiam o olhar e convertem visitantes em clientes apaixonados. Cada projeto nasce de dados e se materializa em beleza funcional.',
     details: [
-      'Design responsivo e mobile-first',
-      'Prototipagem interativa no Figma',
-      'Criação de Design Systems consistentes',
-      'Testes de usabilidade e iteração contínua',
+      'UX Research com mapeamento de jornada e personas baseadas em dados reais',
+      'Design Systems escaláveis com 300+ componentes reutilizáveis',
+      'Micro-interações cinematográficas que aumentam o engajamento em 60%',
+      'Acessibilidade WCAG 2.1 AAA integrada desde o primeiro wireframe',
     ],
     image: '/images/webdesign-gallery-02.jpg',
   },
   {
     id: 'desenvolvimento',
-    subtitle: 'Código & Performance',
+    subtitle: 'Engenharia de Software',
     title: 'Desenvolvimento',
-    description: 'Código limpo, performance máxima e arquitetura escalável. Utilizamos as melhores práticas e tecnologias modernas para construir aplicações robustas e de alta qualidade.',
+    description: 'Engenharia de verdade, não apenas código. Construímos sistemas que suportam milhões de usuários, mantêm latência abaixo de 100ms e evoluem com seu negócio. Arquitetura robusta é a fundação de tudo que criamos.',
     details: [
-      'Arquitetura limpa e código manutenível',
-      'APIs REST e GraphQL performáticas',
-      'Integração contínua e deploy automatizado',
-      'Banco de dados otimizados com PostgreSQL',
+      'Clean Architecture com cobertura de testes acima de 90%',
+      'APIs que respondem em <50ms sob carga pesada com cache inteligente',
+      'Pipelines CI/CD que deployam em produção em menos de 3 minutos',
+      'Observabilidade completa com dashboards de métricas em tempo real',
     ],
     image: '/images/dev-detail-01.jpg',
   },
   {
     id: 'servicos',
-    subtitle: 'Nossos Serviços',
+    subtitle: 'Ecossistema Digital',
     title: 'Serviços',
-    description: 'Soluções digitais completas para impulsionar seu negócio. Do tráfego pago à criação de sistemas complexos, oferecemos tudo o que você precisa para dominar o digital.',
+    description: 'Um ecossistema completo de soluções digitais para empresas que querem dominar o mercado online. Da estratégia de aquisição ao produto final, cobrimos toda a cadeia de valor digital.',
     details: [
-      '📈 Tráfego Pago — Campanhas estratégicas no Google Ads, Meta Ads e TikTok Ads com ROI maximizado',
-      '🌐 Criação de Sites — Sites modernos, responsivos e otimizados para SEO com tecnologias de ponta',
-      '📱 Criação de Apps — Aplicativos nativos e multiplataforma para iOS, Android e PWA',
-      '⚙️ Sistemas & SaaS — Plataformas escaláveis sob medida, ERPs, CRMs e dashboards',
-      '🚀 Landing Pages — Páginas de alta conversão com design persuasivo e funis otimizados',
-      '🎨 Design — Identidade visual completa, UI/UX premium e prototipagem interativa',
+      '📈 Growth Marketing — Estratégias data-driven com ROAS acima de 4x',
+      '🌐 Plataformas Web — Experiências imersivas com Next.js, React e edge computing',
+      '📱 Apps Mobile — Aplicações nativas e cross-platform com React Native e Flutter',
+      '⚙️ SaaS & Plataformas — Arquiteturas multi-tenant escaláveis com billing integrado',
+      '🚀 Landing Pages — Conversão otimizada com A/B testing e analytics avançado',
+      '🎨 Branding Digital — Identidade visual que posiciona e diferencia no mercado',
     ],
     image: '/images/servicos-detail-02.jpg',
   },
   {
     id: 'inovacao-ia',
-    subtitle: 'Futuro Digital',
+    subtitle: 'Inteligência Artificial',
     title: 'Inovação e IA',
-    description: 'Tecnologias de ponta e inteligência artificial para soluções que fazem a diferença. Integramos IA nos nossos projetos para criar experiências inteligentes e personalizadas.',
+    description: 'A inteligência artificial não é mais ficção científica — é vantagem competitiva. Implementamos soluções de IA que automatizam processos, personalizam experiências e revelam insights ocultos nos seus dados.',
     details: [
-      'Integração com modelos de Machine Learning',
-      'Automação inteligente de processos',
-      'Infraestrutura cloud escalável na AWS',
-      'Chatbots e assistentes virtuais customizados',
+      'LLMs customizados e fine-tuning para domínios específicos do seu negócio',
+      'RAG (Retrieval-Augmented Generation) para bases de conhecimento empresariais',
+      'Computer Vision para controle de qualidade e automação industrial',
+      'Agentes autônomos que executam workflows complexos sem intervenção humana',
     ],
     image: '/images/ia-gallery-02.jpg',
   },
   {
     id: 'mobile-web',
-    subtitle: 'Multiplataforma',
+    subtitle: 'Cross-Platform',
     title: 'Mobile e Web',
-    description: 'Aplicações responsivas e multiplataforma que funcionam perfeitamente em qualquer dispositivo. Do mobile ao desktop, garantimos consistência e performance.',
+    description: 'Uma experiência, todos os dispositivos. Desenvolvemos aplicações que transitam perfeitamente entre mobile, tablet e desktop, mantendo performance nativa e consistência visual em cada breakpoint.',
     details: [
-      'Apps nativos com React Native',
-      'Progressive Web Apps (PWA)',
-      'Layouts 100% responsivos',
-      'Deploy containerizado com Docker',
+      'React Native com módulos nativos custom para iOS e Android',
+      'PWAs que funcionam offline com sync inteligente em background',
+      'Animações a 60fps com Reanimated e gesture handlers nativos',
+      'CI/CD mobile com CodePush para updates instantâneos sem app stores',
     ],
     image: '/images/mobile-gallery-01.jpg',
   },
   {
     id: 'skills',
-    subtitle: 'Competências Técnicas',
+    subtitle: 'Arsenal Técnico',
     title: 'Skills',
-    description: 'Domínio completo do ecossistema de desenvolvimento moderno. Das linguagens de programação aos frameworks mais avançados, cada skill é refinada com prática e projetos reais.',
+    description: 'Cada ferramenta no nosso arsenal foi escolhida por excelência, não por modismo. Dominamos o stack completo — do banco de dados ao pixel final — com profundidade que transforma complexidade em simplicidade.',
     details: [
-      'React, Next.js, TypeScript — Front-end de alta performance',
-      'Node.js, Python, Go — Back-end escalável e robusto',
-      'PostgreSQL, MongoDB, Redis — Dados otimizados e resilientes',
-      'AWS, Docker, CI/CD — Infraestrutura cloud automatizada',
-      'Figma, GSAP, Three.js — Design e animações cinematográficas',
-      'Git, Scrum, TDD — Processos ágeis e código confiável',
+      'React 19, Next.js 15, TypeScript Strict — Front-end bleeding edge',
+      'Node.js, Python, Rust — Back-end para cada cenário de performance',
+      'PostgreSQL, Redis, Elasticsearch — Dados rápidos e resilientes',
+      'Kubernetes, Terraform, GitHub Actions — Infraestrutura como código',
+      'GSAP, Three.js, Framer Motion — Animações que impressionam',
+      'Figma, Storybook, Chromatic — Design-to-code sem fricção',
     ],
     image: '/images/skills-detail-01.jpg',
   },
 ];
 
-// Per-section detail images (labels removed for cleanliness)
 const sectionGallery: Record<string, { images: { src: string; alt: string }[]; layout: 'panoramic-duo' | 'trio' | 'asymmetric' | 'stacked' }> = {
   'web-design': {
     layout: 'panoramic-duo',
@@ -144,7 +143,6 @@ const sectionGallery: Record<string, { images: { src: string; alt: string }[]; l
   },
 };
 
-// Static color palette — moved outside component to avoid recreation each render
 const sectionColors: Record<string, { accent: string; accentHsl: string; gradient: string; overlay: string; titleBg: string; titleGradient: string; glowColor: string }> = {
   'focuss-dev':       { accent: 'text-blue-400',      accentHsl: '210 90% 60%',   gradient: 'linear-gradient(90deg, hsl(210 90% 60%), hsl(230 80% 65%))',          overlay: 'none', titleBg: '', titleGradient: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(210 90% 70%) 40%, hsl(230 80% 60%) 70%, hsl(210 90% 50%) 100%)', glowColor: 'hsl(210 90% 60% / 0.4)' },
   'web-design':       { accent: 'text-orange-400',     accentHsl: '25 95% 55%',    gradient: 'linear-gradient(90deg, hsl(25 95% 55%), hsl(335 75% 55%))',           overlay: 'linear-gradient(135deg, hsl(25 95% 55% / 0.12), hsl(335 75% 55% / 0.08), transparent 70%)', titleBg: '', titleGradient: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(25 95% 65%) 30%, hsl(335 75% 55%) 65%, hsl(25 95% 45%) 100%)', glowColor: 'hsl(25 95% 55% / 0.35)' },
@@ -155,7 +153,7 @@ const sectionColors: Record<string, { accent: string; accentHsl: string; gradien
   'skills':           { accent: 'text-cyan-400',       accentHsl: '185 80% 55%',   gradient: 'linear-gradient(90deg, hsl(185 80% 55%), hsl(210 75% 60%))',          overlay: 'linear-gradient(225deg, hsl(185 80% 55% / 0.1), hsl(210 75% 60% / 0.06), transparent 60%)', titleBg: '', titleGradient: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(185 80% 65%) 30%, hsl(210 75% 55%) 65%, hsl(185 80% 45%) 100%)', glowColor: 'hsl(185 80% 55% / 0.35)' },
 };
 
-// ─── Extended deep-dive content per section ──────────────────────
+// ─── Deep-dive content ──────────────────────────────────────────
 type DeepDiveBlock = {
   heading: string;
   body: string;
@@ -166,169 +164,169 @@ type DeepDiveBlock = {
 const sectionDeepDive: Record<string, DeepDiveBlock[]> = {
   'focuss-dev': [
     {
-      heading: 'Nossa Missão',
-      body: 'Acreditamos que tecnologia de ponta deve ser acessível a todos. Nossa missão é democratizar o desenvolvimento digital de alta qualidade, oferecendo soluções que combinam estética premium com engenharia robusta — transformando ideias em produtos que impactam vidas.',
-      highlights: ['Inovação', 'Qualidade', 'Acessibilidade', 'Impacto Real'],
+      heading: 'A Origem da FOCUSS',
+      body: 'Surgimos em 2019, quando percebemos que o mercado digital brasileiro carecia de studios que unissem excelência técnica com visão de produto. Não queríamos ser mais uma fábrica de software — queríamos ser parceiros estratégicos de negócios que acreditam no poder da tecnologia.',
+      highlights: ['Visão de Produto', 'Parceria Estratégica', 'Excelência Técnica', 'Inovação Constante'],
     },
     {
-      heading: 'Como Trabalhamos',
-      body: 'Nosso processo é transparente e colaborativo. Começamos entendendo profundamente o desafio do cliente, definimos uma estratégia técnica sólida e executamos em sprints curtos com entregas frequentes. Cada decisão é guiada por dados e feedback real.',
-      stat: { value: '100%', label: 'Transparência' },
-      highlights: ['Discovery', 'Estratégia', 'Execução Ágil', 'Feedback Loop', 'Entrega Contínua'],
+      heading: 'Nosso Manifesto',
+      body: 'Código é poesia quando bem escrito. Design é linguagem quando bem pensado. Produto é revolução quando bem executado. Na FOCUSS, cada entrega carrega essa filosofia — nunca o mínimo viável, sempre o máximo impactante.',
+      stat: { value: '200+', label: 'Clientes Satisfeitos' },
+      highlights: ['Zero Atalhos', 'Qualidade Obsessiva', 'Entrega de Valor', 'Evolução Contínua'],
     },
     {
-      heading: 'Valores que nos Guiam',
-      body: 'Excelência técnica, comunicação clara, prazos respeitados e um compromisso inabalável com a qualidade. Não entregamos apenas código — entregamos soluções que funcionam, escalam e encantam.',
+      heading: 'Cultura de Aprendizado',
+      body: 'Dedicamos 20% do nosso tempo a pesquisa e desenvolvimento interno. Isso significa explorar novas tecnologias, contribuir com open source, publicar artigos técnicos e organizar meetups. A curiosidade é o combustível que nos mantém à frente.',
     },
   ],
   'web-design': [
     {
-      heading: 'Nosso Processo de Design',
-      body: 'Cada projeto começa com uma fase de descoberta profunda. Entendemos o negócio, o público-alvo e os objetivos antes de traçar qualquer pixel. A partir daí, construímos wireframes de baixa fidelidade, validamos com stakeholders e evoluímos para protótipos interativos.',
-      highlights: ['Discovery & Research', 'Wireframes Lo-Fi', 'Protótipos Hi-Fi', 'Design System', 'Handoff para Dev'],
+      heading: 'Design Thinking na Prática',
+      body: 'Nosso processo de design começa muito antes do Figma. Realizamos entrevistas com stakeholders, análise competitiva, mapeamento de ecossistema e workshops de co-criação. Só depois de entender profundamente o problema é que desenhamos a solução.',
+      highlights: ['Entrevistas com Usuários', 'Análise Competitiva', 'Workshops de Co-criação', 'Mapeamento de Jornada', 'Priorização por Impacto'],
     },
     {
-      heading: 'Design Systems & Consistência',
-      body: 'Criamos Design Systems robustos com tokens de cor, tipografia, espaçamento e componentes reutilizáveis. Isso garante que o produto final mantenha consistência visual em todas as telas e que a equipe de desenvolvimento trabalhe com eficiência máxima.',
-      stat: { value: '200+', label: 'Componentes Criados' },
+      heading: 'Design Tokens & Escala',
+      body: 'Nossos Design Systems não são coleções estáticas de componentes — são organismos vivos. Utilizamos design tokens sincronizados entre Figma e código, permitindo que mudanças de tema, marca ou acessibilidade sejam propagadas instantaneamente em todo o produto.',
+      stat: { value: '300+', label: 'Componentes no Sistema' },
     },
     {
-      heading: 'Ferramentas & Workflow',
-      body: 'Nosso stack de design inclui Figma como ferramenta principal, com plugins customizados para automação. Utilizamos Storybook para documentação de componentes, e integramos diretamente com o código via tokens de design.',
-      highlights: ['Figma', 'Storybook', 'Design Tokens', 'Auto-Layout', 'Variants'],
+      heading: 'Motion Design & Storytelling',
+      body: 'Animações não são decoração — são narrativa. Cada transição, cada micro-interação conta uma parte da história do produto. Usamos GSAP, Framer Motion e Lottie para criar experiências que guiam, encantam e retêm o usuário.',
+      highlights: ['GSAP Cinematográfico', 'Framer Motion', 'Lottie Animations', 'SVG Morphing', 'Scroll-Driven Effects'],
     },
     {
-      heading: 'Acessibilidade & Inclusão',
-      body: 'Todo design é criado seguindo as diretrizes WCAG 2.1 AA. Garantimos contraste adequado, navegação por teclado, textos legíveis e uma experiência inclusiva para todos os usuários, independentemente de suas capacidades.',
+      heading: 'Métricas de Design',
+      body: 'Design sem dados é arte, não produto. Medimos tudo: heatmaps de clique, gravações de sessão, taxas de conclusão de tarefa, NPS de usabilidade. Cada iteração é informada por comportamento real, não por achismo.',
+      stat: { value: '60%', label: 'Aumento em Engajamento' },
     },
   ],
   'desenvolvimento': [
     {
-      heading: 'Arquitetura & Padrões',
-      body: 'Adotamos Clean Architecture e princípios SOLID em todos os projetos. Cada aplicação é dividida em camadas bem definidas — domínio, aplicação, infraestrutura — garantindo testabilidade, manutenibilidade e facilidade de evolução.',
-      highlights: ['Clean Architecture', 'SOLID Principles', 'Domain-Driven Design', 'CQRS', 'Event Sourcing'],
+      heading: 'Filosofia de Código',
+      body: 'Escrevemos código para humanos, não para máquinas. Isso significa nomes descritivos, funções pequenas, abstrações claras e documentação inline. Quando outro desenvolvedor lê nosso código, ele entende a intenção — não precisa decifrá-la.',
+      highlights: ['Clean Code', 'SOLID', 'DDD', 'Hexagonal Architecture', 'Event-Driven'],
     },
     {
-      heading: 'Stack Tecnológico',
-      body: 'Escolhemos a tecnologia certa para cada projeto. Para front-end, React com TypeScript é nosso padrão. No back-end, Node.js para APIs rápidas, Python para data-heavy e Go para microsserviços de alta performance.',
-      stat: { value: '99.9%', label: 'Uptime Garantido' },
+      heading: 'Stack por Contexto',
+      body: 'Não somos fanáticos por uma tecnologia — somos fanáticos por resolver o problema certo da maneira certa. React para interfaces ricas, Next.js para SEO, Node.js para I/O intensivo, Python para ML, Rust para processamento de alta performance.',
+      stat: { value: '99.99%', label: 'Uptime nos Últimos 12 Meses' },
     },
     {
-      heading: 'Testing & Quality Assurance',
-      body: 'Testes automatizados são parte integral do nosso processo. Cobrimos desde unit tests com Jest/Vitest, integration tests com Supertest, até E2E tests com Playwright. Cada PR passa por code review e CI/CD pipeline completo.',
-      highlights: ['Unit Tests', 'Integration Tests', 'E2E Tests', 'Code Review', 'CI/CD Pipeline'],
+      heading: 'Cultura de Testes',
+      body: 'Não deployamos sem testes. Unit tests com Vitest, integration tests com Testing Library, E2E com Playwright, visual regression com Chromatic. Nosso pipeline rejeita automaticamente PRs com cobertura abaixo de 85%.',
+      highlights: ['Vitest / Jest', 'Testing Library', 'Playwright E2E', 'Chromatic Visual', 'Contract Testing'],
     },
     {
-      heading: 'Performance & Otimização',
-      body: 'Monitoramos métricas de Core Web Vitals (LCP, FID, CLS) em tempo real. Aplicamos lazy loading, code splitting, caching agressivo e otimização de queries para garantir que cada aplicação carregue em menos de 2 segundos.',
-      stat: { value: '<2s', label: 'Tempo de Carregamento' },
+      heading: 'Observabilidade Total',
+      body: 'Cada microsserviço emite métricas, logs estruturados e traces distribuídos. Dashboards em Grafana mostram latência por endpoint, taxa de erro, saturação de recursos e alertas inteligentes que nos avisam antes do cliente perceber.',
+      stat: { value: '<50ms', label: 'P95 de Latência' },
     },
   ],
   'servicos': [
     {
-      heading: 'Tráfego Pago — Estratégia Completa',
-      body: 'Desenvolvemos campanhas de tráfego pago com foco em ROI. Começamos com análise de mercado e público, criamos criativos de alto impacto, configuramos tracking avançado (GTM, Pixel, API de Conversões) e otimizamos diariamente com base em dados reais.',
-      highlights: ['Google Ads', 'Meta Ads', 'TikTok Ads', 'Análise de Dados', 'Otimização Contínua'],
-      stat: { value: '3.5x', label: 'ROAS Médio' },
+      heading: 'Growth Marketing — ROI Comprovado',
+      body: 'Não apenas geramos tráfego — geramos receita. Nossas campanhas são construídas sobre funis de conversão otimizados, tracking server-side (CAPI), lookalike audiences inteligentes e criativos testados com rigor estatístico.',
+      highlights: ['Google Ads', 'Meta Ads', 'TikTok Ads', 'LinkedIn Ads', 'Tracking Server-Side'],
+      stat: { value: '4.2x', label: 'ROAS Médio dos Clientes' },
     },
     {
-      heading: 'Desenvolvimento de Sites — Do Conceito ao Deploy',
-      body: 'Cada site é construído com tecnologias modernas (React, Next.js, Tailwind) e otimizado para SEO desde o primeiro commit. Implementamos schemas estruturados, meta tags dinâmicas, sitemap automatizado e performance lighthouse acima de 90.',
-      highlights: ['SEO On-Page', 'Schema Markup', 'Performance 90+', 'Mobile-First', 'Analytics Integrado'],
+      heading: 'Plataformas Web — Além do Básico',
+      body: 'Nossos sites não são brochuras digitais. São máquinas de conversão com SSR para SEO, edge rendering para velocidade global, CMS headless para autonomia do cliente e analytics comportamental para evolução contínua.',
+      highlights: ['Next.js / Remix', 'Edge Computing', 'Headless CMS', 'Core Web Vitals', 'SEO Técnico'],
     },
     {
-      heading: 'Apps & Sistemas SaaS',
-      body: 'Construímos aplicações completas — de MVPs para validação até plataformas SaaS escaláveis. Incluímos autenticação segura, dashboards em tempo real, integrações com APIs de terceiros, sistema de pagamentos e painel administrativo.',
-      stat: { value: '15+', label: 'SaaS Entregues' },
+      heading: 'SaaS — Do MVP ao Scale',
+      body: 'Já ajudamos 15+ startups a ir do zero ao product-market fit. Construímos MVPs em 4-6 semanas, iteramos baseado em métricas de ativação e retenção, e escalamos a arquitetura conforme a base de usuários cresce.',
+      stat: { value: '15+', label: 'SaaS Lançados' },
     },
     {
-      heading: 'Metodologia de Trabalho',
-      body: 'Trabalhamos em sprints de 2 semanas com entregas contínuas. Cada projeto tem um canal dedicado para comunicação, board no Notion/Linear para acompanhamento e calls semanais de alinhamento. Transparência total em cada etapa.',
-      highlights: ['Sprints de 2 semanas', 'Entregas Contínuas', 'Board de Acompanhamento', 'Calls Semanais', 'Relatórios de Progresso'],
+      heading: 'Modelo de Parceria',
+      body: 'Oferecemos três formatos: projeto fechado com escopo definido, squads dedicados para evolução contínua, e consultoria técnica para times internos. Cada formato inclui rituais de alinhamento, documentação e transferência de conhecimento.',
+      highlights: ['Projeto Fechado', 'Squad Dedicado', 'Consultoria Técnica', 'Retainer Mensal', 'Suporte Contínuo'],
     },
   ],
   'inovacao-ia': [
     {
-      heading: 'Integração de IA em Produtos',
-      body: 'Integramos modelos de IA diretamente nos produtos dos nossos clientes. Desde chatbots inteligentes com GPT até sistemas de recomendação personalizados, análise de sentimento em reviews e processamento automático de documentos.',
-      highlights: ['Chatbots com GPT', 'Recomendação Personalizada', 'Análise de Sentimento', 'OCR Automático', 'NLP Customizado'],
+      heading: 'IA Generativa Aplicada',
+      body: 'Implementamos soluções com GPT-4, Claude, Gemini e modelos open-source como LLaMA e Mistral. Cada caso de uso é avaliado: quando fine-tuning vale mais que prompting? Quando RAG supera treinamento? Otimizamos custo, latência e qualidade.',
+      highlights: ['GPT-4 / Claude', 'LLaMA / Mistral', 'Fine-tuning', 'RAG Avançado', 'Prompt Engineering'],
     },
     {
-      heading: 'Automação Inteligente',
-      body: 'Criamos workflows automatizados que eliminam tarefas repetitivas. Integramos ferramentas como Make, n8n e APIs customizadas para conectar sistemas, processar dados automaticamente e gerar relatórios inteligentes.',
-      stat: { value: '80%', label: 'Redução de Trabalho Manual' },
+      heading: 'Automação com Agentes',
+      body: 'Criamos agentes de IA que executam workflows inteiros: desde pesquisa de mercado automatizada até geração de relatórios, moderação de conteúdo e atendimento ao cliente. Cada agente é monitorado com métricas de qualidade e custo.',
+      stat: { value: '85%', label: 'Redução em Trabalho Repetitivo' },
     },
     {
-      heading: 'Machine Learning Aplicado',
-      body: 'Desenvolvemos modelos de ML para casos de uso específicos: previsão de demanda, detecção de fraude, classificação de imagens, análise preditiva de churn e otimização de preços dinâmicos.',
-      highlights: ['Previsão de Demanda', 'Detecção de Fraude', 'Classificação de Imagens', 'Análise de Churn', 'Preços Dinâmicos'],
+      heading: 'Visão Computacional',
+      body: 'Desenvolvemos pipelines de computer vision para controle de qualidade em linhas de produção, análise de documentos (OCR avançado), reconhecimento facial para controle de acesso e análise de imagens médicas.',
+      highlights: ['OCR Avançado', 'Controle de Qualidade', 'Análise de Documentos', 'Detecção de Anomalias', 'Edge AI'],
     },
     {
-      heading: 'Infraestrutura Cloud para IA',
-      body: 'Deployamos modelos de IA em infraestrutura cloud escalável. Utilizamos AWS SageMaker, Google Vertex AI ou soluções serverless para garantir baixa latência e custo otimizado conforme a demanda.',
-      stat: { value: '<100ms', label: 'Latência de Inferência' },
+      heading: 'MLOps & Infraestrutura',
+      body: 'Não basta treinar um modelo — é preciso deployá-lo, monitorá-lo e reciclá-lo. Nosso pipeline de MLOps inclui versionamento de dados, treinamento distribuído, A/B testing de modelos e monitoramento de drift em produção.',
+      stat: { value: '<80ms', label: 'Latência de Inferência' },
     },
   ],
   'mobile-web': [
     {
-      heading: 'React Native — Apps Nativos',
-      body: 'Desenvolvemos aplicações mobile com React Native, compartilhando até 90% do código entre iOS e Android. Implementamos navegação nativa, animações fluidas, push notifications e integração com recursos do dispositivo (câmera, GPS, biometria).',
-      stat: { value: '90%', label: 'Código Compartilhado' },
+      heading: 'React Native — Performance Nativa',
+      body: 'Nossos apps em React Native atingem performance indistinguível de apps nativos. Usamos JSI para bridges diretas, Reanimated para animações a 60fps no UI thread e Hermes engine para startup ultra-rápido.',
+      stat: { value: '95%', label: 'Código Compartilhado iOS/Android' },
     },
     {
-      heading: 'Progressive Web Apps (PWA)',
-      body: 'Para casos onde uma PWA é a melhor escolha, implementamos service workers para funcionamento offline, cache inteligente, push notifications web e instalação na home screen. A experiência é indistinguível de um app nativo.',
-      highlights: ['Offline-First', 'Push Notifications', 'Instalação Home Screen', 'Cache Inteligente', 'Sync em Background'],
+      heading: 'PWA — O Melhor dos Dois Mundos',
+      body: 'Progressive Web Apps são a escolha inteligente quando você quer alcance sem a barreira das app stores. Implementamos cache strategies com Workbox, background sync, push notifications e instalação na home screen.',
+      highlights: ['Workbox Caching', 'Background Sync', 'Push Notifications', 'App Shell Pattern', 'Offline-First'],
     },
     {
-      heading: 'Responsividade Total',
-      body: 'Cada interface é desenvolvida com abordagem mobile-first. Utilizamos breakpoints estratégicos, layouts fluidos com CSS Grid e Flexbox, tipografia responsiva com clamp() e imagens otimizadas para cada resolução.',
-      highlights: ['Mobile-First', 'CSS Grid & Flexbox', 'Tipografia Fluida', 'Imagens Responsivas', 'Touch-Friendly'],
+      heading: 'Design Responsivo Avançado',
+      body: 'Ir além de media queries simples: usamos container queries, clamp() para tipografia fluida, CSS Grid com auto-fill/auto-fit e componentes que se adaptam ao contexto, não apenas ao viewport.',
+      highlights: ['Container Queries', 'Tipografia Fluida', 'CSS Grid Avançado', 'Aspect Ratio', 'Touch-Optimized'],
     },
     {
-      heading: 'Deploy & Distribuição',
-      body: 'Gerenciamos todo o processo de deploy — desde a configuração nas lojas (App Store, Google Play) até CI/CD com CodePush para atualizações over-the-air. Monitoramos crashes em tempo real com Sentry e analytics com Firebase.',
-      stat: { value: '24h', label: 'Tempo para Hotfix' },
+      heading: 'Deploy & Monitoramento Mobile',
+      body: 'CI/CD para mobile com EAS Build, CodePush para updates OTA, Sentry para crash reports em tempo real e Firebase Analytics para métricas de engajamento. Releases semanais automatizadas com changelogs.',
+      stat: { value: '<4h', label: 'Tempo para Hotfix' },
     },
   ],
   'skills': [
     {
-      heading: 'Front-end Moderno',
-      body: 'Dominamos o ecossistema React por completo: hooks avançados, server components, streaming SSR, suspense boundaries, code splitting automático e state management com Zustand/TanStack Query. Animações cinematográficas com GSAP e Three.js.',
-      highlights: ['React 19+', 'Next.js App Router', 'TypeScript Strict', 'Tailwind CSS', 'GSAP & Three.js'],
+      heading: 'Front-end — Bleeding Edge',
+      body: 'Não apenas usamos React — contribuímos com a comunidade. Dominamos RSC (React Server Components), Suspense, Streaming SSR, Partial Prerendering e Server Actions. Nosso código de front-end é indistinguível do que sai de equipes da Vercel.',
+      highlights: ['React 19 / RSC', 'Next.js 15', 'TypeScript 5+', 'Tailwind CSS v4', 'GSAP & Three.js'],
     },
     {
-      heading: 'Back-end Escalável',
-      body: 'Construímos APIs robustas com Node.js (Express/Fastify), Python (FastAPI/Django) e Go para microsserviços de alta performance. Implementamos autenticação JWT/OAuth, rate limiting, caching com Redis e message queues com RabbitMQ.',
-      highlights: ['Node.js / Express', 'Python / FastAPI', 'Go / Gin', 'Redis & RabbitMQ', 'JWT & OAuth2'],
+      heading: 'Back-end — Escalável por Design',
+      body: 'Arquitetamos back-ends que escalam horizontalmente sem refatoração. Event-driven com Kafka/RabbitMQ, CQRS quando necessário, caching multi-layer com Redis e CDN, e bancos de dados escolhidos por workload — OLTP ou OLAP.',
+      highlights: ['Node.js / Fastify', 'Python / FastAPI', 'Rust / Actix', 'Kafka & RabbitMQ', 'gRPC & REST'],
     },
     {
-      heading: 'Banco de Dados & Data',
-      body: 'Expertise em PostgreSQL (com extensões PostGIS e pg_vector), MongoDB para documentos, Redis para cache/sessions e Elasticsearch para busca full-text. Modelamos schemas otimizados com migrations versionadas.',
-      stat: { value: '10TB+', label: 'Dados Gerenciados' },
+      heading: 'Data & Infraestrutura',
+      body: 'PostgreSQL é nosso canivete suíço — com pg_vector para embeddings, PostGIS para dados geoespaciais e pg_cron para scheduling. Redis para cache/sessions, Elasticsearch para full-text search e ClickHouse para analytics.',
+      stat: { value: '50TB+', label: 'Dados Gerenciados' },
     },
     {
-      heading: 'DevOps & Cloud',
-      body: 'Infraestrutura como código com Terraform, containers com Docker/Kubernetes, CI/CD com GitHub Actions, monitoramento com Grafana/Prometheus e logging centralizado com ELK Stack. Escalamos do zero ao milhão de usuários.',
-      highlights: ['Docker & K8s', 'Terraform IaC', 'GitHub Actions', 'Grafana & Prometheus', 'AWS / GCP'],
+      heading: 'DevOps & Platform Engineering',
+      body: 'Infraestrutura como código com Terraform e Pulumi, orquestração com Kubernetes (EKS/GKE), observabilidade com OpenTelemetry + Grafana stack, e golden paths para que desenvolvedores deployem com confiança.',
+      highlights: ['Kubernetes', 'Terraform / Pulumi', 'GitHub Actions', 'ArgoCD', 'OpenTelemetry'],
       stat: { value: '∞', label: 'Escalabilidade' },
     },
   ],
 };
 
-// Deep-dive content renderer component
+// Deep-dive renderer
 const DeepDiveContent = memo(function DeepDiveContent({ sectionId, accentHsl, gradient }: { sectionId: string; accentHsl: string; gradient: string }) {
   const blocks = sectionDeepDive[sectionId];
   if (!blocks || blocks.length === 0) return null;
 
   return (
     <div className="relative z-10 bg-background">
-      {/* Section divider */}
       <div className="fluid-section-pad">
         <div className="flex items-center gap-4 mb-2">
           <div className="h-[2px] flex-1" style={{ background: `linear-gradient(90deg, hsl(${accentHsl} / 0.4), transparent)` }} />
           <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.4em] uppercase" style={{ color: `hsl(${accentHsl} / 0.6)` }}>
-            DEEP DIVE
+            EM PROFUNDIDADE
           </span>
           <div className="h-[2px] flex-1" style={{ background: `linear-gradient(90deg, transparent, hsl(${accentHsl} / 0.4))` }} />
         </div>
@@ -341,7 +339,6 @@ const DeepDiveContent = memo(function DeepDiveContent({ sectionId, accentHsl, gr
           style={{ opacity: 0, padding: `clamp(2rem, 4vw, 4rem) clamp(1.5rem, 4vw, 6rem)` }}
         >
           <div className="max-w-5xl mx-auto">
-            {/* Block number + heading */}
             <div className="flex items-start gap-4 mb-6">
               <span
                 className="font-[family-name:var(--font-display)] text-[11px] tracking-[0.3em] mt-2 shrink-0"
@@ -360,7 +357,6 @@ const DeepDiveContent = memo(function DeepDiveContent({ sectionId, accentHsl, gr
               </div>
             </div>
 
-            {/* Body text */}
             <p
               className="text-foreground/75 leading-relaxed mb-8 max-w-3xl ml-[calc(clamp(11px,1vw,14px)*3+1rem)]"
               style={{ fontSize: 'clamp(0.875rem, 1.3vw, 1.125rem)' }}
@@ -368,7 +364,6 @@ const DeepDiveContent = memo(function DeepDiveContent({ sectionId, accentHsl, gr
               {block.body}
             </p>
 
-            {/* Stat card (if present) */}
             {block.stat && (
               <div
                 className="inline-flex items-center gap-6 rounded-md px-8 py-5 mb-8 ml-[calc(clamp(11px,1vw,14px)*3+1rem)]"
@@ -383,15 +378,12 @@ const DeepDiveContent = memo(function DeepDiveContent({ sectionId, accentHsl, gr
                 >
                   {block.stat.value}
                 </span>
-                <span
-                  className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.2em] uppercase text-muted-foreground"
-                >
+                <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.2em] uppercase text-muted-foreground">
                   {block.stat.label}
                 </span>
               </div>
             )}
 
-            {/* Highlights pills */}
             {block.highlights && (
               <div className="flex flex-wrap gap-2 ml-[calc(clamp(11px,1vw,14px)*3+1rem)]">
                 {block.highlights.map((h, j) => (
@@ -411,7 +403,6 @@ const DeepDiveContent = memo(function DeepDiveContent({ sectionId, accentHsl, gr
             )}
           </div>
 
-          {/* Separator */}
           {i < blocks.length - 1 && (
             <div className="max-w-5xl mx-auto mt-10">
               <div className="h-[1px]" style={{ background: `linear-gradient(90deg, transparent, hsl(${accentHsl} / 0.15), transparent)` }} />
@@ -420,18 +411,17 @@ const DeepDiveContent = memo(function DeepDiveContent({ sectionId, accentHsl, gr
         </div>
       ))}
 
-      {/* CTA / closing */}
       <div className="text-center py-16">
         <div className="h-[1px] w-20 mx-auto mb-6" style={{ background: gradient }} />
         <p className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.4em] uppercase text-muted-foreground/50">
-          VAMOS CONVERSAR SOBRE SEU PROJETO?
+          VAMOS TRANSFORMAR SUA IDEIA EM REALIDADE?
         </p>
       </div>
     </div>
   );
 });
 
-// ─── Lightweight cinematic section layout ─────────────────────────
+// ─── Cinematic section layout ─────────────────────────────────
 const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtTop }: { section: typeof sections[0]; onScrollUpAtTop: () => void }) {
   const sectionRef = useRef<HTMLDivElement>(null);
   const galleryRef = useRef<HTMLDivElement>(null);
@@ -447,7 +437,6 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
     if (!el) return;
 
     const ctx = gsap.context(() => {
-      // Section enter line sweep
       const divider = el.querySelector('.section-enter-line');
       if (divider) {
         gsap.fromTo(divider,
@@ -456,7 +445,6 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
         );
       }
 
-      // Hero content parallax
       const heroImg = el.querySelector('.ken-burns-hero');
       if (heroImg) {
         gsap.to(heroImg, {
@@ -473,7 +461,6 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
         });
       }
 
-      // Subtitle, description fade-in
       gsap.utils.toArray<HTMLElement>(el.querySelectorAll('.cin-subtitle, .cin-desc')).forEach((node) => {
         gsap.fromTo(node,
           { opacity: 0, y: 30 },
@@ -484,7 +471,6 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
         );
       });
 
-      // Gallery items clipPath reveal
       const galleryItems = el.querySelectorAll('.gallery-item');
       if (galleryItems.length) {
         gsap.fromTo(galleryItems,
@@ -504,7 +490,6 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
         );
       }
 
-      // Detail items staggered reveal
       const detailItems = el.querySelectorAll('.detail-item');
       if (detailItems.length) {
         gsap.fromTo(detailItems,
@@ -516,7 +501,6 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
         );
       }
 
-      // Title words cinematic reveal with clip
       const titleWords = el.querySelectorAll('.title-word');
       if (titleWords.length) {
         gsap.fromTo(titleWords,
@@ -525,7 +509,6 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
         );
       }
 
-      // Skill progress bars animation
       const skillBars = el.querySelectorAll('.skill-progress-fill');
       skillBars.forEach((bar) => {
         const targetWidth = (bar as HTMLElement).dataset.width || '0%';
@@ -544,7 +527,7 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
     return () => ctx.revert();
   }, [section.id]);
 
-  // Scroll-up at top → go back to slider + scroll progress
+  // Scroll-up at top → go back + scroll progress
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
@@ -599,10 +582,9 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
     });
   }, [section.id]);
 
-  // Render gallery based on layout type
+  // Gallery renderer
   const renderGallery = () => {
     if (!gallery) return null;
-
     const imgs = gallery.images;
     const imgStyle = { filter: 'brightness(0.75) saturate(1.25) contrast(1.08)' };
 
@@ -670,28 +652,46 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
     }
   };
 
-  // Render section-specific content
+  // Section-specific content
   const renderSectionContent = () => {
     switch (section.id) {
       case 'web-design':
         return (
           <div className="fluid-section-pad">
+            {/* Process timeline */}
+            <div className="mb-20">
+              <h3 className="font-[family-name:var(--font-display)] text-[11px] tracking-[0.4em] uppercase mb-10" style={{ color: `hsl(${colors.accentHsl} / 0.5)` }}>NOSSO PROCESSO</h3>
+              <div className="grid grid-cols-1 md:grid-cols-5 gap-1">
+                {[
+                  { step: '01', title: 'Discovery', desc: 'Entrevistas, pesquisa de mercado e definição de personas' },
+                  { step: '02', title: 'Wireframes', desc: 'Arquitetura de informação e fluxos de navegação' },
+                  { step: '03', title: 'Visual Design', desc: 'Moodboards, tipografia, cores e componentes' },
+                  { step: '04', title: 'Protótipo', desc: 'Interações, animações e testes de usabilidade' },
+                  { step: '05', title: 'Handoff', desc: 'Tokens, specs e documentação para desenvolvimento' },
+                ].map((item, i) => (
+                  <div key={i} className="detail-item magnetic-card group relative p-6 rounded-sm overflow-hidden" style={{ opacity: 0, background: 'hsl(var(--card) / 0.3)', border: '1px solid hsl(var(--border) / 0.1)' }}>
+                    <div className="absolute top-0 left-0 right-0 h-[2px] opacity-40 group-hover:opacity-100 transition-opacity duration-500" style={{ background: colors.gradient }} />
+                    <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.3em] block mb-3" style={{ color: `hsl(${colors.accentHsl} / 0.4)` }}>{item.step}</span>
+                    <h4 className="font-[family-name:var(--font-display)] text-foreground text-sm font-bold tracking-[0.1em] uppercase mb-2">{item.title}</h4>
+                    <p className="text-muted-foreground text-xs leading-relaxed">{item.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+            {/* Showcase cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {[
-                { src: '/images/webdesign-detail-01.jpg', title: 'Prototipagem UI', desc: 'Wireframes e protótipos interativos' },
-                { src: '/images/webdesign-detail-02.jpg', title: 'Criação Visual', desc: 'Design systems e identidade visual' },
-                { src: '/images/webdesign-detail-03.jpg', title: 'Studio Criativo', desc: 'Ambientes de design profissional' },
-                { src: '/images/webdesign-detail-04.jpg', title: 'Web Premium', desc: 'Sites de alto impacto visual' },
-                { src: '/images/ui-detail-01.jpg', title: 'Interface 3D', desc: 'Elementos holográficos e futuristas' },
-                { src: '/images/ui-detail-02.jpg', title: 'Design Mobile', desc: 'Experiências mobile-first' },
-              ].map((item, i) => (
-                <div key={i} className="detail-item magnetic-card image-hover-zoom card-hover-glow relative h-[35vh] md:h-[40vh] rounded-sm overflow-hidden border border-border/10 group cursor-pointer" style={{ opacity: 0 }}>
-                  <img src={item.src} alt={item.title} loading="lazy" decoding="async" fetchPriority="low" className="w-full h-full object-cover" style={{ filter: 'brightness(0.7) saturate(1.2)' }} />
+                { src: '/images/webdesign-detail-01.jpg', title: 'UI Engineering', desc: 'Componentes pixel-perfect com Figma-to-code automatizado' },
+                { src: '/images/webdesign-detail-02.jpg', title: 'Brand Identity', desc: 'Sistemas visuais que comunicam a essência da marca' },
+                { src: '/images/webdesign-detail-03.jpg', title: 'Motion Design', desc: 'Animações cinematográficas que contam histórias' },
+              ].map((card, i) => (
+                <div key={i} className="detail-item image-hover-zoom card-hover-glow relative h-[45vh] rounded-sm overflow-hidden border border-border/10" style={{ opacity: 0 }}>
+                  <img src={card.src} alt={card.title} loading="lazy" decoding="async" fetchPriority="low" className="w-full h-full object-cover" style={{ filter: 'brightness(0.7) saturate(1.25)' }} />
                   <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: 'linear-gradient(135deg, hsl(var(--vice-sunset) / 0.15), transparent)' }} />
-                  <div className="absolute bottom-0 left-0 right-0 p-5">
-                    <h4 className="font-[family-name:var(--font-display)] text-foreground text-sm font-semibold tracking-wide uppercase">{item.title}</h4>
-                    <p className="text-muted-foreground text-xs mt-1">{item.desc}</p>
+                  <div className="absolute inset-0" style={{ background: `linear-gradient(135deg, hsl(${colors.accentHsl} / 0.08), transparent 60%)` }} />
+                  <div className="absolute bottom-6 left-6 right-6">
+                    <h4 className="font-[family-name:var(--font-display)] text-foreground font-bold text-base tracking-[0.08em] uppercase mb-1">{card.title}</h4>
+                    <p className="text-foreground/60 text-xs leading-relaxed">{card.desc}</p>
                   </div>
                 </div>
               ))}
@@ -701,10 +701,10 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
 
       case 'desenvolvimento':
         const devCards = [
-          { icon: '⚡', title: 'APIs REST & GraphQL', desc: 'Endpoints performáticos com autenticação JWT, rate limiting e documentação OpenAPI completa.', accent: 'var(--vice-sunset)' },
-          { icon: '🏗️', title: 'Arquitetura Escalável', desc: 'Microserviços, clean architecture e patterns SOLID para projetos que crescem.', accent: 'var(--vice-teal)' },
-          { icon: '🔄', title: 'CI/CD Automatizado', desc: 'Pipelines de deploy com GitHub Actions, Docker e monitoramento em tempo real.', accent: 'var(--vice-gold)' },
-          { icon: '🗄️', title: 'Banco de Dados', desc: 'PostgreSQL otimizado com migrations, índices inteligentes e queries performáticas.', accent: 'var(--vice-sky)' },
+          { icon: '⚡', title: 'APIs de Alta Performance', desc: 'Endpoints que respondem em <50ms, com rate limiting adaptativo, caching em múltiplas camadas e documentação OpenAPI gerada automaticamente.', accent: 'var(--vice-sunset)' },
+          { icon: '🏗️', title: 'Arquitetura Evolutiva', desc: 'Começamos simples, escalamos com elegância. Monolitos modulares que se transformam em microsserviços quando o negócio demanda.', accent: 'var(--vice-teal)' },
+          { icon: '🔄', title: 'Pipeline Zero-Downtime', desc: 'Deploy blue-green automatizado, canary releases, feature flags e rollback instantâneo. Sua aplicação nunca para.', accent: 'var(--vice-gold)' },
+          { icon: '🗄️', title: 'Dados Inteligentes', desc: 'Modelagem otimizada com índices compostos, materialized views, partitioning e queries que escalam de 100 a 100M registros.', accent: 'var(--vice-sky)' },
         ];
         return (
           <div className="fluid-section-pad">
@@ -729,6 +729,15 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
                 </div>
               ))}
             </div>
+            {/* Tech badges */}
+            <div className="flex flex-wrap gap-3 mt-16 max-w-6xl">
+              {['TypeScript', 'Node.js', 'Python', 'Rust', 'PostgreSQL', 'Redis', 'GraphQL', 'gRPC', 'Docker', 'Kubernetes'].map((tech, i) => (
+                <span key={i} className="detail-item font-[family-name:var(--font-display)] text-[10px] tracking-[0.15em] uppercase px-4 py-2 rounded-sm border transition-all duration-300 cursor-default"
+                  style={{ opacity: 0, borderColor: `hsl(${colors.accentHsl} / 0.2)`, color: `hsl(${colors.accentHsl} / 0.7)`, background: `hsl(${colors.accentHsl} / 0.04)` }}>
+                  {tech}
+                </span>
+              ))}
+            </div>
           </div>
         );
 
@@ -738,30 +747,39 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
             <div className="mb-16">
               <Suspense fallback={null}><FocussChat /></Suspense>
             </div>
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 max-w-7xl">
+            {/* AI capabilities grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 max-w-7xl mb-16">
               <div className="detail-item lg:col-span-7 image-hover-zoom card-hover-glow relative h-[50vh] rounded-sm overflow-hidden border border-vice-pink/10" style={{ opacity: 0 }}>
-                <img src="/images/ia-detail-01.jpg" alt="Laboratório IA" loading="lazy" decoding="async" fetchPriority="low" className="w-full h-full object-cover" style={{ filter: 'brightness(0.7) saturate(1.3)' }} />
+                <img src="/images/ia-detail-01.jpg" alt="IA Generativa" loading="lazy" decoding="async" fetchPriority="low" className="w-full h-full object-cover" style={{ filter: 'brightness(0.7) saturate(1.3)' }} />
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
                 <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, hsl(var(--vice-pink) / 0.1), transparent)' }} />
                 <div className="absolute bottom-6 left-6">
-                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.3em] uppercase text-vice-pink/80">MACHINE LEARNING</span>
-                  <h4 className="font-[family-name:var(--font-display)] text-foreground text-xl font-bold mt-2">Inteligência que Transforma</h4>
+                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.3em] uppercase text-vice-pink/80">IA GENERATIVA</span>
+                  <h4 className="font-[family-name:var(--font-display)] text-foreground text-xl font-bold mt-2">Do Prompt ao Produto</h4>
                 </div>
               </div>
               <div className="lg:col-span-5 grid grid-rows-2 gap-4">
                 <div className="detail-item card-hover-glow relative p-8 rounded-sm border border-vice-pink/10 backdrop-blur-sm" style={{ opacity: 0, background: 'hsl(var(--card) / 0.5)' }}>
                   <div className="text-4xl mb-3">🧠</div>
-                  <h4 className="font-[family-name:var(--font-display)] text-foreground text-sm font-semibold tracking-wide uppercase mb-2">Neural Networks</h4>
-                  <p className="text-muted-foreground text-xs leading-relaxed">Modelos treinados para análise preditiva, processamento de linguagem natural e visão computacional.</p>
+                  <h4 className="font-[family-name:var(--font-display)] text-foreground text-sm font-semibold tracking-wide uppercase mb-2">Agentes Autônomos</h4>
+                  <p className="text-muted-foreground text-xs leading-relaxed">Workflows inteligentes que pesquisam, analisam, decidem e executam — reduzindo horas de trabalho manual para minutos.</p>
                 </div>
                 <div className="detail-item image-hover-zoom card-hover-glow relative h-full rounded-sm overflow-hidden border border-vice-pink/10" style={{ opacity: 0 }}>
-                  <img src="/images/automacao-hero.png" alt="Automação" loading="lazy" decoding="async" fetchPriority="low" className="w-full h-full object-cover" style={{ filter: 'brightness(0.7) saturate(1.2)' }} />
+                  <img src="/images/automacao-hero.png" alt="RAG Pipeline" loading="lazy" decoding="async" fetchPriority="low" className="w-full h-full object-cover" style={{ filter: 'brightness(0.7) saturate(1.2)' }} />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
                   <div className="absolute bottom-4 left-4">
-                    <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.2em] uppercase text-vice-sunset/80">AUTOMAÇÃO</span>
+                    <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.2em] uppercase text-vice-sunset/80">RAG PIPELINE</span>
                   </div>
                 </div>
               </div>
+            </div>
+            {/* AI models we work with */}
+            <div className="flex flex-wrap gap-3 max-w-7xl">
+              {['GPT-4o', 'Claude 3.5', 'Gemini Pro', 'LLaMA 3', 'Mistral', 'Stable Diffusion', 'Whisper', 'DALL-E'].map((model, i) => (
+                <span key={i} className="detail-item font-[family-name:var(--font-display)] text-[10px] tracking-[0.15em] uppercase px-4 py-2 rounded-sm border border-vice-pink/20 text-vice-pink/70 bg-vice-pink/5 hover:bg-vice-pink/15 transition-all duration-300 cursor-default" style={{ opacity: 0 }}>
+                  {model}
+                </span>
+              ))}
             </div>
           </div>
         );
@@ -770,19 +788,20 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
         return (
           <div className="fluid-section-pad">
             <div className="max-w-6xl mx-auto">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {/* Device showcase */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
                 <div className="detail-item magnetic-card card-hover-glow flex flex-col items-center p-8 rounded-sm border border-border/10" style={{ opacity: 0, background: 'hsl(var(--card) / 0.3)' }}>
                   <div className="relative w-[180px] h-[360px] rounded-[24px] border-2 border-foreground/20 overflow-hidden shadow-2xl">
                     <img src="/images/mobile-detail-01.jpg" alt="Mobile" loading="lazy" decoding="async" fetchPriority="low" className="w-full h-full object-cover" style={{ filter: 'brightness(0.85) saturate(1.2)' }} />
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-5 bg-background rounded-b-xl" />
                   </div>
-                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.2em] uppercase text-vice-gold/70 mt-6">MOBILE APP</span>
+                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.2em] uppercase text-vice-gold/70 mt-6">REACT NATIVE</span>
                 </div>
                 <div className="detail-item magnetic-card card-hover-glow flex flex-col items-center p-8 rounded-sm border border-border/10" style={{ opacity: 0, background: 'hsl(var(--card) / 0.3)' }}>
                   <div className="relative w-[260px] h-[340px] rounded-[16px] border-2 border-foreground/20 overflow-hidden shadow-2xl">
                     <img src="/images/mobile-detail-02.jpg" alt="Tablet" loading="lazy" decoding="async" fetchPriority="low" className="w-full h-full object-cover" style={{ filter: 'brightness(0.85) saturate(1.2)' }} />
                   </div>
-                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.2em] uppercase text-vice-gold/70 mt-6">TABLET</span>
+                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.2em] uppercase text-vice-gold/70 mt-6">PWA</span>
                 </div>
                 <div className="detail-item magnetic-card card-hover-glow flex flex-col items-center p-8 rounded-sm border border-border/10" style={{ opacity: 0, background: 'hsl(var(--card) / 0.3)' }}>
                   <div className="relative w-full h-[220px] rounded-t-lg border-2 border-foreground/20 overflow-hidden shadow-2xl">
@@ -790,12 +809,21 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
                   </div>
                   <div className="w-24 h-3 bg-foreground/10 rounded-b-lg" />
                   <div className="w-16 h-1 bg-foreground/10 mt-1 rounded" />
-                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.2em] uppercase text-vice-gold/70 mt-6">DESKTOP</span>
+                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.2em] uppercase text-vice-gold/70 mt-6">RESPONSIVE WEB</span>
                 </div>
               </div>
-              <div className="flex flex-wrap gap-3 justify-center mt-12">
-                {['React Native', 'PWA', '100% Responsivo', 'Docker', 'Cloud Deploy'].map((badge, i) => (
-                  <span key={i} className="detail-item font-[family-name:var(--font-display)] text-[10px] tracking-[0.15em] uppercase px-4 py-2 rounded-sm border border-vice-gold/20 text-vice-gold/80 bg-vice-gold/5 hover:bg-vice-gold/15 hover:border-vice-gold/50 transition-all duration-300 cursor-default" style={{ opacity: 0 }}>{badge}</span>
+              {/* Performance metrics */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {[
+                  { value: '60fps', label: 'Animações' },
+                  { value: '<1s', label: 'Cold Start' },
+                  { value: '95%', label: 'Código Compartilhado' },
+                  { value: '99.5%', label: 'Crash-Free Rate' },
+                ].map((metric, i) => (
+                  <div key={i} className="detail-item text-center p-6 rounded-sm" style={{ opacity: 0, background: 'hsl(var(--card) / 0.3)', border: '1px solid hsl(var(--border) / 0.1)' }}>
+                    <span className="font-[family-name:var(--font-display)] font-bold text-2xl block mb-1" style={{ color: `hsl(${colors.accentHsl})` }}>{metric.value}</span>
+                    <span className="font-[family-name:var(--font-display)] text-[9px] tracking-[0.2em] uppercase text-muted-foreground">{metric.label}</span>
+                  </div>
                 ))}
               </div>
             </div>
@@ -804,16 +832,16 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
 
       case 'skills':
         const skills = [
-          { name: 'React / Next.js', level: 95, category: 'Front-end' },
-          { name: 'TypeScript', level: 92, category: 'Front-end' },
-          { name: 'Tailwind CSS / GSAP', level: 90, category: 'Front-end' },
-          { name: 'Node.js', level: 88, category: 'Back-end' },
-          { name: 'Python', level: 82, category: 'Back-end' },
-          { name: 'PostgreSQL / MongoDB', level: 85, category: 'Back-end' },
-          { name: 'AWS / Docker', level: 80, category: 'DevOps' },
-          { name: 'Figma / UI Design', level: 88, category: 'Design' },
-          { name: 'Three.js / WebGL', level: 75, category: 'Design' },
-          { name: 'CI/CD / Git', level: 90, category: 'DevOps' },
+          { name: 'React / Next.js', level: 97, category: 'Front-end' },
+          { name: 'TypeScript', level: 95, category: 'Front-end' },
+          { name: 'GSAP / Three.js', level: 92, category: 'Creative' },
+          { name: 'Node.js / Fastify', level: 93, category: 'Back-end' },
+          { name: 'Python / FastAPI', level: 88, category: 'Back-end' },
+          { name: 'PostgreSQL', level: 90, category: 'Data' },
+          { name: 'Redis / Elasticsearch', level: 85, category: 'Data' },
+          { name: 'AWS / Kubernetes', level: 87, category: 'Infra' },
+          { name: 'Docker / Terraform', level: 89, category: 'Infra' },
+          { name: 'Figma / Design Systems', level: 91, category: 'Design' },
         ];
         return (
           <div className="fluid-section-pad">
@@ -822,7 +850,7 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
                 <div key={i} className="detail-item group" style={{ opacity: 0 }}>
                   <div className="flex justify-between items-center mb-2">
                     <span className="font-[family-name:var(--font-display)] text-foreground/90 text-sm tracking-wide uppercase">{skill.name}</span>
-                    <span className="font-[family-name:var(--font-display)] text-vice-sunset/60 text-[10px] tracking-widest">{skill.level}%</span>
+                    <span className="font-[family-name:var(--font-display)] text-[10px] tracking-widest" style={{ color: `hsl(${colors.accentHsl} / 0.6)` }}>{skill.level}%</span>
                   </div>
                   <div className="skill-progress-bar">
                     <div className="skill-progress-fill" data-width={`${skill.level}%`} style={{ width: 0 }} />
@@ -833,8 +861,11 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
             </div>
             <Suspense fallback={null}><TechLogosMarquee /></Suspense>
             <div className="max-w-5xl mx-auto mt-16 flex flex-wrap gap-3">
-              {['React', 'Next.js', 'TypeScript', 'Node.js', 'Python', 'Go', 'PostgreSQL', 'MongoDB', 'Redis', 'AWS', 'Docker', 'Figma', 'GSAP', 'Three.js', 'Tailwind CSS', 'GraphQL'].map((tech, i) => (
-                <span key={i} className="detail-item card-hover-glow font-[family-name:var(--font-display)] text-[10px] tracking-[0.12em] uppercase px-4 py-2 rounded-sm border border-vice-sunset/20 text-foreground/70 bg-vice-sunset/5 hover:text-vice-sunset hover:border-vice-sunset/50 transition-all duration-300 cursor-default" style={{ opacity: 0 }}>{tech}</span>
+              {['React', 'Next.js', 'TypeScript', 'Node.js', 'Python', 'Rust', 'PostgreSQL', 'Redis', 'Elasticsearch', 'AWS', 'Docker', 'Kubernetes', 'Terraform', 'Figma', 'GSAP', 'Three.js', 'GraphQL', 'gRPC'].map((tech, i) => (
+                <span key={i} className="detail-item card-hover-glow font-[family-name:var(--font-display)] text-[10px] tracking-[0.12em] uppercase px-4 py-2 rounded-sm border transition-all duration-300 cursor-default"
+                  style={{ opacity: 0, borderColor: `hsl(${colors.accentHsl} / 0.2)`, color: `hsl(${colors.accentHsl} / 0.7)`, background: `hsl(${colors.accentHsl} / 0.05)` }}>
+                  {tech}
+                </span>
               ))}
             </div>
           </div>
@@ -846,45 +877,42 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
             <div className="detail-item relative w-full h-[50vh] md:h-[60vh] overflow-hidden rounded-sm mb-16" style={{ opacity: 0 }}>
               <img src="/images/hero-servicos.jpg" alt="Serviços" className="w-full h-full object-cover" style={{ filter: 'brightness(0.75) saturate(1.3) contrast(1.05)' }} />
               <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent" />
-              <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, hsl(270 70% 60% / 0.12), transparent 60%)' }} />
+              <div className="absolute inset-0" style={{ background: `linear-gradient(135deg, hsl(${colors.accentHsl} / 0.12), transparent 60%)` }} />
               <div className="absolute bottom-8 left-8">
-                <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.3em] uppercase text-vice-pink/80">SOLUÇÕES DIGITAIS</span>
-                <h4 className="font-[family-name:var(--font-display)] text-foreground text-2xl font-bold mt-2">Serviços Completos</h4>
+                <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.3em] uppercase" style={{ color: `hsl(${colors.accentHsl} / 0.8)` }}>ECOSSISTEMA COMPLETO</span>
+                <h4 className="font-[family-name:var(--font-display)] text-foreground text-2xl font-bold mt-2">Do Conceito ao Escala</h4>
               </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl">
               {[
-                { icon: '📈', title: 'Tráfego Pago', desc: 'Campanhas estratégicas no Google Ads, Meta Ads e TikTok Ads. Maximizamos seu ROI com segmentação precisa e otimização contínua.', accent: 'vice-pink' },
-                { icon: '🌐', title: 'Criação de Sites', desc: 'Sites modernos, responsivos e otimizados para SEO. Desenvolvidos com as melhores tecnologias para performance máxima.', accent: 'vice-teal' },
-                { icon: '📱', title: 'Criação de Apps', desc: 'Aplicativos nativos e multiplataforma com experiência de usuário premium. iOS, Android e PWA.', accent: 'vice-sunset' },
-                { icon: '⚙️', title: 'Sistemas & SaaS', desc: 'Plataformas escaláveis sob medida. Painéis administrativos, ERPs, CRMs e soluções SaaS completas.', accent: 'vice-sky' },
-                { icon: '🚀', title: 'Landing Pages', desc: 'Páginas de alta conversão com design persuasivo, copywriting estratégico e integração com funis de vendas.', accent: 'vice-gold' },
-                { icon: '🎨', title: 'Design', desc: 'Identidade visual completa, UI/UX premium, design systems e prototipagem interativa no Figma.', accent: 'vice-palm' },
+                { icon: '📈', title: 'Growth Marketing', desc: 'Campanhas data-driven com ROAS acima de 4x. Google Ads, Meta Ads, TikTok Ads com tracking server-side e atribuição multi-touch.', accent: 'vice-pink' },
+                { icon: '🌐', title: 'Plataformas Web', desc: 'Experiências imersivas com Next.js, edge computing e Core Web Vitals no verde. SEO técnico que coloca você no topo.', accent: 'vice-teal' },
+                { icon: '📱', title: 'Apps Mobile', desc: 'React Native com performance nativa. Publicação nas stores, updates OTA com CodePush e analytics de engajamento.', accent: 'vice-sunset' },
+                { icon: '⚙️', title: 'SaaS & Plataformas', desc: 'Arquitetura multi-tenant escalável com billing Stripe, dashboards em tempo real e admin panel white-label.', accent: 'vice-sky' },
+                { icon: '🚀', title: 'Landing Pages', desc: 'Conversão otimizada com A/B testing, heatmaps, copywriting estratégico e integração com CRM e automação.', accent: 'vice-gold' },
+                { icon: '🎨', title: 'Branding Digital', desc: 'Identidade visual que posiciona e diferencia. Logo, tipografia, paleta, guidelines e assets para todos os canais.', accent: 'vice-palm' },
               ].map((card, i) => (
-                <div key={i} className="detail-item magnetic-card card-hover-glow relative p-8 rounded-sm overflow-hidden group cursor-pointer" 
+                <div key={i} className="detail-item magnetic-card card-hover-glow relative p-8 rounded-sm overflow-hidden group cursor-pointer"
                   style={{ opacity: 0, background: 'hsl(var(--card) / 0.4)', border: '1px solid hsl(var(--border) / 0.15)' }}>
                   <div className="absolute inset-0 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
-                    style={{ 
-                      background: `linear-gradient(135deg, hsl(270 70% 60% / 0.1), hsl(335 75% 55% / 0.06), transparent)`,
-                      boxShadow: 'inset 0 0 30px hsl(270 70% 60% / 0.05)'
-                    }} />
+                    style={{ background: `linear-gradient(135deg, hsl(${colors.accentHsl} / 0.1), transparent 60%)` }} />
                   <div className="absolute top-0 left-0 right-0 h-[2px] opacity-60 group-hover:opacity-100 transition-opacity duration-500"
-                    style={{ background: 'linear-gradient(90deg, transparent, hsl(270 70% 60% / 0.6), hsl(335 75% 55% / 0.4), transparent)' }} />
+                    style={{ background: colors.gradient }} />
                   <div className="relative z-10">
                     <span className="text-4xl mb-5 block drop-shadow-lg">{card.icon}</span>
                     <h4 className="font-[family-name:var(--font-display)] text-foreground text-base font-semibold tracking-[0.15em] uppercase mb-3">{card.title}</h4>
                     <p className="text-muted-foreground text-sm leading-relaxed">{card.desc}</p>
                     <div className="h-[1px] w-12 mt-6 transition-all duration-700 group-hover:w-full"
-                      style={{ background: 'linear-gradient(90deg, hsl(270 70% 60% / 0.5), hsl(335 75% 55% / 0.3))' }} />
+                      style={{ background: colors.gradient }} />
                   </div>
                 </div>
               ))}
             </div>
 
             <div className="mt-20 text-center">
-              <p className="font-[family-name:var(--font-display)] text-[11px] tracking-[0.3em] uppercase text-muted-foreground/60 mb-4">PRONTO PARA COMEÇAR?</p>
-              <div className="h-[1px] w-24 mx-auto" style={{ background: 'linear-gradient(90deg, transparent, hsl(270 70% 60% / 0.5), transparent)' }} />
+              <p className="font-[family-name:var(--font-display)] text-[11px] tracking-[0.3em] uppercase text-muted-foreground/60 mb-4">PRONTO PARA ESCALAR SEU NEGÓCIO?</p>
+              <div className="h-[1px] w-24 mx-auto" style={{ background: colors.gradient }} />
             </div>
           </div>
         );
@@ -896,17 +924,16 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
 
   return (
     <div ref={sectionRef} className="absolute inset-0 overflow-y-auto gta-vi-scroll">
-      {/* Scroll progress indicator */}
+      {/* Scroll progress */}
       <div className="fixed right-3 top-1/2 -translate-y-1/2 z-50 flex flex-col items-center gap-1 pointer-events-none">
         <div className="scroll-progress-track w-[2px] bg-foreground/10 rounded-full" style={{ height: 'clamp(4rem, 8vh, 8rem)' }}>
           <div className="scroll-progress-bar w-full rounded-full origin-top" style={{ height: '0%', background: `hsl(${colors.accentHsl})` }} />
         </div>
       </div>
 
-      {/* ── HERO with parallax ── */}
+      {/* HERO */}
       <div className="relative h-screen w-full overflow-hidden flex items-end parallax-hero">
         <div className="absolute inset-0">
-          {/* Section enter line */}
           <div className="section-enter-line absolute top-0 left-0 right-0 h-[2px] origin-left z-20"
             style={{ background: colors.gradient }} />
           <img src={section.image} alt={section.title} loading="eager" decoding="async" width={1920} height={1080} className="w-full h-full object-cover ken-burns-hero" style={{ filter: 'saturate(1.15) contrast(1.05)' }} />
@@ -930,7 +957,7 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
             <h2 className="hero-reveal hero-reveal-delay-2 font-[family-name:var(--font-display)] font-black leading-[0.85] tracking-tighter uppercase" style={{ fontSize: 'clamp(2.5rem, 9vw, 11rem)' }}>
               {section.title.split(' ').map((word, i) => (
                 <span key={i} className="title-split-wrapper">
-                  <span 
+                  <span
                     className="title-word"
                     style={{
                       display: 'inline-block',
@@ -953,10 +980,10 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
         </div>
       </div>
 
-      {/* ── CONTENT ── */}
+      {/* CONTENT */}
       <div className="relative z-10 bg-background">
         <div className="w-full h-[1px]" style={{ background: `linear-gradient(90deg, transparent, hsl(${colors.accentHsl} / 0.3), hsl(${colors.accentHsl} / 0.15), transparent)` }} />
-        
+
         <div className="cin-desc" style={{ padding: `clamp(1rem, 3vw, 1.5rem) clamp(1.5rem, 4vw, 6rem)` }}>
           <div className="max-w-5xl">
             <p className="text-foreground/90 leading-relaxed font-light tracking-tight" style={{ fontSize: 'clamp(1rem, 2vw, 1.875rem)' }}>{section.description}</p>
@@ -966,19 +993,19 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
         {/* Gallery */}
         <div ref={galleryRef}>{renderGallery()}</div>
 
-        {/* Details grid */}
+        {/* Details */}
         <div ref={detailsRef} style={{ padding: `clamp(1rem, 3vw, 1.5rem) clamp(1.5rem, 4vw, 6rem)` }}>
           {section.id === 'servicos' ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-7xl">
               {section.details.map((detail, i) => {
-                const emoji = detail.slice(0, 2)
-                const rest = detail.slice(3)
-                const [title, desc] = rest.split(' — ')
+                const emoji = detail.slice(0, 2);
+                const rest = detail.slice(3);
+                const [title, desc] = rest.split(' — ');
                 const cardAccents = [
                   'hsl(335 75% 55%)', 'hsl(185 80% 55%)', 'hsl(25 95% 55%)',
                   'hsl(210 90% 60%)', 'hsl(45 100% 55%)', 'hsl(270 70% 60%)'
-                ]
-                const accent = cardAccents[i] || cardAccents[0]
+                ];
+                const accent = cardAccents[i] || cardAccents[0];
                 return (
                   <div key={i} className="detail-item magnetic-card group relative p-7 rounded-sm overflow-hidden cursor-pointer transition-all duration-500 hover:translate-y-[-2px]"
                     style={{ opacity: 0, background: 'hsl(var(--card) / 0.35)', border: '1px solid hsl(var(--border) / 0.1)' }}>
@@ -997,7 +1024,7 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
                         style={{ background: `linear-gradient(90deg, ${accent}80, transparent)` }} />
                     </div>
                   </div>
-                )
+                );
               })}
             </div>
           ) : (
@@ -1018,7 +1045,7 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
         {/* Section-specific content */}
         {renderSectionContent()}
 
-        {/* Deep-dive extended content */}
+        {/* Deep-dive */}
         <DeepDiveContent sectionId={section.id} accentHsl={colors.accentHsl} gradient={colors.gradient} />
 
         <div className="h-16 md:h-24" />
@@ -1047,7 +1074,6 @@ export function SectionsDetail() {
       cancelAnimationFrame(openFrameRef.current);
     }
 
-    // Reset scroll of previous section
     const prevScroller = document.querySelector('.gta-vi-scroll');
     if (prevScroller) prevScroller.scrollTop = 0;
 
@@ -1058,7 +1084,6 @@ export function SectionsDetail() {
       setIsVisible(true);
       openFrameRef.current = null;
 
-      // Refresh ScrollTrigger after section becomes visible
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           ScrollTrigger.refresh();
@@ -1084,7 +1109,7 @@ export function SectionsDetail() {
     };
   }, []);
 
-  // Scroll-up at top for focuss-dev section → go back (with isVisible guard)
+  // Scroll-up for focuss-dev
   useEffect(() => {
     if (!isVisible || activeSlide === null) return;
     const container = containerRef.current;
@@ -1110,14 +1135,12 @@ export function SectionsDetail() {
     if (sections[activeSlide].id !== 'focuss-dev') return;
 
     const timer = setTimeout(() => {
-      // Stagger entrance for all .anim-el
       const animEls = document.querySelectorAll('.anim-el');
       gsap.fromTo(animEls,
         { opacity: 0, y: 30, filter: 'blur(4px)' },
         { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.7, stagger: 0.08, ease: 'power3.out' }
       );
 
-      // Animated stat counters
       const statEls = document.querySelectorAll('.stat-value-animated');
       statEls.forEach((el) => {
         const target = parseInt(el.getAttribute('data-target') || '0', 10);
@@ -1148,14 +1171,13 @@ export function SectionsDetail() {
       ref={containerRef}
       id="detail-section"
       className={`fixed inset-0 z-20 bg-background ${
-        isVisible 
-          ? isAnimating ? 'detail-section-exit pointer-events-none' : 'detail-section-enter pointer-events-auto' 
+        isVisible
+          ? isAnimating ? 'detail-section-exit pointer-events-none' : 'detail-section-enter pointer-events-auto'
           : 'opacity-0 pointer-events-none'
       }`}
     >
       {section && (() => {
         const isFocussDev = section.id === 'focuss-dev';
-        const focussDevColors = sectionColors['focuss-dev'];
         return (
         <div key={section.id} className="relative h-screen overflow-hidden">
           {/* Back button */}
@@ -1166,7 +1188,8 @@ export function SectionsDetail() {
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 19V5m7 7l-7-7-7 7" /></svg>
             Voltar
           </button>
-          {/* FOCUSS DEV: Original layout + deep dive (scrollable) */}
+
+          {/* FOCUSS DEV */}
           {isFocussDev && (
             <div className="absolute inset-0 overflow-y-auto gta-vi-scroll">
               <div className="relative min-h-screen flex items-center">
@@ -1181,14 +1204,14 @@ export function SectionsDetail() {
                     <span className="anim-el block font-[family-name:var(--font-display)] text-xs tracking-[0.2em] uppercase mb-3 text-accent" style={{ opacity: 0 }}>{section.subtitle}</span>
                     <h2 className="anim-el font-[family-name:var(--font-display)] text-4xl md:text-6xl lg:text-7xl font-light text-foreground mb-6 leading-tight tracking-tight" style={{ opacity: 0 }}>{section.title}</h2>
                     <p className="anim-el text-muted-foreground text-base md:text-lg leading-relaxed mb-10 max-w-2xl" style={{ opacity: 0 }}>{section.description}</p>
-                    
-                    {/* Stats with animated counters */}
+
+                    {/* Stats */}
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
                       {[
-                        { value: '5', suffix: '+', label: 'Anos de Experiência', target: 5 },
-                        { value: '50', suffix: '+', label: 'Projetos Entregues', target: 50 },
-                        { value: '100', suffix: '%', label: 'Foco em Performance', target: 100 },
-                        { value: '∞', suffix: '', label: 'Inovação Contínua', target: null },
+                        { value: '6', suffix: '+', label: 'Anos no Mercado', target: 6 },
+                        { value: '200', suffix: '+', label: 'Projetos Entregues', target: 200 },
+                        { value: '98', suffix: '%', label: 'Satisfação dos Clientes', target: 98 },
+                        { value: '∞', suffix: '', label: 'Curiosidade', target: null },
                       ].map((stat, i) => (
                         <div key={i} className="anim-el relative p-5 rounded-md overflow-hidden group"
                           style={{ opacity: 0, background: 'hsl(var(--card) / 0.4)', border: '1px solid hsl(var(--border) / 0.15)' }}>
@@ -1214,7 +1237,6 @@ export function SectionsDetail() {
                       ))}
                     </ul>
 
-                    {/* Scroll hint */}
                     <div className="flex flex-col items-center mt-16 opacity-50">
                       <span className="font-[family-name:var(--font-display)] text-[9px] tracking-[0.3em] uppercase text-accent/60 mb-2">Role para saber mais</span>
                       <div className="w-[1px] h-8 bg-accent/30 animate-pulse" />
@@ -1223,7 +1245,6 @@ export function SectionsDetail() {
                 </div>
               </div>
 
-              {/* Deep dive content */}
               <DeepDiveContent sectionId="focuss-dev" accentHsl={focussDevColors.accentHsl} gradient={focussDevColors.gradient} />
             </div>
           )}
