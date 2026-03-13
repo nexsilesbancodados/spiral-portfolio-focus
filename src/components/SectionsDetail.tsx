@@ -242,12 +242,12 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
         );
       }
 
-      // Title words cinematic reveal with clip
+      // Title words cinematic reveal
       const titleWords = el.querySelectorAll('.title-word');
       if (titleWords.length) {
         gsap.fromTo(titleWords,
           { y: '110%', opacity: 0 },
-          { y: '0%', opacity: 1, duration: 0.9, stagger: 0.1, ease: 'power4.out', delay: 0.15 }
+          { y: '0%', opacity: 1, duration: 1, stagger: 0.08, ease: 'power4.out', delay: 0.1 }
         );
       }
 
