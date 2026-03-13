@@ -257,18 +257,27 @@ export function LuminaSlider() {
   }, [transitionToSlide]);
 
   const triggerExplore = useCallback(() => {
+    const idx = currentSlideRef.current;
     const btn = document.querySelector('.explore-btn') as HTMLElement;
     if (btn) {
-      gsap.to(btn, {
-        y: 8, opacity: 0, duration: 0.3, ease: 'power2.in',
-        onComplete: () => {
-          window.dispatchEvent(new CustomEvent('explore-slide', { detail: { slideIndex: currentSlideRef.current } }));
-          gsap.set(btn, { y: 0, opacity: 0.75 });
-        },
-      });
-    } else {
-      window.dispatchEvent(new CustomEvent('explore-slide', { detail: { slideIndex: currentSlideRef.current } }));
+      gsap.to(btn, { y: 8, opacity: 0, duration: 0.3, ease: 'power2.in' });
     }
+
+    // Dispatch WebGL glass transition (forward: slide → dark)
+    window.dispatchEvent(new CustomEvent('webgl-transition', {
+      detail: {
+        fromImage: slides[idx].media,
+        direction: 'forward',
+        duration: 1.8,
+        onMidpoint: () => {
+          // Show detail section at midpoint of transition
+          window.dispatchEvent(new CustomEvent('explore-slide', { detail: { slideIndex: idx } }));
+        },
+        onComplete: () => {
+          if (btn) gsap.set(btn, { y: 0, opacity: 0.75 });
+        },
+      },
+    }));
   }, []);
 
   // ── Wheel handler ─────────────────────────────────────────────────
