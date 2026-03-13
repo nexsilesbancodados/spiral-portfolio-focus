@@ -150,22 +150,76 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
 
   const gallery = sectionGallery[section.id];
 
-  // Lightweight reveal (sem animações pesadas em scroll)
+  // GSAP ScrollTrigger reveal animations
   useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
     const el = sectionRef.current;
     if (!el) return;
 
-    const revealAll = () => {
-      const nodes = el.querySelectorAll<HTMLElement>('.title-word, .cin-subtitle, .cin-desc, .gallery-item, .detail-item');
-      nodes.forEach((node) => {
-        node.style.opacity = '1';
-        node.style.transform = 'none';
-        node.style.clipPath = 'none';
-      });
-    };
+    const ctx = gsap.context(() => {
+      // Hero content parallax
+      const heroImg = el.querySelector('.ken-burns-hero');
+      if (heroImg) {
+        gsap.to(heroImg, {
+          yPercent: 20,
+          scale: 1.15,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: el.querySelector('.parallax-hero'),
+            scroller: el,
+            start: 'top top',
+            end: 'bottom top',
+            scrub: true,
+          },
+        });
+      }
 
-    const rafId = window.requestAnimationFrame(revealAll);
-    return () => window.cancelAnimationFrame(rafId);
+      // Subtitle, description fade-in
+      gsap.utils.toArray<HTMLElement>(el.querySelectorAll('.cin-subtitle, .cin-desc')).forEach((node) => {
+        gsap.fromTo(node,
+          { opacity: 0, y: 30 },
+          {
+            opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
+            scrollTrigger: { trigger: node, scroller: el, start: 'top 90%', toggleActions: 'play none none none' },
+          }
+        );
+      });
+
+      // Gallery items staggered reveal
+      const galleryItems = el.querySelectorAll('.gallery-item');
+      if (galleryItems.length) {
+        gsap.fromTo(galleryItems,
+          { opacity: 0, y: 60, scale: 0.96 },
+          {
+            opacity: 1, y: 0, scale: 1, duration: 0.9, stagger: 0.15, ease: 'power3.out',
+            scrollTrigger: { trigger: galleryItems[0], scroller: el, start: 'top 85%', toggleActions: 'play none none none' },
+          }
+        );
+      }
+
+      // Detail items staggered reveal
+      const detailItems = el.querySelectorAll('.detail-item');
+      if (detailItems.length) {
+        gsap.fromTo(detailItems,
+          { opacity: 0, y: 50, filter: 'blur(4px)' },
+          {
+            opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.7, stagger: 0.1, ease: 'power2.out',
+            scrollTrigger: { trigger: detailItems[0], scroller: el, start: 'top 88%', toggleActions: 'play none none none' },
+          }
+        );
+      }
+
+      // Title words cinematic reveal
+      const titleWords = el.querySelectorAll('.title-word');
+      if (titleWords.length) {
+        gsap.fromTo(titleWords,
+          { opacity: 0, y: 80, skewY: 3 },
+          { opacity: 1, y: 0, skewY: 0, duration: 1, stagger: 0.12, ease: 'power4.out', delay: 0.2 }
+        );
+      }
+    }, el);
+
+    return () => ctx.revert();
   }, [section.id]);
 
   // Scroll-up at top → go back to slider
