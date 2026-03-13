@@ -82,30 +82,6 @@ All colors MUST be HSL.
   }
 }
 
-/* Custom cursor */
-@media (hover: hover) and (pointer: fine) {
-  body { cursor: none; }
-  
-  #custom-cursor {
-    position: fixed;
-    top: 0; left: 0;
-    width: 10px; height: 10px;
-    border-radius: 50%;
-    background: hsl(var(--vice-sunset));
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%, -50%);
-    transition: width 0.2s, height 0.2s, background 0.2s;
-    mix-blend-mode: difference;
-  }
-  
-  #custom-cursor.cursor-hover {
-    width: 40px;
-    height: 40px;
-    background: hsl(var(--foreground) / 0.15);
-    border: 1px solid hsl(var(--vice-sunset) / 0.8);
-  }
-}
 
 /* ===== Lumina Slider Styles ===== */
 .slider-wrapper {
