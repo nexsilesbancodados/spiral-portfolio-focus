@@ -1,58 +1,32 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+const INTRO_DURATION = 3000; // 3 seconds
 
 const Intro = () => {
   const [progress, setProgress] = useState(0);
   const [fadeOut, setFadeOut] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
+    const start = Date.now();
+    let raf: number;
 
-    let navigated = false;
-
-    const onTimeUpdate = () => {
-      if (!video.duration) return;
-      const pct = Math.min((video.currentTime / video.duration) * 100, 100);
+    const tick = () => {
+      const elapsed = Date.now() - start;
+      const pct = Math.min((elapsed / INTRO_DURATION) * 100, 100);
       setProgress(pct);
-    };
 
-    const onEnded = () => {
-      if (navigated) return;
-      navigated = true;
-      setProgress(100);
-      setFadeOut(true);
-      setTimeout(() => navigate('/home'), 400);
-    };
-
-    video.addEventListener('timeupdate', onTimeUpdate);
-    video.addEventListener('ended', onEnded);
-
-    // Fallback: if video fails to load, skip after 1.5s
-    const fallback = setTimeout(() => {
-      if (!navigated) {
-        navigated = true;
+      if (elapsed >= INTRO_DURATION) {
         setFadeOut(true);
-        setTimeout(() => navigate('/home'), 300);
+        setTimeout(() => navigate('/home'), 400);
+        return;
       }
-    }, 8000);
-
-    video.play().catch(() => {
-      // Autoplay blocked — skip intro
-      if (!navigated) {
-        navigated = true;
-        setFadeOut(true);
-        setTimeout(() => navigate('/home'), 300);
-      }
-    });
-
-    return () => {
-      clearTimeout(fallback);
-      video.removeEventListener('timeupdate', onTimeUpdate);
-      video.removeEventListener('ended', onEnded);
+      raf = requestAnimationFrame(tick);
     };
+
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
   }, [navigate]);
 
   return (
@@ -61,18 +35,8 @@ const Intro = () => {
         fadeOut ? 'opacity-0' : 'opacity-100'
       }`}
     >
-      <video
-        ref={videoRef}
-        className="absolute inset-0 w-full h-full object-cover"
-        src="/videos/intro.mp4"
-        muted
-        playsInline
-        preload="auto"
-      />
-
-      {/* Fallback image */}
       <img
-        className="absolute inset-0 w-full h-full object-cover -z-10"
+        className="absolute inset-0 w-full h-full object-cover"
         src="/images/slide-01.jpg"
         alt="Intro Focuss Dev"
         loading="eager"

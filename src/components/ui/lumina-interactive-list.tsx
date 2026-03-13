@@ -5,61 +5,21 @@ interface Slide {
   title: string;
   description: string;
   media: string;
-  video?: string;
   skills: string[];
 }
 
 const slides: Slide[] = [
   { title: 'FOCUSS DEV', description: 'Transformando ideias em experiências digitais extraordinárias. Desenvolvimento web de alto nível.', media: '/images/slide-01.jpg', skills: ['React', 'TypeScript', 'Node.js', 'Next.js'] },
-  { title: 'Web Design', description: 'Interfaces modernas e elegantes que conectam marcas ao futuro digital com impacto visual.', media: '/images/hero-webdesign.jpg', video: '/videos/slide-02.mp4', skills: ['Figma', 'UI/UX', 'Prototipagem', 'Design System'] },
+  { title: 'Web Design', description: 'Interfaces modernas e elegantes que conectam marcas ao futuro digital com impacto visual.', media: '/images/hero-webdesign.jpg', skills: ['Figma', 'UI/UX', 'Prototipagem', 'Design System'] },
   { title: 'Desenvolvimento', description: 'Código limpo, performance máxima e arquitetura escalável para projetos robustos.', media: '/images/hero-dev.jpg', skills: ['JavaScript', 'Python', 'APIs REST', 'PostgreSQL'] },
-  { title: 'Serviços', description: 'Soluções digitais completas — tráfego pago, sites, apps, SaaS e design premium.', media: '/images/hero-servicos.jpg', video: '/videos/servicos.mp4', skills: ['Tráfego Pago', 'Sites', 'Apps', 'SaaS'] },
+  { title: 'Serviços', description: 'Soluções digitais completas — tráfego pago, sites, apps, SaaS e design premium.', media: '/images/hero-servicos.jpg', skills: ['Tráfego Pago', 'Sites', 'Apps', 'SaaS'] },
   { title: 'Inovação e IA', description: 'Tecnologias de ponta e inteligência artificial para soluções que fazem a diferença.', media: '/images/hero-ia.jpg', skills: ['IA', 'Automação', 'Chatbots', 'Cloud'] },
   { title: 'Mobile e Web', description: 'Aplicações responsivas e multiplataforma que funcionam perfeitamente em qualquer dispositivo.', media: '/images/hero-mobile.jpg', skills: ['React Native', 'PWA', 'Responsivo', 'Docker'] },
   { title: 'Skills', description: 'Domínio completo do ecossistema moderno — front-end, back-end, cloud e design em um só lugar.', media: '/images/hero-skills.jpg', skills: ['React', 'Node.js', 'Python', 'AWS'] },
 ];
 
 function SlideMedia({ slide, isActive, eager, style, slideIndex }: { slide: Slide; isActive: boolean; eager?: boolean; style?: React.CSSProperties; slideIndex: number }) {
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-    if (isActive) {
-      video.play().catch(() => {});
-    } else {
-      video.pause();
-    }
-  }, [isActive]);
-
   const filter = 'saturate(1.08) contrast(1.03)';
-
-  if (slide.video) {
-    return (
-      <div className="absolute inset-0" data-slide-index={slideIndex} style={style}>
-        <img
-          src={slide.media}
-          alt={slide.title}
-          loading={eager ? 'eager' : 'lazy'}
-          decoding="async"
-          data-active-media={isActive ? "true" : undefined}
-          className="absolute inset-0 w-full h-full object-cover"
-          style={{ filter }}
-        />
-        <video
-          ref={videoRef}
-          src={slide.video}
-          muted
-          loop
-          playsInline
-          preload={eager ? 'auto' : 'none'}
-          data-active-media={isActive ? "true" : undefined}
-          className="absolute inset-0 w-full h-full object-cover"
-          style={{ filter }}
-        />
-      </div>
-    );
-  }
 
   return (
     <div className="absolute inset-0" data-slide-index={slideIndex} style={style}>
