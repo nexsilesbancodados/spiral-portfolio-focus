@@ -135,7 +135,7 @@ const sectionGallery: Record<string, { images: { src: string; label: string }[];
   'skills': {
     layout: 'panoramic-duo',
     images: [
-      { src: '/images/skills-detail-01.jpg', label: 'Conferência' },
+      { src: '/images/dev-detail-02.jpg', label: 'Conferência' },
     ],
   },
 };
