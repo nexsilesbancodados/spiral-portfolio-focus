@@ -427,12 +427,15 @@ All colors MUST be HSL.
 @keyframes detail-enter {
   0% {
     opacity: 0;
-    transform: translateY(40px) scale(0.98);
-    filter: blur(6px);
+    transform: translate3d(0, 30px, 0) scale(0.985);
+    filter: blur(4px);
+  }
+  40% {
+    filter: blur(1px);
   }
   100% {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translate3d(0, 0, 0) scale(1);
     filter: blur(0);
   }
 }
@@ -440,42 +443,45 @@ All colors MUST be HSL.
 @keyframes detail-exit {
   0% {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translate3d(0, 0, 0) scale(1);
     filter: blur(0);
   }
   100% {
     opacity: 0;
-    transform: translateY(-20px) scale(0.99);
-    filter: blur(4px);
+    transform: translate3d(0, -15px, 0) scale(0.995);
+    filter: blur(3px);
   }
 }
 
 .detail-section-enter {
-  animation: detail-enter 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  will-change: opacity, transform, filter;
+  animation: detail-enter 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: opacity, transform;
 }
 
 .detail-section-exit {
-  animation: detail-exit 0.35s cubic-bezier(0.55, 0, 1, 0.45) forwards;
-  will-change: opacity, transform, filter;
+  animation: detail-exit 0.4s cubic-bezier(0.55, 0, 1, 0.45) forwards;
+  will-change: opacity, transform;
 }
 
 /* Cinematic hero content reveal */
 @keyframes hero-content-reveal {
   0% {
     opacity: 0;
-    transform: translateY(30px);
-    filter: blur(4px);
+    transform: translate3d(0, 25px, 0);
+    filter: blur(3px);
+  }
+  50% {
+    filter: blur(0);
   }
   100% {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
     filter: blur(0);
   }
 }
 
 .hero-reveal {
-  animation: hero-content-reveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: hero-content-reveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .hero-reveal-delay-1 { animation-delay: 0.1s; opacity: 0; }
