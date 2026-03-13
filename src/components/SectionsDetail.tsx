@@ -1139,7 +1139,7 @@ export function SectionsDetail() {
   }, [activeSlide, isVisible]);
 
   const section = activeSlide === null ? null : sections[activeSlide];
-  const isFocussDev = section?.id === 'focuss-dev';
+  const focussDevColors = sectionColors['focuss-dev'];
 
   return (
     <div
