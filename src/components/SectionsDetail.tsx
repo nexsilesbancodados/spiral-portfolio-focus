@@ -877,7 +877,7 @@ export function SectionsDetail() {
           ? 'opacity-100 pointer-events-auto' 
           : 'opacity-0 pointer-events-none'
       }`}
-      style={{ transition: 'opacity 0.15s ease' }}
+      style={{ transition: 'opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1)' }}
     >
       {section && (
         <div key={section.id} className="relative h-screen overflow-hidden">
