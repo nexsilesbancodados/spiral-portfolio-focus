@@ -69,7 +69,7 @@ const sections = [
       'Infraestrutura cloud escalável na AWS',
       'Chatbots e assistentes virtuais customizados',
     ],
-    image: '/images/ia-detail-01.jpg',
+    image: '/images/ia-gallery-02.jpg',
   },
   {
     id: 'mobile-web',
