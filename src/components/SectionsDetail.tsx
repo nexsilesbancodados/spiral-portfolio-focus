@@ -180,72 +180,74 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
         );
       }
 
-      // Hero content parallax
+      // Hero content parallax — smoother scrub
       const heroImg = el.querySelector('.ken-burns-hero');
       if (heroImg) {
         gsap.to(heroImg, {
-          yPercent: 20,
-          scale: 1.15,
+          yPercent: 15,
+          scale: 1.12,
           ease: 'none',
           scrollTrigger: {
             trigger: el.querySelector('.parallax-hero'),
             scroller: el,
             start: 'top top',
             end: 'bottom top',
-            scrub: true,
+            scrub: 0.8, // smooth scrub with 0.8s lag
           },
         });
       }
 
-      // Subtitle, description fade-in
+      // Subtitle, description fade-in — smoother with GPU
       gsap.utils.toArray<HTMLElement>(el.querySelectorAll('.cin-subtitle, .cin-desc')).forEach((node) => {
         gsap.fromTo(node,
-          { opacity: 0, y: 30 },
+          { opacity: 0, y: 25, willChange: 'transform, opacity' },
           {
-            opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
-            scrollTrigger: { trigger: node, scroller: el, start: 'top 90%', toggleActions: 'play none none none' },
+            opacity: 1, y: 0, duration: 0.9, ease: 'power3.out',
+            scrollTrigger: { trigger: node, scroller: el, start: 'top 92%', toggleActions: 'play none none none' },
+            clearProps: 'willChange',
           }
         );
       });
 
-      // Gallery items clipPath reveal
+      // Gallery items clipPath reveal — smoother easing
       const galleryItems = el.querySelectorAll('.gallery-item');
       if (galleryItems.length) {
         gsap.fromTo(galleryItems,
           { clipPath: 'inset(0 100% 0 0)', opacity: 1 },
           {
             clipPath: 'inset(0 0% 0 0)',
-            duration: 1.1,
-            stagger: 0.18,
-            ease: 'power3.inOut',
+            duration: 1.3,
+            stagger: 0.15,
+            ease: 'power2.inOut',
             scrollTrigger: {
               trigger: galleryItems[0],
               scroller: el,
-              start: 'top 85%',
+              start: 'top 88%',
               toggleActions: 'play none none none',
             },
           }
         );
       }
 
-      // Detail items staggered reveal
+      // Detail items staggered reveal — smoother with GPU-friendly transforms
       const detailItems = el.querySelectorAll('.detail-item');
       if (detailItems.length) {
         gsap.fromTo(detailItems,
-          { opacity: 0, y: 50, filter: 'blur(4px)' },
+          { opacity: 0, y: 40, willChange: 'transform, opacity' },
           {
-            opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.7, stagger: 0.1, ease: 'power2.out',
-            scrollTrigger: { trigger: detailItems[0], scroller: el, start: 'top 88%', toggleActions: 'play none none none' },
+            opacity: 1, y: 0, duration: 0.8, stagger: 0.08, ease: 'power2.out',
+            scrollTrigger: { trigger: detailItems[0], scroller: el, start: 'top 90%', toggleActions: 'play none none none' },
+            clearProps: 'willChange',
           }
         );
       }
 
-      // Title words cinematic reveal with clip
+      // Title words cinematic reveal
       const titleWords = el.querySelectorAll('.title-word');
       if (titleWords.length) {
         gsap.fromTo(titleWords,
           { y: '110%', opacity: 0 },
-          { y: '0%', opacity: 1, duration: 0.9, stagger: 0.1, ease: 'power4.out', delay: 0.15 }
+          { y: '0%', opacity: 1, duration: 1, stagger: 0.08, ease: 'power4.out', delay: 0.1 }
         );
       }
 
@@ -875,7 +877,7 @@ export function SectionsDetail() {
           ? 'opacity-100 pointer-events-auto' 
           : 'opacity-0 pointer-events-none'
       }`}
-      style={{ transition: 'opacity 0.15s ease' }}
+      style={{ transition: 'opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1)' }}
     >
       {section && (
         <div key={section.id} className="relative h-screen overflow-hidden">

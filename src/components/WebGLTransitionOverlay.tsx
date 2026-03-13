@@ -233,7 +233,7 @@ export function WebGLTransitionOverlay() {
       {
         value: 1,
         duration,
-        ease: 'power2.inOut',
+        ease: 'power3.inOut',
         onUpdate: () => {
           if (!midpointCalled && mat.uniforms.uProgress.value >= 0.55) {
             midpointCalled = true;
@@ -244,10 +244,11 @@ export function WebGLTransitionOverlay() {
           activeRef.current = false;
           cancelAnimationFrame(rafRef.current);
 
-          // Fade out overlay
+          // Smooth fade out overlay
           gsap.to(container, {
             opacity: 0,
-            duration: 0.3,
+            duration: 0.4,
+            ease: 'power2.out',
             onComplete: () => {
               container.style.pointerEvents = 'none';
               event.onComplete?.();
