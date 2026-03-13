@@ -197,13 +197,14 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
         });
       }
 
-      // Subtitle, description fade-in
+      // Subtitle, description fade-in — smoother with GPU
       gsap.utils.toArray<HTMLElement>(el.querySelectorAll('.cin-subtitle, .cin-desc')).forEach((node) => {
         gsap.fromTo(node,
-          { opacity: 0, y: 30 },
+          { opacity: 0, y: 25, willChange: 'transform, opacity' },
           {
-            opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
-            scrollTrigger: { trigger: node, scroller: el, start: 'top 90%', toggleActions: 'play none none none' },
+            opacity: 1, y: 0, duration: 0.9, ease: 'power3.out',
+            scrollTrigger: { trigger: node, scroller: el, start: 'top 92%', toggleActions: 'play none none none' },
+            clearProps: 'willChange',
           }
         );
       });
