@@ -258,26 +258,8 @@ export function LuminaSlider() {
 
   const triggerExplore = useCallback(() => {
     const idx = currentSlideRef.current;
-    const btn = document.querySelector('.explore-btn') as HTMLElement;
-    if (btn) {
-      gsap.to(btn, { y: 8, opacity: 0, duration: 0.3, ease: 'power2.in' });
-    }
-
-    // Dispatch WebGL glass transition (forward: slide → dark)
-    window.dispatchEvent(new CustomEvent('webgl-transition', {
-      detail: {
-        fromImage: slides[idx].media,
-        direction: 'forward',
-        duration: 1.8,
-        onMidpoint: () => {
-          // Show detail section at midpoint of transition
-          window.dispatchEvent(new CustomEvent('explore-slide', { detail: { slideIndex: idx } }));
-        },
-        onComplete: () => {
-          if (btn) gsap.set(btn, { y: 0, opacity: 0.75 });
-        },
-      },
-    }));
+    // Simple direct transition — no WebGL overlay
+    window.dispatchEvent(new CustomEvent('explore-slide', { detail: { slideIndex: idx } }));
   }, []);
 
   // ── Wheel handler ─────────────────────────────────────────────────

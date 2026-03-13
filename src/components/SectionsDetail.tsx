@@ -758,25 +758,14 @@ export function SectionsDetail() {
   const [isAnimating, setIsAnimating] = useState(false);
 
   const goBack = useCallback(() => {
-    const idx = activeSlide;
-    const slideMedia = idx !== null ? sections[idx]?.image : undefined;
-
-    // Dispatch WebGL glass transition (backward: dark → slide)
-    window.dispatchEvent(new CustomEvent('webgl-transition', {
-      detail: {
-        fromImage: slideMedia,
-        direction: 'backward',
-        duration: 1.8,
-        onMidpoint: () => {
-          setIsVisible(false);
-        },
-        onComplete: () => {
-          setIsAnimating(false);
-        },
-      },
-    }));
+    // Simple fade out — no WebGL overlay
+    setIsVisible(false);
+    setTimeout(() => {
+      setActiveSlide(null);
+      setIsAnimating(false);
+    }, 350);
     setIsAnimating(true);
-  }, [activeSlide]);
+  }, []);
 
   const openSlide = useCallback((slideIndex: number) => {
     if (openFrameRef.current !== null) {
@@ -877,7 +866,7 @@ export function SectionsDetail() {
           ? 'opacity-100 pointer-events-auto' 
           : 'opacity-0 pointer-events-none'
       }`}
-      style={{ transition: 'opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1)' }}
+      style={{ transition: 'opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1)' }}
     >
       {section && (
         <div key={section.id} className="relative h-screen overflow-hidden">
