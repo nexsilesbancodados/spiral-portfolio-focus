@@ -365,6 +365,8 @@ All colors MUST be HSL.
 /* Performance: contain layout for heavy sections */
 #detail-section {
   contain: layout style;
+  will-change: opacity;
+  transform: translateZ(0);
 }
 
 /* Fluid responsive padding utility */
