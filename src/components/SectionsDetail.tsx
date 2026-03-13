@@ -872,9 +872,10 @@ export function SectionsDetail() {
       id="detail-section"
       className={`fixed inset-0 z-20 bg-background ${
         isVisible 
-          ? isAnimating ? 'detail-section-exit pointer-events-none' : 'detail-section-enter pointer-events-auto' 
+          ? 'opacity-100 pointer-events-auto' 
           : 'opacity-0 pointer-events-none'
       }`}
+      style={{ transition: 'opacity 0.15s ease' }}
     >
       {section && (
         <div key={section.id} className="relative h-screen overflow-hidden">
