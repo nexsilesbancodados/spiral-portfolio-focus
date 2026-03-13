@@ -234,6 +234,8 @@ All colors MUST be HSL.
 /* GTA VI Cinematic Scroll */
 .gta-vi-scroll {
   -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  overscroll-behavior: contain;
 }
 
 .gta-vi-scroll::-webkit-scrollbar {
