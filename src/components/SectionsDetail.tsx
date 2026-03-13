@@ -823,12 +823,20 @@ export function SectionsDetail() {
     return () => container.removeEventListener('wheel', handleWheel);
   }, [activeSlide, goBack, isVisible]);
 
-  // Animated stat counters for focuss-dev
+  // Animated entrance + stat counters for focuss-dev
   useEffect(() => {
     if (!isVisible || activeSlide === null) return;
     if (sections[activeSlide].id !== 'focuss-dev') return;
 
     const timer = setTimeout(() => {
+      // Stagger entrance for all .anim-el
+      const animEls = document.querySelectorAll('.anim-el');
+      gsap.fromTo(animEls,
+        { opacity: 0, y: 30, filter: 'blur(4px)' },
+        { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.7, stagger: 0.08, ease: 'power3.out' }
+      );
+
+      // Animated stat counters
       const statEls = document.querySelectorAll('.stat-value-animated');
       statEls.forEach((el) => {
         const target = parseInt(el.getAttribute('data-target') || '0', 10);
@@ -837,15 +845,16 @@ export function SectionsDetail() {
           { val: 0 },
           {
             val: target,
-            duration: 1.5,
+            duration: 1.8,
             ease: 'power2.out',
+            delay: 0.5,
             onUpdate: function () {
               el.textContent = Math.round(this.targets()[0].val) + (el.getAttribute('data-suffix') || '');
             },
           }
         );
       });
-    }, 300);
+    }, 100);
 
     return () => clearTimeout(timer);
   }, [activeSlide, isVisible]);
