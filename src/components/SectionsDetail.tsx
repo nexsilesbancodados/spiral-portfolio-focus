@@ -28,7 +28,7 @@ const sections = [
       'Criação de Design Systems consistentes',
       'Testes de usabilidade e iteração contínua',
     ],
-    image: '/images/webdesign-detail-01.jpg',
+    image: '/images/webdesign-gallery-02.jpg',
   },
   {
     id: 'desenvolvimento',
@@ -56,7 +56,7 @@ const sections = [
       '🚀 Landing Pages — Páginas de alta conversão com design persuasivo e funis otimizados',
       '🎨 Design — Identidade visual completa, UI/UX premium e prototipagem interativa',
     ],
-    image: '/images/servicos-detail-01.jpg',
+    image: '/images/servicos-detail-02.jpg',
   },
   {
     id: 'inovacao-ia',
@@ -69,7 +69,7 @@ const sections = [
       'Infraestrutura cloud escalável na AWS',
       'Chatbots e assistentes virtuais customizados',
     ],
-    image: '/images/ia-detail-01.jpg',
+    image: '/images/ia-gallery-02.jpg',
   },
   {
     id: 'mobile-web',
@@ -82,7 +82,7 @@ const sections = [
       'Layouts 100% responsivos',
       'Deploy containerizado com Docker',
     ],
-    image: '/images/mobile-detail-01.jpg',
+    image: '/images/mobile-gallery-01.jpg',
   },
   {
     id: 'skills',
@@ -115,14 +115,14 @@ const sectionGallery: Record<string, { images: { src: string; label: string }[];
     layout: 'trio',
     images: [
       { src: '/images/ia-gallery-01.jpg', label: 'Laboratório IA' },
-      { src: '/images/ia-gallery-02.jpg', label: 'Automação' },
-      { src: '/images/ia-detail-02.jpg', label: 'Futuro' },
+      { src: '/images/ia-detail-02.jpg', label: 'Automação' },
+      { src: '/images/ia-detail-01.jpg', label: 'Futuro' },
     ],
   },
   'mobile-web': {
     layout: 'stacked',
     images: [
-      { src: '/images/mobile-gallery-01.jpg', label: 'Multiplataforma' },
+      { src: '/images/mobile-detail-02.jpg', label: 'Multiplataforma' },
     ],
   },
   'servicos': {
@@ -135,7 +135,7 @@ const sectionGallery: Record<string, { images: { src: string; label: string }[];
   'skills': {
     layout: 'panoramic-duo',
     images: [
-      { src: '/images/skills-detail-01.jpg', label: 'Conferência' },
+      { src: '/images/dev-detail-02.jpg', label: 'Conferência' },
     ],
   },
 };
