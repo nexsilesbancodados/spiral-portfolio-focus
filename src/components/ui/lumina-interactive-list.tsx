@@ -96,11 +96,6 @@ export function LuminaSlider() {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [contentKey, setContentKey] = useState(0); // for re-triggering text animations
 
-  // Progress bar
-  const [progress, setProgress] = useState(0);
-  const progressRef = useRef(0);
-  const progressRafRef = useRef<number>(0);
-  const progressStartRef = useRef(Date.now());
 
   // WebGL refs
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
