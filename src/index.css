@@ -124,11 +124,12 @@ All colors MUST be HSL.
 
 .slide-content {
   position: absolute;
-  bottom: clamp(6rem, 10vw, 8rem);
+  bottom: clamp(7rem, 12vw, 10rem);
   left: clamp(1.25rem, 2.5vw, 2.5rem);
   right: clamp(1.25rem, 2.5vw, auto);
   z-index: 10;
-  max-width: clamp(300px, 42vw, 600px);
+  max-width: clamp(320px, 45vw, 650px);
+  pointer-events: none;
 }
 
 .slide-title {
