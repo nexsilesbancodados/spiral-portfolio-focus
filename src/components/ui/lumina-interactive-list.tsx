@@ -234,8 +234,8 @@ export function LuminaSlider() {
       { value: 0 },
       {
         value: 1,
-        duration: 2.2,
-        ease: 'power2.inOut',
+        duration: 2.4,
+        ease: 'power3.inOut',
         onComplete: () => {
           mat.uniforms.uProgress.value = 0;
           mat.uniforms.uTexture1.value = toTex;
