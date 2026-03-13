@@ -923,7 +923,7 @@ export function SectionsDetail() {
 
                   <ul className="space-y-4">
                     {section.details.map((detail, i) => (
-                      <li key={i} className="anim-el flex items-start gap-4 text-muted-foreground text-sm md:text-base group">
+                      <li key={i} className="anim-el flex items-start gap-4 text-muted-foreground text-sm md:text-base group" style={{ opacity: 0 }}>
                         <span className="mt-1 flex items-center justify-center w-6 h-6 rounded-full shrink-0 border border-accent/30 text-accent font-[family-name:var(--font-display)] text-[10px]">{String(i + 1).padStart(2, '0')}</span>
                         <span className="group-hover:text-foreground/90 transition-colors duration-300">{detail}</span>
                       </li>
