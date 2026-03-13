@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState, useCallback } from 'react';
+import { gsap } from 'gsap';
 
 interface Slide {
   title: string;
@@ -18,7 +19,7 @@ const slides: Slide[] = [
   { title: 'Skills', description: 'Domínio completo do ecossistema moderno — front-end, back-end, cloud e design em um só lugar.', media: '/images/hero-skills.jpg', skills: ['React', 'Node.js', 'Python', 'AWS'] },
 ];
 
-function SlideMedia({ slide, isActive, eager, style }: { slide: Slide; isActive: boolean; eager?: boolean; style?: React.CSSProperties }) {
+function SlideMedia({ slide, isActive, eager, style, slideIndex }: { slide: Slide; isActive: boolean; eager?: boolean; style?: React.CSSProperties; slideIndex: number }) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -35,12 +36,13 @@ function SlideMedia({ slide, isActive, eager, style }: { slide: Slide; isActive:
 
   if (slide.video) {
     return (
-      <div className="absolute inset-0" style={style}>
+      <div className="absolute inset-0" data-slide-index={slideIndex} style={style}>
         <img
           src={slide.media}
           alt={slide.title}
           loading={eager ? 'eager' : 'lazy'}
           decoding="async"
+          data-active-media={isActive ? "true" : undefined}
           className="absolute inset-0 w-full h-full object-cover"
           style={{ filter }}
         />
@@ -51,6 +53,7 @@ function SlideMedia({ slide, isActive, eager, style }: { slide: Slide; isActive:
           loop
           playsInline
           preload={eager ? 'auto' : 'none'}
+          data-active-media={isActive ? "true" : undefined}
           className="absolute inset-0 w-full h-full object-cover"
           style={{ filter }}
         />
@@ -59,14 +62,17 @@ function SlideMedia({ slide, isActive, eager, style }: { slide: Slide; isActive:
   }
 
   return (
-    <img
-      src={slide.media}
-      alt={slide.title}
-      loading={eager ? 'eager' : 'lazy'}
-      decoding="async"
-      className="absolute inset-0 w-full h-full object-cover"
-      style={{ filter, ...style }}
-    />
+    <div className="absolute inset-0" data-slide-index={slideIndex} style={style}>
+      <img
+        src={slide.media}
+        alt={slide.title}
+        loading={eager ? 'eager' : 'lazy'}
+        decoding="async"
+        data-active-media={isActive ? "true" : undefined}
+        className="absolute inset-0 w-full h-full object-cover"
+        style={{ filter }}
+      />
+    </div>
   );
 }
 
@@ -101,32 +107,87 @@ export function LuminaSlider() {
   }, [currentSlide, isTransitioning]);
 
   const triggerExplore = useCallback(() => {
-    window.dispatchEvent(new CustomEvent('explore-slide', { detail: { slideIndex: currentSlide } }));
+    const btn = document.querySelector('.explore-btn') as HTMLElement;
+    if (btn) {
+      gsap.to(btn, { y: 8, opacity: 0, duration: 0.3, ease: 'power2.in', onComplete: () => {
+        window.dispatchEvent(new CustomEvent('explore-slide', { detail: { slideIndex: currentSlide } }));
+        gsap.set(btn, { y: 0, opacity: 0.75 });
+      }});
+    } else {
+      window.dispatchEvent(new CustomEvent('explore-slide', { detail: { slideIndex: currentSlide } }));
+    }
   }, [currentSlide]);
+
+  // GSAP slide transitions
+  useEffect(() => {
+    if (prevSlide === null) return;
+    const prev = containerRef.current?.querySelector<HTMLElement>(`[data-slide-index="${prevSlide}"]`);
+    const curr = containerRef.current?.querySelector<HTMLElement>(`[data-slide-index="${currentSlide}"]`);
+    if (!prev || !curr) return;
+
+    const tl = gsap.timeline();
+    tl.set(curr, { opacity: 0, scale: 1.04 })
+      .to(prev, { opacity: 0, scale: 1.06, duration: 0.6, ease: 'power2.in' }, 0)
+      .to(curr, { opacity: 1, scale: 1, duration: 0.7, ease: 'power3.out' }, 0.15);
+
+    return () => { tl.kill(); };
+  }, [currentSlide, prevSlide]);
+
+  // Wheel handler with useRef for stable state
+  const wheelAccumRef = useRef(0);
+  const wheelCooldownRef = useRef(false);
+  const wheelTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
 
-    let wheelAccum = 0;
-    let wheelCooldown = false;
-
     const handleWheel = (e: WheelEvent) => {
-      if (wheelCooldown) return;
-      wheelAccum += e.deltaY;
+      if (wheelCooldownRef.current) return;
+      wheelAccumRef.current += e.deltaY;
 
-      if (wheelAccum > 120) {
-        wheelCooldown = true;
+      if (wheelAccumRef.current > 120) {
+        wheelCooldownRef.current = true;
         triggerExplore();
-        wheelAccum = 0;
-        window.setTimeout(() => { wheelCooldown = false; }, 900);
+        wheelAccumRef.current = 0;
+        wheelTimerRef.current = setTimeout(() => { wheelCooldownRef.current = false; }, 900);
       }
-      if (wheelAccum < 0) { wheelAccum = 0; }
+      if (wheelAccumRef.current < 0) { wheelAccumRef.current = 0; }
     };
 
     el.addEventListener('wheel', handleWheel, { passive: true });
-    return () => el.removeEventListener('wheel', handleWheel);
+    return () => {
+      el.removeEventListener('wheel', handleWheel);
+      if (wheelTimerRef.current) clearTimeout(wheelTimerRef.current);
+    };
   }, [triggerExplore]);
+
+  // Mouse parallax on active slide media
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    let rafId: number;
+    const handleMouseMove = (e: MouseEvent) => {
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        const { clientX, clientY } = e;
+        const xPct = (clientX / window.innerWidth - 0.5) * 2;
+        const yPct = (clientY / window.innerHeight - 0.5) * 2;
+        const activeImg = el.querySelector<HTMLElement>('[data-active-media="true"]');
+        if (activeImg) {
+          gsap.to(activeImg, {
+            x: xPct * 12,
+            y: yPct * 8,
+            duration: 1.2,
+            ease: 'power1.out',
+            overwrite: 'auto',
+          });
+        }
+      });
+    };
+    el.addEventListener('mousemove', handleMouseMove);
+    return () => { el.removeEventListener('mousemove', handleMouseMove); cancelAnimationFrame(rafId); };
+  }, []);
 
   // Touch swipe support
   useEffect(() => {
@@ -184,12 +245,9 @@ export function LuminaSlider() {
               slide={slide}
               isActive={isActive || isLeaving}
               eager={index === 0}
+              slideIndex={index}
               style={{
-                opacity: isActive ? 1 : isLeaving ? 0 : 0,
-                transform: isActive ? 'scale(1)' : isLeaving ? 'scale(1.06)' : 'scale(1.02)',
-                transition: isActive 
-                  ? 'opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1)' 
-                  : 'opacity 0.5s ease-out, transform 0.7s ease-out',
+                opacity: isActive ? 1 : 0,
                 zIndex: isActive ? 2 : isLeaving ? 1 : 0,
               }}
             />
@@ -199,14 +257,14 @@ export function LuminaSlider() {
         <div className="absolute inset-0 bg-gradient-to-r from-background/55 via-transparent to-transparent" style={{ zIndex: 3 }} />
       </div>
 
-      {/* Ambient glow that follows slide accent */}
+      {/* Ambient glow */}
       <div className="absolute top-0 right-0 w-1/2 h-1/2 pointer-events-none" style={{ 
         zIndex: 4,
         background: 'radial-gradient(ellipse at 90% 10%, hsl(var(--primary) / 0.06), transparent 60%)',
         transition: 'opacity 0.8s ease',
       }} />
 
-      {/* Slide counter - vertical style */}
+      {/* Slide counter */}
       <div className="absolute z-10 flex items-center gap-3" style={{ top: 'clamp(1rem, 2vw, 2rem)', left: 'clamp(1.25rem, 2.5vw, 2.5rem)' }}>
         <span className="font-[family-name:var(--font-display)] text-primary tracking-wider" style={{ fontSize: 'clamp(11px, 1vw, 16px)' }}>
           {String(currentSlide + 1).padStart(2, '0')}
@@ -245,7 +303,7 @@ export function LuminaSlider() {
         </div>
       </div>
 
-      {/* Bottom navigation with animated progress */}
+      {/* Bottom navigation */}
       <nav className="slides-navigation" aria-label="Navegação de seções">
         {slides.map((slide, index) => (
           <button

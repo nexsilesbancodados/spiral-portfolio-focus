@@ -51,60 +51,6 @@ All colors MUST be HSL.
     --vice-palm: 145 50% 35%;
     --vice-sky: 200 60% 50%;
     --vice-gold: 40 100% 50%;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
 
@@ -121,11 +67,6 @@ All colors MUST be HSL.
     -webkit-tap-highlight-color: transparent;
     text-rendering: optimizeSpeed;
   }
-
-  img, video {
-    content-visibility: auto;
-    contain-intrinsic-size: auto 300px;
-  }
 }
 
 /* Accessibility: reduced motion */
@@ -138,6 +79,31 @@ All colors MUST be HSL.
   }
   .animate-text-fill, .animate-pulse, .explore-btn-arrow {
     animation: none !important;
+  }
+}
+
+/* Custom cursor */
+@media (hover: hover) and (pointer: fine) {
+  body { cursor: none; }
+  
+  #custom-cursor {
+    position: fixed;
+    top: 0; left: 0;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: hsl(var(--vice-sunset));
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s, height 0.2s, background 0.2s;
+    mix-blend-mode: difference;
+  }
+  
+  #custom-cursor.cursor-hover {
+    width: 40px;
+    height: 40px;
+    background: hsl(var(--foreground) / 0.15);
+    border: 1px solid hsl(var(--vice-sunset) / 0.8);
   }
 }
 
@@ -336,6 +302,11 @@ All colors MUST be HSL.
   transform: translateY(-2px);
 }
 
+/* Magnetic card effect */
+.magnetic-card {
+  transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
 .image-hover-zoom {
   overflow: hidden;
 }
@@ -357,7 +328,6 @@ All colors MUST be HSL.
   height: 100%;
   border-radius: 2px;
   background: linear-gradient(90deg, hsl(var(--vice-sunset)), hsl(var(--vice-pink)));
-  transition: width 0.6s ease;
 }
 
 /* Parallax container */
@@ -496,10 +466,12 @@ All colors MUST be HSL.
 
 .detail-section-enter {
   animation: detail-enter 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  will-change: opacity, transform, filter;
 }
 
 .detail-section-exit {
   animation: detail-exit 0.35s cubic-bezier(0.55, 0, 1, 0.45) forwards;
+  will-change: opacity, transform, filter;
 }
 
 /* Cinematic hero content reveal */
@@ -532,4 +504,14 @@ All colors MUST be HSL.
 
 .ken-burns-hero {
   animation: ken-burns 20s ease-in-out alternate infinite;
+  will-change: transform;
+}
+
+/* Title split wrapper for clip reveal */
+.title-split-wrapper {
+  overflow: hidden;
+  display: block;
+}
+.title-word {
+  display: inline-block;
 }
