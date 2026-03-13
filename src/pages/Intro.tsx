@@ -1,14 +1,25 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { gsap } from 'gsap';
 
-const INTRO_DURATION = 3000; // 3 seconds
+const INTRO_DURATION = 3200;
 
 const Intro = () => {
   const [progress, setProgress] = useState(0);
   const [fadeOut, setFadeOut] = useState(false);
   const navigate = useNavigate();
+  const logoRef = useRef<HTMLDivElement>(null);
+  const barRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Animate logo entrance
+    if (logoRef.current) {
+      gsap.fromTo(logoRef.current,
+        { opacity: 0, y: 20, filter: 'blur(8px)' },
+        { opacity: 1, y: 0, filter: 'blur(0px)', duration: 1, ease: 'power3.out', delay: 0.2 }
+      );
+    }
+
     const start = Date.now();
     let raf: number;
 
@@ -19,7 +30,7 @@ const Intro = () => {
 
       if (elapsed >= INTRO_DURATION) {
         setFadeOut(true);
-        setTimeout(() => navigate('/home'), 400);
+        setTimeout(() => navigate('/home'), 500);
         return;
       }
       raf = requestAnimationFrame(tick);
@@ -31,7 +42,7 @@ const Intro = () => {
 
   return (
     <div
-      className={`fixed inset-0 z-[9999] bg-background flex flex-col items-center justify-end transition-opacity duration-500 ${
+      className={`fixed inset-0 z-[9999] bg-background flex flex-col items-center justify-center transition-opacity duration-500 ${
         fadeOut ? 'opacity-0' : 'opacity-100'
       }`}
     >
@@ -41,47 +52,61 @@ const Intro = () => {
         alt="Intro Focuss Dev"
         loading="eager"
         decoding="async"
+        style={{ filter: 'brightness(0.35) saturate(1.2)' }}
       />
 
-      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-background/30" />
+      <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at center, transparent 30%, hsl(var(--background)) 80%)' }} />
 
-      <div className="relative z-10 w-full space-y-4" style={{ padding: '0 clamp(1.5rem, 4vw, 3rem) clamp(2rem, 3vw, 4rem)' }}>
-        <div className="flex items-center justify-between">
+      {/* Logo / Brand */}
+      <div ref={logoRef} className="relative z-10 flex flex-col items-center gap-6 mb-12" style={{ opacity: 0 }}>
+        <img
+          src="/images/focuss-dev-logo.png"
+          alt="FOCUSS DEV"
+          className="w-auto object-contain"
+          style={{ height: 'clamp(40px, 6vw, 80px)' }}
+        />
+        <div className="flex items-center gap-3">
+          <div className="h-[1px] bg-primary/40" style={{ width: 'clamp(1.5rem, 3vw, 3rem)' }} />
           <span
-            className="tracking-[0.3em] uppercase"
+            className="font-[family-name:var(--font-display)] tracking-[0.5em] uppercase text-muted-foreground"
+            style={{ fontSize: 'clamp(8px, 0.7vw, 11px)' }}
+          >
+            Studio Digital
+          </span>
+          <div className="h-[1px] bg-primary/40" style={{ width: 'clamp(1.5rem, 3vw, 3rem)' }} />
+        </div>
+      </div>
+
+      {/* Progress */}
+      <div className="relative z-10 w-full" style={{ maxWidth: 'clamp(200px, 30vw, 400px)', padding: '0 clamp(1.5rem, 4vw, 3rem)' }}>
+        <div className="flex items-center justify-between mb-3">
+          <span
+            className="tracking-[0.3em] uppercase font-[family-name:var(--font-display)]"
             style={{
-              fontFamily: 'var(--font-display)',
-              color: 'hsl(var(--foreground) / 0.6)',
-              fontSize: 'clamp(9px, 0.8vw, 14px)',
+              color: 'hsl(var(--foreground) / 0.5)',
+              fontSize: 'clamp(8px, 0.7vw, 11px)',
             }}
           >
-            Carregando...
+            Carregando
           </span>
-          <span className="font-mono" style={{ color: 'hsl(var(--primary))', fontSize: 'clamp(9px, 0.8vw, 14px)' }}>
+          <span className="font-[family-name:var(--font-display)] tracking-wider" style={{ color: 'hsl(var(--primary))', fontSize: 'clamp(9px, 0.8vw, 12px)' }}>
             {Math.min(Math.round(progress), 100)}%
           </span>
         </div>
 
-        <div className="relative w-full rounded-full overflow-hidden bg-secondary/60 border border-border/30" style={{ height: 'clamp(4px, 0.4vw, 6px)' }}>
+        <div className="relative w-full rounded-full overflow-hidden bg-secondary/40 border border-border/20" style={{ height: 'clamp(3px, 0.35vw, 5px)' }}>
           <div
-            className="h-full rounded-full transition-[width] duration-200 ease-linear"
+            ref={barRef}
+            className="h-full rounded-full"
             style={{
               width: `${Math.min(progress, 100)}%`,
               background: 'linear-gradient(90deg, hsl(var(--vice-teal)), hsl(var(--vice-sunset)), hsl(var(--vice-pink)))',
+              boxShadow: '0 0 12px hsl(var(--vice-sunset) / 0.4)',
+              transition: 'width 0.1s linear',
             }}
           />
         </div>
-
-        <p
-          className="text-center tracking-[0.5em] uppercase"
-          style={{
-            fontFamily: 'var(--font-display)',
-            color: 'hsl(var(--muted-foreground))',
-            fontSize: 'clamp(8px, 0.7vw, 12px)',
-          }}
-        >
-          Focuss Dev Studio
-        </p>
       </div>
     </div>
   );
