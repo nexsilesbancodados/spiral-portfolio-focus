@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState, useCallback } from 'react';
 import { gsap } from 'gsap';
+import * as THREE from 'three';
 
 interface Slide {
   title: string;
@@ -18,82 +19,259 @@ const slides: Slide[] = [
   { title: 'Skills', description: 'Domínio completo do ecossistema moderno — front-end, back-end, cloud e design em um só lugar.', media: '/images/hero-skills.jpg', skills: ['React', 'Node.js', 'Python', 'AWS'] },
 ];
 
-function SlideMedia({ slide, isActive, eager, style, slideIndex }: { slide: Slide; isActive: boolean; eager?: boolean; style?: React.CSSProperties; slideIndex: number }) {
-  const filter = 'saturate(1.08) contrast(1.03)';
+// ── WebGL Glass Shader ──────────────────────────────────────────────
+const vertexShader = `
+  varying vec2 vUv;
+  void main() {
+    vUv = uv;
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+  }
+`;
 
-  return (
-    <div className="absolute inset-0" data-slide-index={slideIndex} style={style}>
-      <img
-        src={slide.media}
-        alt={slide.title}
-        loading={eager ? 'eager' : 'lazy'}
-        decoding="async"
-        data-active-media={isActive ? "true" : undefined}
-        className="absolute inset-0 w-full h-full object-cover"
-        style={{ filter }}
-      />
-    </div>
-  );
-}
+const fragmentShader = `
+  uniform sampler2D uTexture1, uTexture2;
+  uniform float uProgress;
+  uniform vec2 uResolution, uTexture1Size, uTexture2Size;
+  uniform float uGlobalIntensity, uSpeedMultiplier, uDistortionStrength;
+  uniform float uGlassRefractionStrength, uGlassChromaticAberration, uGlassBubbleClarity, uGlassEdgeGlow, uGlassLiquidFlow;
+  varying vec2 vUv;
+
+  vec2 getCoverUV(vec2 uv, vec2 textureSize) {
+    vec2 s = uResolution / textureSize;
+    float scale = max(s.x, s.y);
+    vec2 scaledSize = textureSize * scale;
+    vec2 offset = (uResolution - scaledSize) * 0.5;
+    return (uv * uResolution - offset) / scaledSize;
+  }
+
+  void main() {
+    float progress = uProgress;
+    float time = progress * 5.0 * uSpeedMultiplier;
+    vec2 uv1 = getCoverUV(vUv, uTexture1Size);
+    vec2 uv2 = getCoverUV(vUv, uTexture2Size);
+
+    float maxR = length(uResolution) * 0.85;
+    float br = progress * maxR;
+    vec2 p = vUv * uResolution;
+    vec2 c = uResolution * 0.5;
+    float d = length(p - c);
+    float nd = d / max(br, 0.001);
+    float param = smoothstep(br + 3.0, br - 3.0, d);
+
+    vec4 img;
+    if (param > 0.0) {
+      float ro = 0.08 * uGlassRefractionStrength * uDistortionStrength * uGlobalIntensity * pow(smoothstep(0.3 * uGlassBubbleClarity, 1.0, nd), 1.5);
+      vec2 dir = (d > 0.0) ? (p - c) / d : vec2(0.0);
+      vec2 distUV = uv2 - dir * ro;
+      distUV += vec2(sin(time + nd * 10.0), cos(time * 0.8 + nd * 8.0)) * 0.015 * uGlassLiquidFlow * uSpeedMultiplier * nd * param;
+      float ca = 0.02 * uGlassChromaticAberration * uGlobalIntensity * pow(smoothstep(0.3, 1.0, nd), 1.2);
+      img = vec4(
+        texture2D(uTexture2, distUV + dir * ca * 1.2).r,
+        texture2D(uTexture2, distUV + dir * ca * 0.2).g,
+        texture2D(uTexture2, distUV - dir * ca * 0.8).b,
+        1.0
+      );
+      if (uGlassEdgeGlow > 0.0) {
+        float rim = smoothstep(0.95, 1.0, nd) * (1.0 - smoothstep(1.0, 1.01, nd));
+        img.rgb += rim * 0.08 * uGlassEdgeGlow * uGlobalIntensity;
+      }
+    } else {
+      img = texture2D(uTexture2, uv2);
+    }
+
+    vec4 oldImg = texture2D(uTexture1, uv1);
+    if (progress > 0.95) {
+      img = mix(img, texture2D(uTexture2, uv2), (progress - 0.95) / 0.05);
+    }
+    gl_FragColor = mix(oldImg, img, param);
+  }
+`;
 
 export function LuminaSlider() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [prevSlide, setPrevSlide] = useState<number | null>(null);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const [loadedSlides, setLoadedSlides] = useState<Set<number>>(() => new Set([0]));
+
+  // WebGL refs
+  const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
+  const materialRef = useRef<THREE.ShaderMaterial | null>(null);
+  const sceneRef = useRef<THREE.Scene | null>(null);
+  const cameraRef = useRef<THREE.OrthographicCamera | null>(null);
+  const texturesRef = useRef<THREE.Texture[]>([]);
+  const webglReadyRef = useRef(false);
+  const currentSlideRef = useRef(0);
+  const isTransitioningRef = useRef(false);
+  const rafRef = useRef<number>(0);
 
   const current = useMemo(() => slides[currentSlide], [currentSlide]);
 
-  const goToSlide = useCallback((index: number) => {
-    const bounded = (index + slides.length) % slides.length;
-    if (bounded === currentSlide || isTransitioning) return;
+  // ── Initialize WebGL ──────────────────────────────────────────────
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
 
-    setLoadedSlides(prev => {
-      if (prev.has(bounded)) return prev;
-      const next = new Set(prev);
-      next.add(bounded);
-      return next;
+    const scene = new THREE.Scene();
+    const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: false });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    const material = new THREE.ShaderMaterial({
+      uniforms: {
+        uTexture1: { value: null },
+        uTexture2: { value: null },
+        uProgress: { value: 0 },
+        uResolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
+        uTexture1Size: { value: new THREE.Vector2(1, 1) },
+        uTexture2Size: { value: new THREE.Vector2(1, 1) },
+        uGlobalIntensity: { value: 1.0 },
+        uSpeedMultiplier: { value: 1.0 },
+        uDistortionStrength: { value: 1.0 },
+        uGlassRefractionStrength: { value: 1.0 },
+        uGlassChromaticAberration: { value: 1.0 },
+        uGlassBubbleClarity: { value: 1.0 },
+        uGlassEdgeGlow: { value: 1.0 },
+        uGlassLiquidFlow: { value: 1.0 },
+      },
+      vertexShader,
+      fragmentShader,
     });
 
-    setIsTransitioning(true);
-    setPrevSlide(currentSlide);
-    setCurrentSlide(bounded);
+    const mesh = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), material);
+    scene.add(mesh);
 
-    setTimeout(() => {
-      setPrevSlide(null);
-      setIsTransitioning(false);
-    }, 600);
-  }, [currentSlide, isTransitioning]);
+    sceneRef.current = scene;
+    cameraRef.current = camera;
+    rendererRef.current = renderer;
+    materialRef.current = material;
+
+    // Load all textures
+    const loader = new THREE.TextureLoader();
+    const loadTexture = (src: string): Promise<THREE.Texture> =>
+      new Promise((resolve, reject) => {
+        loader.load(
+          src,
+          (tex) => {
+            tex.minFilter = THREE.LinearFilter;
+            tex.magFilter = THREE.LinearFilter;
+            tex.userData = { size: new THREE.Vector2(tex.image.width, tex.image.height) };
+            resolve(tex);
+          },
+          undefined,
+          reject
+        );
+      });
+
+    const loadAll = async () => {
+      const textures: THREE.Texture[] = [];
+      for (const slide of slides) {
+        try {
+          textures.push(await loadTexture(slide.media));
+        } catch {
+          // Create a fallback 1x1 black texture
+          const fallback = new THREE.DataTexture(new Uint8Array([0, 0, 0, 255]), 1, 1);
+          fallback.userData = { size: new THREE.Vector2(1, 1) };
+          fallback.needsUpdate = true;
+          textures.push(fallback);
+        }
+      }
+      texturesRef.current = textures;
+
+      if (textures.length >= 2) {
+        material.uniforms.uTexture1.value = textures[0];
+        material.uniforms.uTexture2.value = textures[0]; // same initially
+        material.uniforms.uTexture1Size.value = textures[0].userData.size;
+        material.uniforms.uTexture2Size.value = textures[0].userData.size;
+        webglReadyRef.current = true;
+      }
+    };
+
+    loadAll();
+
+    // Render loop
+    const render = () => {
+      rafRef.current = requestAnimationFrame(render);
+      renderer.render(scene, camera);
+    };
+    render();
+
+    // Resize handler
+    const onResize = () => {
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      material.uniforms.uResolution.value.set(window.innerWidth, window.innerHeight);
+    };
+    window.addEventListener('resize', onResize);
+
+    return () => {
+      window.removeEventListener('resize', onResize);
+      cancelAnimationFrame(rafRef.current);
+      renderer.dispose();
+      material.dispose();
+    };
+  }, []);
+
+  // ── WebGL Glass Transition ────────────────────────────────────────
+  const transitionToSlide = useCallback((targetIndex: number) => {
+    const mat = materialRef.current;
+    const textures = texturesRef.current;
+    if (!mat || !webglReadyRef.current || textures.length < 2) return;
+
+    const fromTex = textures[currentSlideRef.current];
+    const toTex = textures[targetIndex];
+    if (!fromTex || !toTex) return;
+
+    isTransitioningRef.current = true;
+    setIsTransitioning(true);
+
+    mat.uniforms.uTexture1.value = fromTex;
+    mat.uniforms.uTexture2.value = toTex;
+    mat.uniforms.uTexture1Size.value = fromTex.userData.size;
+    mat.uniforms.uTexture2Size.value = toTex.userData.size;
+
+    gsap.fromTo(
+      mat.uniforms.uProgress,
+      { value: 0 },
+      {
+        value: 1,
+        duration: 2.2,
+        ease: 'power2.inOut',
+        onComplete: () => {
+          mat.uniforms.uProgress.value = 0;
+          mat.uniforms.uTexture1.value = toTex;
+          mat.uniforms.uTexture1Size.value = toTex.userData.size;
+          isTransitioningRef.current = false;
+          setIsTransitioning(false);
+        },
+      }
+    );
+
+    currentSlideRef.current = targetIndex;
+    setCurrentSlide(targetIndex);
+  }, []);
+
+  const goToSlide = useCallback((index: number) => {
+    const bounded = (index + slides.length) % slides.length;
+    if (bounded === currentSlideRef.current || isTransitioningRef.current) return;
+    transitionToSlide(bounded);
+  }, [transitionToSlide]);
 
   const triggerExplore = useCallback(() => {
     const btn = document.querySelector('.explore-btn') as HTMLElement;
     if (btn) {
-      gsap.to(btn, { y: 8, opacity: 0, duration: 0.3, ease: 'power2.in', onComplete: () => {
-        window.dispatchEvent(new CustomEvent('explore-slide', { detail: { slideIndex: currentSlide } }));
-        gsap.set(btn, { y: 0, opacity: 0.75 });
-      }});
+      gsap.to(btn, {
+        y: 8, opacity: 0, duration: 0.3, ease: 'power2.in',
+        onComplete: () => {
+          window.dispatchEvent(new CustomEvent('explore-slide', { detail: { slideIndex: currentSlideRef.current } }));
+          gsap.set(btn, { y: 0, opacity: 0.75 });
+        },
+      });
     } else {
-      window.dispatchEvent(new CustomEvent('explore-slide', { detail: { slideIndex: currentSlide } }));
+      window.dispatchEvent(new CustomEvent('explore-slide', { detail: { slideIndex: currentSlideRef.current } }));
     }
-  }, [currentSlide]);
+  }, []);
 
-  // GSAP slide transitions
-  useEffect(() => {
-    if (prevSlide === null) return;
-    const prev = containerRef.current?.querySelector<HTMLElement>(`[data-slide-index="${prevSlide}"]`);
-    const curr = containerRef.current?.querySelector<HTMLElement>(`[data-slide-index="${currentSlide}"]`);
-    if (!prev || !curr) return;
-
-    const tl = gsap.timeline();
-    tl.set(curr, { opacity: 0, scale: 1.04 })
-      .to(prev, { opacity: 0, scale: 1.06, duration: 0.6, ease: 'power2.in' }, 0)
-      .to(curr, { opacity: 1, scale: 1, duration: 0.7, ease: 'power3.out' }, 0.15);
-
-    return () => { tl.kill(); };
-  }, [currentSlide, prevSlide]);
-
-  // Wheel handler with useRef for stable state
+  // ── Wheel handler ─────────────────────────────────────────────────
   const wheelAccumRef = useRef(0);
   const wheelCooldownRef = useRef(false);
   const wheelTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -101,20 +279,17 @@ export function LuminaSlider() {
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
-
     const handleWheel = (e: WheelEvent) => {
       if (wheelCooldownRef.current) return;
       wheelAccumRef.current += e.deltaY;
-
       if (wheelAccumRef.current > 120) {
         wheelCooldownRef.current = true;
         triggerExplore();
         wheelAccumRef.current = 0;
         wheelTimerRef.current = setTimeout(() => { wheelCooldownRef.current = false; }, 900);
       }
-      if (wheelAccumRef.current < 0) { wheelAccumRef.current = 0; }
+      if (wheelAccumRef.current < 0) wheelAccumRef.current = 0;
     };
-
     el.addEventListener('wheel', handleWheel, { passive: true });
     return () => {
       el.removeEventListener('wheel', handleWheel);
@@ -122,106 +297,72 @@ export function LuminaSlider() {
     };
   }, [triggerExplore]);
 
-  // Mouse parallax on active slide media
+  // ── Touch swipe ───────────────────────────────────────────────────
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
-    let rafId: number;
-    const handleMouseMove = (e: MouseEvent) => {
-      cancelAnimationFrame(rafId);
-      rafId = requestAnimationFrame(() => {
-        const { clientX, clientY } = e;
-        const xPct = (clientX / window.innerWidth - 0.5) * 2;
-        const yPct = (clientY / window.innerHeight - 0.5) * 2;
-        const activeImg = el.querySelector<HTMLElement>('[data-active-media="true"]');
-        if (activeImg) {
-          gsap.to(activeImg, {
-            x: xPct * 12,
-            y: yPct * 8,
-            duration: 1.2,
-            ease: 'power1.out',
-            overwrite: 'auto',
-          });
-        }
-      });
-    };
-    el.addEventListener('mousemove', handleMouseMove);
-    return () => { el.removeEventListener('mousemove', handleMouseMove); cancelAnimationFrame(rafId); };
-  }, []);
-
-  // Touch swipe support
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-    let startX = 0;
-    let startY = 0;
+    let startX = 0, startY = 0;
     const onStart = (e: TouchEvent) => { startX = e.touches[0].clientX; startY = e.touches[0].clientY; };
     const onEnd = (e: TouchEvent) => {
       const dx = e.changedTouches[0].clientX - startX;
       const dy = e.changedTouches[0].clientY - startY;
       if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
-        if (dx < 0) goToSlide(currentSlide + 1);
-        else goToSlide(currentSlide - 1);
+        if (dx < 0) goToSlide(currentSlideRef.current + 1);
+        else goToSlide(currentSlideRef.current - 1);
       }
     };
     el.addEventListener('touchstart', onStart, { passive: true });
     el.addEventListener('touchend', onEnd, { passive: true });
     return () => { el.removeEventListener('touchstart', onStart); el.removeEventListener('touchend', onEnd); };
-  }, [currentSlide, goToSlide]);
+  }, [goToSlide]);
 
-  // Keyboard navigation
+  // ── Keyboard ──────────────────────────────────────────────────────
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowRight') goToSlide(currentSlide + 1);
-      else if (e.key === 'ArrowLeft') goToSlide(currentSlide - 1);
+      if (e.key === 'ArrowRight') goToSlide(currentSlideRef.current + 1);
+      else if (e.key === 'ArrowLeft') goToSlide(currentSlideRef.current - 1);
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [currentSlide, goToSlide]);
+  }, [goToSlide]);
 
-  // Preload adjacent slides after 1s
+  // ── External navigation event ─────────────────────────────────────
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoadedSlides(prev => {
-        const next = new Set(prev);
-        next.add((currentSlide + 1) % slides.length);
-        if (currentSlide > 0) next.add(currentSlide - 1);
-        return next;
-      });
-    }, 1000);
-    return () => clearTimeout(timer);
-  }, [currentSlide]);
+    const handler = (e: Event) => {
+      const idx = (e as CustomEvent).detail?.slideIndex;
+      if (typeof idx === 'number') goToSlide(idx);
+    };
+    window.addEventListener('navigate-slide', handler);
+    return () => window.removeEventListener('navigate-slide', handler);
+  }, [goToSlide]);
+
+  // ── Auto-slide timer ──────────────────────────────────────────────
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (!isTransitioningRef.current && webglReadyRef.current) {
+        goToSlide(currentSlideRef.current + 1);
+      }
+    }, 6000);
+    return () => clearInterval(timer);
+  }, [goToSlide]);
 
   return (
     <main className="slider-wrapper loaded" ref={containerRef}>
-      <div className="absolute inset-0">
-        {slides.map((slide, index) => {
-          if (!loadedSlides.has(index)) return null;
-          const isActive = index === currentSlide;
-          const isLeaving = index === prevSlide;
-          return (
-            <SlideMedia
-              key={slide.title}
-              slide={slide}
-              isActive={isActive || isLeaving}
-              eager={index === 0}
-              slideIndex={index}
-              style={{
-                opacity: isActive ? 1 : 0,
-                zIndex: isActive ? 2 : isLeaving ? 1 : 0,
-              }}
-            />
-          );
-        })}
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/45 to-transparent" style={{ zIndex: 3 }} />
-        <div className="absolute inset-0 bg-gradient-to-r from-background/55 via-transparent to-transparent" style={{ zIndex: 3 }} />
-      </div>
+      {/* WebGL canvas */}
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 w-full h-full"
+        style={{ zIndex: 0 }}
+      />
+
+      {/* Gradient overlays */}
+      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/45 to-transparent" style={{ zIndex: 3 }} />
+      <div className="absolute inset-0 bg-gradient-to-r from-background/55 via-transparent to-transparent" style={{ zIndex: 3 }} />
 
       {/* Ambient glow */}
-      <div className="absolute top-0 right-0 w-1/2 h-1/2 pointer-events-none" style={{ 
+      <div className="absolute top-0 right-0 w-1/2 h-1/2 pointer-events-none" style={{
         zIndex: 4,
         background: 'radial-gradient(ellipse at 90% 10%, hsl(var(--primary) / 0.06), transparent 60%)',
-        transition: 'opacity 0.8s ease',
       }} />
 
       {/* Slide counter */}
@@ -253,6 +394,7 @@ export function LuminaSlider() {
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M9 18l6-6-6-6" /></svg>
       </button>
 
+      {/* Slide content */}
       <div className="slide-content" key={currentSlide}>
         <h1 className="slide-title slide-transition-title" style={{ textShadow: '0 2px 40px hsl(0 0% 0% / 0.5)' }}>{current.title}</h1>
         <p className="slide-description slide-transition-desc" style={{ textShadow: '0 1px 20px hsl(0 0% 0% / 0.4)' }}>{current.description}</p>
@@ -273,7 +415,7 @@ export function LuminaSlider() {
             aria-label={`Ir para ${slide.title}`}
           >
             <div className="slide-progress-line">
-              <div className="slide-progress-fill" style={{ 
+              <div className="slide-progress-fill" style={{
                 width: index === currentSlide ? '100%' : '0%',
                 transition: index === currentSlide ? 'width 0.4s cubic-bezier(0.22, 1, 0.36, 1)' : 'width 0.2s ease',
               }} />
