@@ -345,15 +345,6 @@ export function LuminaSlider() {
     return () => window.removeEventListener('navigate-slide', handler);
   }, [goToSlide]);
 
-  // ── Auto-slide timer ──────────────────────────────────────────────
-  useEffect(() => {
-    const timer = setInterval(() => {
-      if (!isTransitioningRef.current && webglReadyRef.current) {
-        goToSlide(currentSlideRef.current + 1);
-      }
-    }, 6000);
-    return () => clearInterval(timer);
-  }, [goToSlide]);
 
   return (
     <main className="slider-wrapper loaded" ref={containerRef}>
