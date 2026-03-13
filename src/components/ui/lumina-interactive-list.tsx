@@ -256,10 +256,6 @@ export function LuminaSlider() {
     setCurrentSlide(targetIndex);
     setContentKey(k => k + 1);
 
-    // Reset progress
-    progressRef.current = 0;
-    setProgress(0);
-    progressStartRef.current = Date.now();
   }, []);
 
   const goToSlide = useCallback((index: number) => {
