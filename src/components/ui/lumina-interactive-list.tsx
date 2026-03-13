@@ -19,46 +19,7 @@ const slides: Slide[] = [
 ];
 
 function SlideMedia({ slide, isActive, eager, style, slideIndex }: { slide: Slide; isActive: boolean; eager?: boolean; style?: React.CSSProperties; slideIndex: number }) {
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-    if (isActive) {
-      video.play().catch(() => {});
-    } else {
-      video.pause();
-    }
-  }, [isActive]);
-
   const filter = 'saturate(1.08) contrast(1.03)';
-
-  if (slide.video) {
-    return (
-      <div className="absolute inset-0" data-slide-index={slideIndex} style={style}>
-        <img
-          src={slide.media}
-          alt={slide.title}
-          loading={eager ? 'eager' : 'lazy'}
-          decoding="async"
-          data-active-media={isActive ? "true" : undefined}
-          className="absolute inset-0 w-full h-full object-cover"
-          style={{ filter }}
-        />
-        <video
-          ref={videoRef}
-          src={slide.video}
-          muted
-          loop
-          playsInline
-          preload={eager ? 'auto' : 'none'}
-          data-active-media={isActive ? "true" : undefined}
-          className="absolute inset-0 w-full h-full object-cover"
-          style={{ filter }}
-        />
-      </div>
-    );
-  }
 
   return (
     <div className="absolute inset-0" data-slide-index={slideIndex} style={style}>
