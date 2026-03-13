@@ -155,6 +155,265 @@ const sectionColors: Record<string, { accent: string; accentHsl: string; gradien
   'skills':           { accent: 'text-cyan-400',       accentHsl: '185 80% 55%',   gradient: 'linear-gradient(90deg, hsl(185 80% 55%), hsl(210 75% 60%))',          overlay: 'linear-gradient(225deg, hsl(185 80% 55% / 0.1), hsl(210 75% 60% / 0.06), transparent 60%)', titleBg: '', titleGradient: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(185 80% 65%) 30%, hsl(210 75% 55%) 65%, hsl(185 80% 45%) 100%)', glowColor: 'hsl(185 80% 55% / 0.35)' },
 };
 
+// ─── Extended deep-dive content per section ──────────────────────
+type DeepDiveBlock = {
+  heading: string;
+  body: string;
+  highlights?: string[];
+  stat?: { value: string; label: string };
+};
+
+const sectionDeepDive: Record<string, DeepDiveBlock[]> = {
+  'web-design': [
+    {
+      heading: 'Nosso Processo de Design',
+      body: 'Cada projeto começa com uma fase de descoberta profunda. Entendemos o negócio, o público-alvo e os objetivos antes de traçar qualquer pixel. A partir daí, construímos wireframes de baixa fidelidade, validamos com stakeholders e evoluímos para protótipos interativos.',
+      highlights: ['Discovery & Research', 'Wireframes Lo-Fi', 'Protótipos Hi-Fi', 'Design System', 'Handoff para Dev'],
+    },
+    {
+      heading: 'Design Systems & Consistência',
+      body: 'Criamos Design Systems robustos com tokens de cor, tipografia, espaçamento e componentes reutilizáveis. Isso garante que o produto final mantenha consistência visual em todas as telas e que a equipe de desenvolvimento trabalhe com eficiência máxima.',
+      stat: { value: '200+', label: 'Componentes Criados' },
+    },
+    {
+      heading: 'Ferramentas & Workflow',
+      body: 'Nosso stack de design inclui Figma como ferramenta principal, com plugins customizados para automação. Utilizamos Storybook para documentação de componentes, e integramos diretamente com o código via tokens de design.',
+      highlights: ['Figma', 'Storybook', 'Design Tokens', 'Auto-Layout', 'Variants'],
+    },
+    {
+      heading: 'Acessibilidade & Inclusão',
+      body: 'Todo design é criado seguindo as diretrizes WCAG 2.1 AA. Garantimos contraste adequado, navegação por teclado, textos legíveis e uma experiência inclusiva para todos os usuários, independentemente de suas capacidades.',
+    },
+  ],
+  'desenvolvimento': [
+    {
+      heading: 'Arquitetura & Padrões',
+      body: 'Adotamos Clean Architecture e princípios SOLID em todos os projetos. Cada aplicação é dividida em camadas bem definidas — domínio, aplicação, infraestrutura — garantindo testabilidade, manutenibilidade e facilidade de evolução.',
+      highlights: ['Clean Architecture', 'SOLID Principles', 'Domain-Driven Design', 'CQRS', 'Event Sourcing'],
+    },
+    {
+      heading: 'Stack Tecnológico',
+      body: 'Escolhemos a tecnologia certa para cada projeto. Para front-end, React com TypeScript é nosso padrão. No back-end, Node.js para APIs rápidas, Python para data-heavy e Go para microsserviços de alta performance.',
+      stat: { value: '99.9%', label: 'Uptime Garantido' },
+    },
+    {
+      heading: 'Testing & Quality Assurance',
+      body: 'Testes automatizados são parte integral do nosso processo. Cobrimos desde unit tests com Jest/Vitest, integration tests com Supertest, até E2E tests com Playwright. Cada PR passa por code review e CI/CD pipeline completo.',
+      highlights: ['Unit Tests', 'Integration Tests', 'E2E Tests', 'Code Review', 'CI/CD Pipeline'],
+    },
+    {
+      heading: 'Performance & Otimização',
+      body: 'Monitoramos métricas de Core Web Vitals (LCP, FID, CLS) em tempo real. Aplicamos lazy loading, code splitting, caching agressivo e otimização de queries para garantir que cada aplicação carregue em menos de 2 segundos.',
+      stat: { value: '<2s', label: 'Tempo de Carregamento' },
+    },
+  ],
+  'servicos': [
+    {
+      heading: 'Tráfego Pago — Estratégia Completa',
+      body: 'Desenvolvemos campanhas de tráfego pago com foco em ROI. Começamos com análise de mercado e público, criamos criativos de alto impacto, configuramos tracking avançado (GTM, Pixel, API de Conversões) e otimizamos diariamente com base em dados reais.',
+      highlights: ['Google Ads', 'Meta Ads', 'TikTok Ads', 'Análise de Dados', 'Otimização Contínua'],
+      stat: { value: '3.5x', label: 'ROAS Médio' },
+    },
+    {
+      heading: 'Desenvolvimento de Sites — Do Conceito ao Deploy',
+      body: 'Cada site é construído com tecnologias modernas (React, Next.js, Tailwind) e otimizado para SEO desde o primeiro commit. Implementamos schemas estruturados, meta tags dinâmicas, sitemap automatizado e performance lighthouse acima de 90.',
+      highlights: ['SEO On-Page', 'Schema Markup', 'Performance 90+', 'Mobile-First', 'Analytics Integrado'],
+    },
+    {
+      heading: 'Apps & Sistemas SaaS',
+      body: 'Construímos aplicações completas — de MVPs para validação até plataformas SaaS escaláveis. Incluímos autenticação segura, dashboards em tempo real, integrações com APIs de terceiros, sistema de pagamentos e painel administrativo.',
+      stat: { value: '15+', label: 'SaaS Entregues' },
+    },
+    {
+      heading: 'Metodologia de Trabalho',
+      body: 'Trabalhamos em sprints de 2 semanas com entregas contínuas. Cada projeto tem um canal dedicado para comunicação, board no Notion/Linear para acompanhamento e calls semanais de alinhamento. Transparência total em cada etapa.',
+      highlights: ['Sprints de 2 semanas', 'Entregas Contínuas', 'Board de Acompanhamento', 'Calls Semanais', 'Relatórios de Progresso'],
+    },
+  ],
+  'inovacao-ia': [
+    {
+      heading: 'Integração de IA em Produtos',
+      body: 'Integramos modelos de IA diretamente nos produtos dos nossos clientes. Desde chatbots inteligentes com GPT até sistemas de recomendação personalizados, análise de sentimento em reviews e processamento automático de documentos.',
+      highlights: ['Chatbots com GPT', 'Recomendação Personalizada', 'Análise de Sentimento', 'OCR Automático', 'NLP Customizado'],
+    },
+    {
+      heading: 'Automação Inteligente',
+      body: 'Criamos workflows automatizados que eliminam tarefas repetitivas. Integramos ferramentas como Make, n8n e APIs customizadas para conectar sistemas, processar dados automaticamente e gerar relatórios inteligentes.',
+      stat: { value: '80%', label: 'Redução de Trabalho Manual' },
+    },
+    {
+      heading: 'Machine Learning Aplicado',
+      body: 'Desenvolvemos modelos de ML para casos de uso específicos: previsão de demanda, detecção de fraude, classificação de imagens, análise preditiva de churn e otimização de preços dinâmicos.',
+      highlights: ['Previsão de Demanda', 'Detecção de Fraude', 'Classificação de Imagens', 'Análise de Churn', 'Preços Dinâmicos'],
+    },
+    {
+      heading: 'Infraestrutura Cloud para IA',
+      body: 'Deployamos modelos de IA em infraestrutura cloud escalável. Utilizamos AWS SageMaker, Google Vertex AI ou soluções serverless para garantir baixa latência e custo otimizado conforme a demanda.',
+      stat: { value: '<100ms', label: 'Latência de Inferência' },
+    },
+  ],
+  'mobile-web': [
+    {
+      heading: 'React Native — Apps Nativos',
+      body: 'Desenvolvemos aplicações mobile com React Native, compartilhando até 90% do código entre iOS e Android. Implementamos navegação nativa, animações fluidas, push notifications e integração com recursos do dispositivo (câmera, GPS, biometria).',
+      stat: { value: '90%', label: 'Código Compartilhado' },
+    },
+    {
+      heading: 'Progressive Web Apps (PWA)',
+      body: 'Para casos onde uma PWA é a melhor escolha, implementamos service workers para funcionamento offline, cache inteligente, push notifications web e instalação na home screen. A experiência é indistinguível de um app nativo.',
+      highlights: ['Offline-First', 'Push Notifications', 'Instalação Home Screen', 'Cache Inteligente', 'Sync em Background'],
+    },
+    {
+      heading: 'Responsividade Total',
+      body: 'Cada interface é desenvolvida com abordagem mobile-first. Utilizamos breakpoints estratégicos, layouts fluidos com CSS Grid e Flexbox, tipografia responsiva com clamp() e imagens otimizadas para cada resolução.',
+      highlights: ['Mobile-First', 'CSS Grid & Flexbox', 'Tipografia Fluida', 'Imagens Responsivas', 'Touch-Friendly'],
+    },
+    {
+      heading: 'Deploy & Distribuição',
+      body: 'Gerenciamos todo o processo de deploy — desde a configuração nas lojas (App Store, Google Play) até CI/CD com CodePush para atualizações over-the-air. Monitoramos crashes em tempo real com Sentry e analytics com Firebase.',
+      stat: { value: '24h', label: 'Tempo para Hotfix' },
+    },
+  ],
+  'skills': [
+    {
+      heading: 'Front-end Moderno',
+      body: 'Dominamos o ecossistema React por completo: hooks avançados, server components, streaming SSR, suspense boundaries, code splitting automático e state management com Zustand/TanStack Query. Animações cinematográficas com GSAP e Three.js.',
+      highlights: ['React 19+', 'Next.js App Router', 'TypeScript Strict', 'Tailwind CSS', 'GSAP & Three.js'],
+    },
+    {
+      heading: 'Back-end Escalável',
+      body: 'Construímos APIs robustas com Node.js (Express/Fastify), Python (FastAPI/Django) e Go para microsserviços de alta performance. Implementamos autenticação JWT/OAuth, rate limiting, caching com Redis e message queues com RabbitMQ.',
+      highlights: ['Node.js / Express', 'Python / FastAPI', 'Go / Gin', 'Redis & RabbitMQ', 'JWT & OAuth2'],
+    },
+    {
+      heading: 'Banco de Dados & Data',
+      body: 'Expertise em PostgreSQL (com extensões PostGIS e pg_vector), MongoDB para documentos, Redis para cache/sessions e Elasticsearch para busca full-text. Modelamos schemas otimizados com migrations versionadas.',
+      stat: { value: '10TB+', label: 'Dados Gerenciados' },
+    },
+    {
+      heading: 'DevOps & Cloud',
+      body: 'Infraestrutura como código com Terraform, containers com Docker/Kubernetes, CI/CD com GitHub Actions, monitoramento com Grafana/Prometheus e logging centralizado com ELK Stack. Escalamos do zero ao milhão de usuários.',
+      highlights: ['Docker & K8s', 'Terraform IaC', 'GitHub Actions', 'Grafana & Prometheus', 'AWS / GCP'],
+      stat: { value: '∞', label: 'Escalabilidade' },
+    },
+  ],
+};
+
+// Deep-dive content renderer component
+const DeepDiveContent = memo(function DeepDiveContent({ sectionId, accentHsl, gradient }: { sectionId: string; accentHsl: string; gradient: string }) {
+  const blocks = sectionDeepDive[sectionId];
+  if (!blocks || blocks.length === 0) return null;
+
+  return (
+    <div className="relative z-10 bg-background">
+      {/* Section divider */}
+      <div className="fluid-section-pad">
+        <div className="flex items-center gap-4 mb-2">
+          <div className="h-[2px] flex-1" style={{ background: `linear-gradient(90deg, hsl(${accentHsl} / 0.4), transparent)` }} />
+          <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.4em] uppercase" style={{ color: `hsl(${accentHsl} / 0.6)` }}>
+            DEEP DIVE
+          </span>
+          <div className="h-[2px] flex-1" style={{ background: `linear-gradient(90deg, transparent, hsl(${accentHsl} / 0.4))` }} />
+        </div>
+      </div>
+
+      {blocks.map((block, i) => (
+        <div
+          key={i}
+          className="detail-item"
+          style={{ opacity: 0, padding: `clamp(2rem, 4vw, 4rem) clamp(1.5rem, 4vw, 6rem)` }}
+        >
+          <div className="max-w-5xl mx-auto">
+            {/* Block number + heading */}
+            <div className="flex items-start gap-4 mb-6">
+              <span
+                className="font-[family-name:var(--font-display)] text-[11px] tracking-[0.3em] mt-2 shrink-0"
+                style={{ color: `hsl(${accentHsl} / 0.35)` }}
+              >
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <div>
+                <h3
+                  className="font-[family-name:var(--font-display)] font-bold tracking-tight uppercase mb-4"
+                  style={{ fontSize: 'clamp(1.25rem, 2.5vw, 2rem)', color: 'hsl(var(--foreground) / 0.95)' }}
+                >
+                  {block.heading}
+                </h3>
+                <div className="h-[2px] w-12" style={{ background: gradient }} />
+              </div>
+            </div>
+
+            {/* Body text */}
+            <p
+              className="text-foreground/75 leading-relaxed mb-8 max-w-3xl ml-[calc(clamp(11px,1vw,14px)*3+1rem)]"
+              style={{ fontSize: 'clamp(0.875rem, 1.3vw, 1.125rem)' }}
+            >
+              {block.body}
+            </p>
+
+            {/* Stat card (if present) */}
+            {block.stat && (
+              <div
+                className="inline-flex items-center gap-6 rounded-md px-8 py-5 mb-8 ml-[calc(clamp(11px,1vw,14px)*3+1rem)]"
+                style={{
+                  background: `hsl(${accentHsl} / 0.06)`,
+                  border: `1px solid hsl(${accentHsl} / 0.15)`,
+                }}
+              >
+                <span
+                  className="font-[family-name:var(--font-display)] font-bold"
+                  style={{ fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', color: `hsl(${accentHsl})` }}
+                >
+                  {block.stat.value}
+                </span>
+                <span
+                  className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.2em] uppercase text-muted-foreground"
+                >
+                  {block.stat.label}
+                </span>
+              </div>
+            )}
+
+            {/* Highlights pills */}
+            {block.highlights && (
+              <div className="flex flex-wrap gap-2 ml-[calc(clamp(11px,1vw,14px)*3+1rem)]">
+                {block.highlights.map((h, j) => (
+                  <span
+                    key={j}
+                    className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.12em] uppercase px-3 py-1.5 rounded-sm transition-all duration-300 cursor-default hover:scale-[1.03]"
+                    style={{
+                      border: `1px solid hsl(${accentHsl} / 0.2)`,
+                      color: `hsl(${accentHsl} / 0.8)`,
+                      background: `hsl(${accentHsl} / 0.05)`,
+                    }}
+                  >
+                    {h}
+                  </span>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Separator */}
+          {i < blocks.length - 1 && (
+            <div className="max-w-5xl mx-auto mt-10">
+              <div className="h-[1px]" style={{ background: `linear-gradient(90deg, transparent, hsl(${accentHsl} / 0.15), transparent)` }} />
+            </div>
+          )}
+        </div>
+      ))}
+
+      {/* CTA / closing */}
+      <div className="text-center py-16">
+        <div className="h-[1px] w-20 mx-auto mb-6" style={{ background: gradient }} />
+        <p className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.4em] uppercase text-muted-foreground/50">
+          VAMOS CONVERSAR SOBRE SEU PROJETO?
+        </p>
+      </div>
+    </div>
+  );
+});
+
 // ─── Lightweight cinematic section layout ─────────────────────────
 const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtTop }: { section: typeof sections[0]; onScrollUpAtTop: () => void }) {
   const sectionRef = useRef<HTMLDivElement>(null);
