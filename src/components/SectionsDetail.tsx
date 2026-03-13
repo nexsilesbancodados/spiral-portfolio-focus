@@ -907,7 +907,7 @@ export function SectionsDetail() {
                       { value: '∞', suffix: '', label: 'Inovação Contínua', target: null },
                     ].map((stat, i) => (
                       <div key={i} className="anim-el relative p-5 rounded-md overflow-hidden group"
-                        style={{ background: 'hsl(var(--card) / 0.4)', border: '1px solid hsl(var(--border) / 0.15)' }}>
+                        style={{ opacity: 0, background: 'hsl(var(--card) / 0.4)', border: '1px solid hsl(var(--border) / 0.15)' }}>
                         <div className="absolute top-0 left-0 right-0 h-[1px] opacity-60"
                           style={{ background: 'linear-gradient(90deg, transparent, hsl(var(--accent) / 0.5), transparent)' }} />
                         {stat.target !== null ? (
