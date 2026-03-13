@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { gsap } from 'gsap';
 
 const menuItems = [
   { id: 'focuss-dev', label: 'FOCUSS DEV', index: 0 },
@@ -17,6 +18,16 @@ export function HamburgerMenu({ onNavigate }: { onNavigate: (index: number) => v
     setIsOpen(false);
     onNavigate(index);
   };
+
+  // GSAP stagger animation on open
+  useEffect(() => {
+    if (!isOpen) return;
+    const items = document.querySelectorAll('.menu-item-animated');
+    gsap.fromTo(items,
+      { x: -30, opacity: 0 },
+      { x: 0, opacity: 1, duration: 0.4, stagger: 0.06, ease: 'power3.out', delay: 0.1 }
+    );
+  }, [isOpen]);
 
   return (
     <>
@@ -41,8 +52,8 @@ export function HamburgerMenu({ onNavigate }: { onNavigate: (index: number) => v
             <button
               key={item.id}
               onClick={() => handleClick(item.index)}
-              className="group flex items-center gap-4 py-2 animate-fade-in"
-              style={{ animationDelay: `${80 + i * 50}ms` }}
+              className="menu-item-animated group flex items-center gap-4 py-2"
+              style={{ opacity: 0 }}
             >
               <span className="font-[family-name:var(--font-display)] tracking-widest text-vice-sunset/30 group-hover:text-vice-sunset transition-colors duration-300" style={{ fontSize: 'clamp(8px, 0.7vw, 10px)' }}>
                 {String(i + 1).padStart(2, '0')}

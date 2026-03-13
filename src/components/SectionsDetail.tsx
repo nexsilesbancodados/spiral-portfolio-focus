@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState, useCallback, lazy, Suspense, memo }
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
+gsap.registerPlugin(ScrollTrigger);
+
 const FocussChat = lazy(() => import('@/components/FocussChat').then(m => ({ default: m.FocussChat })));
 const TechLogosMarquee = lazy(() => import('@/components/TechLogosMarquee'));
 
@@ -17,7 +19,7 @@ const sections = [
       'Foco em performance, acessibilidade e experiência do usuário',
       'Metodologias ágeis e entrega contínua',
     ],
-    image: '/images/slide-01.jpg', // FOCUSS DEV preservada
+    image: '/images/slide-01.jpg',
   },
   {
     id: 'web-design',
@@ -103,43 +105,54 @@ const sections = [
   },
 ];
 
-// Per-section detail images
-const sectionGallery: Record<string, { images: { src: string; label: string }[]; layout: 'panoramic-duo' | 'trio' | 'asymmetric' | 'stacked' }> = {
+// Per-section detail images (labels removed for cleanliness)
+const sectionGallery: Record<string, { images: { src: string; alt: string }[]; layout: 'panoramic-duo' | 'trio' | 'asymmetric' | 'stacked' }> = {
   'web-design': {
     layout: 'panoramic-duo',
     images: [
-      { src: '/images/webdesign-gallery-03.jpg', label: 'Studio' },
-      { src: '/images/webdesign-gallery-01.jpg', label: 'Prototipagem' },
-      { src: '/images/webdesign-gallery-02.jpg', label: 'Criação' },
+      { src: '/images/webdesign-gallery-03.jpg', alt: 'Studio' },
+      { src: '/images/webdesign-gallery-01.jpg', alt: 'Prototipagem' },
+      { src: '/images/webdesign-gallery-02.jpg', alt: 'Criação' },
     ],
   },
   'inovacao-ia': {
     layout: 'trio',
     images: [
-      { src: '/images/ia-gallery-01.jpg', label: 'Laboratório IA' },
-      { src: '/images/ia-detail-02.jpg', label: 'Automação' },
-      { src: '/images/ia-detail-01.jpg', label: 'Futuro' },
+      { src: '/images/ia-gallery-01.jpg', alt: 'Laboratório IA' },
+      { src: '/images/ia-detail-02.jpg', alt: 'Automação' },
+      { src: '/images/ia-detail-01.jpg', alt: 'Futuro' },
     ],
   },
   'mobile-web': {
     layout: 'stacked',
     images: [
-      { src: '/images/mobile-detail-02.jpg', label: 'Multiplataforma' },
+      { src: '/images/mobile-detail-02.jpg', alt: 'Multiplataforma' },
     ],
   },
   'servicos': {
     layout: 'asymmetric',
     images: [
-      { src: '/images/servicos-detail-01.jpg', label: 'Marketing Digital' },
-      { src: '/images/servicos-detail-02.jpg', label: 'Desenvolvimento' },
+      { src: '/images/servicos-detail-01.jpg', alt: 'Marketing Digital' },
+      { src: '/images/servicos-detail-02.jpg', alt: 'Desenvolvimento' },
     ],
   },
   'skills': {
     layout: 'panoramic-duo',
     images: [
-      { src: '/images/dev-detail-02.jpg', label: 'Conferência' },
+      { src: '/images/dev-detail-02.jpg', alt: 'Conferência' },
     ],
   },
+};
+
+// Static color palette — moved outside component to avoid recreation each render
+const sectionColors: Record<string, { accent: string; accentHsl: string; gradient: string; overlay: string; titleBg: string; titleGradient: string; glowColor: string }> = {
+  'focuss-dev':       { accent: 'text-blue-400',      accentHsl: '210 90% 60%',   gradient: 'linear-gradient(90deg, hsl(210 90% 60%), hsl(230 80% 65%))',          overlay: 'none', titleBg: '', titleGradient: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(210 90% 70%) 40%, hsl(230 80% 60%) 70%, hsl(210 90% 50%) 100%)', glowColor: 'hsl(210 90% 60% / 0.4)' },
+  'web-design':       { accent: 'text-orange-400',     accentHsl: '25 95% 55%',    gradient: 'linear-gradient(90deg, hsl(25 95% 55%), hsl(335 75% 55%))',           overlay: 'linear-gradient(135deg, hsl(25 95% 55% / 0.12), hsl(335 75% 55% / 0.08), transparent 70%)', titleBg: '', titleGradient: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(25 95% 65%) 30%, hsl(335 75% 55%) 65%, hsl(25 95% 45%) 100%)', glowColor: 'hsl(25 95% 55% / 0.35)' },
+  'desenvolvimento':  { accent: 'text-emerald-400',    accentHsl: '160 70% 50%',   gradient: 'linear-gradient(90deg, hsl(160 70% 50%), hsl(190 80% 55%))',          overlay: 'linear-gradient(225deg, hsl(160 70% 50% / 0.12), hsl(190 80% 55% / 0.08), transparent 60%)', titleBg: '', titleGradient: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(160 70% 60%) 30%, hsl(190 80% 50%) 65%, hsl(160 70% 40%) 100%)', glowColor: 'hsl(160 70% 50% / 0.35)' },
+  'servicos':         { accent: 'text-purple-400',     accentHsl: '270 70% 60%',   gradient: 'linear-gradient(90deg, hsl(270 70% 60%), hsl(300 65% 55%))',          overlay: 'linear-gradient(180deg, hsl(270 70% 60% / 0.1), hsl(300 65% 55% / 0.06), transparent)', titleBg: '', titleGradient: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(270 70% 70%) 30%, hsl(300 65% 55%) 65%, hsl(270 70% 50%) 100%)', glowColor: 'hsl(270 70% 60% / 0.35)' },
+  'inovacao-ia':      { accent: 'text-pink-400',       accentHsl: '335 75% 55%',   gradient: 'linear-gradient(90deg, hsl(335 75% 55%), hsl(355 85% 60%))',          overlay: 'linear-gradient(180deg, hsl(335 75% 55% / 0.1), hsl(25 95% 55% / 0.08), transparent)', titleBg: '', titleGradient: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(335 75% 65%) 30%, hsl(355 85% 55%) 65%, hsl(335 75% 45%) 100%)', glowColor: 'hsl(335 75% 55% / 0.35)' },
+  'mobile-web':       { accent: 'text-amber-400',      accentHsl: '40 100% 50%',   gradient: 'linear-gradient(90deg, hsl(40 100% 50%), hsl(30 95% 55%))',           overlay: 'linear-gradient(135deg, hsl(40 100% 50% / 0.1), hsl(175 70% 45% / 0.06), transparent 70%)', titleBg: '', titleGradient: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(40 100% 60%) 30%, hsl(30 95% 50%) 65%, hsl(40 100% 40%) 100%)', glowColor: 'hsl(40 100% 50% / 0.35)' },
+  'skills':           { accent: 'text-cyan-400',       accentHsl: '185 80% 55%',   gradient: 'linear-gradient(90deg, hsl(185 80% 55%), hsl(210 75% 60%))',          overlay: 'linear-gradient(225deg, hsl(185 80% 55% / 0.1), hsl(210 75% 60% / 0.06), transparent 60%)', titleBg: '', titleGradient: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(185 80% 65%) 30%, hsl(210 75% 55%) 65%, hsl(185 80% 45%) 100%)', glowColor: 'hsl(185 80% 55% / 0.35)' },
 };
 
 // ─── Lightweight cinematic section layout ─────────────────────────
@@ -149,14 +162,24 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
   const detailsRef = useRef<HTMLDivElement>(null);
 
   const gallery = sectionGallery[section.id];
+  const colors = sectionColors[section.id] || sectionColors['focuss-dev'];
+  const viceOverlay = colors.overlay;
 
   // GSAP ScrollTrigger reveal animations
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
     const el = sectionRef.current;
     if (!el) return;
 
     const ctx = gsap.context(() => {
+      // Section enter line sweep
+      const divider = el.querySelector('.section-enter-line');
+      if (divider) {
+        gsap.fromTo(divider,
+          { scaleX: 0, transformOrigin: 'left center' },
+          { scaleX: 1, duration: 0.6, ease: 'power3.inOut', delay: 0.05 }
+        );
+      }
+
       // Hero content parallax
       const heroImg = el.querySelector('.ken-burns-hero');
       if (heroImg) {
@@ -185,14 +208,22 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
         );
       });
 
-      // Gallery items staggered reveal
+      // Gallery items clipPath reveal
       const galleryItems = el.querySelectorAll('.gallery-item');
       if (galleryItems.length) {
         gsap.fromTo(galleryItems,
-          { opacity: 0, y: 60, scale: 0.96 },
+          { clipPath: 'inset(0 100% 0 0)', opacity: 1 },
           {
-            opacity: 1, y: 0, scale: 1, duration: 0.9, stagger: 0.15, ease: 'power3.out',
-            scrollTrigger: { trigger: galleryItems[0], scroller: el, start: 'top 85%', toggleActions: 'play none none none' },
+            clipPath: 'inset(0 0% 0 0)',
+            duration: 1.1,
+            stagger: 0.18,
+            ease: 'power3.inOut',
+            scrollTrigger: {
+              trigger: galleryItems[0],
+              scroller: el,
+              start: 'top 85%',
+              toggleActions: 'play none none none',
+            },
           }
         );
       }
@@ -209,57 +240,109 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
         );
       }
 
-      // Title words cinematic reveal
+      // Title words cinematic reveal with clip
       const titleWords = el.querySelectorAll('.title-word');
       if (titleWords.length) {
         gsap.fromTo(titleWords,
-          { opacity: 0, y: 80, skewY: 3 },
-          { opacity: 1, y: 0, skewY: 0, duration: 1, stagger: 0.12, ease: 'power4.out', delay: 0.2 }
+          { y: '110%', opacity: 0 },
+          { y: '0%', opacity: 1, duration: 0.9, stagger: 0.1, ease: 'power4.out', delay: 0.15 }
         );
       }
+
+      // Skill progress bars animation
+      const skillBars = el.querySelectorAll('.skill-progress-fill');
+      skillBars.forEach((bar) => {
+        const targetWidth = (bar as HTMLElement).dataset.width || '0%';
+        gsap.fromTo(bar,
+          { width: '0%' },
+          {
+            width: targetWidth,
+            duration: 1.2,
+            ease: 'power2.out',
+            scrollTrigger: { trigger: bar, scroller: el, start: 'top 90%', toggleActions: 'play none none none' },
+          }
+        );
+      });
     }, el);
 
     return () => ctx.revert();
   }, [section.id]);
 
-  // Scroll-up at top → go back to slider
+  // Scroll-up at top → go back to slider + scroll progress
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
     let accum = 0;
+
     const handleWheel = (e: WheelEvent) => {
       if (el.scrollTop <= 5 && e.deltaY < 0) {
         accum += Math.abs(e.deltaY);
         if (accum > 100) { accum = 0; onScrollUpAtTop(); }
       } else { accum = 0; }
     };
+
+    const updateProgress = () => {
+      const bar = el.querySelector<HTMLElement>('.scroll-progress-bar');
+      if (bar) {
+        const pct = (el.scrollTop / (el.scrollHeight - el.clientHeight)) * 100;
+        bar.style.height = `${Math.min(pct, 100)}%`;
+      }
+    };
+
     el.addEventListener('wheel', handleWheel, { passive: true });
-    return () => el.removeEventListener('wheel', handleWheel);
+    el.addEventListener('scroll', updateProgress, { passive: true });
+    return () => {
+      el.removeEventListener('wheel', handleWheel);
+      el.removeEventListener('scroll', updateProgress);
+    };
   }, [onScrollUpAtTop]);
+
+  // Magnetic card effect
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const cards = el.querySelectorAll<HTMLElement>('.magnetic-card');
+    const handlers: Array<[HTMLElement, (e: MouseEvent) => void, () => void]> = [];
+
+    cards.forEach(card => {
+      const onMove = (e: MouseEvent) => {
+        const rect = card.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width - 0.5) * 14;
+        const y = ((e.clientY - rect.top) / rect.height - 0.5) * 10;
+        gsap.to(card, { x, y, duration: 0.4, ease: 'power1.out' });
+      };
+      const onLeave = () => gsap.to(card, { x: 0, y: 0, duration: 0.5, ease: 'elastic.out(1, 0.5)' });
+      card.addEventListener('mousemove', onMove);
+      card.addEventListener('mouseleave', onLeave);
+      handlers.push([card, onMove, onLeave]);
+    });
+
+    return () => handlers.forEach(([card, onMove, onLeave]) => {
+      card.removeEventListener('mousemove', onMove);
+      card.removeEventListener('mouseleave', onLeave);
+    });
+  }, [section.id]);
 
   // Render gallery based on layout type
   const renderGallery = () => {
-    if (!gallery) {
-      return null;
-    }
+    if (!gallery) return null;
 
     const imgs = gallery.images;
     const imgStyle = { filter: 'brightness(0.75) saturate(1.25) contrast(1.08)' };
-    const labelCls = "font-[family-name:var(--font-display)] text-[10px] tracking-[0.2em] uppercase text-vice-sunset/80";
 
     switch (gallery.layout) {
       case 'panoramic-duo':
         return (
           <div className="space-y-0">
-            <div className="gallery-item relative w-full h-[40vh] md:h-[50vh] overflow-hidden" style={{ opacity: 0 }}>
-              <img src={imgs[0].src} alt={imgs[0].label} loading="lazy" decoding="async" className="w-full h-full object-cover" style={imgStyle} />
+            <div className="gallery-item relative w-full h-[40vh] md:h-[50vh] overflow-hidden">
+              <img src={imgs[0].src} alt={imgs[0].alt} loading="lazy" decoding="async" fetchPriority="low" className="w-full h-full object-cover" style={imgStyle} />
               <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background" />
               <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/40" />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-[2px]">
               {imgs.slice(1).map((img, i) => (
-                <div key={i} className="gallery-item relative h-[35vh] md:h-[45vh] overflow-hidden" style={{ opacity: 0 }}>
-                  <img src={img.src} alt={img.label} loading="lazy" decoding="async" className="w-full h-full object-cover" style={{ filter: 'brightness(0.8) saturate(1.15)' }} />
+                <div key={i} className="gallery-item relative h-[35vh] md:h-[45vh] overflow-hidden">
+                  <img src={img.src} alt={img.alt} loading="lazy" decoding="async" fetchPriority="low" className="w-full h-full object-cover" style={{ filter: 'brightness(0.8) saturate(1.15)' }} />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
                 </div>
               ))}
@@ -269,29 +352,27 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
       case 'asymmetric':
         return (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-[2px]">
-            <div className="gallery-item md:col-span-2 relative h-[45vh] md:h-[60vh] overflow-hidden" style={{ opacity: 0 }}>
-              <img src={imgs[0].src} alt={imgs[0].label} loading="lazy" decoding="async" className="w-full h-full object-cover" style={imgStyle} />
+            <div className="gallery-item md:col-span-2 relative h-[45vh] md:h-[60vh] overflow-hidden">
+              <img src={imgs[0].src} alt={imgs[0].alt} loading="lazy" decoding="async" fetchPriority="low" className="w-full h-full object-cover" style={imgStyle} />
               <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent" />
             </div>
-            <div className="gallery-item relative h-[45vh] md:h-[60vh] overflow-hidden" style={{ opacity: 0 }}>
-              <img src={imgs[1].src} alt={imgs[1].label} loading="lazy" decoding="async" className="w-full h-full object-cover" style={imgStyle} />
+            <div className="gallery-item relative h-[45vh] md:h-[60vh] overflow-hidden">
+              <img src={imgs[1].src} alt={imgs[1].alt} loading="lazy" decoding="async" fetchPriority="low" className="w-full h-full object-cover" style={imgStyle} />
               <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent" />
-              
             </div>
           </div>
         );
       case 'trio':
         return (
           <div className="space-y-[2px]">
-            <div className="gallery-item relative w-full h-[35vh] md:h-[45vh] overflow-hidden" style={{ opacity: 0 }}>
-              <img src={imgs[0].src} alt={imgs[0].label} loading="lazy" decoding="async" className="w-full h-full object-cover" style={imgStyle} />
+            <div className="gallery-item relative w-full h-[35vh] md:h-[45vh] overflow-hidden">
+              <img src={imgs[0].src} alt={imgs[0].alt} loading="lazy" decoding="async" fetchPriority="low" className="w-full h-full object-cover" style={imgStyle} />
               <div className="absolute inset-0 bg-gradient-to-r from-background/60 via-transparent to-background/60" />
-              
             </div>
             <div className="grid grid-cols-2 gap-[2px]">
               {imgs.slice(1).map((img, i) => (
-                <div key={i} className="gallery-item relative h-[30vh] md:h-[40vh] overflow-hidden" style={{ opacity: 0 }}>
-                  <img src={img.src} alt={img.label} loading="lazy" decoding="async" className="w-full h-full object-cover" style={{ filter: 'brightness(0.8) saturate(1.15)' }} />
+                <div key={i} className="gallery-item relative h-[30vh] md:h-[40vh] overflow-hidden">
+                  <img src={img.src} alt={img.alt} loading="lazy" decoding="async" fetchPriority="low" className="w-full h-full object-cover" style={{ filter: 'brightness(0.8) saturate(1.15)' }} />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent" />
                 </div>
               ))}
@@ -302,32 +383,16 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
         return (
           <div className="space-y-[2px]">
             {imgs.map((img, i) => (
-              <div key={i} className="gallery-item relative w-full h-[40vh] md:h-[50vh] overflow-hidden" style={{ opacity: 0 }}>
-                <img src={img.src} alt={img.label} loading="lazy" decoding="async" className="w-full h-full object-cover" style={imgStyle} />
+              <div key={i} className="gallery-item relative w-full h-[40vh] md:h-[50vh] overflow-hidden">
+                <img src={img.src} alt={img.alt} loading="lazy" decoding="async" fetchPriority="low" className="w-full h-full object-cover" style={imgStyle} />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent" />
                 <div className="absolute inset-0 bg-gradient-to-r from-background/40 via-transparent to-background/40" />
-                
               </div>
             ))}
           </div>
         );
     }
   };
-
-  // Per-section color palette + bg image for title text-fill effect
-  const sectionColors: Record<string, { accent: string; accentHsl: string; gradient: string; overlay: string; titleBg: string; titleGradient: string; glowColor: string }> = {
-    'focuss-dev':       { accent: 'text-blue-400',      accentHsl: '210 90% 60%',   gradient: 'linear-gradient(90deg, hsl(210 90% 60%), hsl(230 80% 65%))',          overlay: 'none', titleBg: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=900&auto=format&fit=crop&q=60', titleGradient: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(210 90% 70%) 40%, hsl(230 80% 60%) 70%, hsl(210 90% 50%) 100%)', glowColor: 'hsl(210 90% 60% / 0.4)' },
-    'web-design':       { accent: 'text-orange-400',     accentHsl: '25 95% 55%',    gradient: 'linear-gradient(90deg, hsl(25 95% 55%), hsl(335 75% 55%))',           overlay: 'linear-gradient(135deg, hsl(25 95% 55% / 0.12), hsl(335 75% 55% / 0.08), transparent 70%)', titleBg: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=900&auto=format&fit=crop&q=60', titleGradient: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(25 95% 65%) 30%, hsl(335 75% 55%) 65%, hsl(25 95% 45%) 100%)', glowColor: 'hsl(25 95% 55% / 0.35)' },
-    'desenvolvimento':  { accent: 'text-emerald-400',    accentHsl: '160 70% 50%',   gradient: 'linear-gradient(90deg, hsl(160 70% 50%), hsl(190 80% 55%))',          overlay: 'linear-gradient(225deg, hsl(160 70% 50% / 0.12), hsl(190 80% 55% / 0.08), transparent 60%)', titleBg: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=900&auto=format&fit=crop&q=60', titleGradient: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(160 70% 60%) 30%, hsl(190 80% 50%) 65%, hsl(160 70% 40%) 100%)', glowColor: 'hsl(160 70% 50% / 0.35)' },
-    'servicos':         { accent: 'text-purple-400',     accentHsl: '270 70% 60%',   gradient: 'linear-gradient(90deg, hsl(270 70% 60%), hsl(300 65% 55%))',          overlay: 'linear-gradient(180deg, hsl(270 70% 60% / 0.1), hsl(300 65% 55% / 0.06), transparent)', titleBg: '', titleGradient: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(270 70% 70%) 30%, hsl(300 65% 55%) 65%, hsl(270 70% 50%) 100%)', glowColor: 'hsl(270 70% 60% / 0.35)' },
-    'inovacao-ia':      { accent: 'text-pink-400',       accentHsl: '335 75% 55%',   gradient: 'linear-gradient(90deg, hsl(335 75% 55%), hsl(355 85% 60%))',          overlay: 'linear-gradient(180deg, hsl(335 75% 55% / 0.1), hsl(25 95% 55% / 0.08), transparent)', titleBg: 'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=900&auto=format&fit=crop&q=60', titleGradient: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(335 75% 65%) 30%, hsl(355 85% 55%) 65%, hsl(335 75% 45%) 100%)', glowColor: 'hsl(335 75% 55% / 0.35)' },
-    'mobile-web':       { accent: 'text-amber-400',      accentHsl: '40 100% 50%',   gradient: 'linear-gradient(90deg, hsl(40 100% 50%), hsl(30 95% 55%))',           overlay: 'linear-gradient(135deg, hsl(40 100% 50% / 0.1), hsl(175 70% 45% / 0.06), transparent 70%)', titleBg: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=900&auto=format&fit=crop&q=60', titleGradient: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(40 100% 60%) 30%, hsl(30 95% 50%) 65%, hsl(40 100% 40%) 100%)', glowColor: 'hsl(40 100% 50% / 0.35)' },
-    'skills':           { accent: 'text-cyan-400',       accentHsl: '185 80% 55%',   gradient: 'linear-gradient(90deg, hsl(185 80% 55%), hsl(210 75% 60%))',          overlay: 'linear-gradient(225deg, hsl(185 80% 55% / 0.1), hsl(210 75% 60% / 0.06), transparent 60%)', titleBg: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&auto=format&fit=crop&q=60', titleGradient: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(185 80% 65%) 30%, hsl(210 75% 55%) 65%, hsl(185 80% 45%) 100%)', glowColor: 'hsl(185 80% 55% / 0.35)' },
-  };
-  const colors = sectionColors[section.id] || sectionColors['focuss-dev'];
-  const viceOverlay = colors.overlay;
-
-  // Parallax removido para priorizar scroll nativo e leve
 
   // Render section-specific content
   const renderSectionContent = () => {
@@ -344,8 +409,8 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
                 { src: '/images/ui-detail-01.jpg', title: 'Interface 3D', desc: 'Elementos holográficos e futuristas' },
                 { src: '/images/ui-detail-02.jpg', title: 'Design Mobile', desc: 'Experiências mobile-first' },
               ].map((item, i) => (
-                <div key={i} className="detail-item image-hover-zoom card-hover-glow relative h-[35vh] md:h-[40vh] rounded-sm overflow-hidden border border-border/10 group cursor-pointer" style={{ opacity: 0 }}>
-                  <img src={item.src} alt={item.title} loading="lazy" decoding="async" className="w-full h-full object-cover" style={{ filter: 'brightness(0.7) saturate(1.2)' }} />
+                <div key={i} className="detail-item magnetic-card image-hover-zoom card-hover-glow relative h-[35vh] md:h-[40vh] rounded-sm overflow-hidden border border-border/10 group cursor-pointer" style={{ opacity: 0 }}>
+                  <img src={item.src} alt={item.title} loading="lazy" decoding="async" fetchPriority="low" className="w-full h-full object-cover" style={{ filter: 'brightness(0.7) saturate(1.2)' }} />
                   <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: 'linear-gradient(135deg, hsl(var(--vice-sunset) / 0.15), transparent)' }} />
                   <div className="absolute bottom-0 left-0 right-0 p-5">
@@ -369,23 +434,19 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
           <div className="fluid-section-pad">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-6xl">
               {devCards.map((card, i) => (
-                <div key={i} className="detail-item group relative rounded-md overflow-hidden cursor-pointer transition-transform duration-300 hover:-translate-y-1"
+                <div key={i} className="detail-item magnetic-card group relative rounded-md overflow-hidden cursor-pointer transition-transform duration-300 hover:-translate-y-1"
                   style={{ opacity: 0, background: 'hsl(var(--card) / 0.6)', border: '1px solid hsl(var(--border) / 0.15)' }}>
-                  {/* Subtle gradient overlay on hover */}
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
                     style={{ background: `linear-gradient(160deg, hsl(${card.accent} / 0.08), transparent 60%)` }} />
-                  {/* Top accent glow line */}
                   <div className="absolute top-0 left-0 right-0 h-[1px] opacity-0 group-hover:opacity-60 transition-opacity duration-500"
                     style={{ background: `linear-gradient(90deg, transparent, hsl(${card.accent} / 0.6), transparent)` }} />
                   <div className="relative z-10 p-8 md:p-10">
-                    {/* Icon with glow bg */}
                     <div className="w-11 h-11 rounded-lg flex items-center justify-center mb-6 text-xl"
                       style={{ background: `hsl(${card.accent} / 0.12)`, boxShadow: `0 0 20px hsl(${card.accent} / 0.08)` }}>
                       {card.icon}
                     </div>
                     <h4 className="font-[family-name:var(--font-display)] text-foreground text-sm md:text-base font-bold tracking-[0.12em] uppercase mb-3">{card.title}</h4>
                     <p className="text-muted-foreground text-sm leading-relaxed mb-8">{card.desc}</p>
-                    {/* Accent bar */}
                     <div className="h-[2px] w-10 group-hover:w-20 transition-all duration-700"
                       style={{ background: `hsl(${card.accent} / 0.5)` }} />
                   </div>
@@ -398,14 +459,12 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
       case 'inovacao-ia':
         return (
           <div className="fluid-section-pad">
-            {/* FOCUSS AI Chat */}
             <div className="mb-16">
               <Suspense fallback={null}><FocussChat /></Suspense>
             </div>
-            {/* Futuristic grid */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 max-w-7xl">
               <div className="detail-item lg:col-span-7 image-hover-zoom card-hover-glow relative h-[50vh] rounded-sm overflow-hidden border border-vice-pink/10" style={{ opacity: 0 }}>
-                <img src="/images/ia-detail-01.jpg" alt="Laboratório IA" loading="lazy" className="w-full h-full object-cover" style={{ filter: 'brightness(0.7) saturate(1.3)' }} />
+                <img src="/images/ia-detail-01.jpg" alt="Laboratório IA" loading="lazy" decoding="async" fetchPriority="low" className="w-full h-full object-cover" style={{ filter: 'brightness(0.7) saturate(1.3)' }} />
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
                 <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, hsl(var(--vice-pink) / 0.1), transparent)' }} />
                 <div className="absolute bottom-6 left-6">
@@ -420,7 +479,7 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
                   <p className="text-muted-foreground text-xs leading-relaxed">Modelos treinados para análise preditiva, processamento de linguagem natural e visão computacional.</p>
                 </div>
                 <div className="detail-item image-hover-zoom card-hover-glow relative h-full rounded-sm overflow-hidden border border-vice-pink/10" style={{ opacity: 0 }}>
-                  <img src="/images/automacao-hero.png" alt="Automação" loading="lazy" className="w-full h-full object-cover" style={{ filter: 'brightness(0.7) saturate(1.2)' }} />
+                  <img src="/images/automacao-hero.png" alt="Automação" loading="lazy" decoding="async" fetchPriority="low" className="w-full h-full object-cover" style={{ filter: 'brightness(0.7) saturate(1.2)' }} />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
                   <div className="absolute bottom-4 left-4">
                     <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.2em] uppercase text-vice-sunset/80">AUTOMAÇÃO</span>
@@ -434,35 +493,30 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
       case 'mobile-web':
         return (
           <div className="fluid-section-pad">
-            {/* Mockup showcase */}
             <div className="max-w-6xl mx-auto">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {/* Phone mockup */}
-                <div className="detail-item card-hover-glow flex flex-col items-center p-8 rounded-sm border border-border/10" style={{ opacity: 0, background: 'hsl(var(--card) / 0.3)' }}>
+                <div className="detail-item magnetic-card card-hover-glow flex flex-col items-center p-8 rounded-sm border border-border/10" style={{ opacity: 0, background: 'hsl(var(--card) / 0.3)' }}>
                   <div className="relative w-[180px] h-[360px] rounded-[24px] border-2 border-foreground/20 overflow-hidden shadow-2xl">
-                    <img src="/images/mobile-detail-01.jpg" alt="Mobile" loading="lazy" className="w-full h-full object-cover" style={{ filter: 'brightness(0.85) saturate(1.2)' }} />
+                    <img src="/images/mobile-detail-01.jpg" alt="Mobile" loading="lazy" decoding="async" fetchPriority="low" className="w-full h-full object-cover" style={{ filter: 'brightness(0.85) saturate(1.2)' }} />
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-5 bg-background rounded-b-xl" />
                   </div>
                   <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.2em] uppercase text-vice-gold/70 mt-6">MOBILE APP</span>
                 </div>
-                {/* Tablet mockup */}
-                <div className="detail-item card-hover-glow flex flex-col items-center p-8 rounded-sm border border-border/10" style={{ opacity: 0, background: 'hsl(var(--card) / 0.3)' }}>
+                <div className="detail-item magnetic-card card-hover-glow flex flex-col items-center p-8 rounded-sm border border-border/10" style={{ opacity: 0, background: 'hsl(var(--card) / 0.3)' }}>
                   <div className="relative w-[260px] h-[340px] rounded-[16px] border-2 border-foreground/20 overflow-hidden shadow-2xl">
-                    <img src="/images/mobile-detail-02.jpg" alt="Tablet" loading="lazy" className="w-full h-full object-cover" style={{ filter: 'brightness(0.85) saturate(1.2)' }} />
+                    <img src="/images/mobile-detail-02.jpg" alt="Tablet" loading="lazy" decoding="async" fetchPriority="low" className="w-full h-full object-cover" style={{ filter: 'brightness(0.85) saturate(1.2)' }} />
                   </div>
                   <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.2em] uppercase text-vice-gold/70 mt-6">TABLET</span>
                 </div>
-                {/* Desktop mockup */}
-                <div className="detail-item card-hover-glow flex flex-col items-center p-8 rounded-sm border border-border/10" style={{ opacity: 0, background: 'hsl(var(--card) / 0.3)' }}>
+                <div className="detail-item magnetic-card card-hover-glow flex flex-col items-center p-8 rounded-sm border border-border/10" style={{ opacity: 0, background: 'hsl(var(--card) / 0.3)' }}>
                   <div className="relative w-full h-[220px] rounded-t-lg border-2 border-foreground/20 overflow-hidden shadow-2xl">
-                    <img src="/images/mobile-detail-03.jpg" alt="Desktop" loading="lazy" className="w-full h-full object-cover" style={{ filter: 'brightness(0.85) saturate(1.2)' }} />
+                    <img src="/images/mobile-detail-03.jpg" alt="Desktop" loading="lazy" decoding="async" fetchPriority="low" className="w-full h-full object-cover" style={{ filter: 'brightness(0.85) saturate(1.2)' }} />
                   </div>
                   <div className="w-24 h-3 bg-foreground/10 rounded-b-lg" />
                   <div className="w-16 h-1 bg-foreground/10 mt-1 rounded" />
                   <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.2em] uppercase text-vice-gold/70 mt-6">DESKTOP</span>
                 </div>
               </div>
-              {/* PWA + Docker badges */}
               <div className="flex flex-wrap gap-3 justify-center mt-12">
                 {['React Native', 'PWA', '100% Responsivo', 'Docker', 'Cloud Deploy'].map((badge, i) => (
                   <span key={i} className="detail-item font-[family-name:var(--font-display)] text-[10px] tracking-[0.15em] uppercase px-4 py-2 rounded-sm border border-vice-gold/20 text-vice-gold/80 bg-vice-gold/5 hover:bg-vice-gold/15 hover:border-vice-gold/50 transition-all duration-300 cursor-default" style={{ opacity: 0 }}>{badge}</span>
@@ -495,15 +549,13 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
                     <span className="font-[family-name:var(--font-display)] text-vice-sunset/60 text-[10px] tracking-widest">{skill.level}%</span>
                   </div>
                   <div className="skill-progress-bar">
-                    <div className="skill-progress-fill" style={{ width: `${skill.level}%` }} />
+                    <div className="skill-progress-fill" data-width={`${skill.level}%`} style={{ width: 0 }} />
                   </div>
                   <span className="font-[family-name:var(--font-display)] text-[9px] tracking-[0.2em] uppercase text-muted-foreground/60 mt-1 block">{skill.category}</span>
                 </div>
               ))}
             </div>
-            {/* Animated tech logos marquee */}
             <Suspense fallback={null}><TechLogosMarquee /></Suspense>
-            {/* Tech badges */}
             <div className="max-w-5xl mx-auto mt-16 flex flex-wrap gap-3">
               {['React', 'Next.js', 'TypeScript', 'Node.js', 'Python', 'Go', 'PostgreSQL', 'MongoDB', 'Redis', 'AWS', 'Docker', 'Figma', 'GSAP', 'Three.js', 'Tailwind CSS', 'GraphQL'].map((tech, i) => (
                 <span key={i} className="detail-item card-hover-glow font-[family-name:var(--font-display)] text-[10px] tracking-[0.12em] uppercase px-4 py-2 rounded-sm border border-vice-sunset/20 text-foreground/70 bg-vice-sunset/5 hover:text-vice-sunset hover:border-vice-sunset/50 transition-all duration-300 cursor-default" style={{ opacity: 0 }}>{tech}</span>
@@ -515,7 +567,6 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
       case 'servicos':
         return (
           <div className="fluid-section-pad">
-            {/* Cinematic video header */}
             <div className="detail-item relative w-full h-[50vh] md:h-[60vh] overflow-hidden rounded-sm mb-16" style={{ opacity: 0 }}>
               <video src="/videos/servicos.mp4" autoPlay muted loop playsInline className="w-full h-full object-cover" style={{ filter: 'brightness(0.75) saturate(1.3) contrast(1.05)' }} />
               <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent" />
@@ -526,7 +577,6 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
               </div>
             </div>
 
-            {/* Service cards grid - Vice City neon style */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl">
               {[
                 { icon: '📈', title: 'Tráfego Pago', desc: 'Campanhas estratégicas no Google Ads, Meta Ads e TikTok Ads. Maximizamos seu ROI com segmentação precisa e otimização contínua.', accent: 'vice-pink' },
@@ -536,15 +586,13 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
                 { icon: '🚀', title: 'Landing Pages', desc: 'Páginas de alta conversão com design persuasivo, copywriting estratégico e integração com funis de vendas.', accent: 'vice-gold' },
                 { icon: '🎨', title: 'Design', desc: 'Identidade visual completa, UI/UX premium, design systems e prototipagem interativa no Figma.', accent: 'vice-palm' },
               ].map((card, i) => (
-                <div key={i} className="detail-item card-hover-glow relative p-8 rounded-sm overflow-hidden group cursor-pointer" 
+                <div key={i} className="detail-item magnetic-card card-hover-glow relative p-8 rounded-sm overflow-hidden group cursor-pointer" 
                   style={{ opacity: 0, background: 'hsl(var(--card) / 0.4)', border: '1px solid hsl(var(--border) / 0.15)' }}>
-                  {/* Neon glow border on hover */}
                   <div className="absolute inset-0 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
                     style={{ 
                       background: `linear-gradient(135deg, hsl(270 70% 60% / 0.1), hsl(335 75% 55% / 0.06), transparent)`,
                       boxShadow: 'inset 0 0 30px hsl(270 70% 60% / 0.05)'
                     }} />
-                  {/* Top accent line */}
                   <div className="absolute top-0 left-0 right-0 h-[2px] opacity-60 group-hover:opacity-100 transition-opacity duration-500"
                     style={{ background: 'linear-gradient(90deg, transparent, hsl(270 70% 60% / 0.6), hsl(335 75% 55% / 0.4), transparent)' }} />
                   <div className="relative z-10">
@@ -558,7 +606,6 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
               ))}
             </div>
 
-            {/* Bottom CTA area */}
             <div className="mt-20 text-center">
               <p className="font-[family-name:var(--font-display)] text-[11px] tracking-[0.3em] uppercase text-muted-foreground/60 mb-4">PRONTO PARA COMEÇAR?</p>
               <div className="h-[1px] w-24 mx-auto" style={{ background: 'linear-gradient(90deg, transparent, hsl(270 70% 60% / 0.5), transparent)' }} />
@@ -573,14 +620,23 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
 
   return (
     <div ref={sectionRef} className="absolute inset-0 overflow-y-auto gta-vi-scroll">
+      {/* Scroll progress indicator */}
+      <div className="fixed right-3 top-1/2 -translate-y-1/2 z-50 flex flex-col items-center gap-1 pointer-events-none">
+        <div className="scroll-progress-track w-[2px] bg-foreground/10 rounded-full" style={{ height: 'clamp(4rem, 8vh, 8rem)' }}>
+          <div className="scroll-progress-bar w-full rounded-full origin-top" style={{ height: '0%', background: `hsl(${colors.accentHsl})` }} />
+        </div>
+      </div>
+
       {/* ── HERO with parallax ── */}
       <div className="relative h-screen w-full overflow-hidden flex items-end parallax-hero">
         <div className="absolute inset-0">
+          {/* Section enter line */}
+          <div className="section-enter-line absolute top-0 left-0 right-0 h-[2px] origin-left z-20"
+            style={{ background: colors.gradient }} />
           <img src={section.image} alt={section.title} loading="eager" decoding="async" width={1920} height={1080} className="w-full h-full object-cover ken-burns-hero" style={{ filter: 'saturate(1.15) contrast(1.05)' }} />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-background/10" />
           <div className="absolute inset-0 bg-gradient-to-r from-background/60 via-transparent to-transparent" />
           <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, transparent 30%, hsl(var(--background) / 0.6) 70%, hsl(var(--background)) 95%)' }} />
-          {/* Vice City color wash */}
           <div className="absolute inset-0" style={{ background: viceOverlay }} />
         </div>
 
@@ -591,24 +647,25 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
             <div className="h-[2px]" style={{ width: 'clamp(1rem, 1.5vw, 2rem)', background: colors.gradient, opacity: 0.4 }} />
           </div>
           <div className="relative">
-            {/* Glow layer behind title */}
             <div className="absolute inset-0 -z-10 pointer-events-none" style={{
               filter: 'blur(60px)',
               background: `radial-gradient(ellipse 80% 60% at 20% 60%, ${colors.glowColor}, transparent 70%)`,
             }} />
             <h2 className="hero-reveal hero-reveal-delay-2 font-[family-name:var(--font-display)] font-black leading-[0.85] tracking-tighter uppercase" style={{ fontSize: 'clamp(2.5rem, 9vw, 11rem)' }}>
               {section.title.split(' ').map((word, i) => (
-                <span 
-                  key={i} 
-                  className="title-word block"
-                  style={{
-                    background: colors.titleGradient,
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    filter: `drop-shadow(0 0 30px ${colors.glowColor}) drop-shadow(0 4px 20px hsl(0 0% 0% / 0.5))`,
-                  }}
-                >
-                  {word}
+                <span key={i} className="title-split-wrapper">
+                  <span 
+                    className="title-word"
+                    style={{
+                      display: 'inline-block',
+                      background: colors.titleGradient,
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      filter: `drop-shadow(0 0 30px ${colors.glowColor}) drop-shadow(0 4px 20px hsl(0 0% 0% / 0.5))`,
+                    }}
+                  >
+                    {word}
+                  </span>
                 </span>
               ))}
             </h2>
@@ -636,7 +693,6 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
         {/* Details grid */}
         <div ref={detailsRef} style={{ padding: `clamp(1rem, 3vw, 1.5rem) clamp(1.5rem, 4vw, 6rem)` }}>
           {section.id === 'servicos' ? (
-            /* Serviços: Premium card grid */
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-7xl">
               {section.details.map((detail, i) => {
                 const emoji = detail.slice(0, 2)
@@ -648,12 +704,10 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
                 ]
                 const accent = cardAccents[i] || cardAccents[0]
                 return (
-                  <div key={i} className="detail-item group relative p-7 rounded-sm overflow-hidden cursor-pointer transition-all duration-500 hover:translate-y-[-2px]"
+                  <div key={i} className="detail-item magnetic-card group relative p-7 rounded-sm overflow-hidden cursor-pointer transition-all duration-500 hover:translate-y-[-2px]"
                     style={{ opacity: 0, background: 'hsl(var(--card) / 0.35)', border: '1px solid hsl(var(--border) / 0.1)' }}>
-                    {/* Top accent line */}
                     <div className="absolute top-0 left-0 right-0 h-[2px] opacity-50 group-hover:opacity-100 transition-opacity duration-500"
                       style={{ background: `linear-gradient(90deg, transparent, ${accent}, transparent)` }} />
-                    {/* Hover glow */}
                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
                       style={{ background: `radial-gradient(ellipse at top, ${accent}08, transparent 70%)` }} />
                     <div className="relative z-10">
@@ -671,7 +725,6 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
               })}
             </div>
           ) : (
-            /* Default details grid */
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 max-w-6xl">
               {section.details.map((detail, i) => (
                 <div key={i} className="detail-item group flex items-start gap-4" style={{ opacity: 0 }}>
@@ -712,15 +765,26 @@ export function SectionsDetail() {
 
   const openSlide = useCallback((slideIndex: number) => {
     if (openFrameRef.current !== null) {
-      window.cancelAnimationFrame(openFrameRef.current);
+      cancelAnimationFrame(openFrameRef.current);
     }
+
+    // Reset scroll of previous section
+    const prevScroller = document.querySelector('.gta-vi-scroll');
+    if (prevScroller) prevScroller.scrollTop = 0;
 
     setIsVisible(false);
     setActiveSlide(slideIndex);
 
-    openFrameRef.current = window.requestAnimationFrame(() => {
+    openFrameRef.current = requestAnimationFrame(() => {
       setIsVisible(true);
       openFrameRef.current = null;
+
+      // Refresh ScrollTrigger after section becomes visible
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          ScrollTrigger.refresh();
+        });
+      });
     });
   }, []);
 
@@ -736,18 +800,20 @@ export function SectionsDetail() {
   useEffect(() => {
     return () => {
       if (openFrameRef.current !== null) {
-        window.cancelAnimationFrame(openFrameRef.current);
+        cancelAnimationFrame(openFrameRef.current);
       }
     };
   }, []);
 
-  // Scroll-up at top for focuss-dev section → go back
+  // Scroll-up at top for focuss-dev section → go back (with isVisible guard)
   useEffect(() => {
+    if (!isVisible || activeSlide === null) return;
     const container = containerRef.current;
     if (!container) return;
+    if (sections[activeSlide].id !== 'focuss-dev') return;
+
     let accum = 0;
     const handleWheel = (e: WheelEvent) => {
-      if (activeSlide === null || sections[activeSlide].id !== 'focuss-dev') return;
       if (e.deltaY < 0) {
         accum += Math.abs(e.deltaY);
         if (accum > 100) { accum = 0; goBack(); }
@@ -755,7 +821,34 @@ export function SectionsDetail() {
     };
     container.addEventListener('wheel', handleWheel, { passive: true });
     return () => container.removeEventListener('wheel', handleWheel);
-  }, [activeSlide, goBack]);
+  }, [activeSlide, goBack, isVisible]);
+
+  // Animated stat counters for focuss-dev
+  useEffect(() => {
+    if (!isVisible || activeSlide === null) return;
+    if (sections[activeSlide].id !== 'focuss-dev') return;
+
+    const timer = setTimeout(() => {
+      const statEls = document.querySelectorAll('.stat-value-animated');
+      statEls.forEach((el) => {
+        const target = parseInt(el.getAttribute('data-target') || '0', 10);
+        if (isNaN(target)) return;
+        gsap.fromTo({ val: 0 },
+          { val: 0 },
+          {
+            val: target,
+            duration: 1.5,
+            ease: 'power2.out',
+            onUpdate: function () {
+              el.textContent = Math.round(this.targets()[0].val) + (el.getAttribute('data-suffix') || '');
+            },
+          }
+        );
+      });
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, [activeSlide, isVisible]);
 
   const section = activeSlide === null ? null : sections[activeSlide];
   const isFocussDev = section?.id === 'focuss-dev';
@@ -781,7 +874,7 @@ export function SectionsDetail() {
             Voltar
           </button>
 
-          {/* FOCUSS DEV: Original layout (unchanged) */}
+          {/* FOCUSS DEV: Original layout */}
           {isFocussDev && (
             <>
               <div className="absolute inset-0">
@@ -796,19 +889,24 @@ export function SectionsDetail() {
                   <h2 className="anim-el font-[family-name:var(--font-display)] text-4xl md:text-6xl lg:text-7xl font-light text-foreground mb-6 leading-tight tracking-tight">{section.title}</h2>
                   <p className="anim-el text-muted-foreground text-base md:text-lg leading-relaxed mb-10 max-w-2xl">{section.description}</p>
                   
-                  {/* Stats / highlights grid */}
+                  {/* Stats with animated counters */}
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
                     {[
-                      { value: '5+', label: 'Anos de Experiência' },
-                      { value: '50+', label: 'Projetos Entregues' },
-                      { value: '100%', label: 'Foco em Performance' },
-                      { value: '∞', label: 'Inovação Contínua' },
+                      { value: '5', suffix: '+', label: 'Anos de Experiência', target: 5 },
+                      { value: '50', suffix: '+', label: 'Projetos Entregues', target: 50 },
+                      { value: '100', suffix: '%', label: 'Foco em Performance', target: 100 },
+                      { value: '∞', suffix: '', label: 'Inovação Contínua', target: null },
                     ].map((stat, i) => (
                       <div key={i} className="anim-el relative p-5 rounded-md overflow-hidden group"
                         style={{ background: 'hsl(var(--card) / 0.4)', border: '1px solid hsl(var(--border) / 0.15)' }}>
                         <div className="absolute top-0 left-0 right-0 h-[1px] opacity-60"
                           style={{ background: 'linear-gradient(90deg, transparent, hsl(var(--accent) / 0.5), transparent)' }} />
-                        <span className="block font-[family-name:var(--font-display)] text-2xl md:text-3xl font-bold text-accent mb-1">{stat.value}</span>
+                        {stat.target !== null ? (
+                          <span className="stat-value-animated block font-[family-name:var(--font-display)] text-2xl md:text-3xl font-bold text-accent mb-1"
+                            data-target={stat.target} data-suffix={stat.suffix}>0{stat.suffix}</span>
+                        ) : (
+                          <span className="block font-[family-name:var(--font-display)] text-2xl md:text-3xl font-bold text-accent mb-1">∞</span>
+                        )}
                         <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.15em] uppercase text-muted-foreground">{stat.label}</span>
                       </div>
                     ))}
