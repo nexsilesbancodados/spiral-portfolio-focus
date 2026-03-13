@@ -893,10 +893,10 @@ export function SectionsDetail() {
               </div>
               <div className="relative flex items-center h-full px-6 md:px-16 lg:px-24">
                 <div className="w-full max-w-4xl mx-auto">
-                  <div className="anim-el h-[2px] w-16 mb-6 origin-left bg-accent" />
-                  <span className="anim-el block font-[family-name:var(--font-display)] text-xs tracking-[0.2em] uppercase mb-3 text-accent">{section.subtitle}</span>
-                  <h2 className="anim-el font-[family-name:var(--font-display)] text-4xl md:text-6xl lg:text-7xl font-light text-foreground mb-6 leading-tight tracking-tight">{section.title}</h2>
-                  <p className="anim-el text-muted-foreground text-base md:text-lg leading-relaxed mb-10 max-w-2xl">{section.description}</p>
+                  <div className="anim-el h-[2px] w-16 mb-6 origin-left bg-accent" style={{ opacity: 0 }} />
+                  <span className="anim-el block font-[family-name:var(--font-display)] text-xs tracking-[0.2em] uppercase mb-3 text-accent" style={{ opacity: 0 }}>{section.subtitle}</span>
+                  <h2 className="anim-el font-[family-name:var(--font-display)] text-4xl md:text-6xl lg:text-7xl font-light text-foreground mb-6 leading-tight tracking-tight" style={{ opacity: 0 }}>{section.title}</h2>
+                  <p className="anim-el text-muted-foreground text-base md:text-lg leading-relaxed mb-10 max-w-2xl" style={{ opacity: 0 }}>{section.description}</p>
                   
                   {/* Stats with animated counters */}
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
