@@ -1151,7 +1151,10 @@ export function SectionsDetail() {
           : 'opacity-0 pointer-events-none'
       }`}
     >
-      {section && (
+      {section && (() => {
+        const isFocussDev = section.id === 'focuss-dev';
+        const focussDevColors = sectionColors['focuss-dev'];
+        return (
         <div key={section.id} className="relative h-screen overflow-hidden">
           {/* Back button */}
           <button
@@ -1161,7 +1164,6 @@ export function SectionsDetail() {
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 19V5m7 7l-7-7-7 7" /></svg>
             Voltar
           </button>
-  const isFocussDev = section?.id === 'focuss-dev';
           {/* FOCUSS DEV: Original layout */}
           {isFocussDev && (
             <>
