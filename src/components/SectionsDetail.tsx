@@ -180,19 +180,19 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
         );
       }
 
-      // Hero content parallax
+      // Hero content parallax — smoother scrub
       const heroImg = el.querySelector('.ken-burns-hero');
       if (heroImg) {
         gsap.to(heroImg, {
-          yPercent: 20,
-          scale: 1.15,
+          yPercent: 15,
+          scale: 1.12,
           ease: 'none',
           scrollTrigger: {
             trigger: el.querySelector('.parallax-hero'),
             scroller: el,
             start: 'top top',
             end: 'bottom top',
-            scrub: true,
+            scrub: 0.8, // smooth scrub with 0.8s lag
           },
         });
       }
