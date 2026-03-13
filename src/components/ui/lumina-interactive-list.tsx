@@ -87,7 +87,7 @@ const fragmentShader = `
   }
 `;
 
-const AUTO_SLIDE_DURATION = 6000;
+
 
 export function LuminaSlider() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -96,11 +96,6 @@ export function LuminaSlider() {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [contentKey, setContentKey] = useState(0); // for re-triggering text animations
 
-  // Progress bar
-  const [progress, setProgress] = useState(0);
-  const progressRef = useRef(0);
-  const progressRafRef = useRef<number>(0);
-  const progressStartRef = useRef(Date.now());
 
   // WebGL refs
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
@@ -261,10 +256,6 @@ export function LuminaSlider() {
     setCurrentSlide(targetIndex);
     setContentKey(k => k + 1);
 
-    // Reset progress
-    progressRef.current = 0;
-    setProgress(0);
-    progressStartRef.current = Date.now();
   }, []);
 
   const goToSlide = useCallback((index: number) => {
@@ -288,33 +279,6 @@ export function LuminaSlider() {
     }
   }, []);
 
-  // ── Auto-slide progress timer ─────────────────────────────────────
-  useEffect(() => {
-    progressStartRef.current = Date.now();
-
-    const tick = () => {
-      if (isTransitioningRef.current) {
-        progressRafRef.current = requestAnimationFrame(tick);
-        return;
-      }
-      const elapsed = Date.now() - progressStartRef.current;
-      const pct = Math.min((elapsed / AUTO_SLIDE_DURATION) * 100, 100);
-      progressRef.current = pct;
-      setProgress(pct);
-
-      if (pct >= 100) {
-        // Trigger next slide
-        if (webglReadyRef.current) {
-          goToSlide(currentSlideRef.current + 1);
-        }
-        return;
-      }
-      progressRafRef.current = requestAnimationFrame(tick);
-    };
-
-    progressRafRef.current = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(progressRafRef.current);
-  }, [goToSlide, contentKey]);
 
   // ── Wheel handler ─────────────────────────────────────────────────
   const wheelAccumRef = useRef(0);
@@ -476,8 +440,8 @@ export function LuminaSlider() {
           >
             <div className="slide-progress-line">
               <div className="slide-progress-fill" style={{
-                width: index === currentSlide ? `${progress}%` : '0%',
-                transition: index === currentSlide ? 'none' : 'width 0.3s ease',
+                width: index === currentSlide ? '100%' : '0%',
+                transition: 'width 0.3s ease',
               }} />
             </div>
             <div className="slide-nav-title">{slide.title}</div>
