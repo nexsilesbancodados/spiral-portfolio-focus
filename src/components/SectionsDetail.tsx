@@ -229,14 +229,15 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
         );
       }
 
-      // Detail items staggered reveal
+      // Detail items staggered reveal — smoother with GPU-friendly transforms
       const detailItems = el.querySelectorAll('.detail-item');
       if (detailItems.length) {
         gsap.fromTo(detailItems,
-          { opacity: 0, y: 50, filter: 'blur(4px)' },
+          { opacity: 0, y: 40, willChange: 'transform, opacity' },
           {
-            opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.7, stagger: 0.1, ease: 'power2.out',
-            scrollTrigger: { trigger: detailItems[0], scroller: el, start: 'top 88%', toggleActions: 'play none none none' },
+            opacity: 1, y: 0, duration: 0.8, stagger: 0.08, ease: 'power2.out',
+            scrollTrigger: { trigger: detailItems[0], scroller: el, start: 'top 90%', toggleActions: 'play none none none' },
+            clearProps: 'willChange',
           }
         );
       }
