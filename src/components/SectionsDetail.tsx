@@ -209,20 +209,20 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
         );
       });
 
-      // Gallery items clipPath reveal
+      // Gallery items clipPath reveal — smoother easing
       const galleryItems = el.querySelectorAll('.gallery-item');
       if (galleryItems.length) {
         gsap.fromTo(galleryItems,
           { clipPath: 'inset(0 100% 0 0)', opacity: 1 },
           {
             clipPath: 'inset(0 0% 0 0)',
-            duration: 1.1,
-            stagger: 0.18,
-            ease: 'power3.inOut',
+            duration: 1.3,
+            stagger: 0.15,
+            ease: 'power2.inOut',
             scrollTrigger: {
               trigger: galleryItems[0],
               scroller: el,
-              start: 'top 85%',
+              start: 'top 88%',
               toggleActions: 'play none none none',
             },
           }
