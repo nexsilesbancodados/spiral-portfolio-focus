@@ -5,7 +5,6 @@ interface Slide {
   title: string;
   description: string;
   media: string;
-  video?: string;
   skills: string[];
 }
 
