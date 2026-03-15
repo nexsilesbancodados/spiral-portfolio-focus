@@ -438,12 +438,12 @@ export function LuminaSlider() {
         ))}
       </nav>
 
-      <button className="explore-btn" onClick={triggerExplore} aria-label="Explorar seção atual" style={{ zIndex: 15 }}>
-        <span className="explore-btn-text">Explorar</span>
-        <svg className="explore-btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
-          <path d="M12 5v14m-7-7l7 7 7-7" />
+      {/* Scroll indicator */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center opacity-40 animate-pulse pointer-events-none" style={{ zIndex: 15 }}>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-foreground/60">
+          <path d="M7 13l5 5 5-5M7 7l5 5 5-5" />
         </svg>
-      </button>
+      </div>
     </main>
   );
 }
