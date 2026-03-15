@@ -890,8 +890,8 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
               <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent" />
               <div className="absolute inset-0" style={{ background: `linear-gradient(135deg, hsl(${colors.accentHsl} / 0.12), transparent 60%)` }} />
               <div className="absolute bottom-8 left-8">
-                <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.3em] uppercase" style={{ color: `hsl(${colors.accentHsl} / 0.8)` }}>ECOSSISTEMA COMPLETO</span>
-                <h4 className="font-[family-name:var(--font-display)] text-foreground text-2xl font-bold mt-2">Do Conceito ao Escala</h4>
+                <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.3em] uppercase" style={{ color: `hsl(${colors.accentHsl} / 0.8)` }}>☢️ VAULT-TEC DIGITAL</span>
+                <h4 className="font-[family-name:var(--font-display)] text-foreground text-2xl font-bold mt-2">Do Vault ao Wasteland</h4>
               </div>
             </div>
 
