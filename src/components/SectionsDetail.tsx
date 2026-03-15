@@ -885,13 +885,13 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
       case 'servicos':
         return (
           <div className="fluid-section-pad">
-            <div className="detail-item relative w-full h-[50vh] md:h-[60vh] overflow-hidden rounded-sm mb-16" style={{ opacity: 0 }}>
-              <img src="/images/hero-servicos.jpg" alt="Serviços" className="w-full h-full object-cover" style={{ filter: 'brightness(0.75) saturate(1.3) contrast(1.05)' }} />
+            <div className="detail-item relative w-full h-[50vh] md:h-[60vh] overflow-hidden rounded-lg mb-16" style={{ opacity: 0, border: `1px solid hsl(${colors.accentHsl} / 0.12)` }}>
+              <img src="/images/hero-servicos.jpg" alt="Serviços" className="w-full h-full object-cover" style={{ filter: 'brightness(0.7) saturate(1.35) contrast(1.05)' }} />
               <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent" />
-              <div className="absolute inset-0" style={{ background: `linear-gradient(135deg, hsl(${colors.accentHsl} / 0.12), transparent 60%)` }} />
-              <div className="absolute bottom-8 left-8">
-                <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.3em] uppercase" style={{ color: `hsl(${colors.accentHsl} / 0.8)` }}>☢️ VAULT-TEC DIGITAL</span>
-                <h4 className="font-[family-name:var(--font-display)] text-foreground text-2xl font-bold mt-2">Do Vault ao Wasteland</h4>
+              <div className="absolute inset-0" style={{ background: `linear-gradient(135deg, hsl(${colors.accentHsl} / 0.14), transparent 60%)` }} />
+              <div className="absolute bottom-0 left-0 right-0 p-8" style={{ background: 'linear-gradient(to top, hsl(var(--background) / 0.85), transparent)' }}>
+                <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.35em] uppercase font-medium" style={{ color: `hsl(${colors.accentHsl} / 0.9)` }}>☢️ VAULT-TEC DIGITAL</span>
+                <h4 className="font-[family-name:var(--font-display)] text-foreground text-2xl md:text-3xl font-bold mt-2">Do Vault ao Wasteland</h4>
               </div>
             </div>
 
@@ -1007,7 +1007,7 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
         {/* Details */}
         <div ref={detailsRef} style={{ padding: `clamp(1rem, 3vw, 1.5rem) clamp(1.5rem, 4vw, 6rem)` }}>
           {section.id === 'servicos' ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-7xl">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 max-w-7xl">
               {section.details.map((detail, i) => {
                 const emoji = detail.slice(0, 2);
                 const rest = detail.slice(3);
@@ -1018,21 +1018,21 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
                 ];
                 const accent = cardAccents[i] || cardAccents[0];
                 return (
-                  <div key={i} className="detail-item magnetic-card group relative p-7 rounded-sm overflow-hidden cursor-pointer transition-all duration-500 hover:translate-y-[-2px]"
-                    style={{ opacity: 0, background: 'hsl(var(--card) / 0.35)', border: '1px solid hsl(var(--border) / 0.1)' }}>
+                  <div key={i} className="detail-item magnetic-card premium-card group relative p-8 rounded-lg overflow-hidden cursor-pointer"
+                    style={{ opacity: 0 }}>
                     <div className="absolute top-0 left-0 right-0 h-[2px] opacity-50 group-hover:opacity-100 transition-opacity duration-500"
                       style={{ background: `linear-gradient(90deg, transparent, ${accent}, transparent)` }} />
                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
-                      style={{ background: `radial-gradient(ellipse at top, ${accent}08, transparent 70%)` }} />
+                      style={{ background: `radial-gradient(ellipse at top, ${accent}12, transparent 70%)` }} />
                     <div className="relative z-10">
-                      <div className="flex items-center gap-3 mb-4">
+                      <div className="flex items-center gap-3 mb-5">
                         <span className="text-2xl">{emoji}</span>
-                        <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.25em] uppercase opacity-40" style={{ color: accent }}>{String(i + 1).padStart(2, '0')}</span>
+                        <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.25em] uppercase opacity-50 font-semibold" style={{ color: accent }}>{String(i + 1).padStart(2, '0')}</span>
                       </div>
-                      <h4 className="font-[family-name:var(--font-display)] text-foreground text-sm font-semibold tracking-[0.12em] uppercase mb-2">{title}</h4>
-                      <p className="text-muted-foreground text-xs leading-relaxed">{desc}</p>
-                      <div className="h-[1px] w-10 mt-5 group-hover:w-full transition-all duration-700"
-                        style={{ background: `linear-gradient(90deg, ${accent}80, transparent)` }} />
+                      <h4 className="font-[family-name:var(--font-display)] text-foreground text-sm font-bold tracking-[0.12em] uppercase mb-3">{title}</h4>
+                      <p className="text-muted-foreground text-[13px] leading-[1.7]">{desc}</p>
+                      <div className="h-[2px] w-12 mt-6 group-hover:w-full transition-all duration-700 ease-out"
+                        style={{ background: `linear-gradient(90deg, ${accent}90, transparent)` }} />
                     </div>
                   </div>
                 );
@@ -1193,7 +1193,7 @@ export function SectionsDetail() {
         <div key={section.id} className="relative h-screen overflow-hidden">
           {/* Back button */}
           <button
-            className="absolute top-6 left-6 z-50 flex items-center gap-2 text-foreground/60 hover:text-foreground transition-colors duration-300 font-[family-name:var(--font-display)] text-xs tracking-[0.15em] uppercase bg-background/40 px-3 py-2 rounded-sm border border-border/20 hover:border-accent/30"
+            className="absolute top-6 left-6 z-50 flex items-center gap-2 text-foreground/60 hover:text-foreground transition-all duration-300 font-[family-name:var(--font-display)] text-xs tracking-[0.15em] uppercase bg-background/30 backdrop-blur-md px-4 py-2.5 rounded-lg border border-foreground/8 hover:border-foreground/15 hover:bg-background/50"
             onClick={goBack}
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 19V5m7 7l-7-7-7 7" /></svg>
@@ -1224,17 +1224,17 @@ export function SectionsDetail() {
                         { value: '98', suffix: '%', label: 'Satisfação dos Clientes', target: 98 },
                         { value: '∞', suffix: '', label: 'Curiosidade', target: null },
                       ].map((stat, i) => (
-                        <div key={i} className="anim-el relative p-5 rounded-md overflow-hidden group"
-                          style={{ opacity: 0, background: 'hsl(var(--card) / 0.4)', border: '1px solid hsl(var(--border) / 0.15)' }}>
-                          <div className="absolute top-0 left-0 right-0 h-[1px] opacity-60"
-                            style={{ background: 'linear-gradient(90deg, transparent, hsl(var(--accent) / 0.5), transparent)' }} />
+                        <div key={i} className="anim-el stat-card relative p-6 rounded-lg overflow-hidden group"
+                          style={{ opacity: 0 }}>
+                          <div className="absolute top-0 left-0 right-0 h-[2px] opacity-60"
+                            style={{ background: 'linear-gradient(90deg, transparent, hsl(var(--accent) / 0.6), transparent)' }} />
                           {stat.target !== null ? (
-                            <span className="stat-value-animated block font-[family-name:var(--font-display)] text-2xl md:text-3xl font-bold text-accent mb-1"
-                              data-target={stat.target} data-suffix={stat.suffix}>0{stat.suffix}</span>
+                            <span className="stat-value-animated block font-[family-name:var(--font-display)] text-2xl md:text-3xl font-black text-accent mb-2"
+                              data-target={stat.target} data-suffix={stat.suffix} style={{ textShadow: '0 0 25px hsl(var(--accent) / 0.2)' }}>0{stat.suffix}</span>
                           ) : (
-                            <span className="block font-[family-name:var(--font-display)] text-2xl md:text-3xl font-bold text-accent mb-1">∞</span>
+                            <span className="block font-[family-name:var(--font-display)] text-2xl md:text-3xl font-black text-accent mb-2" style={{ textShadow: '0 0 25px hsl(var(--accent) / 0.2)' }}>∞</span>
                           )}
-                          <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.15em] uppercase text-muted-foreground">{stat.label}</span>
+                          <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.2em] uppercase text-muted-foreground font-medium">{stat.label}</span>
                         </div>
                       ))}
                     </div>
