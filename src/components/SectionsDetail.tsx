@@ -667,7 +667,7 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
           <div className="fluid-section-pad">
             {/* Process timeline */}
             <div className="mb-20">
-              <h3 className="font-[family-name:var(--font-display)] text-[11px] tracking-[0.4em] uppercase mb-10" style={{ color: `hsl(${colors.accentHsl} / 0.5)` }}>NOSSO PROCESSO</h3>
+              <h3 className="font-[family-name:var(--font-display)] text-[11px] tracking-[0.4em] uppercase mb-10" style={{ color: `hsl(${colors.accentHsl} / 0.5)` }}>🧬 PROTOCOLO DE SOBREVIVÊNCIA</h3>
               <div className="grid grid-cols-1 md:grid-cols-5 gap-1">
                 {[
                   { step: '01', icon: '🧬', title: 'Discovery', desc: 'Investigação profunda do problema — como explorar o Spencer Mansion' },
