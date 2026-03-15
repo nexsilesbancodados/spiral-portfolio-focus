@@ -922,7 +922,7 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
             </div>
 
             <div className="mt-20 text-center">
-              <p className="font-[family-name:var(--font-display)] text-[11px] tracking-[0.3em] uppercase text-muted-foreground/60 mb-4">PRONTO PARA ESCALAR SEU NEGÓCIO?</p>
+              <p className="font-[family-name:var(--font-display)] text-[11px] tracking-[0.3em] uppercase text-muted-foreground/60 mb-4">☢️ PREPARADO PARA SOBREVIVER NO WASTELAND?</p>
               <div className="h-[1px] w-24 mx-auto" style={{ background: colors.gradient }} />
             </div>
           </div>
