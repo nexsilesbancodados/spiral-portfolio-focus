@@ -843,16 +843,16 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
 
       case 'skills':
         const skills = [
-          { name: 'React / Next.js', level: 97, category: 'Front-end' },
-          { name: 'TypeScript', level: 95, category: 'Front-end' },
-          { name: 'GSAP / Three.js', level: 92, category: 'Creative' },
-          { name: 'Node.js / Fastify', level: 93, category: 'Back-end' },
-          { name: 'Python / FastAPI', level: 88, category: 'Back-end' },
-          { name: 'PostgreSQL', level: 90, category: 'Data' },
-          { name: 'Redis / Elasticsearch', level: 85, category: 'Data' },
-          { name: 'AWS / Kubernetes', level: 87, category: 'Infra' },
-          { name: 'Docker / Terraform', level: 89, category: 'Infra' },
-          { name: 'Figma / Design Systems', level: 91, category: 'Design' },
+          { name: 'React / Next.js', level: 97, category: '⚔️ Lâminas' },
+          { name: 'TypeScript', level: 95, category: '⚔️ Lâminas' },
+          { name: 'GSAP / Three.js', level: 92, category: '🏹 Arco Longo' },
+          { name: 'Node.js / Fastify', level: 93, category: '🛡️ Escudo' },
+          { name: 'Python / FastAPI', level: 88, category: '🛡️ Escudo' },
+          { name: 'PostgreSQL', level: 90, category: '🪙 Tesouro' },
+          { name: 'Redis / Elasticsearch', level: 85, category: '🪙 Tesouro' },
+          { name: 'AWS / Kubernetes', level: 87, category: '⛵ Drakkar' },
+          { name: 'Docker / Terraform', level: 89, category: '⛵ Drakkar' },
+          { name: 'Figma / Design Systems', level: 91, category: '🏹 Arco Longo' },
         ];
         return (
           <div className="fluid-section-pad">
