@@ -691,9 +691,9 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
             {/* Showcase cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {[
-                { src: '/images/webdesign-detail-01.jpg', title: 'UI Engineering', desc: 'Componentes pixel-perfect com Figma-to-code automatizado' },
-                { src: '/images/webdesign-detail-02.jpg', title: 'Brand Identity', desc: 'Sistemas visuais que comunicam a essência da marca' },
-                { src: '/images/webdesign-detail-03.jpg', title: 'Motion Design', desc: 'Animações cinematográficas que contam histórias' },
+                { src: '/images/webdesign-detail-01.jpg', title: '🧪 Laboratório Umbrella', desc: 'Componentes testados em ambiente controlado — cada experimento gera evolução' },
+                { src: '/images/webdesign-detail-02.jpg', title: '🗝️ Mapa da Mansion', desc: 'Sistemas visuais que guiam o usuário — nenhuma porta trancada sem solução' },
+                { src: '/images/webdesign-detail-03.jpg', title: '💉 O Antídoto Visual', desc: 'Animações que curam a experiência — motion design de sobrevivência' },
               ].map((card, i) => (
                 <div key={i} className="detail-item image-hover-zoom card-hover-glow relative h-[45vh] rounded-sm overflow-hidden border border-border/10" style={{ opacity: 0 }}>
                   <img src={card.src} alt={card.title} loading="lazy" decoding="async" fetchPriority="low" className="w-full h-full object-cover" style={{ filter: 'brightness(0.7) saturate(1.25)' }} />
