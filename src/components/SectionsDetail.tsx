@@ -664,8 +664,8 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
           <div className="fluid-section-pad">
             {/* Process timeline */}
             <div className="mb-20">
-              <h3 className="font-[family-name:var(--font-display)] text-[11px] tracking-[0.4em] uppercase mb-10" style={{ color: `hsl(${colors.accentHsl} / 0.5)` }}>🧬 PROTOCOLO DE SOBREVIVÊNCIA</h3>
-              <div className="grid grid-cols-1 md:grid-cols-5 gap-1">
+              <h3 className="font-[family-name:var(--font-display)] text-[11px] tracking-[0.5em] uppercase mb-12 font-medium" style={{ color: `hsl(${colors.accentHsl} / 0.6)` }}>🧬 PROTOCOLO DE SOBREVIVÊNCIA</h3>
+              <div className="grid grid-cols-1 md:grid-cols-5 gap-2">
                 {[
                   { step: '01', icon: '🧬', title: 'Discovery', desc: 'Investigação profunda do problema — como explorar o Spencer Mansion' },
                   { step: '02', icon: '🗝️', title: 'Wireframes', desc: 'Mapeamento de fluxos e arquitetura — cada sala conecta ao destino certo' },
@@ -673,32 +673,35 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
                   { step: '04', icon: '🔬', title: 'Protótipo', desc: 'Testes de usabilidade e refinamento — sobreviver é iterar' },
                   { step: '05', icon: '💉', title: 'Handoff', desc: 'Entrega precisa com tokens e documentação — o antídoto final' },
                 ].map((item, i) => (
-                  <div key={i} className="detail-item magnetic-card group relative p-6 rounded-sm overflow-hidden" style={{ opacity: 0, background: 'hsl(var(--card) / 0.3)', border: `1px solid hsl(${colors.accentHsl} / 0.15)` }}>
+                  <div key={i} className="detail-item magnetic-card premium-card group relative p-7 rounded-lg overflow-hidden" style={{ opacity: 0 }}>
                     <div className="absolute top-0 left-0 right-0 h-[2px] opacity-40 group-hover:opacity-100 transition-opacity duration-500" style={{ background: colors.gradient }} />
-                    <div className="flex items-center gap-2 mb-3">
-                      <span className="text-lg">{item.icon}</span>
-                      <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.3em]" style={{ color: `hsl(${colors.accentHsl} / 0.4)` }}>{item.step}</span>
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-600 pointer-events-none" style={{ background: `radial-gradient(ellipse at top, hsl(${colors.accentHsl} / 0.08), transparent 70%)` }} />
+                    <div className="relative z-10">
+                      <div className="flex items-center gap-3 mb-4">
+                        <span className="text-xl">{item.icon}</span>
+                        <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.3em] font-semibold" style={{ color: `hsl(${colors.accentHsl} / 0.5)` }}>{item.step}</span>
+                      </div>
+                      <h4 className="font-[family-name:var(--font-display)] text-foreground text-sm font-bold tracking-[0.12em] uppercase mb-3">{item.title}</h4>
+                      <p className="text-muted-foreground text-[13px] leading-relaxed">{item.desc}</p>
                     </div>
-                    <h4 className="font-[family-name:var(--font-display)] text-foreground text-sm font-bold tracking-[0.1em] uppercase mb-2">{item.title}</h4>
-                    <p className="text-muted-foreground text-xs leading-relaxed">{item.desc}</p>
                   </div>
                 ))}
               </div>
             </div>
             {/* Showcase cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
               {[
                 { src: '/images/webdesign-detail-01.jpg', title: '🧪 Laboratório Umbrella', desc: 'Componentes testados em ambiente controlado — cada experimento gera evolução' },
                 { src: '/images/webdesign-detail-02.jpg', title: '🗝️ Mapa da Mansion', desc: 'Sistemas visuais que guiam o usuário — nenhuma porta trancada sem solução' },
                 { src: '/images/webdesign-detail-03.jpg', title: '💉 O Antídoto Visual', desc: 'Animações que curam a experiência — motion design de sobrevivência' },
               ].map((card, i) => (
-                <div key={i} className="detail-item image-hover-zoom card-hover-glow relative h-[45vh] rounded-sm overflow-hidden border border-border/10" style={{ opacity: 0 }}>
-                  <img src={card.src} alt={card.title} loading="lazy" decoding="async" fetchPriority="low" className="w-full h-full object-cover" style={{ filter: 'brightness(0.7) saturate(1.25)' }} />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
-                  <div className="absolute inset-0" style={{ background: `linear-gradient(135deg, hsl(${colors.accentHsl} / 0.08), transparent 60%)` }} />
-                  <div className="absolute bottom-6 left-6 right-6">
-                    <h4 className="font-[family-name:var(--font-display)] text-foreground font-bold text-base tracking-[0.08em] uppercase mb-1">{card.title}</h4>
-                    <p className="text-foreground/60 text-xs leading-relaxed">{card.desc}</p>
+                <div key={i} className="detail-item image-hover-zoom card-hover-glow relative h-[48vh] rounded-lg overflow-hidden" style={{ opacity: 0, border: `1px solid hsl(${colors.accentHsl} / 0.12)` }}>
+                  <img src={card.src} alt={card.title} loading="lazy" decoding="async" fetchPriority="low" className="w-full h-full object-cover" style={{ filter: 'brightness(0.65) saturate(1.3)' }} />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent" />
+                  <div className="absolute inset-0" style={{ background: `linear-gradient(135deg, hsl(${colors.accentHsl} / 0.1), transparent 60%)` }} />
+                  <div className="absolute bottom-0 left-0 right-0 p-7" style={{ background: 'linear-gradient(to top, hsl(var(--background) / 0.9), transparent)' }}>
+                    <h4 className="font-[family-name:var(--font-display)] text-foreground font-bold text-base tracking-[0.08em] uppercase mb-2">{card.title}</h4>
+                    <p className="text-foreground/60 text-[13px] leading-relaxed">{card.desc}</p>
                   </div>
                 </div>
               ))}
