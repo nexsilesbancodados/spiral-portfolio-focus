@@ -265,19 +265,31 @@ export function LuminaSlider() {
   }, [transitionToSlide]);
 
   const triggerExplore = useCallback(() => {
-    const btn = document.querySelector('.explore-btn') as HTMLElement;
-    if (btn) {
-      gsap.to(btn, {
-        y: 8, opacity: 0, duration: 0.3, ease: 'power2.in',
-        onComplete: () => {
-          window.dispatchEvent(new CustomEvent('explore-slide', { detail: { slideIndex: currentSlideRef.current } }));
-          gsap.set(btn, { y: 0, opacity: 0.75 });
-        },
-      });
-    } else {
-      window.dispatchEvent(new CustomEvent('explore-slide', { detail: { slideIndex: currentSlideRef.current } }));
-    }
+    window.dispatchEvent(new CustomEvent('explore-slide', { detail: { slideIndex: currentSlideRef.current } }));
   }, []);
+
+  // ── Scroll down to explore ────────────────────────────────────────
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    let scrollAccum = 0;
+    let scrollTimeout: ReturnType<typeof setTimeout>;
+    const threshold = 120;
+
+    const onWheel = (e: WheelEvent) => {
+      if (e.deltaY > 0) {
+        scrollAccum += e.deltaY;
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => { scrollAccum = 0; }, 300);
+        if (scrollAccum >= threshold) {
+          scrollAccum = 0;
+          triggerExplore();
+        }
+      }
+    };
+    el.addEventListener('wheel', onWheel, { passive: true });
+    return () => { el.removeEventListener('wheel', onWheel); clearTimeout(scrollTimeout); };
+  }, [triggerExplore]);
 
 
 
