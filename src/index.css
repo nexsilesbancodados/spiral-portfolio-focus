@@ -134,10 +134,10 @@ All colors MUST be HSL.
 
 .slide-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(3rem, 10vw, 10rem);
+  font-size: clamp(2rem, 6vw, 6rem);
   font-weight: 900;
   color: hsl(var(--foreground));
-  line-height: 0.85;
+  line-height: 0.88;
   margin: 0 0 clamp(0.5rem, 1vw, 0.75rem) 0;
   letter-spacing: -0.03em;
   text-transform: uppercase;
