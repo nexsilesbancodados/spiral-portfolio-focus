@@ -965,17 +965,17 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
               filter: 'blur(60px)',
               background: `radial-gradient(ellipse 80% 60% at 20% 60%, ${colors.glowColor}, transparent 70%)`,
             }} />
-            <h2 className="hero-reveal hero-reveal-delay-2 font-[family-name:var(--font-display)] font-black leading-[0.85] tracking-tighter uppercase" style={{ fontSize: 'clamp(2.5rem, 9vw, 11rem)' }}>
+            <h2 className="hero-reveal hero-reveal-delay-2 font-[family-name:var(--font-display)] font-black leading-[0.82] tracking-[-0.04em] uppercase flex flex-col items-start" style={{ fontSize: 'clamp(3rem, 12vw, 14rem)' }}>
               {section.title.split(' ').map((word, i) => (
-                <span key={i} className="title-split-wrapper">
+                <span key={i} className="title-split-wrapper block overflow-hidden">
                   <span
                     className="title-word"
                     style={{
-                      display: 'inline-block',
+                      display: 'block',
                       background: colors.titleGradient,
                       WebkitBackgroundClip: 'text',
                       WebkitTextFillColor: 'transparent',
-                      filter: `drop-shadow(0 0 30px ${colors.glowColor}) drop-shadow(0 4px 20px hsl(0 0% 0% / 0.5))`,
+                      filter: `drop-shadow(0 0 40px ${colors.glowColor}) drop-shadow(0 4px 25px hsl(0 0% 0% / 0.6))`,
                     }}
                   >
                     {word}
