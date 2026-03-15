@@ -947,54 +947,19 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
         </div>
       </div>
 
-      {/* HERO */}
-      <div className="relative h-screen w-full overflow-hidden flex items-end parallax-hero">
-        <div className="absolute inset-0">
-          <div className="section-enter-line absolute top-0 left-0 right-0 h-[2px] origin-left z-20"
-            style={{ background: colors.gradient }} />
-          <img src={section.image} alt={section.title} loading="eager" decoding="async" width={1920} height={1080} className="w-full h-full object-cover ken-burns-hero" style={{ filter: 'saturate(1.15) contrast(1.05)' }} />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-background/10" />
-          <div className="absolute inset-0 bg-gradient-to-r from-background/60 via-transparent to-transparent" />
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, transparent 30%, hsl(var(--background) / 0.6) 70%, hsl(var(--background)) 95%)' }} />
-          <div className="absolute inset-0" style={{ background: viceOverlay }} />
-        </div>
-
-        <div className="relative z-10 w-full" style={{ padding: `0 clamp(1.5rem, 4vw, 6rem) clamp(1rem, 3vw, 1.5rem)` }}>
-          <div className="cin-subtitle hero-reveal hero-reveal-delay-1 flex items-center gap-3 mb-[clamp(0.5rem,1vw,1.5rem)]">
-            <div className="h-[2px]" style={{ width: 'clamp(2rem, 3vw, 4rem)', background: colors.gradient }} />
-            <span className={`font-[family-name:var(--font-display)] tracking-[0.4em] uppercase ${colors.accent}`} style={{ fontSize: 'clamp(9px, 0.8vw, 12px)', textShadow: `0 0 20px ${colors.glowColor}` }}>{section.subtitle}</span>
-            <div className="h-[2px]" style={{ width: 'clamp(1rem, 1.5vw, 2rem)', background: colors.gradient, opacity: 0.4 }} />
-          </div>
-          <div className="relative">
-            <div className="absolute inset-0 -z-10 pointer-events-none" style={{
-              filter: 'blur(60px)',
-              background: `radial-gradient(ellipse 80% 60% at 20% 60%, ${colors.glowColor}, transparent 70%)`,
-            }} />
-            <h2 className="hero-reveal hero-reveal-delay-2 font-[family-name:var(--font-display)] font-black leading-[0.85] tracking-tighter uppercase" style={{ fontSize: 'clamp(2.5rem, 9vw, 11rem)' }}>
-              {section.title.split(' ').map((word, i) => (
-                <span key={i} className="title-split-wrapper">
-                  <span
-                    className="title-word"
-                    style={{
-                      display: 'inline-block',
-                      background: colors.titleGradient,
-                      WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent',
-                      filter: `drop-shadow(0 0 30px ${colors.glowColor}) drop-shadow(0 4px 20px hsl(0 0% 0% / 0.5))`,
-                    }}
-                  >
-                    {word}
-                  </span>
-                </span>
-              ))}
-            </h2>
-          </div>
-          <div className="hero-reveal hero-reveal-delay-3 absolute bottom-8 flex flex-col items-center gap-2 opacity-50" style={{ right: 'clamp(1.5rem, 3vw, 4rem)' }}>
-            <span className={`font-[family-name:var(--font-display)] tracking-[0.25em] uppercase ${colors.accent} opacity-60 [writing-mode:vertical-lr]`} style={{ fontSize: 'clamp(7px, 0.6vw, 9px)' }}>Role para baixo</span>
-            <div className="w-[1px] animate-pulse" style={{ height: 'clamp(2rem, 3vw, 3rem)', background: `hsl(${colors.accentHsl} / 0.4)` }} />
-          </div>
-        </div>
-      </div>
+      {/* HERO with Parallax Layers */}
+      <ParallaxHero
+        layers={sectionParallaxLayers[section.id] || [{ src: section.image, speed: 20, alt: section.title }]}
+        title={section.title}
+        titleGradient={colors.titleGradient}
+        glowColor={colors.glowColor}
+        accentHsl={colors.accentHsl}
+        gradient={colors.gradient}
+        subtitle={section.subtitle}
+        accentClass={colors.accent}
+        overlay={viceOverlay}
+        scroller=".gta-vi-scroll"
+      />
 
       {/* CONTENT */}
       <div className="relative z-10 bg-background">
