@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState, useCallback, lazy, Suspense, memo } from 'react';
+import { MediaButton } from '@/components/ui/media-button';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
