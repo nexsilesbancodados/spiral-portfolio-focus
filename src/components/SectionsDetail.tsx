@@ -670,15 +670,18 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
               <h3 className="font-[family-name:var(--font-display)] text-[11px] tracking-[0.4em] uppercase mb-10" style={{ color: `hsl(${colors.accentHsl} / 0.5)` }}>NOSSO PROCESSO</h3>
               <div className="grid grid-cols-1 md:grid-cols-5 gap-1">
                 {[
-                  { step: '01', title: 'Discovery', desc: 'Entrevistas, pesquisa de mercado e definição de personas' },
-                  { step: '02', title: 'Wireframes', desc: 'Arquitetura de informação e fluxos de navegação' },
-                  { step: '03', title: 'Visual Design', desc: 'Moodboards, tipografia, cores e componentes' },
-                  { step: '04', title: 'Protótipo', desc: 'Interações, animações e testes de usabilidade' },
-                  { step: '05', title: 'Handoff', desc: 'Tokens, specs e documentação para desenvolvimento' },
+                  { step: '01', icon: '🧬', title: 'Discovery', desc: 'Investigação profunda do problema — como explorar o Spencer Mansion' },
+                  { step: '02', icon: '🗝️', title: 'Wireframes', desc: 'Mapeamento de fluxos e arquitetura — cada sala conecta ao destino certo' },
+                  { step: '03', icon: '🧪', title: 'Visual Design', desc: 'Experimentos visuais controlados — cores, tipografia e componentes' },
+                  { step: '04', icon: '🔬', title: 'Protótipo', desc: 'Testes de usabilidade e refinamento — sobreviver é iterar' },
+                  { step: '05', icon: '💉', title: 'Handoff', desc: 'Entrega precisa com tokens e documentação — o antídoto final' },
                 ].map((item, i) => (
-                  <div key={i} className="detail-item magnetic-card group relative p-6 rounded-sm overflow-hidden" style={{ opacity: 0, background: 'hsl(var(--card) / 0.3)', border: '1px solid hsl(var(--border) / 0.1)' }}>
+                  <div key={i} className="detail-item magnetic-card group relative p-6 rounded-sm overflow-hidden" style={{ opacity: 0, background: 'hsl(var(--card) / 0.3)', border: `1px solid hsl(${colors.accentHsl} / 0.15)` }}>
                     <div className="absolute top-0 left-0 right-0 h-[2px] opacity-40 group-hover:opacity-100 transition-opacity duration-500" style={{ background: colors.gradient }} />
-                    <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.3em] block mb-3" style={{ color: `hsl(${colors.accentHsl} / 0.4)` }}>{item.step}</span>
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className="text-lg">{item.icon}</span>
+                      <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.3em]" style={{ color: `hsl(${colors.accentHsl} / 0.4)` }}>{item.step}</span>
+                    </div>
                     <h4 className="font-[family-name:var(--font-display)] text-foreground text-sm font-bold tracking-[0.1em] uppercase mb-2">{item.title}</h4>
                     <p className="text-muted-foreground text-xs leading-relaxed">{item.desc}</p>
                   </div>
