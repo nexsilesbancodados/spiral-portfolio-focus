@@ -995,9 +995,9 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
       <div className="relative z-10 bg-background">
         <div className="w-full h-[1px]" style={{ background: `linear-gradient(90deg, transparent, hsl(${colors.accentHsl} / 0.3), hsl(${colors.accentHsl} / 0.15), transparent)` }} />
 
-        <div className="cin-desc" style={{ padding: `clamp(1rem, 3vw, 1.5rem) clamp(1.5rem, 4vw, 6rem)` }}>
+        <div className="cin-desc" style={{ padding: `clamp(1.5rem, 4vw, 2.5rem) clamp(1.5rem, 4vw, 6rem)` }}>
           <div className="max-w-5xl">
-            <p className="text-foreground/90 leading-relaxed font-light tracking-tight" style={{ fontSize: 'clamp(1rem, 2vw, 1.875rem)' }}>{section.description}</p>
+            <p className="text-foreground/85 leading-[1.7] font-light tracking-tight" style={{ fontSize: 'clamp(1.05rem, 2vw, 1.9rem)' }}>{section.description}</p>
           </div>
         </div>
 
