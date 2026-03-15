@@ -755,6 +755,12 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
                 </span>
               ))}
             </div>
+
+            {/* CTA God of War */}
+            <div className="flex flex-wrap gap-4 mt-16 justify-center">
+              <MediaButton label="❄️ Invocar o Leviatã" mediaUrl="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNTY1YjQ2NWM2MzVmMmI4YjhmNjE5NjQ5ZGRhNmQyOGUwNjJhNTZlMiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3ohzdYJK1lnOmTxFxC/giphy.gif" />
+              <MediaButton label="🔥 Lâminas do Caos" mediaUrl="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExOTk1MTkxMTQ0ZTBjMWY3NzQ2OGMzNTdlNjY2YjFkZGY5NjE5MDRiNSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/26BRuo6sLetdllPAQ/giphy.gif" />
+            </div>
           </div>
         );
 
