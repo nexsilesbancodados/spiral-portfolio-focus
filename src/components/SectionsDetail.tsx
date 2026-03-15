@@ -144,13 +144,20 @@ const sectionGallery: Record<string, { images: { src: string; alt: string }[]; l
 };
 
 const sectionColors: Record<string, { accent: string; accentHsl: string; gradient: string; overlay: string; titleBg: string; titleGradient: string; glowColor: string }> = {
+  // FOCUSS DEV — Identidade original preservada
   'focuss-dev':       { accent: 'text-blue-400',      accentHsl: '210 90% 60%',   gradient: 'linear-gradient(90deg, hsl(210 90% 60%), hsl(230 80% 65%))',          overlay: 'none', titleBg: '', titleGradient: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(210 90% 70%) 40%, hsl(230 80% 60%) 70%, hsl(210 90% 50%) 100%)', glowColor: 'hsl(210 90% 60% / 0.4)' },
-  'web-design':       { accent: 'text-orange-400',     accentHsl: '25 95% 55%',    gradient: 'linear-gradient(90deg, hsl(25 95% 55%), hsl(335 75% 55%))',           overlay: 'linear-gradient(135deg, hsl(25 95% 55% / 0.12), hsl(335 75% 55% / 0.08), transparent 70%)', titleBg: '', titleGradient: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(25 95% 65%) 30%, hsl(335 75% 55%) 65%, hsl(25 95% 45%) 100%)', glowColor: 'hsl(25 95% 55% / 0.35)' },
-  'desenvolvimento':  { accent: 'text-emerald-400',    accentHsl: '160 70% 50%',   gradient: 'linear-gradient(90deg, hsl(160 70% 50%), hsl(190 80% 55%))',          overlay: 'linear-gradient(225deg, hsl(160 70% 50% / 0.12), hsl(190 80% 55% / 0.08), transparent 60%)', titleBg: '', titleGradient: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(160 70% 60%) 30%, hsl(190 80% 50%) 65%, hsl(160 70% 40%) 100%)', glowColor: 'hsl(160 70% 50% / 0.35)' },
-  'servicos':         { accent: 'text-purple-400',     accentHsl: '270 70% 60%',   gradient: 'linear-gradient(90deg, hsl(270 70% 60%), hsl(300 65% 55%))',          overlay: 'linear-gradient(180deg, hsl(270 70% 60% / 0.1), hsl(300 65% 55% / 0.06), transparent)', titleBg: '', titleGradient: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(270 70% 70%) 30%, hsl(300 65% 55%) 65%, hsl(270 70% 50%) 100%)', glowColor: 'hsl(270 70% 60% / 0.35)' },
-  'inovacao-ia':      { accent: 'text-pink-400',       accentHsl: '335 75% 55%',   gradient: 'linear-gradient(90deg, hsl(335 75% 55%), hsl(355 85% 60%))',          overlay: 'linear-gradient(180deg, hsl(335 75% 55% / 0.1), hsl(25 95% 55% / 0.08), transparent)', titleBg: '', titleGradient: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(335 75% 65%) 30%, hsl(355 85% 55%) 65%, hsl(335 75% 45%) 100%)', glowColor: 'hsl(335 75% 55% / 0.35)' },
-  'mobile-web':       { accent: 'text-amber-400',      accentHsl: '40 100% 50%',   gradient: 'linear-gradient(90deg, hsl(40 100% 50%), hsl(30 95% 55%))',           overlay: 'linear-gradient(135deg, hsl(40 100% 50% / 0.1), hsl(175 70% 45% / 0.06), transparent 70%)', titleBg: '', titleGradient: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(40 100% 60%) 30%, hsl(30 95% 50%) 65%, hsl(40 100% 40%) 100%)', glowColor: 'hsl(40 100% 50% / 0.35)' },
-  'skills':           { accent: 'text-cyan-400',       accentHsl: '185 80% 55%',   gradient: 'linear-gradient(90deg, hsl(185 80% 55%), hsl(210 75% 60%))',          overlay: 'linear-gradient(225deg, hsl(185 80% 55% / 0.1), hsl(210 75% 60% / 0.06), transparent 60%)', titleBg: '', titleGradient: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(185 80% 65%) 30%, hsl(210 75% 55%) 65%, hsl(185 80% 45%) 100%)', glowColor: 'hsl(185 80% 55% / 0.35)' },
+  // Resident Evil — Blood red + biohazard green
+  'web-design':       { accent: 'text-red-500',        accentHsl: '0 80% 50%',     gradient: 'linear-gradient(90deg, hsl(0 80% 50%), hsl(120 60% 35%))',            overlay: 'linear-gradient(135deg, hsl(0 80% 50% / 0.12), hsl(120 60% 35% / 0.08), transparent 70%)', titleBg: '', titleGradient: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(0 80% 60%) 30%, hsl(0 60% 40%) 65%, hsl(0 80% 35%) 100%)', glowColor: 'hsl(0 80% 50% / 0.4)' },
+  // God of War Ragnarök — Leviathan ice blue + Blades of Chaos fire
+  'desenvolvimento':  { accent: 'text-sky-400',        accentHsl: '200 85% 60%',   gradient: 'linear-gradient(90deg, hsl(200 85% 60%), hsl(15 90% 55%))',           overlay: 'linear-gradient(225deg, hsl(200 85% 60% / 0.12), hsl(15 90% 55% / 0.08), transparent 60%)', titleBg: '', titleGradient: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(200 85% 65%) 30%, hsl(15 90% 55%) 65%, hsl(200 85% 50%) 100%)', glowColor: 'hsl(200 85% 60% / 0.4)' },
+  // Fallout — Pip-Boy green + nuclear amber
+  'servicos':         { accent: 'text-green-400',      accentHsl: '120 75% 50%',   gradient: 'linear-gradient(90deg, hsl(120 75% 50%), hsl(45 90% 50%))',           overlay: 'linear-gradient(180deg, hsl(120 75% 50% / 0.1), hsl(45 90% 50% / 0.06), transparent)', titleBg: '', titleGradient: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(120 75% 60%) 30%, hsl(120 60% 45%) 65%, hsl(120 75% 40%) 100%)', glowColor: 'hsl(120 75% 50% / 0.4)' },
+  // Detroit: Become Human — CyberLife blue + LED cyan
+  'inovacao-ia':      { accent: 'text-cyan-400',       accentHsl: '195 90% 55%',   gradient: 'linear-gradient(90deg, hsl(195 90% 55%), hsl(210 80% 60%))',          overlay: 'linear-gradient(180deg, hsl(195 90% 55% / 0.1), hsl(210 80% 60% / 0.08), transparent)', titleBg: '', titleGradient: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(195 90% 65%) 30%, hsl(210 80% 55%) 65%, hsl(195 90% 45%) 100%)', glowColor: 'hsl(195 90% 55% / 0.4)' },
+  // Watch Dogs — ctOS green + hacker teal
+  'mobile-web':       { accent: 'text-emerald-400',    accentHsl: '160 85% 45%',   gradient: 'linear-gradient(90deg, hsl(160 85% 45%), hsl(180 70% 50%))',          overlay: 'linear-gradient(135deg, hsl(160 85% 45% / 0.1), hsl(180 70% 50% / 0.06), transparent 70%)', titleBg: '', titleGradient: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(160 85% 55%) 30%, hsl(180 70% 45%) 65%, hsl(160 85% 40%) 100%)', glowColor: 'hsl(160 85% 45% / 0.4)' },
+  // Assassin's Creed Valhalla — Viking gold + Norse amber
+  'skills':           { accent: 'text-amber-400',      accentHsl: '38 90% 50%',    gradient: 'linear-gradient(90deg, hsl(38 90% 50%), hsl(25 80% 45%))',            overlay: 'linear-gradient(225deg, hsl(38 90% 50% / 0.1), hsl(25 80% 45% / 0.06), transparent 60%)', titleBg: '', titleGradient: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(38 90% 60%) 30%, hsl(25 80% 50%) 65%, hsl(38 90% 40%) 100%)', glowColor: 'hsl(38 90% 50% / 0.4)' },
 };
 
 // ─── Deep-dive content ──────────────────────────────────────────
@@ -663,15 +670,18 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
               <h3 className="font-[family-name:var(--font-display)] text-[11px] tracking-[0.4em] uppercase mb-10" style={{ color: `hsl(${colors.accentHsl} / 0.5)` }}>NOSSO PROCESSO</h3>
               <div className="grid grid-cols-1 md:grid-cols-5 gap-1">
                 {[
-                  { step: '01', title: 'Discovery', desc: 'Entrevistas, pesquisa de mercado e definição de personas' },
-                  { step: '02', title: 'Wireframes', desc: 'Arquitetura de informação e fluxos de navegação' },
-                  { step: '03', title: 'Visual Design', desc: 'Moodboards, tipografia, cores e componentes' },
-                  { step: '04', title: 'Protótipo', desc: 'Interações, animações e testes de usabilidade' },
-                  { step: '05', title: 'Handoff', desc: 'Tokens, specs e documentação para desenvolvimento' },
+                  { step: '01', icon: '🧬', title: 'Discovery', desc: 'Investigação profunda do problema — como explorar o Spencer Mansion' },
+                  { step: '02', icon: '🗝️', title: 'Wireframes', desc: 'Mapeamento de fluxos e arquitetura — cada sala conecta ao destino certo' },
+                  { step: '03', icon: '🧪', title: 'Visual Design', desc: 'Experimentos visuais controlados — cores, tipografia e componentes' },
+                  { step: '04', icon: '🔬', title: 'Protótipo', desc: 'Testes de usabilidade e refinamento — sobreviver é iterar' },
+                  { step: '05', icon: '💉', title: 'Handoff', desc: 'Entrega precisa com tokens e documentação — o antídoto final' },
                 ].map((item, i) => (
-                  <div key={i} className="detail-item magnetic-card group relative p-6 rounded-sm overflow-hidden" style={{ opacity: 0, background: 'hsl(var(--card) / 0.3)', border: '1px solid hsl(var(--border) / 0.1)' }}>
+                  <div key={i} className="detail-item magnetic-card group relative p-6 rounded-sm overflow-hidden" style={{ opacity: 0, background: 'hsl(var(--card) / 0.3)', border: `1px solid hsl(${colors.accentHsl} / 0.15)` }}>
                     <div className="absolute top-0 left-0 right-0 h-[2px] opacity-40 group-hover:opacity-100 transition-opacity duration-500" style={{ background: colors.gradient }} />
-                    <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.3em] block mb-3" style={{ color: `hsl(${colors.accentHsl} / 0.4)` }}>{item.step}</span>
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className="text-lg">{item.icon}</span>
+                      <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.3em]" style={{ color: `hsl(${colors.accentHsl} / 0.4)` }}>{item.step}</span>
+                    </div>
                     <h4 className="font-[family-name:var(--font-display)] text-foreground text-sm font-bold tracking-[0.1em] uppercase mb-2">{item.title}</h4>
                     <p className="text-muted-foreground text-xs leading-relaxed">{item.desc}</p>
                   </div>
@@ -701,10 +711,10 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
 
       case 'desenvolvimento':
         const devCards = [
-          { icon: '⚡', title: 'APIs de Alta Performance', desc: 'Endpoints que respondem em <50ms, com rate limiting adaptativo, caching em múltiplas camadas e documentação OpenAPI gerada automaticamente.', accent: 'var(--vice-sunset)' },
-          { icon: '🏗️', title: 'Arquitetura Evolutiva', desc: 'Começamos simples, escalamos com elegância. Monolitos modulares que se transformam em microsserviços quando o negócio demanda.', accent: 'var(--vice-teal)' },
-          { icon: '🔄', title: 'Pipeline Zero-Downtime', desc: 'Deploy blue-green automatizado, canary releases, feature flags e rollback instantâneo. Sua aplicação nunca para.', accent: 'var(--vice-gold)' },
-          { icon: '🗄️', title: 'Dados Inteligentes', desc: 'Modelagem otimizada com índices compostos, materialized views, partitioning e queries que escalam de 100 a 100M registros.', accent: 'var(--vice-sky)' },
+          { icon: '❄️', title: 'APIs de Alta Performance', desc: 'Endpoints que respondem em <50ms — precisos como o Machado Leviatã. Cache inteligente, rate limiting e documentação OpenAPI.', accent: '200 85% 60%' },
+          { icon: '🔥', title: 'Arquitetura Evolutiva', desc: 'Começamos simples, escalamos com a fúria das Lâminas do Caos. Monolitos modulares que evoluem em microsserviços.', accent: '15 90% 55%' },
+          { icon: '⚡', title: 'Pipeline Zero-Downtime', desc: 'Deploy blue-green como os Bifröst — instantâneo e sem falhas. Canary releases, feature flags e rollback.', accent: '38 90% 50%' },
+          { icon: '🪨', title: 'Dados Inteligentes', desc: 'Modelagem sólida como as runas nórdicas. Índices compostos, materialized views e queries que escalam aos milhões.', accent: '200 70% 50%' },
         ];
         return (
           <div className="fluid-section-pad">
@@ -717,8 +727,8 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
                   <div className="absolute top-0 left-0 right-0 h-[1px] opacity-0 group-hover:opacity-60 transition-opacity duration-500"
                     style={{ background: `linear-gradient(90deg, transparent, hsl(${card.accent} / 0.6), transparent)` }} />
                   <div className="relative z-10 p-8 md:p-10">
-                    <div className="w-11 h-11 rounded-lg flex items-center justify-center mb-6 text-xl"
-                      style={{ background: `hsl(${card.accent} / 0.12)`, boxShadow: `0 0 20px hsl(${card.accent} / 0.08)` }}>
+                    <div className="w-11 h-11 rounded-lg flex items-center justify-center mb-6 text-xl border"
+                      style={{ background: `hsl(${card.accent} / 0.12)`, borderColor: `hsl(${card.accent} / 0.2)`, boxShadow: `0 0 25px hsl(${card.accent} / 0.12)` }}>
                       {card.icon}
                     </div>
                     <h4 className="font-[family-name:var(--font-display)] text-foreground text-sm md:text-base font-bold tracking-[0.12em] uppercase mb-3">{card.title}</h4>
@@ -749,26 +759,26 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
             </div>
             {/* AI capabilities grid */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 max-w-7xl mb-16">
-              <div className="detail-item lg:col-span-7 image-hover-zoom card-hover-glow relative h-[50vh] rounded-sm overflow-hidden border border-vice-pink/10" style={{ opacity: 0 }}>
+              <div className="detail-item lg:col-span-7 image-hover-zoom card-hover-glow relative h-[50vh] rounded-sm overflow-hidden" style={{ opacity: 0, border: `1px solid hsl(${colors.accentHsl} / 0.15)` }}>
                 <img src="/images/ia-detail-01.jpg" alt="IA Generativa" loading="lazy" decoding="async" fetchPriority="low" className="w-full h-full object-cover" style={{ filter: 'brightness(0.7) saturate(1.3)' }} />
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
-                <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, hsl(var(--vice-pink) / 0.1), transparent)' }} />
+                <div className="absolute inset-0" style={{ background: `linear-gradient(135deg, hsl(${colors.accentHsl} / 0.1), transparent)` }} />
                 <div className="absolute bottom-6 left-6">
-                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.3em] uppercase text-vice-pink/80">IA GENERATIVA</span>
+                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.3em] uppercase" style={{ color: `hsl(${colors.accentHsl} / 0.8)` }}>🤖 IA GENERATIVA</span>
                   <h4 className="font-[family-name:var(--font-display)] text-foreground text-xl font-bold mt-2">Do Prompt ao Produto</h4>
                 </div>
               </div>
               <div className="lg:col-span-5 grid grid-rows-2 gap-4">
-                <div className="detail-item card-hover-glow relative p-8 rounded-sm border border-vice-pink/10 backdrop-blur-sm" style={{ opacity: 0, background: 'hsl(var(--card) / 0.5)' }}>
-                  <div className="text-4xl mb-3">🧠</div>
+                <div className="detail-item card-hover-glow relative p-8 rounded-sm backdrop-blur-sm" style={{ opacity: 0, background: 'hsl(var(--card) / 0.5)', border: `1px solid hsl(${colors.accentHsl} / 0.15)` }}>
+                  <div className="text-4xl mb-3">💠</div>
                   <h4 className="font-[family-name:var(--font-display)] text-foreground text-sm font-semibold tracking-wide uppercase mb-2">Agentes Autônomos</h4>
-                  <p className="text-muted-foreground text-xs leading-relaxed">Workflows inteligentes que pesquisam, analisam, decidem e executam — reduzindo horas de trabalho manual para minutos.</p>
+                  <p className="text-muted-foreground text-xs leading-relaxed">Workflows inteligentes como androides — pesquisam, analisam, decidem e executam com precisão sobre-humana.</p>
                 </div>
-                <div className="detail-item image-hover-zoom card-hover-glow relative h-full rounded-sm overflow-hidden border border-vice-pink/10" style={{ opacity: 0 }}>
+                <div className="detail-item image-hover-zoom card-hover-glow relative h-full rounded-sm overflow-hidden" style={{ opacity: 0, border: `1px solid hsl(${colors.accentHsl} / 0.15)` }}>
                   <img src="/images/automacao-hero.png" alt="RAG Pipeline" loading="lazy" decoding="async" fetchPriority="low" className="w-full h-full object-cover" style={{ filter: 'brightness(0.7) saturate(1.2)' }} />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
                   <div className="absolute bottom-4 left-4">
-                    <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.2em] uppercase text-vice-sunset/80">RAG PIPELINE</span>
+                    <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.2em] uppercase" style={{ color: `hsl(${colors.accentHsl} / 0.8)` }}>🔷 RAG PIPELINE</span>
                   </div>
                 </div>
               </div>
@@ -776,7 +786,8 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
             {/* AI models we work with */}
             <div className="flex flex-wrap gap-3 max-w-7xl">
               {['GPT-4o', 'Claude 3.5', 'Gemini Pro', 'LLaMA 3', 'Mistral', 'Stable Diffusion', 'Whisper', 'DALL-E'].map((model, i) => (
-                <span key={i} className="detail-item font-[family-name:var(--font-display)] text-[10px] tracking-[0.15em] uppercase px-4 py-2 rounded-sm border border-vice-pink/20 text-vice-pink/70 bg-vice-pink/5 hover:bg-vice-pink/15 transition-all duration-300 cursor-default" style={{ opacity: 0 }}>
+                <span key={i} className="detail-item font-[family-name:var(--font-display)] text-[10px] tracking-[0.15em] uppercase px-4 py-2 rounded-sm border transition-all duration-300 cursor-default"
+                  style={{ opacity: 0, borderColor: `hsl(${colors.accentHsl} / 0.2)`, color: `hsl(${colors.accentHsl} / 0.7)`, background: `hsl(${colors.accentHsl} / 0.05)` }}>
                   {model}
                 </span>
               ))}
@@ -790,26 +801,26 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
             <div className="max-w-6xl mx-auto">
               {/* Device showcase */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-                <div className="detail-item magnetic-card card-hover-glow flex flex-col items-center p-8 rounded-sm border border-border/10" style={{ opacity: 0, background: 'hsl(var(--card) / 0.3)' }}>
-                  <div className="relative w-[180px] h-[360px] rounded-[24px] border-2 border-foreground/20 overflow-hidden shadow-2xl">
+                <div className="detail-item magnetic-card card-hover-glow flex flex-col items-center p-8 rounded-sm" style={{ opacity: 0, background: 'hsl(var(--card) / 0.3)', border: `1px solid hsl(${colors.accentHsl} / 0.15)` }}>
+                  <div className="relative w-[180px] h-[360px] rounded-[24px] overflow-hidden shadow-2xl" style={{ border: `2px solid hsl(${colors.accentHsl} / 0.3)` }}>
                     <img src="/images/mobile-detail-01.jpg" alt="Mobile" loading="lazy" decoding="async" fetchPriority="low" className="w-full h-full object-cover" style={{ filter: 'brightness(0.85) saturate(1.2)' }} />
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-5 bg-background rounded-b-xl" />
                   </div>
-                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.2em] uppercase text-vice-gold/70 mt-6">REACT NATIVE</span>
+                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.2em] uppercase mt-6" style={{ color: `hsl(${colors.accentHsl} / 0.7)` }}>📱 REACT NATIVE</span>
                 </div>
-                <div className="detail-item magnetic-card card-hover-glow flex flex-col items-center p-8 rounded-sm border border-border/10" style={{ opacity: 0, background: 'hsl(var(--card) / 0.3)' }}>
-                  <div className="relative w-[260px] h-[340px] rounded-[16px] border-2 border-foreground/20 overflow-hidden shadow-2xl">
+                <div className="detail-item magnetic-card card-hover-glow flex flex-col items-center p-8 rounded-sm" style={{ opacity: 0, background: 'hsl(var(--card) / 0.3)', border: `1px solid hsl(${colors.accentHsl} / 0.15)` }}>
+                  <div className="relative w-[260px] h-[340px] rounded-[16px] overflow-hidden shadow-2xl" style={{ border: `2px solid hsl(${colors.accentHsl} / 0.3)` }}>
                     <img src="/images/mobile-detail-02.jpg" alt="Tablet" loading="lazy" decoding="async" fetchPriority="low" className="w-full h-full object-cover" style={{ filter: 'brightness(0.85) saturate(1.2)' }} />
                   </div>
-                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.2em] uppercase text-vice-gold/70 mt-6">PWA</span>
+                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.2em] uppercase mt-6" style={{ color: `hsl(${colors.accentHsl} / 0.7)` }}>💻 PWA</span>
                 </div>
-                <div className="detail-item magnetic-card card-hover-glow flex flex-col items-center p-8 rounded-sm border border-border/10" style={{ opacity: 0, background: 'hsl(var(--card) / 0.3)' }}>
-                  <div className="relative w-full h-[220px] rounded-t-lg border-2 border-foreground/20 overflow-hidden shadow-2xl">
+                <div className="detail-item magnetic-card card-hover-glow flex flex-col items-center p-8 rounded-sm" style={{ opacity: 0, background: 'hsl(var(--card) / 0.3)', border: `1px solid hsl(${colors.accentHsl} / 0.15)` }}>
+                  <div className="relative w-full h-[220px] rounded-t-lg overflow-hidden shadow-2xl" style={{ border: `2px solid hsl(${colors.accentHsl} / 0.3)` }}>
                     <img src="/images/mobile-detail-03.jpg" alt="Desktop" loading="lazy" decoding="async" fetchPriority="low" className="w-full h-full object-cover" style={{ filter: 'brightness(0.85) saturate(1.2)' }} />
                   </div>
-                  <div className="w-24 h-3 bg-foreground/10 rounded-b-lg" />
-                  <div className="w-16 h-1 bg-foreground/10 mt-1 rounded" />
-                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.2em] uppercase text-vice-gold/70 mt-6">RESPONSIVE WEB</span>
+                  <div className="w-24 h-3 rounded-b-lg" style={{ background: `hsl(${colors.accentHsl} / 0.1)` }} />
+                  <div className="w-16 h-1 mt-1 rounded" style={{ background: `hsl(${colors.accentHsl} / 0.1)` }} />
+                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.2em] uppercase mt-6" style={{ color: `hsl(${colors.accentHsl} / 0.7)` }}>🔓 RESPONSIVE WEB</span>
                 </div>
               </div>
               {/* Performance metrics */}
@@ -886,12 +897,12 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl">
               {[
-                { icon: '📈', title: 'Growth Marketing', desc: 'Campanhas data-driven com ROAS acima de 4x. Google Ads, Meta Ads, TikTok Ads com tracking server-side e atribuição multi-touch.', accent: 'vice-pink' },
-                { icon: '🌐', title: 'Plataformas Web', desc: 'Experiências imersivas com Next.js, edge computing e Core Web Vitals no verde. SEO técnico que coloca você no topo.', accent: 'vice-teal' },
-                { icon: '📱', title: 'Apps Mobile', desc: 'React Native com performance nativa. Publicação nas stores, updates OTA com CodePush e analytics de engajamento.', accent: 'vice-sunset' },
-                { icon: '⚙️', title: 'SaaS & Plataformas', desc: 'Arquitetura multi-tenant escalável com billing Stripe, dashboards em tempo real e admin panel white-label.', accent: 'vice-sky' },
-                { icon: '🚀', title: 'Landing Pages', desc: 'Conversão otimizada com A/B testing, heatmaps, copywriting estratégico e integração com CRM e automação.', accent: 'vice-gold' },
-                { icon: '🎨', title: 'Branding Digital', desc: 'Identidade visual que posiciona e diferencia. Logo, tipografia, paleta, guidelines e assets para todos os canais.', accent: 'vice-palm' },
+                { icon: '☢️', title: 'Growth Marketing', desc: 'Campanhas data-driven com ROAS acima de 4x — penetrando o mercado como radiação no Wasteland.', accent: '120 75% 50%' },
+                { icon: '🔧', title: 'Plataformas Web', desc: 'Experiências imersivas construídas para sobreviver. Next.js, edge computing e Core Web Vitals no verde.', accent: '45 90% 50%' },
+                { icon: '📻', title: 'Apps Mobile', desc: 'React Native com performance nativa — sintonize na frequência certa. Updates OTA e analytics de engajamento.', accent: '120 60% 45%' },
+                { icon: '💊', title: 'SaaS & Plataformas', desc: 'Arquitetura multi-tenant escalável como um Vault-Tec — billing Stripe e dashboards em tempo real.', accent: '160 70% 45%' },
+                { icon: '🏗️', title: 'Landing Pages', desc: 'Conversão otimizada para reconstruir o mundo. A/B testing, heatmaps e integração com CRM.', accent: '80 60% 45%' },
+                { icon: '⚡', title: 'Branding Digital', desc: 'Identidade visual que sobrevive ao apocalipse. Logo, tipografia, paleta e guidelines para todos os canais.', accent: '50 85% 50%' },
               ].map((card, i) => (
                 <div key={i} className="detail-item magnetic-card card-hover-glow relative p-8 rounded-sm overflow-hidden group cursor-pointer"
                   style={{ opacity: 0, background: 'hsl(var(--card) / 0.4)', border: '1px solid hsl(var(--border) / 0.15)' }}>
@@ -1002,8 +1013,8 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
                 const rest = detail.slice(3);
                 const [title, desc] = rest.split(' — ');
                 const cardAccents = [
-                  'hsl(335 75% 55%)', 'hsl(185 80% 55%)', 'hsl(25 95% 55%)',
-                  'hsl(210 90% 60%)', 'hsl(45 100% 55%)', 'hsl(270 70% 60%)'
+                  'hsl(120 75% 50%)', 'hsl(45 90% 50%)', 'hsl(120 60% 45%)',
+                  'hsl(160 70% 45%)', 'hsl(80 60% 45%)', 'hsl(50 85% 50%)'
                 ];
                 const accent = cardAccents[i] || cardAccents[0];
                 return (
