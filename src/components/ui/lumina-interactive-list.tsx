@@ -11,12 +11,12 @@ interface Slide {
 
 const slides: Slide[] = [
   { title: 'FOCUSS DEV', description: 'Transformando ideias em experiências digitais extraordinárias. Desenvolvimento web de alto nível.', media: '/images/slide-01.jpg', skills: ['React', 'TypeScript', 'Node.js', 'Next.js'] },
-  { title: 'Web Design', description: 'Interfaces modernas e elegantes que conectam marcas ao futuro digital com impacto visual.', media: '/images/hero-webdesign.jpg', skills: ['Figma', 'UI/UX', 'Prototipagem', 'Design System'] },
-  { title: 'Desenvolvimento', description: 'Código limpo, performance máxima e arquitetura escalável para projetos robustos.', media: '/images/hero-dev.jpg', skills: ['JavaScript', 'Python', 'APIs REST', 'PostgreSQL'] },
-  { title: 'Serviços', description: 'Soluções digitais completas — tráfego pago, sites, apps, SaaS e design premium.', media: '/images/hero-servicos.jpg', skills: ['Tráfego Pago', 'Sites', 'Apps', 'SaaS'] },
-  { title: 'Inovação e IA', description: 'Tecnologias de ponta e inteligência artificial para soluções que fazem a diferença.', media: '/images/hero-ia.jpg', skills: ['IA', 'Automação', 'Chatbots', 'Cloud'] },
-  { title: 'Mobile e Web', description: 'Aplicações responsivas e multiplataforma que funcionam perfeitamente em qualquer dispositivo.', media: '/images/hero-mobile.jpg', skills: ['React Native', 'PWA', 'Responsivo', 'Docker'] },
-  { title: 'Skills', description: 'Domínio completo do ecossistema moderno — front-end, back-end, cloud e design em um só lugar.', media: '/images/hero-skills.jpg', skills: ['React', 'Node.js', 'Python', 'AWS'] },
+  { title: 'Web Design', description: 'Sobreviver exige preparação. Cada interface é projetada como um mapa de fuga — cada pixel no lugar certo, cada rota calculada para a conversão.', media: '/images/hero-webdesign.jpg', skills: ['🧬 Research', '🗝️ Wireframes', '🧪 Protótipo', '💉 Handoff'] },
+  { title: 'Desenvolvimento', description: 'Forjado no gelo do Leviatã e no fogo das Lâminas do Caos. Código que escala como a fúria de um deus.', media: '/images/hero-dev.jpg', skills: ['❄️ Clean Code', '🔥 APIs', '⚡ CI/CD', '🪨 Database'] },
+  { title: 'Serviços', description: 'No Wasteland digital, só sobrevive quem tem o kit completo. Soluções que resistem ao apocalipse do mercado.', media: '/images/hero-servicos.jpg', skills: ['☢️ Growth', '🔧 Web', '📻 Apps', '💊 SaaS'] },
+  { title: 'Inovação e IA', description: 'A linha entre humano e máquina se dissolve. Androides que pensam, decidem e evoluem ao seu lado.', media: '/images/hero-ia.jpg', skills: ['🤖 LLMs', '💠 Agentes', '🔷 RAG', '🧠 Vision'] },
+  { title: 'Mobile e Web', description: 'Hackear o sistema é dominar todas as plataformas. Apps que se conectam ao ctOS da experiência do usuário.', media: '/images/hero-mobile.jpg', skills: ['📱 Native', '💻 PWA', '🔓 Cross-Platform', '📡 OTA'] },
+  { title: 'Skills', description: 'A árvore de habilidades de um verdadeiro Viking digital. Cada runa domada, cada skill desbloqueada no caminho de Valhalla.', media: '/images/hero-skills.jpg', skills: ['⚔️ Front-end', '🛡️ Back-end', '🏹 Infra', '🪙 Design'] },
 ];
 
 // ── WebGL Glass Shader ──────────────────────────────────────────────
