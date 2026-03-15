@@ -413,7 +413,16 @@ export function LuminaSlider() {
       {/* Slide content */}
       <div className="slide-content" style={{ zIndex: 10 }}>
         <div className="slide-content-inner" key={contentKey}>
-          <h1 className="slide-title" style={{ textShadow: '0 2px 40px hsl(0 0% 0% / 0.6), 0 4px 80px hsl(0 0% 0% / 0.4)' }}>{current.title}</h1>
+          <h1 className="slide-title" style={{ textShadow: '0 2px 40px hsl(0 0% 0% / 0.6), 0 4px 80px hsl(0 0% 0% / 0.4)' }}>
+            {current.title.split(' ').map((word, i) => (
+              <span key={i} className="slide-title-word" style={{
+                background: `linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(${current.theme.accent}) 50%, hsl(${current.theme.accent} / 0.7) 100%)`,
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                filter: `drop-shadow(0 0 30px ${current.theme.glow})`,
+              }}>{word}</span>
+            ))}
+          </h1>
           <p className="slide-description" style={{ textShadow: '0 1px 20px hsl(0 0% 0% / 0.5)' }}>{current.description}</p>
           <div className="slide-skills">
             {current.skills.map((skill) => (
