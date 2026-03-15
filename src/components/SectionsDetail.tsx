@@ -1,6 +1,4 @@
 import React, { useEffect, useRef, useState, useCallback, lazy, Suspense, memo } from 'react';
-import { MediaButton } from '@/components/ui/media-button';
-import { ParallaxHero } from '@/components/ui/parallax-scrolling';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -160,34 +158,6 @@ const sectionColors: Record<string, { accent: string; accentHsl: string; gradien
   'mobile-web':       { accent: 'text-emerald-400',    accentHsl: '160 85% 45%',   gradient: 'linear-gradient(90deg, hsl(160 85% 45%), hsl(180 70% 50%))',          overlay: 'linear-gradient(135deg, hsl(160 85% 45% / 0.1), hsl(180 70% 50% / 0.06), transparent 70%)', titleBg: '', titleGradient: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(160 85% 55%) 30%, hsl(180 70% 45%) 65%, hsl(160 85% 40%) 100%)', glowColor: 'hsl(160 85% 45% / 0.4)' },
   // Assassin's Creed Valhalla — Viking gold + Norse amber
   'skills':           { accent: 'text-amber-400',      accentHsl: '38 90% 50%',    gradient: 'linear-gradient(90deg, hsl(38 90% 50%), hsl(25 80% 45%))',            overlay: 'linear-gradient(225deg, hsl(38 90% 50% / 0.1), hsl(25 80% 45% / 0.06), transparent 60%)', titleBg: '', titleGradient: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(38 90% 60%) 30%, hsl(25 80% 50%) 65%, hsl(38 90% 40%) 100%)', glowColor: 'hsl(38 90% 50% / 0.4)' },
-};
-
-// Parallax layers per section (multiple depth layers using existing + detail images)
-const sectionParallaxLayers: Record<string, Array<{ src: string; speed: number; alt?: string; className?: string }>> = {
-  'web-design': [
-    { src: '/images/hero-webdesign.jpg', speed: 25, alt: 'Background', className: 'scale-110' },
-    { src: '/images/webdesign-detail-01.jpg', speed: 12, alt: 'Mid layer', className: 'scale-105 opacity-30 mix-blend-overlay' },
-  ],
-  'desenvolvimento': [
-    { src: '/images/hero-dev.jpg', speed: 25, alt: 'Background', className: 'scale-110' },
-    { src: '/images/dev-detail-01.jpg', speed: 10, alt: 'Mid layer', className: 'scale-105 opacity-25 mix-blend-overlay' },
-  ],
-  'servicos': [
-    { src: '/images/hero-servicos.jpg', speed: 25, alt: 'Background', className: 'scale-110' },
-    { src: '/images/servicos-detail-01.jpg', speed: 12, alt: 'Mid layer', className: 'scale-105 opacity-25 mix-blend-overlay' },
-  ],
-  'inovacao-ia': [
-    { src: '/images/hero-ia.jpg', speed: 25, alt: 'Background', className: 'scale-110' },
-    { src: '/images/ia-detail-01.jpg', speed: 10, alt: 'Mid layer', className: 'scale-105 opacity-30 mix-blend-overlay' },
-  ],
-  'mobile-web': [
-    { src: '/images/hero-mobile.jpg', speed: 25, alt: 'Background', className: 'scale-110' },
-    { src: '/images/mobile-detail-01.jpg', speed: 12, alt: 'Mid layer', className: 'scale-105 opacity-25 mix-blend-overlay' },
-  ],
-  'skills': [
-    { src: '/images/hero-skills.jpg', speed: 25, alt: 'Background', className: 'scale-110' },
-    { src: '/images/skills-detail-01.jpg', speed: 10, alt: 'Mid layer', className: 'scale-105 opacity-25 mix-blend-overlay' },
-  ],
 };
 
 // ─── Deep-dive content ──────────────────────────────────────────
@@ -474,7 +444,29 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
     if (!el) return;
 
     const ctx = gsap.context(() => {
-      // Note: divider, heroImg parallax and titleWords are now handled by ParallaxHero component
+      const divider = el.querySelector('.section-enter-line');
+      if (divider) {
+        gsap.fromTo(divider,
+          { scaleX: 0, transformOrigin: 'left center' },
+          { scaleX: 1, duration: 0.6, ease: 'power3.inOut', delay: 0.05 }
+        );
+      }
+
+      const heroImg = el.querySelector('.ken-burns-hero');
+      if (heroImg) {
+        gsap.to(heroImg, {
+          yPercent: 20,
+          scale: 1.15,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: el.querySelector('.parallax-hero'),
+            scroller: el,
+            start: 'top top',
+            end: 'bottom top',
+            scrub: true,
+          },
+        });
+      }
 
       gsap.utils.toArray<HTMLElement>(el.querySelectorAll('.cin-subtitle, .cin-desc')).forEach((node) => {
         gsap.fromTo(node,
@@ -485,6 +477,44 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
           }
         );
       });
+
+      const galleryItems = el.querySelectorAll('.gallery-item');
+      if (galleryItems.length) {
+        gsap.fromTo(galleryItems,
+          { clipPath: 'inset(0 100% 0 0)', opacity: 1 },
+          {
+            clipPath: 'inset(0 0% 0 0)',
+            duration: 1.1,
+            stagger: 0.18,
+            ease: 'power3.inOut',
+            scrollTrigger: {
+              trigger: galleryItems[0],
+              scroller: el,
+              start: 'top 85%',
+              toggleActions: 'play none none none',
+            },
+          }
+        );
+      }
+
+      const detailItems = el.querySelectorAll('.detail-item');
+      if (detailItems.length) {
+        gsap.fromTo(detailItems,
+          { opacity: 0, y: 50, filter: 'blur(4px)' },
+          {
+            opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.7, stagger: 0.1, ease: 'power2.out',
+            scrollTrigger: { trigger: detailItems[0], scroller: el, start: 'top 88%', toggleActions: 'play none none none' },
+          }
+        );
+      }
+
+      const titleWords = el.querySelectorAll('.title-word');
+      if (titleWords.length) {
+        gsap.fromTo(titleWords,
+          { y: '110%', opacity: 0 },
+          { y: '0%', opacity: 1, duration: 0.9, stagger: 0.1, ease: 'power4.out', delay: 0.15 }
+        );
+      }
 
       const skillBars = el.querySelectorAll('.skill-progress-fill');
       skillBars.forEach((bar) => {
@@ -676,12 +706,6 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
                 </div>
               ))}
             </div>
-
-            {/* CTA Resident Evil */}
-            <div className="flex flex-wrap gap-4 mt-16 justify-center">
-              <MediaButton label="🧬 Iniciar Protocolo S.T.A.R.S." mediaUrl="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExOTlhMzVhZmI4YzFmYjUxOGM3NWY1MjhlMTY3MDRiOWE5NDgzNjcxYyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7TKsQ8UQ5MHFRXmU/giphy.gif" />
-              <MediaButton label="🗝️ Explorar a Mansion" mediaUrl="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExMzc0OTBhOGQwNzQ0MDY1MjRlZWU5MTRlNGQyZWRmOWI0YjVmMjc1NCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l0HlBO7eyXzSZkJri/giphy.gif" />
-            </div>
           </div>
         );
 
@@ -723,12 +747,6 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
                   {tech}
                 </span>
               ))}
-            </div>
-
-            {/* CTA God of War */}
-            <div className="flex flex-wrap gap-4 mt-16 justify-center">
-              <MediaButton label="❄️ Invocar o Leviatã" mediaUrl="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNTY1YjQ2NWM2MzVmMmI4YjhmNjE5NjQ5ZGRhNmQyOGUwNjJhNTZlMiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3ohzdYJK1lnOmTxFxC/giphy.gif" />
-              <MediaButton label="🔥 Lâminas do Caos" mediaUrl="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExOTk1MTkxMTQ0ZTBjMWY3NzQ2OGMzNTdlNjY2YjFkZGY5NjE5MDRiNSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/26BRuo6sLetdllPAQ/giphy.gif" />
             </div>
           </div>
         );
@@ -773,12 +791,6 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
                   {model}
                 </span>
               ))}
-            </div>
-
-            {/* CTA Detroit */}
-            <div className="flex flex-wrap gap-4 mt-16 justify-center">
-              <MediaButton label="🤖 Despertar Consciência" mediaUrl="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjk5YjI2MzE5ZjJhZTU0MDczMWMzYTNlNGUzZTk2MGZkODgzNzJkNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7btPCcdNniyf0ArS/giphy.gif" />
-              <MediaButton label="💠 Conectar a Jericho" mediaUrl="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExZjk4OWM5ZWY0ZjAyZTUzN2RjNTVlNjZlMzQ2ZjJkZTQ0NjFhMjM4OCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xT9IgzoKnwFNmISR8I/giphy.gif" />
             </div>
           </div>
         );
@@ -826,12 +838,6 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
                 ))}
               </div>
             </div>
-
-            {/* CTA Watch Dogs */}
-            <div className="flex flex-wrap gap-4 mt-16 justify-center">
-              <MediaButton label="📱 Hackear o ctOS" mediaUrl="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExMmFlMjQ2ZmY2YjIwMTk2ZGQ5MTRkOGU2N2UwNzBmNTc3ZmU1OGNiOSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ZvLUtG6BZkBi0/giphy.gif" />
-              <MediaButton label="🔓 Acessar DedSec" mediaUrl="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExZjJiOGRjMGQzMzQ3MmJlZGE3NTc4ZjVhM2RjNDBiMjlhZmY5NjMzYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/PjJ1cLHqLbLfO/giphy.gif" />
-            </div>
           </div>
         );
 
@@ -872,12 +878,6 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
                   {tech}
                 </span>
               ))}
-            </div>
-
-            {/* CTA AC Valhalla */}
-            <div className="flex flex-wrap gap-4 mt-16 justify-center">
-              <MediaButton label="⚔️ Zarpar no Drakkar" mediaUrl="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNGU2Mjk0OGVhMjY2YTdmZjI1MjM4MDhkYWRkNTQyZjVlNmI3NWI0OCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xUA7b0fN4FPzSh9qhO/giphy.gif" />
-              <MediaButton label="🛡️ Runas de Odin" mediaUrl="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNzE3N2IyZTIzZTMxM2EyYjRkYzIxMjVhZTFlNTE2Y2M3NDMzY2ZhYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l4FGuhL4U2WSOlFf2/giphy.gif" />
             </div>
           </div>
         );
@@ -921,12 +921,7 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
               ))}
             </div>
 
-            {/* CTA Fallout */}
-            <div className="flex flex-wrap gap-4 mt-20 justify-center">
-              <MediaButton label="☢️ Abrir o Vault" mediaUrl="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExN2FkODQ0MzRhZTIyOTI0NjkxNTUxZjc5MjdjNTdkODJlOGYxYjQ1NyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3oKIPlLZEbEbacWqOc/giphy.gif" />
-              <MediaButton label="💊 Pegar Stimpaks" mediaUrl="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExYWY0MjM4MWQ2YTEzZWI3MjJiOWI1OGM5NzlkMGVlYjU3YTc3OGJhZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l0MYt5jPR6QX5pnqM/giphy.gif" />
-            </div>
-            <div className="mt-8 text-center">
+            <div className="mt-20 text-center">
               <p className="font-[family-name:var(--font-display)] text-[11px] tracking-[0.3em] uppercase text-muted-foreground/60 mb-4">☢️ PREPARADO PARA SOBREVIVER NO WASTELAND?</p>
               <div className="h-[1px] w-24 mx-auto" style={{ background: colors.gradient }} />
             </div>
@@ -947,19 +942,54 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
         </div>
       </div>
 
-      {/* HERO with Parallax Layers */}
-      <ParallaxHero
-        layers={sectionParallaxLayers[section.id] || [{ src: section.image, speed: 20, alt: section.title }]}
-        title={section.title}
-        titleGradient={colors.titleGradient}
-        glowColor={colors.glowColor}
-        accentHsl={colors.accentHsl}
-        gradient={colors.gradient}
-        subtitle={section.subtitle}
-        accentClass={colors.accent}
-        overlay={viceOverlay}
-        scroller=".gta-vi-scroll"
-      />
+      {/* HERO */}
+      <div className="relative h-screen w-full overflow-hidden flex items-end parallax-hero">
+        <div className="absolute inset-0">
+          <div className="section-enter-line absolute top-0 left-0 right-0 h-[2px] origin-left z-20"
+            style={{ background: colors.gradient }} />
+          <img src={section.image} alt={section.title} loading="eager" decoding="async" width={1920} height={1080} className="w-full h-full object-cover ken-burns-hero" style={{ filter: 'saturate(1.15) contrast(1.05)' }} />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-background/10" />
+          <div className="absolute inset-0 bg-gradient-to-r from-background/60 via-transparent to-transparent" />
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, transparent 30%, hsl(var(--background) / 0.6) 70%, hsl(var(--background)) 95%)' }} />
+          <div className="absolute inset-0" style={{ background: viceOverlay }} />
+        </div>
+
+        <div className="relative z-10 w-full" style={{ padding: `0 clamp(1.5rem, 4vw, 6rem) clamp(1rem, 3vw, 1.5rem)` }}>
+          <div className="cin-subtitle hero-reveal hero-reveal-delay-1 flex items-center gap-3 mb-[clamp(0.5rem,1vw,1.5rem)]">
+            <div className="h-[2px]" style={{ width: 'clamp(2rem, 3vw, 4rem)', background: colors.gradient }} />
+            <span className={`font-[family-name:var(--font-display)] tracking-[0.4em] uppercase ${colors.accent}`} style={{ fontSize: 'clamp(9px, 0.8vw, 12px)', textShadow: `0 0 20px ${colors.glowColor}` }}>{section.subtitle}</span>
+            <div className="h-[2px]" style={{ width: 'clamp(1rem, 1.5vw, 2rem)', background: colors.gradient, opacity: 0.4 }} />
+          </div>
+          <div className="relative">
+            <div className="absolute inset-0 -z-10 pointer-events-none" style={{
+              filter: 'blur(60px)',
+              background: `radial-gradient(ellipse 80% 60% at 20% 60%, ${colors.glowColor}, transparent 70%)`,
+            }} />
+            <h2 className="hero-reveal hero-reveal-delay-2 font-[family-name:var(--font-display)] font-black leading-[0.85] tracking-tighter uppercase" style={{ fontSize: 'clamp(2.5rem, 9vw, 11rem)' }}>
+              {section.title.split(' ').map((word, i) => (
+                <span key={i} className="title-split-wrapper">
+                  <span
+                    className="title-word"
+                    style={{
+                      display: 'inline-block',
+                      background: colors.titleGradient,
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      filter: `drop-shadow(0 0 30px ${colors.glowColor}) drop-shadow(0 4px 20px hsl(0 0% 0% / 0.5))`,
+                    }}
+                  >
+                    {word}
+                  </span>
+                </span>
+              ))}
+            </h2>
+          </div>
+          <div className="hero-reveal hero-reveal-delay-3 absolute bottom-8 flex flex-col items-center gap-2 opacity-50" style={{ right: 'clamp(1.5rem, 3vw, 4rem)' }}>
+            <span className={`font-[family-name:var(--font-display)] tracking-[0.25em] uppercase ${colors.accent} opacity-60 [writing-mode:vertical-lr]`} style={{ fontSize: 'clamp(7px, 0.6vw, 9px)' }}>Role para baixo</span>
+            <div className="w-[1px] animate-pulse" style={{ height: 'clamp(2rem, 3vw, 3rem)', background: `hsl(${colors.accentHsl} / 0.4)` }} />
+          </div>
+        </div>
+      </div>
 
       {/* CONTENT */}
       <div className="relative z-10 bg-background">

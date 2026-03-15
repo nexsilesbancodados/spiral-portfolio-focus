@@ -179,29 +179,23 @@ All colors MUST be HSL.
 
 .slides-navigation {
   position: absolute;
-  top: clamp(0.2rem, 0.8vw, 0.8rem);
-  left: 0;
-  right: 0;
-  display: grid;
-  grid-template-columns: repeat(7, minmax(0, 1fr));
-  gap: clamp(0.35rem, 0.8vw, 1rem);
-  padding: 0 clamp(0.75rem, 1.5vw, 1.25rem);
-  z-index: 14;
-  pointer-events: auto;
+  bottom: clamp(1.5rem, 2.5vw, 2.5rem);
+  left: clamp(1.25rem, 2.5vw, 2.5rem);
+  right: clamp(1.25rem, 2.5vw, 2.5rem);
+  display: flex;
+  gap: clamp(0.4rem, 0.8vw, 1rem);
+  z-index: 10;
 }
 
 .slide-nav-item {
+  flex: 1;
   cursor: pointer;
-  padding: clamp(0.35rem, 0.7vw, 0.65rem) 0 0;
-  transition: opacity 0.2s ease, transform 0.2s ease;
-  opacity: 0.62;
+  padding: clamp(0.3rem, 0.5vw, 0.5rem) 0;
+  transition: opacity 0.2s ease;
+  opacity: 0.55;
   background: transparent;
   border: 0;
   text-align: left;
-}
-
-.slide-nav-item:hover {
-  opacity: 0.92;
 }
 
 .slide-nav-item.active {
@@ -212,7 +206,7 @@ All colors MUST be HSL.
   width: 100%;
   height: 1px;
   background: hsl(var(--foreground) / 0.2);
-  margin-bottom: clamp(0.38rem, 0.7vw, 0.62rem);
+  margin-bottom: clamp(0.3rem, 0.5vw, 0.5rem);
   position: relative;
   overflow: hidden;
 }
@@ -220,8 +214,8 @@ All colors MUST be HSL.
 .slide-progress-fill {
   height: 100%;
   width: 0%;
-  background: hsl(var(--vice-gold));
-  transition: width 0.25s ease;
+  background: hsl(var(--primary));
+  transition: width 0.2s ease;
 }
 
 .slide-nav-title {
@@ -229,28 +223,14 @@ All colors MUST be HSL.
   font-size: clamp(7px, 0.7vw, 11px);
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: hsl(var(--foreground) / 0.6);
-  transition: color 0.2s ease;
-}
-
-.slide-nav-item.active .slide-nav-title {
-  color: hsl(var(--foreground) / 0.9);
-}
-
-@media (max-width: 1024px) {
-  .slides-navigation {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    row-gap: 0.6rem;
-    padding: 0 0.75rem;
-  }
+  color: hsl(var(--foreground) / 0.65);
 }
 
 @media (max-width: 768px) {
-  .slides-navigation {
+  .slide-nav-title {
     display: none;
   }
 }
-
 
 /* GTA VI Cinematic Scroll */
 .gta-vi-scroll {
@@ -336,32 +316,29 @@ All colors MUST be HSL.
 /* Explore Button */
 .explore-btn {
   position: absolute;
-  top: clamp(0.18rem, 0.6vw, 0.6rem);
+  bottom: clamp(1.5rem, 2.5vw, 2.5rem);
   left: 50%;
   transform: translateX(-50%);
   z-index: 15;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: clamp(0.2rem, 0.45vw, 0.45rem);
-  min-width: clamp(88px, 9vw, 136px);
-  background: transparent;
+  gap: clamp(0.3rem, 0.5vw, 0.5rem);
+  background: none;
   border: none;
   cursor: pointer;
-  color: hsl(var(--vice-gold));
-  opacity: 0.92;
+  color: hsl(var(--primary));
+  opacity: 0.75;
   transition: opacity 0.2s ease, transform 0.2s ease;
 }
 .explore-btn:hover {
   opacity: 1;
-  transform: translateX(-50%) translateY(-1px);
+  transform: translateX(-50%) translateY(-2px);
 }
 .explore-btn-text {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(9px, 0.85vw, 12px);
-  font-weight: 700;
-  letter-spacing: 0.18em;
+  font-size: clamp(8px, 0.75vw, 11px);
+  letter-spacing: 0.2em;
   text-transform: uppercase;
 }
 .explore-btn-arrow {
@@ -370,13 +347,6 @@ All colors MUST be HSL.
 @keyframes bounceDown {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(3px); }
-}
-
-@media (max-width: 768px) {
-  .explore-btn {
-    top: clamp(0.35rem, 1vw, 0.6rem);
-    min-width: auto;
-  }
 }
 
 /* Chat slide-in animation */
