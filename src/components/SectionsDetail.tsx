@@ -314,10 +314,10 @@ const sectionDeepDive: Record<string, DeepDiveBlock[]> = {
       stat: { value: '50TB+', label: 'Territórios de Dados Conquistados' },
     },
     {
-      heading: 'DevOps & Platform Engineering',
-      body: 'Infraestrutura como código com Terraform e Pulumi, orquestração com Kubernetes (EKS/GKE), observabilidade com OpenTelemetry + Grafana stack, e golden paths para que desenvolvedores deployem com confiança.',
+      heading: '🪙 DevOps — A Conquista de Valhalla',
+      body: 'Infraestrutura como código é nossa rota para Valhalla. Terraform e Pulumi são nossos drakkar, Kubernetes orquestra os raids, OpenTelemetry são as runas que guiam e ArgoCD é o corvo de Odin que vigia tudo.',
       highlights: ['Kubernetes', 'Terraform / Pulumi', 'GitHub Actions', 'ArgoCD', 'OpenTelemetry'],
-      stat: { value: '∞', label: 'Escalabilidade' },
+      stat: { value: '∞', label: 'Escalabilidade — Infinita como Yggdrasil' },
     },
   ],
 };
