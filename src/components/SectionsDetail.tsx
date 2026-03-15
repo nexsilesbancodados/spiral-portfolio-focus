@@ -727,8 +727,8 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
                   <div className="absolute top-0 left-0 right-0 h-[1px] opacity-0 group-hover:opacity-60 transition-opacity duration-500"
                     style={{ background: `linear-gradient(90deg, transparent, hsl(${card.accent} / 0.6), transparent)` }} />
                   <div className="relative z-10 p-8 md:p-10">
-                    <div className="w-11 h-11 rounded-lg flex items-center justify-center mb-6 text-xl"
-                      style={{ background: `hsl(${card.accent} / 0.12)`, boxShadow: `0 0 20px hsl(${card.accent} / 0.08)` }}>
+                    <div className="w-11 h-11 rounded-lg flex items-center justify-center mb-6 text-xl border"
+                      style={{ background: `hsl(${card.accent} / 0.12)`, borderColor: `hsl(${card.accent} / 0.2)`, boxShadow: `0 0 25px hsl(${card.accent} / 0.12)` }}>
                       {card.icon}
                     </div>
                     <h4 className="font-[family-name:var(--font-display)] text-foreground text-sm md:text-base font-bold tracking-[0.12em] uppercase mb-3">{card.title}</h4>
