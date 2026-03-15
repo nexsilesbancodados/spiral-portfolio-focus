@@ -1193,7 +1193,7 @@ export function SectionsDetail() {
         <div key={section.id} className="relative h-screen overflow-hidden">
           {/* Back button */}
           <button
-            className="absolute top-6 left-6 z-50 flex items-center gap-2 text-foreground/60 hover:text-foreground transition-colors duration-300 font-[family-name:var(--font-display)] text-xs tracking-[0.15em] uppercase bg-background/40 px-3 py-2 rounded-sm border border-border/20 hover:border-accent/30"
+            className="absolute top-6 left-6 z-50 flex items-center gap-2 text-foreground/60 hover:text-foreground transition-all duration-300 font-[family-name:var(--font-display)] text-xs tracking-[0.15em] uppercase bg-background/30 backdrop-blur-md px-4 py-2.5 rounded-lg border border-foreground/8 hover:border-foreground/15 hover:bg-background/50"
             onClick={goBack}
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 19V5m7 7l-7-7-7 7" /></svg>
