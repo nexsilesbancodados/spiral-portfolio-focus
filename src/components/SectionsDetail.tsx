@@ -331,11 +331,11 @@ const DeepDiveContent = memo(function DeepDiveContent({ sectionId, accentHsl, gr
     <div className="relative z-10 bg-background">
       <div className="fluid-section-pad">
         <div className="flex items-center gap-4 mb-2">
-          <div className="h-[2px] flex-1" style={{ background: `linear-gradient(90deg, hsl(${accentHsl} / 0.4), transparent)` }} />
-          <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.4em] uppercase" style={{ color: `hsl(${accentHsl} / 0.6)` }}>
+          <div className="h-[2px] flex-1" style={{ background: `linear-gradient(90deg, hsl(${accentHsl} / 0.5), transparent)` }} />
+          <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.5em] uppercase font-medium" style={{ color: `hsl(${accentHsl} / 0.7)` }}>
             EM PROFUNDIDADE
           </span>
-          <div className="h-[2px] flex-1" style={{ background: `linear-gradient(90deg, transparent, hsl(${accentHsl} / 0.4))` }} />
+          <div className="h-[2px] flex-1" style={{ background: `linear-gradient(90deg, transparent, hsl(${accentHsl} / 0.5))` }} />
         </div>
       </div>
 
@@ -343,64 +343,67 @@ const DeepDiveContent = memo(function DeepDiveContent({ sectionId, accentHsl, gr
         <div
           key={i}
           className="detail-item"
-          style={{ opacity: 0, padding: `clamp(2rem, 4vw, 4rem) clamp(1.5rem, 4vw, 6rem)` }}
+          style={{ opacity: 0, padding: `clamp(2.5rem, 5vw, 5rem) clamp(1.5rem, 4vw, 6rem)` }}
         >
-          <div className="max-w-5xl mx-auto">
-            <div className="flex items-start gap-4 mb-6">
+          <div className="max-w-5xl mx-auto premium-card rounded-lg p-8 md:p-10">
+            <div className="flex items-start gap-5 mb-6">
               <span
-                className="font-[family-name:var(--font-display)] text-[11px] tracking-[0.3em] mt-2 shrink-0"
-                style={{ color: `hsl(${accentHsl} / 0.35)` }}
+                className="font-[family-name:var(--font-display)] text-[12px] tracking-[0.3em] mt-2 shrink-0 font-semibold"
+                style={{ color: `hsl(${accentHsl} / 0.45)` }}
               >
                 {String(i + 1).padStart(2, '0')}
               </span>
-              <div>
+              <div className="flex-1">
                 <h3
                   className="font-[family-name:var(--font-display)] font-bold tracking-tight uppercase mb-4"
-                  style={{ fontSize: 'clamp(1.25rem, 2.5vw, 2rem)', color: 'hsl(var(--foreground) / 0.95)' }}
+                  style={{ fontSize: 'clamp(1.3rem, 2.5vw, 2.2rem)', color: 'hsl(var(--foreground) / 0.95)' }}
                 >
                   {block.heading}
                 </h3>
-                <div className="h-[2px] w-12" style={{ background: gradient }} />
+                <div className="h-[2px] w-16" style={{ background: gradient }} />
               </div>
             </div>
 
             <p
-              className="text-foreground/75 leading-relaxed mb-8 max-w-3xl ml-[calc(clamp(11px,1vw,14px)*3+1rem)]"
-              style={{ fontSize: 'clamp(0.875rem, 1.3vw, 1.125rem)' }}
+              className="text-foreground/70 leading-[1.8] mb-8 max-w-3xl ml-[calc(clamp(12px,1vw,15px)*3+1.25rem)]"
+              style={{ fontSize: 'clamp(0.9rem, 1.3vw, 1.15rem)' }}
             >
               {block.body}
             </p>
 
             {block.stat && (
               <div
-                className="inline-flex items-center gap-6 rounded-md px-8 py-5 mb-8 ml-[calc(clamp(11px,1vw,14px)*3+1rem)]"
+                className="stat-card inline-flex items-center gap-8 rounded-lg px-10 py-6 mb-8 ml-[calc(clamp(12px,1vw,15px)*3+1.25rem)]"
                 style={{
-                  background: `hsl(${accentHsl} / 0.06)`,
-                  border: `1px solid hsl(${accentHsl} / 0.15)`,
+                  background: `hsl(${accentHsl} / 0.08)`,
+                  border: `1px solid hsl(${accentHsl} / 0.2)`,
+                  boxShadow: `0 0 30px hsl(${accentHsl} / 0.06)`,
                 }}
               >
                 <span
-                  className="font-[family-name:var(--font-display)] font-bold"
-                  style={{ fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', color: `hsl(${accentHsl})` }}
+                  className="font-[family-name:var(--font-display)] font-black"
+                  style={{ fontSize: 'clamp(1.75rem, 3.5vw, 3rem)', color: `hsl(${accentHsl})`, textShadow: `0 0 30px hsl(${accentHsl} / 0.3)` }}
                 >
                   {block.stat.value}
                 </span>
-                <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.2em] uppercase text-muted-foreground">
+                <div className="h-8 w-[1px]" style={{ background: `hsl(${accentHsl} / 0.2)` }} />
+                <span className="font-[family-name:var(--font-display)] text-[11px] tracking-[0.25em] uppercase text-muted-foreground font-medium">
                   {block.stat.label}
                 </span>
               </div>
             )}
 
             {block.highlights && (
-              <div className="flex flex-wrap gap-2 ml-[calc(clamp(11px,1vw,14px)*3+1rem)]">
+              <div className="flex flex-wrap gap-2.5 ml-[calc(clamp(12px,1vw,15px)*3+1.25rem)]">
                 {block.highlights.map((h, j) => (
                   <span
                     key={j}
-                    className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.12em] uppercase px-3 py-1.5 rounded-sm transition-all duration-300 cursor-default hover:scale-[1.03]"
+                    className="tech-badge font-[family-name:var(--font-display)] text-[10px] tracking-[0.15em] uppercase px-4 py-2 rounded-md cursor-default hover:scale-[1.04]"
                     style={{
-                      border: `1px solid hsl(${accentHsl} / 0.2)`,
-                      color: `hsl(${accentHsl} / 0.8)`,
-                      background: `hsl(${accentHsl} / 0.05)`,
+                      border: `1px solid hsl(${accentHsl} / 0.25)`,
+                      color: `hsl(${accentHsl} / 0.85)`,
+                      background: `hsl(${accentHsl} / 0.06)`,
+                      boxShadow: `inset 0 1px 0 hsl(${accentHsl} / 0.06)`,
                     }}
                   >
                     {h}
@@ -409,18 +412,12 @@ const DeepDiveContent = memo(function DeepDiveContent({ sectionId, accentHsl, gr
               </div>
             )}
           </div>
-
-          {i < blocks.length - 1 && (
-            <div className="max-w-5xl mx-auto mt-10">
-              <div className="h-[1px]" style={{ background: `linear-gradient(90deg, transparent, hsl(${accentHsl} / 0.15), transparent)` }} />
-            </div>
-          )}
         </div>
       ))}
 
-      <div className="text-center py-16">
-        <div className="h-[1px] w-20 mx-auto mb-6" style={{ background: gradient }} />
-        <p className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.4em] uppercase text-muted-foreground/50">
+      <div className="text-center py-20">
+        <div className="h-[2px] w-24 mx-auto mb-8" style={{ background: gradient }} />
+        <p className="font-[family-name:var(--font-display)] text-[11px] tracking-[0.5em] uppercase text-muted-foreground/60 font-medium">
           VAMOS TRANSFORMAR SUA IDEIA EM REALIDADE?
         </p>
       </div>
@@ -667,8 +664,8 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
           <div className="fluid-section-pad">
             {/* Process timeline */}
             <div className="mb-20">
-              <h3 className="font-[family-name:var(--font-display)] text-[11px] tracking-[0.4em] uppercase mb-10" style={{ color: `hsl(${colors.accentHsl} / 0.5)` }}>🧬 PROTOCOLO DE SOBREVIVÊNCIA</h3>
-              <div className="grid grid-cols-1 md:grid-cols-5 gap-1">
+              <h3 className="font-[family-name:var(--font-display)] text-[11px] tracking-[0.5em] uppercase mb-12 font-medium" style={{ color: `hsl(${colors.accentHsl} / 0.6)` }}>🧬 PROTOCOLO DE SOBREVIVÊNCIA</h3>
+              <div className="grid grid-cols-1 md:grid-cols-5 gap-2">
                 {[
                   { step: '01', icon: '🧬', title: 'Discovery', desc: 'Investigação profunda do problema — como explorar o Spencer Mansion' },
                   { step: '02', icon: '🗝️', title: 'Wireframes', desc: 'Mapeamento de fluxos e arquitetura — cada sala conecta ao destino certo' },
@@ -676,32 +673,35 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
                   { step: '04', icon: '🔬', title: 'Protótipo', desc: 'Testes de usabilidade e refinamento — sobreviver é iterar' },
                   { step: '05', icon: '💉', title: 'Handoff', desc: 'Entrega precisa com tokens e documentação — o antídoto final' },
                 ].map((item, i) => (
-                  <div key={i} className="detail-item magnetic-card group relative p-6 rounded-sm overflow-hidden" style={{ opacity: 0, background: 'hsl(var(--card) / 0.3)', border: `1px solid hsl(${colors.accentHsl} / 0.15)` }}>
+                  <div key={i} className="detail-item magnetic-card premium-card group relative p-7 rounded-lg overflow-hidden" style={{ opacity: 0 }}>
                     <div className="absolute top-0 left-0 right-0 h-[2px] opacity-40 group-hover:opacity-100 transition-opacity duration-500" style={{ background: colors.gradient }} />
-                    <div className="flex items-center gap-2 mb-3">
-                      <span className="text-lg">{item.icon}</span>
-                      <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.3em]" style={{ color: `hsl(${colors.accentHsl} / 0.4)` }}>{item.step}</span>
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-600 pointer-events-none" style={{ background: `radial-gradient(ellipse at top, hsl(${colors.accentHsl} / 0.08), transparent 70%)` }} />
+                    <div className="relative z-10">
+                      <div className="flex items-center gap-3 mb-4">
+                        <span className="text-xl">{item.icon}</span>
+                        <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.3em] font-semibold" style={{ color: `hsl(${colors.accentHsl} / 0.5)` }}>{item.step}</span>
+                      </div>
+                      <h4 className="font-[family-name:var(--font-display)] text-foreground text-sm font-bold tracking-[0.12em] uppercase mb-3">{item.title}</h4>
+                      <p className="text-muted-foreground text-[13px] leading-relaxed">{item.desc}</p>
                     </div>
-                    <h4 className="font-[family-name:var(--font-display)] text-foreground text-sm font-bold tracking-[0.1em] uppercase mb-2">{item.title}</h4>
-                    <p className="text-muted-foreground text-xs leading-relaxed">{item.desc}</p>
                   </div>
                 ))}
               </div>
             </div>
             {/* Showcase cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
               {[
                 { src: '/images/webdesign-detail-01.jpg', title: '🧪 Laboratório Umbrella', desc: 'Componentes testados em ambiente controlado — cada experimento gera evolução' },
                 { src: '/images/webdesign-detail-02.jpg', title: '🗝️ Mapa da Mansion', desc: 'Sistemas visuais que guiam o usuário — nenhuma porta trancada sem solução' },
                 { src: '/images/webdesign-detail-03.jpg', title: '💉 O Antídoto Visual', desc: 'Animações que curam a experiência — motion design de sobrevivência' },
               ].map((card, i) => (
-                <div key={i} className="detail-item image-hover-zoom card-hover-glow relative h-[45vh] rounded-sm overflow-hidden border border-border/10" style={{ opacity: 0 }}>
-                  <img src={card.src} alt={card.title} loading="lazy" decoding="async" fetchPriority="low" className="w-full h-full object-cover" style={{ filter: 'brightness(0.7) saturate(1.25)' }} />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
-                  <div className="absolute inset-0" style={{ background: `linear-gradient(135deg, hsl(${colors.accentHsl} / 0.08), transparent 60%)` }} />
-                  <div className="absolute bottom-6 left-6 right-6">
-                    <h4 className="font-[family-name:var(--font-display)] text-foreground font-bold text-base tracking-[0.08em] uppercase mb-1">{card.title}</h4>
-                    <p className="text-foreground/60 text-xs leading-relaxed">{card.desc}</p>
+                <div key={i} className="detail-item image-hover-zoom card-hover-glow relative h-[48vh] rounded-lg overflow-hidden" style={{ opacity: 0, border: `1px solid hsl(${colors.accentHsl} / 0.12)` }}>
+                  <img src={card.src} alt={card.title} loading="lazy" decoding="async" fetchPriority="low" className="w-full h-full object-cover" style={{ filter: 'brightness(0.65) saturate(1.3)' }} />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent" />
+                  <div className="absolute inset-0" style={{ background: `linear-gradient(135deg, hsl(${colors.accentHsl} / 0.1), transparent 60%)` }} />
+                  <div className="absolute bottom-0 left-0 right-0 p-7" style={{ background: 'linear-gradient(to top, hsl(var(--background) / 0.9), transparent)' }}>
+                    <h4 className="font-[family-name:var(--font-display)] text-foreground font-bold text-base tracking-[0.08em] uppercase mb-2">{card.title}</h4>
+                    <p className="text-foreground/60 text-[13px] leading-relaxed">{card.desc}</p>
                   </div>
                 </div>
               ))}
@@ -718,22 +718,22 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
         ];
         return (
           <div className="fluid-section-pad">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-6xl">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-6xl">
               {devCards.map((card, i) => (
-                <div key={i} className="detail-item magnetic-card group relative rounded-md overflow-hidden cursor-pointer transition-transform duration-300 hover:-translate-y-1"
-                  style={{ opacity: 0, background: 'hsl(var(--card) / 0.6)', border: '1px solid hsl(var(--border) / 0.15)' }}>
+                <div key={i} className="detail-item magnetic-card premium-card group relative rounded-lg overflow-hidden cursor-pointer"
+                  style={{ opacity: 0 }}>
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
-                    style={{ background: `linear-gradient(160deg, hsl(${card.accent} / 0.08), transparent 60%)` }} />
-                  <div className="absolute top-0 left-0 right-0 h-[1px] opacity-0 group-hover:opacity-60 transition-opacity duration-500"
-                    style={{ background: `linear-gradient(90deg, transparent, hsl(${card.accent} / 0.6), transparent)` }} />
-                  <div className="relative z-10 p-8 md:p-10">
-                    <div className="w-11 h-11 rounded-lg flex items-center justify-center mb-6 text-xl border"
-                      style={{ background: `hsl(${card.accent} / 0.12)`, borderColor: `hsl(${card.accent} / 0.2)`, boxShadow: `0 0 25px hsl(${card.accent} / 0.12)` }}>
+                    style={{ background: `linear-gradient(160deg, hsl(${card.accent} / 0.1), transparent 60%)` }} />
+                  <div className="absolute top-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-80 transition-opacity duration-500"
+                    style={{ background: `linear-gradient(90deg, transparent, hsl(${card.accent} / 0.7), transparent)` }} />
+                  <div className="relative z-10 p-9 md:p-11">
+                    <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-7 text-xl border"
+                      style={{ background: `hsl(${card.accent} / 0.1)`, borderColor: `hsl(${card.accent} / 0.2)`, boxShadow: `0 0 30px hsl(${card.accent} / 0.1)` }}>
                       {card.icon}
                     </div>
-                    <h4 className="font-[family-name:var(--font-display)] text-foreground text-sm md:text-base font-bold tracking-[0.12em] uppercase mb-3">{card.title}</h4>
-                    <p className="text-muted-foreground text-sm leading-relaxed mb-8">{card.desc}</p>
-                    <div className="h-[2px] w-10 group-hover:w-20 transition-all duration-700"
+                    <h4 className="font-[family-name:var(--font-display)] text-foreground text-base md:text-lg font-bold tracking-[0.12em] uppercase mb-4">{card.title}</h4>
+                    <p className="text-muted-foreground text-sm leading-[1.7] mb-9">{card.desc}</p>
+                    <div className="h-[2px] w-12 group-hover:w-24 transition-all duration-700 ease-out"
                       style={{ background: `hsl(${card.accent} / 0.5)` }} />
                   </div>
                 </div>
@@ -742,8 +742,8 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
             {/* Tech badges */}
             <div className="flex flex-wrap gap-3 mt-16 max-w-6xl">
               {['TypeScript', 'Node.js', 'Python', 'Rust', 'PostgreSQL', 'Redis', 'GraphQL', 'gRPC', 'Docker', 'Kubernetes'].map((tech, i) => (
-                <span key={i} className="detail-item font-[family-name:var(--font-display)] text-[10px] tracking-[0.15em] uppercase px-4 py-2 rounded-sm border transition-all duration-300 cursor-default"
-                  style={{ opacity: 0, borderColor: `hsl(${colors.accentHsl} / 0.2)`, color: `hsl(${colors.accentHsl} / 0.7)`, background: `hsl(${colors.accentHsl} / 0.04)` }}>
+                <span key={i} className="detail-item tech-badge font-[family-name:var(--font-display)] text-[10px] tracking-[0.15em] uppercase px-5 py-2.5 rounded-md border cursor-default"
+                  style={{ opacity: 0, borderColor: `hsl(${colors.accentHsl} / 0.2)`, color: `hsl(${colors.accentHsl} / 0.8)`, background: `hsl(${colors.accentHsl} / 0.05)` }}>
                   {tech}
                 </span>
               ))}
@@ -758,27 +758,27 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
               <Suspense fallback={null}><FocussChat /></Suspense>
             </div>
             {/* AI capabilities grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 max-w-7xl mb-16">
-              <div className="detail-item lg:col-span-7 image-hover-zoom card-hover-glow relative h-[50vh] rounded-sm overflow-hidden" style={{ opacity: 0, border: `1px solid hsl(${colors.accentHsl} / 0.15)` }}>
-                <img src="/images/ia-detail-01.jpg" alt="IA Generativa" loading="lazy" decoding="async" fetchPriority="low" className="w-full h-full object-cover" style={{ filter: 'brightness(0.7) saturate(1.3)' }} />
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 max-w-7xl mb-16">
+              <div className="detail-item lg:col-span-7 image-hover-zoom card-hover-glow relative h-[52vh] rounded-lg overflow-hidden" style={{ opacity: 0, border: `1px solid hsl(${colors.accentHsl} / 0.15)` }}>
+                <img src="/images/ia-detail-01.jpg" alt="IA Generativa" loading="lazy" decoding="async" fetchPriority="low" className="w-full h-full object-cover" style={{ filter: 'brightness(0.65) saturate(1.35)' }} />
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
-                <div className="absolute inset-0" style={{ background: `linear-gradient(135deg, hsl(${colors.accentHsl} / 0.1), transparent)` }} />
-                <div className="absolute bottom-6 left-6">
-                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.3em] uppercase" style={{ color: `hsl(${colors.accentHsl} / 0.8)` }}>🤖 TORRE CYBERLIFE</span>
-                  <h4 className="font-[family-name:var(--font-display)] text-foreground text-xl font-bold mt-2">O Despertar dos Androides</h4>
+                <div className="absolute inset-0" style={{ background: `linear-gradient(135deg, hsl(${colors.accentHsl} / 0.12), transparent)` }} />
+                <div className="absolute bottom-0 left-0 right-0 p-8" style={{ background: 'linear-gradient(to top, hsl(var(--background) / 0.85), transparent)' }}>
+                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.3em] uppercase font-medium" style={{ color: `hsl(${colors.accentHsl} / 0.9)` }}>🤖 TORRE CYBERLIFE</span>
+                  <h4 className="font-[family-name:var(--font-display)] text-foreground text-xl md:text-2xl font-bold mt-2">O Despertar dos Androides</h4>
                 </div>
               </div>
-              <div className="lg:col-span-5 grid grid-rows-2 gap-4">
-                <div className="detail-item card-hover-glow relative p-8 rounded-sm backdrop-blur-sm" style={{ opacity: 0, background: 'hsl(var(--card) / 0.5)', border: `1px solid hsl(${colors.accentHsl} / 0.15)` }}>
-                  <div className="text-4xl mb-3">💠</div>
-                  <h4 className="font-[family-name:var(--font-display)] text-foreground text-sm font-semibold tracking-wide uppercase mb-2">💠 Revolução de Jericho</h4>
-                  <p className="text-muted-foreground text-xs leading-relaxed">Como Markus liderando Jericho — agentes que pesquisam, analisam, decidem e executam com consciência própria.</p>
+              <div className="lg:col-span-5 grid grid-rows-2 gap-5">
+                <div className="detail-item premium-card card-hover-glow relative p-9 rounded-lg" style={{ opacity: 0 }}>
+                  <div className="text-4xl mb-4">💠</div>
+                  <h4 className="font-[family-name:var(--font-display)] text-foreground text-sm font-bold tracking-[0.12em] uppercase mb-3">Revolução de Jericho</h4>
+                  <p className="text-muted-foreground text-[13px] leading-[1.7]">Como Markus liderando Jericho — agentes que pesquisam, analisam, decidem e executam com consciência própria.</p>
                 </div>
-                <div className="detail-item image-hover-zoom card-hover-glow relative h-full rounded-sm overflow-hidden" style={{ opacity: 0, border: `1px solid hsl(${colors.accentHsl} / 0.15)` }}>
-                  <img src="/images/automacao-hero.png" alt="RAG Pipeline" loading="lazy" decoding="async" fetchPriority="low" className="w-full h-full object-cover" style={{ filter: 'brightness(0.7) saturate(1.2)' }} />
+                <div className="detail-item image-hover-zoom card-hover-glow relative h-full rounded-lg overflow-hidden" style={{ opacity: 0, border: `1px solid hsl(${colors.accentHsl} / 0.15)` }}>
+                  <img src="/images/automacao-hero.png" alt="RAG Pipeline" loading="lazy" decoding="async" fetchPriority="low" className="w-full h-full object-cover" style={{ filter: 'brightness(0.65) saturate(1.25)' }} />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
-                  <div className="absolute bottom-4 left-4">
-                    <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.2em] uppercase" style={{ color: `hsl(${colors.accentHsl} / 0.8)` }}>🔷 RAG PIPELINE</span>
+                  <div className="absolute bottom-0 left-0 right-0 p-5" style={{ background: 'linear-gradient(to top, hsl(var(--background) / 0.8), transparent)' }}>
+                    <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.25em] uppercase font-medium" style={{ color: `hsl(${colors.accentHsl} / 0.9)` }}>🔷 RAG PIPELINE</span>
                   </div>
                 </div>
               </div>
@@ -786,8 +786,8 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
             {/* AI models we work with */}
             <div className="flex flex-wrap gap-3 max-w-7xl">
               {['GPT-4o', 'Claude 3.5', 'Gemini Pro', 'LLaMA 3', 'Mistral', 'Stable Diffusion', 'Whisper', 'DALL-E'].map((model, i) => (
-                <span key={i} className="detail-item font-[family-name:var(--font-display)] text-[10px] tracking-[0.15em] uppercase px-4 py-2 rounded-sm border transition-all duration-300 cursor-default"
-                  style={{ opacity: 0, borderColor: `hsl(${colors.accentHsl} / 0.2)`, color: `hsl(${colors.accentHsl} / 0.7)`, background: `hsl(${colors.accentHsl} / 0.05)` }}>
+                <span key={i} className="detail-item tech-badge font-[family-name:var(--font-display)] text-[10px] tracking-[0.15em] uppercase px-5 py-2.5 rounded-md border cursor-default"
+                  style={{ opacity: 0, borderColor: `hsl(${colors.accentHsl} / 0.2)`, color: `hsl(${colors.accentHsl} / 0.8)`, background: `hsl(${colors.accentHsl} / 0.06)` }}>
                   {model}
                 </span>
               ))}
@@ -801,26 +801,26 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
             <div className="max-w-6xl mx-auto">
               {/* Device showcase */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-                <div className="detail-item magnetic-card card-hover-glow flex flex-col items-center p-8 rounded-sm" style={{ opacity: 0, background: 'hsl(var(--card) / 0.3)', border: `1px solid hsl(${colors.accentHsl} / 0.15)` }}>
-                  <div className="relative w-[180px] h-[360px] rounded-[24px] overflow-hidden shadow-2xl" style={{ border: `2px solid hsl(${colors.accentHsl} / 0.3)` }}>
+                <div className="detail-item magnetic-card premium-card card-hover-glow flex flex-col items-center p-9 rounded-xl" style={{ opacity: 0 }}>
+                  <div className="relative w-[180px] h-[360px] rounded-[28px] overflow-hidden" style={{ border: `2px solid hsl(${colors.accentHsl} / 0.3)`, boxShadow: `0 20px 60px -15px hsl(${colors.accentHsl} / 0.15)` }}>
                     <img src="/images/mobile-detail-01.jpg" alt="Mobile" loading="lazy" decoding="async" fetchPriority="low" className="w-full h-full object-cover" style={{ filter: 'brightness(0.85) saturate(1.2)' }} />
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-5 bg-background rounded-b-xl" />
                   </div>
-                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.2em] uppercase mt-6" style={{ color: `hsl(${colors.accentHsl} / 0.7)` }}>📱 REACT NATIVE</span>
+                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.25em] uppercase mt-7 font-medium" style={{ color: `hsl(${colors.accentHsl} / 0.8)` }}>📱 REACT NATIVE</span>
                 </div>
-                <div className="detail-item magnetic-card card-hover-glow flex flex-col items-center p-8 rounded-sm" style={{ opacity: 0, background: 'hsl(var(--card) / 0.3)', border: `1px solid hsl(${colors.accentHsl} / 0.15)` }}>
-                  <div className="relative w-[260px] h-[340px] rounded-[16px] overflow-hidden shadow-2xl" style={{ border: `2px solid hsl(${colors.accentHsl} / 0.3)` }}>
+                <div className="detail-item magnetic-card premium-card card-hover-glow flex flex-col items-center p-9 rounded-xl" style={{ opacity: 0 }}>
+                  <div className="relative w-[260px] h-[340px] rounded-[20px] overflow-hidden" style={{ border: `2px solid hsl(${colors.accentHsl} / 0.3)`, boxShadow: `0 20px 60px -15px hsl(${colors.accentHsl} / 0.15)` }}>
                     <img src="/images/mobile-detail-02.jpg" alt="Tablet" loading="lazy" decoding="async" fetchPriority="low" className="w-full h-full object-cover" style={{ filter: 'brightness(0.85) saturate(1.2)' }} />
                   </div>
-                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.2em] uppercase mt-6" style={{ color: `hsl(${colors.accentHsl} / 0.7)` }}>💻 PWA</span>
+                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.25em] uppercase mt-7 font-medium" style={{ color: `hsl(${colors.accentHsl} / 0.8)` }}>💻 PWA</span>
                 </div>
-                <div className="detail-item magnetic-card card-hover-glow flex flex-col items-center p-8 rounded-sm" style={{ opacity: 0, background: 'hsl(var(--card) / 0.3)', border: `1px solid hsl(${colors.accentHsl} / 0.15)` }}>
-                  <div className="relative w-full h-[220px] rounded-t-lg overflow-hidden shadow-2xl" style={{ border: `2px solid hsl(${colors.accentHsl} / 0.3)` }}>
+                <div className="detail-item magnetic-card premium-card card-hover-glow flex flex-col items-center p-9 rounded-xl" style={{ opacity: 0 }}>
+                  <div className="relative w-full h-[220px] rounded-t-xl overflow-hidden" style={{ border: `2px solid hsl(${colors.accentHsl} / 0.3)`, boxShadow: `0 20px 60px -15px hsl(${colors.accentHsl} / 0.15)` }}>
                     <img src="/images/mobile-detail-03.jpg" alt="Desktop" loading="lazy" decoding="async" fetchPriority="low" className="w-full h-full object-cover" style={{ filter: 'brightness(0.85) saturate(1.2)' }} />
                   </div>
                   <div className="w-24 h-3 rounded-b-lg" style={{ background: `hsl(${colors.accentHsl} / 0.1)` }} />
                   <div className="w-16 h-1 mt-1 rounded" style={{ background: `hsl(${colors.accentHsl} / 0.1)` }} />
-                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.2em] uppercase mt-6" style={{ color: `hsl(${colors.accentHsl} / 0.7)` }}>🔓 RESPONSIVE WEB</span>
+                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.25em] uppercase mt-7 font-medium" style={{ color: `hsl(${colors.accentHsl} / 0.8)` }}>🔓 RESPONSIVE WEB</span>
                 </div>
               </div>
               {/* Performance metrics */}
@@ -831,9 +831,9 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
                   { value: '95%', label: 'Código Compartilhado' },
                   { value: '99.5%', label: 'Crash-Free Rate' },
                 ].map((metric, i) => (
-                  <div key={i} className="detail-item text-center p-6 rounded-sm" style={{ opacity: 0, background: 'hsl(var(--card) / 0.3)', border: '1px solid hsl(var(--border) / 0.1)' }}>
-                    <span className="font-[family-name:var(--font-display)] font-bold text-2xl block mb-1" style={{ color: `hsl(${colors.accentHsl})` }}>{metric.value}</span>
-                    <span className="font-[family-name:var(--font-display)] text-[9px] tracking-[0.2em] uppercase text-muted-foreground">{metric.label}</span>
+                  <div key={i} className="detail-item stat-card text-center p-7 rounded-lg" style={{ opacity: 0 }}>
+                    <span className="font-[family-name:var(--font-display)] font-black text-2xl md:text-3xl block mb-2" style={{ color: `hsl(${colors.accentHsl})`, textShadow: `0 0 25px hsl(${colors.accentHsl} / 0.2)` }}>{metric.value}</span>
+                    <span className="font-[family-name:var(--font-display)] text-[9px] tracking-[0.25em] uppercase text-muted-foreground font-medium">{metric.label}</span>
                   </div>
                 ))}
               </div>
@@ -856,25 +856,25 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
         ];
         return (
           <div className="fluid-section-pad">
-            <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-8">
+            <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-10">
               {skills.map((skill, i) => (
                 <div key={i} className="detail-item group" style={{ opacity: 0 }}>
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="font-[family-name:var(--font-display)] text-foreground/90 text-sm tracking-wide uppercase">{skill.name}</span>
-                    <span className="font-[family-name:var(--font-display)] text-[10px] tracking-widest" style={{ color: `hsl(${colors.accentHsl} / 0.6)` }}>{skill.level}%</span>
+                  <div className="flex justify-between items-center mb-3">
+                    <span className="font-[family-name:var(--font-display)] text-foreground/90 text-sm tracking-wide uppercase font-medium">{skill.name}</span>
+                    <span className="font-[family-name:var(--font-display)] text-[11px] tracking-widest font-semibold" style={{ color: `hsl(${colors.accentHsl} / 0.7)` }}>{skill.level}%</span>
                   </div>
-                  <div className="skill-progress-bar">
-                    <div className="skill-progress-fill" data-width={`${skill.level}%`} style={{ width: 0 }} />
+                  <div className="skill-progress-bar" style={{ height: '4px', borderRadius: '4px' }}>
+                    <div className="skill-progress-fill" data-width={`${skill.level}%`} style={{ width: 0, borderRadius: '4px' }} />
                   </div>
-                  <span className="font-[family-name:var(--font-display)] text-[9px] tracking-[0.2em] uppercase text-muted-foreground/60 mt-1 block">{skill.category}</span>
+                  <span className="font-[family-name:var(--font-display)] text-[9px] tracking-[0.25em] uppercase text-muted-foreground/50 mt-2 block font-medium">{skill.category}</span>
                 </div>
               ))}
             </div>
             <Suspense fallback={null}><TechLogosMarquee /></Suspense>
             <div className="max-w-5xl mx-auto mt-16 flex flex-wrap gap-3">
               {['React', 'Next.js', 'TypeScript', 'Node.js', 'Python', 'Rust', 'PostgreSQL', 'Redis', 'Elasticsearch', 'AWS', 'Docker', 'Kubernetes', 'Terraform', 'Figma', 'GSAP', 'Three.js', 'GraphQL', 'gRPC'].map((tech, i) => (
-                <span key={i} className="detail-item card-hover-glow font-[family-name:var(--font-display)] text-[10px] tracking-[0.12em] uppercase px-4 py-2 rounded-sm border transition-all duration-300 cursor-default"
-                  style={{ opacity: 0, borderColor: `hsl(${colors.accentHsl} / 0.2)`, color: `hsl(${colors.accentHsl} / 0.7)`, background: `hsl(${colors.accentHsl} / 0.05)` }}>
+                <span key={i} className="detail-item tech-badge card-hover-glow font-[family-name:var(--font-display)] text-[10px] tracking-[0.15em] uppercase px-5 py-2.5 rounded-md border cursor-default"
+                  style={{ opacity: 0, borderColor: `hsl(${colors.accentHsl} / 0.2)`, color: `hsl(${colors.accentHsl} / 0.8)`, background: `hsl(${colors.accentHsl} / 0.05)` }}>
                   {tech}
                 </span>
               ))}
@@ -895,7 +895,7 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 max-w-7xl">
               {[
                 { icon: '☢️', title: 'Growth Marketing', desc: 'Campanhas data-driven com ROAS acima de 4x — penetrando o mercado como radiação no Wasteland.', accent: '120 75% 50%' },
                 { icon: '🔧', title: 'Plataformas Web', desc: 'Experiências imersivas construídas para sobreviver. Next.js, edge computing e Core Web Vitals no verde.', accent: '45 90% 50%' },
@@ -904,17 +904,17 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
                 { icon: '🏗️', title: 'Landing Pages', desc: 'Conversão otimizada para reconstruir o mundo. A/B testing, heatmaps e integração com CRM.', accent: '80 60% 45%' },
                 { icon: '⚡', title: 'Branding Digital', desc: 'Identidade visual que sobrevive ao apocalipse. Logo, tipografia, paleta e guidelines para todos os canais.', accent: '50 85% 50%' },
               ].map((card, i) => (
-                <div key={i} className="detail-item magnetic-card card-hover-glow relative p-8 rounded-sm overflow-hidden group cursor-pointer"
-                  style={{ opacity: 0, background: 'hsl(var(--card) / 0.4)', border: '1px solid hsl(var(--border) / 0.15)' }}>
-                  <div className="absolute inset-0 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
-                    style={{ background: `linear-gradient(135deg, hsl(${colors.accentHsl} / 0.1), transparent 60%)` }} />
-                  <div className="absolute top-0 left-0 right-0 h-[2px] opacity-60 group-hover:opacity-100 transition-opacity duration-500"
+                <div key={i} className="detail-item magnetic-card premium-card card-hover-glow group relative p-9 rounded-lg overflow-hidden cursor-pointer"
+                  style={{ opacity: 0 }}>
+                  <div className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+                    style={{ background: `radial-gradient(ellipse at top left, hsl(${colors.accentHsl} / 0.1), transparent 60%)` }} />
+                  <div className="absolute top-0 left-0 right-0 h-[2px] opacity-50 group-hover:opacity-100 transition-opacity duration-500"
                     style={{ background: colors.gradient }} />
                   <div className="relative z-10">
-                    <span className="text-4xl mb-5 block drop-shadow-lg">{card.icon}</span>
-                    <h4 className="font-[family-name:var(--font-display)] text-foreground text-base font-semibold tracking-[0.15em] uppercase mb-3">{card.title}</h4>
-                    <p className="text-muted-foreground text-sm leading-relaxed">{card.desc}</p>
-                    <div className="h-[1px] w-12 mt-6 transition-all duration-700 group-hover:w-full"
+                    <span className="text-4xl mb-6 block drop-shadow-lg">{card.icon}</span>
+                    <h4 className="font-[family-name:var(--font-display)] text-foreground text-base font-bold tracking-[0.15em] uppercase mb-4">{card.title}</h4>
+                    <p className="text-muted-foreground text-[13px] leading-[1.7]">{card.desc}</p>
+                    <div className="h-[2px] w-14 mt-7 transition-all duration-700 group-hover:w-full ease-out"
                       style={{ background: colors.gradient }} />
                   </div>
                 </div>
@@ -922,8 +922,8 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
             </div>
 
             <div className="mt-20 text-center">
-              <p className="font-[family-name:var(--font-display)] text-[11px] tracking-[0.3em] uppercase text-muted-foreground/60 mb-4">☢️ PREPARADO PARA SOBREVIVER NO WASTELAND?</p>
-              <div className="h-[1px] w-24 mx-auto" style={{ background: colors.gradient }} />
+              <p className="font-[family-name:var(--font-display)] text-[11px] tracking-[0.4em] uppercase text-muted-foreground/60 mb-5 font-medium">☢️ PREPARADO PARA SOBREVIVER NO WASTELAND?</p>
+              <div className="h-[2px] w-28 mx-auto" style={{ background: colors.gradient }} />
             </div>
           </div>
         );
@@ -995,9 +995,9 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
       <div className="relative z-10 bg-background">
         <div className="w-full h-[1px]" style={{ background: `linear-gradient(90deg, transparent, hsl(${colors.accentHsl} / 0.3), hsl(${colors.accentHsl} / 0.15), transparent)` }} />
 
-        <div className="cin-desc" style={{ padding: `clamp(1rem, 3vw, 1.5rem) clamp(1.5rem, 4vw, 6rem)` }}>
+        <div className="cin-desc" style={{ padding: `clamp(1.5rem, 4vw, 2.5rem) clamp(1.5rem, 4vw, 6rem)` }}>
           <div className="max-w-5xl">
-            <p className="text-foreground/90 leading-relaxed font-light tracking-tight" style={{ fontSize: 'clamp(1rem, 2vw, 1.875rem)' }}>{section.description}</p>
+            <p className="text-foreground/85 leading-[1.7] font-light tracking-tight" style={{ fontSize: 'clamp(1.05rem, 2vw, 1.9rem)' }}>{section.description}</p>
           </div>
         </div>
 
@@ -1039,13 +1039,13 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
               })}
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 max-w-6xl">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 max-w-6xl">
               {section.details.map((detail, i) => (
-                <div key={i} className="detail-item group flex items-start gap-4" style={{ opacity: 0 }}>
-                  <span className={`font-[family-name:var(--font-display)] ${colors.accent} opacity-40 text-sm tracking-widest mt-1`}>{String(i + 1).padStart(2, '0')}</span>
+                <div key={i} className="detail-item group flex items-start gap-5" style={{ opacity: 0 }}>
+                  <span className={`font-[family-name:var(--font-display)] ${colors.accent} opacity-50 text-sm tracking-widest mt-1 font-semibold`}>{String(i + 1).padStart(2, '0')}</span>
                   <div>
-                    <div className="h-[1px] w-8 mb-4 group-hover:w-16 transition-all duration-500" style={{ background: `hsl(${colors.accentHsl} / 0.3)` }} />
-                    <p className="text-foreground/80 text-base md:text-lg leading-relaxed">{detail}</p>
+                    <div className="h-[2px] w-10 mb-5 group-hover:w-20 transition-all duration-500 ease-out" style={{ background: `hsl(${colors.accentHsl} / 0.4)` }} />
+                    <p className="text-foreground/80 text-base md:text-lg leading-[1.7]">{detail}</p>
                   </div>
                 </div>
               ))}
