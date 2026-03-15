@@ -305,6 +305,8 @@ export function LuminaSlider() {
       if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
         if (dx < 0) goToSlide(currentSlideRef.current + 1);
         else goToSlide(currentSlideRef.current - 1);
+      } else if (dy < -50 && Math.abs(dy) > Math.abs(dx)) {
+        triggerExplore();
       }
     };
     el.addEventListener('touchstart', onStart, { passive: true });
