@@ -304,7 +304,7 @@ All colors MUST be HSL.
 .skill-progress-fill {
   height: 100%;
   border-radius: 2px;
-  background: linear-gradient(90deg, hsl(var(--vice-sunset)), hsl(var(--vice-pink)));
+  background: linear-gradient(90deg, hsl(38 90% 50%), hsl(25 80% 45%));
 }
 
 /* Parallax container */
