@@ -857,6 +857,12 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
                 ))}
               </div>
             </div>
+
+            {/* CTA Watch Dogs */}
+            <div className="flex flex-wrap gap-4 mt-16 justify-center">
+              <MediaButton label="📱 Hackear o ctOS" mediaUrl="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExMmFlMjQ2ZmY2YjIwMTk2ZGQ5MTRkOGU2N2UwNzBmNTc3ZmU1OGNiOSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ZvLUtG6BZkBi0/giphy.gif" />
+              <MediaButton label="🔓 Acessar DedSec" mediaUrl="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExZjJiOGRjMGQzMzQ3MmJlZGE3NTc4ZjVhM2RjNDBiMjlhZmY5NjMzYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/PjJ1cLHqLbLfO/giphy.gif" />
+            </div>
           </div>
         );
 
