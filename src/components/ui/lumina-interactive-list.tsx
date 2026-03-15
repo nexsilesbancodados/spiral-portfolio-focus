@@ -417,7 +417,18 @@ export function LuminaSlider() {
           <p className="slide-description" style={{ textShadow: '0 1px 20px hsl(0 0% 0% / 0.5)' }}>{current.description}</p>
           <div className="slide-skills">
             {current.skills.map((skill) => (
-              <span key={skill} className="skill-tag">{skill}</span>
+              <span
+                key={skill}
+                className="skill-tag"
+                style={{
+                  borderColor: `hsl(${current.theme.accent} / 0.5)`,
+                  color: `hsl(${current.theme.accent})`,
+                  background: `hsl(${current.theme.accent} / 0.1)`,
+                  textShadow: `0 0 12px ${current.theme.glow}`,
+                }}
+              >
+                {skill}
+              </span>
             ))}
           </div>
         </div>
