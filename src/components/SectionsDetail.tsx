@@ -952,7 +952,12 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
               ))}
             </div>
 
-            <div className="mt-20 text-center">
+            {/* CTA Fallout */}
+            <div className="flex flex-wrap gap-4 mt-20 justify-center">
+              <MediaButton label="☢️ Abrir o Vault" mediaUrl="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExN2FkODQ0MzRhZTIyOTI0NjkxNTUxZjc5MjdjNTdkODJlOGYxYjQ1NyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3oKIPlLZEbEbacWqOc/giphy.gif" />
+              <MediaButton label="💊 Pegar Stimpaks" mediaUrl="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExYWY0MjM4MWQ2YTEzZWI3MjJiOWI1OGM5NzlkMGVlYjU3YTc3OGJhZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l0MYt5jPR6QX5pnqM/giphy.gif" />
+            </div>
+            <div className="mt-8 text-center">
               <p className="font-[family-name:var(--font-display)] text-[11px] tracking-[0.3em] uppercase text-muted-foreground/60 mb-4">☢️ PREPARADO PARA SOBREVIVER NO WASTELAND?</p>
               <div className="h-[1px] w-24 mx-auto" style={{ background: colors.gradient }} />
             </div>
