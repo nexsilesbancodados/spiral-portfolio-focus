@@ -474,29 +474,7 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
     if (!el) return;
 
     const ctx = gsap.context(() => {
-      const divider = el.querySelector('.section-enter-line');
-      if (divider) {
-        gsap.fromTo(divider,
-          { scaleX: 0, transformOrigin: 'left center' },
-          { scaleX: 1, duration: 0.6, ease: 'power3.inOut', delay: 0.05 }
-        );
-      }
-
-      const heroImg = el.querySelector('.ken-burns-hero');
-      if (heroImg) {
-        gsap.to(heroImg, {
-          yPercent: 20,
-          scale: 1.15,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: el.querySelector('.parallax-hero'),
-            scroller: el,
-            start: 'top top',
-            end: 'bottom top',
-            scrub: true,
-          },
-        });
-      }
+      // Note: divider, heroImg parallax and titleWords are now handled by ParallaxHero component
 
       gsap.utils.toArray<HTMLElement>(el.querySelectorAll('.cin-subtitle, .cin-desc')).forEach((node) => {
         gsap.fromTo(node,
@@ -507,44 +485,6 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
           }
         );
       });
-
-      const galleryItems = el.querySelectorAll('.gallery-item');
-      if (galleryItems.length) {
-        gsap.fromTo(galleryItems,
-          { clipPath: 'inset(0 100% 0 0)', opacity: 1 },
-          {
-            clipPath: 'inset(0 0% 0 0)',
-            duration: 1.1,
-            stagger: 0.18,
-            ease: 'power3.inOut',
-            scrollTrigger: {
-              trigger: galleryItems[0],
-              scroller: el,
-              start: 'top 85%',
-              toggleActions: 'play none none none',
-            },
-          }
-        );
-      }
-
-      const detailItems = el.querySelectorAll('.detail-item');
-      if (detailItems.length) {
-        gsap.fromTo(detailItems,
-          { opacity: 0, y: 50, filter: 'blur(4px)' },
-          {
-            opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.7, stagger: 0.1, ease: 'power2.out',
-            scrollTrigger: { trigger: detailItems[0], scroller: el, start: 'top 88%', toggleActions: 'play none none none' },
-          }
-        );
-      }
-
-      const titleWords = el.querySelectorAll('.title-word');
-      if (titleWords.length) {
-        gsap.fromTo(titleWords,
-          { y: '110%', opacity: 0 },
-          { y: '0%', opacity: 1, duration: 0.9, stagger: 0.1, ease: 'power4.out', delay: 0.15 }
-        );
-      }
 
       const skillBars = el.querySelectorAll('.skill-progress-fill');
       skillBars.forEach((bar) => {
