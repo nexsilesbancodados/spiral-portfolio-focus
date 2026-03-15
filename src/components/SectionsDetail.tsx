@@ -1007,7 +1007,7 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
         {/* Details */}
         <div ref={detailsRef} style={{ padding: `clamp(1rem, 3vw, 1.5rem) clamp(1.5rem, 4vw, 6rem)` }}>
           {section.id === 'servicos' ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-7xl">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 max-w-7xl">
               {section.details.map((detail, i) => {
                 const emoji = detail.slice(0, 2);
                 const rest = detail.slice(3);
@@ -1018,21 +1018,21 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
                 ];
                 const accent = cardAccents[i] || cardAccents[0];
                 return (
-                  <div key={i} className="detail-item magnetic-card group relative p-7 rounded-sm overflow-hidden cursor-pointer transition-all duration-500 hover:translate-y-[-2px]"
-                    style={{ opacity: 0, background: 'hsl(var(--card) / 0.35)', border: '1px solid hsl(var(--border) / 0.1)' }}>
+                  <div key={i} className="detail-item magnetic-card premium-card group relative p-8 rounded-lg overflow-hidden cursor-pointer"
+                    style={{ opacity: 0 }}>
                     <div className="absolute top-0 left-0 right-0 h-[2px] opacity-50 group-hover:opacity-100 transition-opacity duration-500"
                       style={{ background: `linear-gradient(90deg, transparent, ${accent}, transparent)` }} />
                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
-                      style={{ background: `radial-gradient(ellipse at top, ${accent}08, transparent 70%)` }} />
+                      style={{ background: `radial-gradient(ellipse at top, ${accent}12, transparent 70%)` }} />
                     <div className="relative z-10">
-                      <div className="flex items-center gap-3 mb-4">
+                      <div className="flex items-center gap-3 mb-5">
                         <span className="text-2xl">{emoji}</span>
-                        <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.25em] uppercase opacity-40" style={{ color: accent }}>{String(i + 1).padStart(2, '0')}</span>
+                        <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.25em] uppercase opacity-50 font-semibold" style={{ color: accent }}>{String(i + 1).padStart(2, '0')}</span>
                       </div>
-                      <h4 className="font-[family-name:var(--font-display)] text-foreground text-sm font-semibold tracking-[0.12em] uppercase mb-2">{title}</h4>
-                      <p className="text-muted-foreground text-xs leading-relaxed">{desc}</p>
-                      <div className="h-[1px] w-10 mt-5 group-hover:w-full transition-all duration-700"
-                        style={{ background: `linear-gradient(90deg, ${accent}80, transparent)` }} />
+                      <h4 className="font-[family-name:var(--font-display)] text-foreground text-sm font-bold tracking-[0.12em] uppercase mb-3">{title}</h4>
+                      <p className="text-muted-foreground text-[13px] leading-[1.7]">{desc}</p>
+                      <div className="h-[2px] w-12 mt-6 group-hover:w-full transition-all duration-700 ease-out"
+                        style={{ background: `linear-gradient(90deg, ${accent}90, transparent)` }} />
                     </div>
                   </div>
                 );
