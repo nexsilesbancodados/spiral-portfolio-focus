@@ -801,26 +801,26 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
             <div className="max-w-6xl mx-auto">
               {/* Device showcase */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-                <div className="detail-item magnetic-card card-hover-glow flex flex-col items-center p-8 rounded-sm" style={{ opacity: 0, background: 'hsl(var(--card) / 0.3)', border: `1px solid hsl(${colors.accentHsl} / 0.15)` }}>
-                  <div className="relative w-[180px] h-[360px] rounded-[24px] overflow-hidden shadow-2xl" style={{ border: `2px solid hsl(${colors.accentHsl} / 0.3)` }}>
+                <div className="detail-item magnetic-card premium-card card-hover-glow flex flex-col items-center p-9 rounded-xl" style={{ opacity: 0 }}>
+                  <div className="relative w-[180px] h-[360px] rounded-[28px] overflow-hidden" style={{ border: `2px solid hsl(${colors.accentHsl} / 0.3)`, boxShadow: `0 20px 60px -15px hsl(${colors.accentHsl} / 0.15)` }}>
                     <img src="/images/mobile-detail-01.jpg" alt="Mobile" loading="lazy" decoding="async" fetchPriority="low" className="w-full h-full object-cover" style={{ filter: 'brightness(0.85) saturate(1.2)' }} />
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-5 bg-background rounded-b-xl" />
                   </div>
-                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.2em] uppercase mt-6" style={{ color: `hsl(${colors.accentHsl} / 0.7)` }}>📱 REACT NATIVE</span>
+                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.25em] uppercase mt-7 font-medium" style={{ color: `hsl(${colors.accentHsl} / 0.8)` }}>📱 REACT NATIVE</span>
                 </div>
-                <div className="detail-item magnetic-card card-hover-glow flex flex-col items-center p-8 rounded-sm" style={{ opacity: 0, background: 'hsl(var(--card) / 0.3)', border: `1px solid hsl(${colors.accentHsl} / 0.15)` }}>
-                  <div className="relative w-[260px] h-[340px] rounded-[16px] overflow-hidden shadow-2xl" style={{ border: `2px solid hsl(${colors.accentHsl} / 0.3)` }}>
+                <div className="detail-item magnetic-card premium-card card-hover-glow flex flex-col items-center p-9 rounded-xl" style={{ opacity: 0 }}>
+                  <div className="relative w-[260px] h-[340px] rounded-[20px] overflow-hidden" style={{ border: `2px solid hsl(${colors.accentHsl} / 0.3)`, boxShadow: `0 20px 60px -15px hsl(${colors.accentHsl} / 0.15)` }}>
                     <img src="/images/mobile-detail-02.jpg" alt="Tablet" loading="lazy" decoding="async" fetchPriority="low" className="w-full h-full object-cover" style={{ filter: 'brightness(0.85) saturate(1.2)' }} />
                   </div>
-                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.2em] uppercase mt-6" style={{ color: `hsl(${colors.accentHsl} / 0.7)` }}>💻 PWA</span>
+                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.25em] uppercase mt-7 font-medium" style={{ color: `hsl(${colors.accentHsl} / 0.8)` }}>💻 PWA</span>
                 </div>
-                <div className="detail-item magnetic-card card-hover-glow flex flex-col items-center p-8 rounded-sm" style={{ opacity: 0, background: 'hsl(var(--card) / 0.3)', border: `1px solid hsl(${colors.accentHsl} / 0.15)` }}>
-                  <div className="relative w-full h-[220px] rounded-t-lg overflow-hidden shadow-2xl" style={{ border: `2px solid hsl(${colors.accentHsl} / 0.3)` }}>
+                <div className="detail-item magnetic-card premium-card card-hover-glow flex flex-col items-center p-9 rounded-xl" style={{ opacity: 0 }}>
+                  <div className="relative w-full h-[220px] rounded-t-xl overflow-hidden" style={{ border: `2px solid hsl(${colors.accentHsl} / 0.3)`, boxShadow: `0 20px 60px -15px hsl(${colors.accentHsl} / 0.15)` }}>
                     <img src="/images/mobile-detail-03.jpg" alt="Desktop" loading="lazy" decoding="async" fetchPriority="low" className="w-full h-full object-cover" style={{ filter: 'brightness(0.85) saturate(1.2)' }} />
                   </div>
                   <div className="w-24 h-3 rounded-b-lg" style={{ background: `hsl(${colors.accentHsl} / 0.1)` }} />
                   <div className="w-16 h-1 mt-1 rounded" style={{ background: `hsl(${colors.accentHsl} / 0.1)` }} />
-                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.2em] uppercase mt-6" style={{ color: `hsl(${colors.accentHsl} / 0.7)` }}>🔓 RESPONSIVE WEB</span>
+                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.25em] uppercase mt-7 font-medium" style={{ color: `hsl(${colors.accentHsl} / 0.8)` }}>🔓 RESPONSIVE WEB</span>
                 </div>
               </div>
               {/* Performance metrics */}
@@ -831,9 +831,9 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
                   { value: '95%', label: 'Código Compartilhado' },
                   { value: '99.5%', label: 'Crash-Free Rate' },
                 ].map((metric, i) => (
-                  <div key={i} className="detail-item text-center p-6 rounded-sm" style={{ opacity: 0, background: 'hsl(var(--card) / 0.3)', border: '1px solid hsl(var(--border) / 0.1)' }}>
-                    <span className="font-[family-name:var(--font-display)] font-bold text-2xl block mb-1" style={{ color: `hsl(${colors.accentHsl})` }}>{metric.value}</span>
-                    <span className="font-[family-name:var(--font-display)] text-[9px] tracking-[0.2em] uppercase text-muted-foreground">{metric.label}</span>
+                  <div key={i} className="detail-item stat-card text-center p-7 rounded-lg" style={{ opacity: 0 }}>
+                    <span className="font-[family-name:var(--font-display)] font-black text-2xl md:text-3xl block mb-2" style={{ color: `hsl(${colors.accentHsl})`, textShadow: `0 0 25px hsl(${colors.accentHsl} / 0.2)` }}>{metric.value}</span>
+                    <span className="font-[family-name:var(--font-display)] text-[9px] tracking-[0.25em] uppercase text-muted-foreground font-medium">{metric.label}</span>
                   </div>
                 ))}
               </div>
