@@ -707,6 +707,12 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
                 </div>
               ))}
             </div>
+
+            {/* CTA Resident Evil */}
+            <div className="flex flex-wrap gap-4 mt-16 justify-center">
+              <MediaButton label="🧬 Iniciar Protocolo S.T.A.R.S." mediaUrl="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExOTlhMzVhZmI4YzFmYjUxOGM3NWY1MjhlMTY3MDRiOWE5NDgzNjcxYyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7TKsQ8UQ5MHFRXmU/giphy.gif" />
+              <MediaButton label="🗝️ Explorar a Mansion" mediaUrl="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExMzc0OTBhOGQwNzQ0MDY1MjRlZWU5MTRlNGQyZWRmOWI0YjVmMjc1NCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l0HlBO7eyXzSZkJri/giphy.gif" />
+            </div>
           </div>
         );
 
