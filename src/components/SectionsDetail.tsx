@@ -162,6 +162,34 @@ const sectionColors: Record<string, { accent: string; accentHsl: string; gradien
   'skills':           { accent: 'text-amber-400',      accentHsl: '38 90% 50%',    gradient: 'linear-gradient(90deg, hsl(38 90% 50%), hsl(25 80% 45%))',            overlay: 'linear-gradient(225deg, hsl(38 90% 50% / 0.1), hsl(25 80% 45% / 0.06), transparent 60%)', titleBg: '', titleGradient: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(38 90% 60%) 30%, hsl(25 80% 50%) 65%, hsl(38 90% 40%) 100%)', glowColor: 'hsl(38 90% 50% / 0.4)' },
 };
 
+// Parallax layers per section (multiple depth layers using existing + detail images)
+const sectionParallaxLayers: Record<string, Array<{ src: string; speed: number; alt?: string; className?: string }>> = {
+  'web-design': [
+    { src: '/images/hero-webdesign.jpg', speed: 25, alt: 'Background', className: 'scale-110' },
+    { src: '/images/webdesign-detail-01.jpg', speed: 12, alt: 'Mid layer', className: 'scale-105 opacity-30 mix-blend-overlay' },
+  ],
+  'desenvolvimento': [
+    { src: '/images/hero-dev.jpg', speed: 25, alt: 'Background', className: 'scale-110' },
+    { src: '/images/dev-detail-01.jpg', speed: 10, alt: 'Mid layer', className: 'scale-105 opacity-25 mix-blend-overlay' },
+  ],
+  'servicos': [
+    { src: '/images/hero-servicos.jpg', speed: 25, alt: 'Background', className: 'scale-110' },
+    { src: '/images/servicos-detail-01.jpg', speed: 12, alt: 'Mid layer', className: 'scale-105 opacity-25 mix-blend-overlay' },
+  ],
+  'inovacao-ia': [
+    { src: '/images/hero-ia.jpg', speed: 25, alt: 'Background', className: 'scale-110' },
+    { src: '/images/ia-detail-01.jpg', speed: 10, alt: 'Mid layer', className: 'scale-105 opacity-30 mix-blend-overlay' },
+  ],
+  'mobile-web': [
+    { src: '/images/hero-mobile.jpg', speed: 25, alt: 'Background', className: 'scale-110' },
+    { src: '/images/mobile-detail-01.jpg', speed: 12, alt: 'Mid layer', className: 'scale-105 opacity-25 mix-blend-overlay' },
+  ],
+  'skills': [
+    { src: '/images/hero-skills.jpg', speed: 25, alt: 'Background', className: 'scale-110' },
+    { src: '/images/skills-detail-01.jpg', speed: 10, alt: 'Mid layer', className: 'scale-105 opacity-25 mix-blend-overlay' },
+  ],
+};
+
 // ─── Deep-dive content ──────────────────────────────────────────
 type DeepDiveBlock = {
   heading: string;
