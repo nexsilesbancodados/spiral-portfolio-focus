@@ -904,6 +904,12 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
                 </span>
               ))}
             </div>
+
+            {/* CTA AC Valhalla */}
+            <div className="flex flex-wrap gap-4 mt-16 justify-center">
+              <MediaButton label="⚔️ Zarpar no Drakkar" mediaUrl="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNGU2Mjk0OGVhMjY2YTdmZjI1MjM4MDhkYWRkNTQyZjVlNmI3NWI0OCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xUA7b0fN4FPzSh9qhO/giphy.gif" />
+              <MediaButton label="🛡️ Runas de Odin" mediaUrl="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNzE3N2IyZTIzZTMxM2EyYjRkYzIxMjVhZTFlNTE2Y2M3NDMzY2ZhYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l4FGuhL4U2WSOlFf2/giphy.gif" />
+            </div>
           </div>
         );
 
