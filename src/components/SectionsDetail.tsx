@@ -895,7 +895,7 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 max-w-7xl">
               {[
                 { icon: '☢️', title: 'Growth Marketing', desc: 'Campanhas data-driven com ROAS acima de 4x — penetrando o mercado como radiação no Wasteland.', accent: '120 75% 50%' },
                 { icon: '🔧', title: 'Plataformas Web', desc: 'Experiências imersivas construídas para sobreviver. Next.js, edge computing e Core Web Vitals no verde.', accent: '45 90% 50%' },
@@ -904,17 +904,17 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
                 { icon: '🏗️', title: 'Landing Pages', desc: 'Conversão otimizada para reconstruir o mundo. A/B testing, heatmaps e integração com CRM.', accent: '80 60% 45%' },
                 { icon: '⚡', title: 'Branding Digital', desc: 'Identidade visual que sobrevive ao apocalipse. Logo, tipografia, paleta e guidelines para todos os canais.', accent: '50 85% 50%' },
               ].map((card, i) => (
-                <div key={i} className="detail-item magnetic-card card-hover-glow relative p-8 rounded-sm overflow-hidden group cursor-pointer"
-                  style={{ opacity: 0, background: 'hsl(var(--card) / 0.4)', border: '1px solid hsl(var(--border) / 0.15)' }}>
-                  <div className="absolute inset-0 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
-                    style={{ background: `linear-gradient(135deg, hsl(${colors.accentHsl} / 0.1), transparent 60%)` }} />
-                  <div className="absolute top-0 left-0 right-0 h-[2px] opacity-60 group-hover:opacity-100 transition-opacity duration-500"
+                <div key={i} className="detail-item magnetic-card premium-card card-hover-glow group relative p-9 rounded-lg overflow-hidden cursor-pointer"
+                  style={{ opacity: 0 }}>
+                  <div className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+                    style={{ background: `radial-gradient(ellipse at top left, hsl(${colors.accentHsl} / 0.1), transparent 60%)` }} />
+                  <div className="absolute top-0 left-0 right-0 h-[2px] opacity-50 group-hover:opacity-100 transition-opacity duration-500"
                     style={{ background: colors.gradient }} />
                   <div className="relative z-10">
-                    <span className="text-4xl mb-5 block drop-shadow-lg">{card.icon}</span>
-                    <h4 className="font-[family-name:var(--font-display)] text-foreground text-base font-semibold tracking-[0.15em] uppercase mb-3">{card.title}</h4>
-                    <p className="text-muted-foreground text-sm leading-relaxed">{card.desc}</p>
-                    <div className="h-[1px] w-12 mt-6 transition-all duration-700 group-hover:w-full"
+                    <span className="text-4xl mb-6 block drop-shadow-lg">{card.icon}</span>
+                    <h4 className="font-[family-name:var(--font-display)] text-foreground text-base font-bold tracking-[0.15em] uppercase mb-4">{card.title}</h4>
+                    <p className="text-muted-foreground text-[13px] leading-[1.7]">{card.desc}</p>
+                    <div className="h-[2px] w-14 mt-7 transition-all duration-700 group-hover:w-full ease-out"
                       style={{ background: colors.gradient }} />
                   </div>
                 </div>
@@ -922,8 +922,8 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
             </div>
 
             <div className="mt-20 text-center">
-              <p className="font-[family-name:var(--font-display)] text-[11px] tracking-[0.3em] uppercase text-muted-foreground/60 mb-4">☢️ PREPARADO PARA SOBREVIVER NO WASTELAND?</p>
-              <div className="h-[1px] w-24 mx-auto" style={{ background: colors.gradient }} />
+              <p className="font-[family-name:var(--font-display)] text-[11px] tracking-[0.4em] uppercase text-muted-foreground/60 mb-5 font-medium">☢️ PREPARADO PARA SOBREVIVER NO WASTELAND?</p>
+              <div className="h-[2px] w-28 mx-auto" style={{ background: colors.gradient }} />
             </div>
           </div>
         );
