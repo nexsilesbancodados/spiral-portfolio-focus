@@ -786,7 +786,8 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
             {/* AI models we work with */}
             <div className="flex flex-wrap gap-3 max-w-7xl">
               {['GPT-4o', 'Claude 3.5', 'Gemini Pro', 'LLaMA 3', 'Mistral', 'Stable Diffusion', 'Whisper', 'DALL-E'].map((model, i) => (
-                <span key={i} className="detail-item font-[family-name:var(--font-display)] text-[10px] tracking-[0.15em] uppercase px-4 py-2 rounded-sm border border-vice-pink/20 text-vice-pink/70 bg-vice-pink/5 hover:bg-vice-pink/15 transition-all duration-300 cursor-default" style={{ opacity: 0 }}>
+                <span key={i} className="detail-item font-[family-name:var(--font-display)] text-[10px] tracking-[0.15em] uppercase px-4 py-2 rounded-sm border transition-all duration-300 cursor-default"
+                  style={{ opacity: 0, borderColor: `hsl(${colors.accentHsl} / 0.2)`, color: `hsl(${colors.accentHsl} / 0.7)`, background: `hsl(${colors.accentHsl} / 0.05)` }}>
                   {model}
                 </span>
               ))}
