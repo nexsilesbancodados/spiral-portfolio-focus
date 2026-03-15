@@ -265,19 +265,31 @@ export function LuminaSlider() {
   }, [transitionToSlide]);
 
   const triggerExplore = useCallback(() => {
-    const btn = document.querySelector('.explore-btn') as HTMLElement;
-    if (btn) {
-      gsap.to(btn, {
-        y: 8, opacity: 0, duration: 0.3, ease: 'power2.in',
-        onComplete: () => {
-          window.dispatchEvent(new CustomEvent('explore-slide', { detail: { slideIndex: currentSlideRef.current } }));
-          gsap.set(btn, { y: 0, opacity: 0.75 });
-        },
-      });
-    } else {
-      window.dispatchEvent(new CustomEvent('explore-slide', { detail: { slideIndex: currentSlideRef.current } }));
-    }
+    window.dispatchEvent(new CustomEvent('explore-slide', { detail: { slideIndex: currentSlideRef.current } }));
   }, []);
+
+  // ── Scroll down to explore ────────────────────────────────────────
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    let scrollAccum = 0;
+    let scrollTimeout: ReturnType<typeof setTimeout>;
+    const threshold = 120;
+
+    const onWheel = (e: WheelEvent) => {
+      if (e.deltaY > 0) {
+        scrollAccum += e.deltaY;
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => { scrollAccum = 0; }, 300);
+        if (scrollAccum >= threshold) {
+          scrollAccum = 0;
+          triggerExplore();
+        }
+      }
+    };
+    el.addEventListener('wheel', onWheel, { passive: true });
+    return () => { el.removeEventListener('wheel', onWheel); clearTimeout(scrollTimeout); };
+  }, [triggerExplore]);
 
 
 
@@ -293,6 +305,8 @@ export function LuminaSlider() {
       if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
         if (dx < 0) goToSlide(currentSlideRef.current + 1);
         else goToSlide(currentSlideRef.current - 1);
+      } else if (dy < -50 && Math.abs(dy) > Math.abs(dx)) {
+        triggerExplore();
       }
     };
     el.addEventListener('touchstart', onStart, { passive: true });
@@ -424,12 +438,12 @@ export function LuminaSlider() {
         ))}
       </nav>
 
-      <button className="explore-btn" onClick={triggerExplore} aria-label="Explorar seção atual" style={{ zIndex: 15 }}>
-        <span className="explore-btn-text">Explorar</span>
-        <svg className="explore-btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
-          <path d="M12 5v14m-7-7l7 7 7-7" />
+      {/* Scroll indicator */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center opacity-40 animate-pulse pointer-events-none" style={{ zIndex: 15 }}>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-foreground/60">
+          <path d="M7 13l5 5 5-5M7 7l5 5 5-5" />
         </svg>
-      </button>
+      </div>
     </main>
   );
 }
