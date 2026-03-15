@@ -856,25 +856,25 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
         ];
         return (
           <div className="fluid-section-pad">
-            <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-8">
+            <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-10">
               {skills.map((skill, i) => (
                 <div key={i} className="detail-item group" style={{ opacity: 0 }}>
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="font-[family-name:var(--font-display)] text-foreground/90 text-sm tracking-wide uppercase">{skill.name}</span>
-                    <span className="font-[family-name:var(--font-display)] text-[10px] tracking-widest" style={{ color: `hsl(${colors.accentHsl} / 0.6)` }}>{skill.level}%</span>
+                  <div className="flex justify-between items-center mb-3">
+                    <span className="font-[family-name:var(--font-display)] text-foreground/90 text-sm tracking-wide uppercase font-medium">{skill.name}</span>
+                    <span className="font-[family-name:var(--font-display)] text-[11px] tracking-widest font-semibold" style={{ color: `hsl(${colors.accentHsl} / 0.7)` }}>{skill.level}%</span>
                   </div>
-                  <div className="skill-progress-bar">
-                    <div className="skill-progress-fill" data-width={`${skill.level}%`} style={{ width: 0 }} />
+                  <div className="skill-progress-bar" style={{ height: '4px', borderRadius: '4px' }}>
+                    <div className="skill-progress-fill" data-width={`${skill.level}%`} style={{ width: 0, borderRadius: '4px' }} />
                   </div>
-                  <span className="font-[family-name:var(--font-display)] text-[9px] tracking-[0.2em] uppercase text-muted-foreground/60 mt-1 block">{skill.category}</span>
+                  <span className="font-[family-name:var(--font-display)] text-[9px] tracking-[0.25em] uppercase text-muted-foreground/50 mt-2 block font-medium">{skill.category}</span>
                 </div>
               ))}
             </div>
             <Suspense fallback={null}><TechLogosMarquee /></Suspense>
             <div className="max-w-5xl mx-auto mt-16 flex flex-wrap gap-3">
               {['React', 'Next.js', 'TypeScript', 'Node.js', 'Python', 'Rust', 'PostgreSQL', 'Redis', 'Elasticsearch', 'AWS', 'Docker', 'Kubernetes', 'Terraform', 'Figma', 'GSAP', 'Three.js', 'GraphQL', 'gRPC'].map((tech, i) => (
-                <span key={i} className="detail-item card-hover-glow font-[family-name:var(--font-display)] text-[10px] tracking-[0.12em] uppercase px-4 py-2 rounded-sm border transition-all duration-300 cursor-default"
-                  style={{ opacity: 0, borderColor: `hsl(${colors.accentHsl} / 0.2)`, color: `hsl(${colors.accentHsl} / 0.7)`, background: `hsl(${colors.accentHsl} / 0.05)` }}>
+                <span key={i} className="detail-item tech-badge card-hover-glow font-[family-name:var(--font-display)] text-[10px] tracking-[0.15em] uppercase px-5 py-2.5 rounded-md border cursor-default"
+                  style={{ opacity: 0, borderColor: `hsl(${colors.accentHsl} / 0.2)`, color: `hsl(${colors.accentHsl} / 0.8)`, background: `hsl(${colors.accentHsl} / 0.05)` }}>
                   {tech}
                 </span>
               ))}
