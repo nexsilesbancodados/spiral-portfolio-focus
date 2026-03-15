@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState, useCallback, lazy, Suspense, memo } from 'react';
+import { MediaButton } from '@/components/ui/media-button';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -706,6 +707,12 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
                 </div>
               ))}
             </div>
+
+            {/* CTA Resident Evil */}
+            <div className="flex flex-wrap gap-4 mt-16 justify-center">
+              <MediaButton label="🧬 Iniciar Protocolo S.T.A.R.S." mediaUrl="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExOTlhMzVhZmI4YzFmYjUxOGM3NWY1MjhlMTY3MDRiOWE5NDgzNjcxYyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7TKsQ8UQ5MHFRXmU/giphy.gif" />
+              <MediaButton label="🗝️ Explorar a Mansion" mediaUrl="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExMzc0OTBhOGQwNzQ0MDY1MjRlZWU5MTRlNGQyZWRmOWI0YjVmMjc1NCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l0HlBO7eyXzSZkJri/giphy.gif" />
+            </div>
           </div>
         );
 
@@ -747,6 +754,12 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
                   {tech}
                 </span>
               ))}
+            </div>
+
+            {/* CTA God of War */}
+            <div className="flex flex-wrap gap-4 mt-16 justify-center">
+              <MediaButton label="❄️ Invocar o Leviatã" mediaUrl="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNTY1YjQ2NWM2MzVmMmI4YjhmNjE5NjQ5ZGRhNmQyOGUwNjJhNTZlMiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3ohzdYJK1lnOmTxFxC/giphy.gif" />
+              <MediaButton label="🔥 Lâminas do Caos" mediaUrl="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExOTk1MTkxMTQ0ZTBjMWY3NzQ2OGMzNTdlNjY2YjFkZGY5NjE5MDRiNSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/26BRuo6sLetdllPAQ/giphy.gif" />
             </div>
           </div>
         );
@@ -791,6 +804,12 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
                   {model}
                 </span>
               ))}
+            </div>
+
+            {/* CTA Detroit */}
+            <div className="flex flex-wrap gap-4 mt-16 justify-center">
+              <MediaButton label="🤖 Despertar Consciência" mediaUrl="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjk5YjI2MzE5ZjJhZTU0MDczMWMzYTNlNGUzZTk2MGZkODgzNzJkNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7btPCcdNniyf0ArS/giphy.gif" />
+              <MediaButton label="💠 Conectar a Jericho" mediaUrl="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExZjk4OWM5ZWY0ZjAyZTUzN2RjNTVlNjZlMzQ2ZjJkZTQ0NjFhMjM4OCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xT9IgzoKnwFNmISR8I/giphy.gif" />
             </div>
           </div>
         );
@@ -838,6 +857,12 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
                 ))}
               </div>
             </div>
+
+            {/* CTA Watch Dogs */}
+            <div className="flex flex-wrap gap-4 mt-16 justify-center">
+              <MediaButton label="📱 Hackear o ctOS" mediaUrl="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExMmFlMjQ2ZmY2YjIwMTk2ZGQ5MTRkOGU2N2UwNzBmNTc3ZmU1OGNiOSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ZvLUtG6BZkBi0/giphy.gif" />
+              <MediaButton label="🔓 Acessar DedSec" mediaUrl="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExZjJiOGRjMGQzMzQ3MmJlZGE3NTc4ZjVhM2RjNDBiMjlhZmY5NjMzYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/PjJ1cLHqLbLfO/giphy.gif" />
+            </div>
           </div>
         );
 
@@ -878,6 +903,12 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
                   {tech}
                 </span>
               ))}
+            </div>
+
+            {/* CTA AC Valhalla */}
+            <div className="flex flex-wrap gap-4 mt-16 justify-center">
+              <MediaButton label="⚔️ Zarpar no Drakkar" mediaUrl="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNGU2Mjk0OGVhMjY2YTdmZjI1MjM4MDhkYWRkNTQyZjVlNmI3NWI0OCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xUA7b0fN4FPzSh9qhO/giphy.gif" />
+              <MediaButton label="🛡️ Runas de Odin" mediaUrl="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNzE3N2IyZTIzZTMxM2EyYjRkYzIxMjVhZTFlNTE2Y2M3NDMzY2ZhYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l4FGuhL4U2WSOlFf2/giphy.gif" />
             </div>
           </div>
         );
@@ -921,7 +952,12 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
               ))}
             </div>
 
-            <div className="mt-20 text-center">
+            {/* CTA Fallout */}
+            <div className="flex flex-wrap gap-4 mt-20 justify-center">
+              <MediaButton label="☢️ Abrir o Vault" mediaUrl="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExN2FkODQ0MzRhZTIyOTI0NjkxNTUxZjc5MjdjNTdkODJlOGYxYjQ1NyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3oKIPlLZEbEbacWqOc/giphy.gif" />
+              <MediaButton label="💊 Pegar Stimpaks" mediaUrl="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExYWY0MjM4MWQ2YTEzZWI3MjJiOWI1OGM5NzlkMGVlYjU3YTc3OGJhZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l0MYt5jPR6QX5pnqM/giphy.gif" />
+            </div>
+            <div className="mt-8 text-center">
               <p className="font-[family-name:var(--font-display)] text-[11px] tracking-[0.3em] uppercase text-muted-foreground/60 mb-4">☢️ PREPARADO PARA SOBREVIVER NO WASTELAND?</p>
               <div className="h-[1px] w-24 mx-auto" style={{ background: colors.gradient }} />
             </div>
