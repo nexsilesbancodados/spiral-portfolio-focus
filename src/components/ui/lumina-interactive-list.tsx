@@ -447,9 +447,10 @@ export function LuminaSlider() {
               <div className="slide-progress-fill" style={{
                 width: index === currentSlide ? '100%' : '0%',
                 transition: 'width 0.3s ease',
+                background: index === currentSlide ? `hsl(${slide.theme.accent})` : undefined,
               }} />
             </div>
-            <div className="slide-nav-title">{slide.title}</div>
+            <div className="slide-nav-title" style={index === currentSlide ? { color: `hsl(${slide.theme.accent})` } : undefined}>{slide.title}</div>
           </button>
         ))}
       </nav>
