@@ -1039,13 +1039,13 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
               })}
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 max-w-6xl">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 max-w-6xl">
               {section.details.map((detail, i) => (
-                <div key={i} className="detail-item group flex items-start gap-4" style={{ opacity: 0 }}>
-                  <span className={`font-[family-name:var(--font-display)] ${colors.accent} opacity-40 text-sm tracking-widest mt-1`}>{String(i + 1).padStart(2, '0')}</span>
+                <div key={i} className="detail-item group flex items-start gap-5" style={{ opacity: 0 }}>
+                  <span className={`font-[family-name:var(--font-display)] ${colors.accent} opacity-50 text-sm tracking-widest mt-1 font-semibold`}>{String(i + 1).padStart(2, '0')}</span>
                   <div>
-                    <div className="h-[1px] w-8 mb-4 group-hover:w-16 transition-all duration-500" style={{ background: `hsl(${colors.accentHsl} / 0.3)` }} />
-                    <p className="text-foreground/80 text-base md:text-lg leading-relaxed">{detail}</p>
+                    <div className="h-[2px] w-10 mb-5 group-hover:w-20 transition-all duration-500 ease-out" style={{ background: `hsl(${colors.accentHsl} / 0.4)` }} />
+                    <p className="text-foreground/80 text-base md:text-lg leading-[1.7]">{detail}</p>
                   </div>
                 </div>
               ))}
