@@ -718,22 +718,22 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
         ];
         return (
           <div className="fluid-section-pad">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-6xl">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-6xl">
               {devCards.map((card, i) => (
-                <div key={i} className="detail-item magnetic-card group relative rounded-md overflow-hidden cursor-pointer transition-transform duration-300 hover:-translate-y-1"
-                  style={{ opacity: 0, background: 'hsl(var(--card) / 0.6)', border: '1px solid hsl(var(--border) / 0.15)' }}>
+                <div key={i} className="detail-item magnetic-card premium-card group relative rounded-lg overflow-hidden cursor-pointer"
+                  style={{ opacity: 0 }}>
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
-                    style={{ background: `linear-gradient(160deg, hsl(${card.accent} / 0.08), transparent 60%)` }} />
-                  <div className="absolute top-0 left-0 right-0 h-[1px] opacity-0 group-hover:opacity-60 transition-opacity duration-500"
-                    style={{ background: `linear-gradient(90deg, transparent, hsl(${card.accent} / 0.6), transparent)` }} />
-                  <div className="relative z-10 p-8 md:p-10">
-                    <div className="w-11 h-11 rounded-lg flex items-center justify-center mb-6 text-xl border"
-                      style={{ background: `hsl(${card.accent} / 0.12)`, borderColor: `hsl(${card.accent} / 0.2)`, boxShadow: `0 0 25px hsl(${card.accent} / 0.12)` }}>
+                    style={{ background: `linear-gradient(160deg, hsl(${card.accent} / 0.1), transparent 60%)` }} />
+                  <div className="absolute top-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-80 transition-opacity duration-500"
+                    style={{ background: `linear-gradient(90deg, transparent, hsl(${card.accent} / 0.7), transparent)` }} />
+                  <div className="relative z-10 p-9 md:p-11">
+                    <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-7 text-xl border"
+                      style={{ background: `hsl(${card.accent} / 0.1)`, borderColor: `hsl(${card.accent} / 0.2)`, boxShadow: `0 0 30px hsl(${card.accent} / 0.1)` }}>
                       {card.icon}
                     </div>
-                    <h4 className="font-[family-name:var(--font-display)] text-foreground text-sm md:text-base font-bold tracking-[0.12em] uppercase mb-3">{card.title}</h4>
-                    <p className="text-muted-foreground text-sm leading-relaxed mb-8">{card.desc}</p>
-                    <div className="h-[2px] w-10 group-hover:w-20 transition-all duration-700"
+                    <h4 className="font-[family-name:var(--font-display)] text-foreground text-base md:text-lg font-bold tracking-[0.12em] uppercase mb-4">{card.title}</h4>
+                    <p className="text-muted-foreground text-sm leading-[1.7] mb-9">{card.desc}</p>
+                    <div className="h-[2px] w-12 group-hover:w-24 transition-all duration-700 ease-out"
                       style={{ background: `hsl(${card.accent} / 0.5)` }} />
                   </div>
                 </div>
@@ -742,8 +742,8 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
             {/* Tech badges */}
             <div className="flex flex-wrap gap-3 mt-16 max-w-6xl">
               {['TypeScript', 'Node.js', 'Python', 'Rust', 'PostgreSQL', 'Redis', 'GraphQL', 'gRPC', 'Docker', 'Kubernetes'].map((tech, i) => (
-                <span key={i} className="detail-item font-[family-name:var(--font-display)] text-[10px] tracking-[0.15em] uppercase px-4 py-2 rounded-sm border transition-all duration-300 cursor-default"
-                  style={{ opacity: 0, borderColor: `hsl(${colors.accentHsl} / 0.2)`, color: `hsl(${colors.accentHsl} / 0.7)`, background: `hsl(${colors.accentHsl} / 0.04)` }}>
+                <span key={i} className="detail-item tech-badge font-[family-name:var(--font-display)] text-[10px] tracking-[0.15em] uppercase px-5 py-2.5 rounded-md border cursor-default"
+                  style={{ opacity: 0, borderColor: `hsl(${colors.accentHsl} / 0.2)`, color: `hsl(${colors.accentHsl} / 0.8)`, background: `hsl(${colors.accentHsl} / 0.05)` }}>
                   {tech}
                 </span>
               ))}
