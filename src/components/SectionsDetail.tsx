@@ -1013,8 +1013,8 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
                 const rest = detail.slice(3);
                 const [title, desc] = rest.split(' — ');
                 const cardAccents = [
-                  'hsl(335 75% 55%)', 'hsl(185 80% 55%)', 'hsl(25 95% 55%)',
-                  'hsl(210 90% 60%)', 'hsl(45 100% 55%)', 'hsl(270 70% 60%)'
+                  'hsl(120 75% 50%)', 'hsl(45 90% 50%)', 'hsl(120 60% 45%)',
+                  'hsl(160 70% 45%)', 'hsl(80 60% 45%)', 'hsl(50 85% 50%)'
                 ];
                 const accent = cardAccents[i] || cardAccents[0];
                 return (
