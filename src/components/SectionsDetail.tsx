@@ -759,26 +759,26 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
             </div>
             {/* AI capabilities grid */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 max-w-7xl mb-16">
-              <div className="detail-item lg:col-span-7 image-hover-zoom card-hover-glow relative h-[50vh] rounded-sm overflow-hidden border border-vice-pink/10" style={{ opacity: 0 }}>
+              <div className="detail-item lg:col-span-7 image-hover-zoom card-hover-glow relative h-[50vh] rounded-sm overflow-hidden" style={{ opacity: 0, border: `1px solid hsl(${colors.accentHsl} / 0.15)` }}>
                 <img src="/images/ia-detail-01.jpg" alt="IA Generativa" loading="lazy" decoding="async" fetchPriority="low" className="w-full h-full object-cover" style={{ filter: 'brightness(0.7) saturate(1.3)' }} />
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
-                <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, hsl(var(--vice-pink) / 0.1), transparent)' }} />
+                <div className="absolute inset-0" style={{ background: `linear-gradient(135deg, hsl(${colors.accentHsl} / 0.1), transparent)` }} />
                 <div className="absolute bottom-6 left-6">
-                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.3em] uppercase text-vice-pink/80">IA GENERATIVA</span>
+                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.3em] uppercase" style={{ color: `hsl(${colors.accentHsl} / 0.8)` }}>🤖 IA GENERATIVA</span>
                   <h4 className="font-[family-name:var(--font-display)] text-foreground text-xl font-bold mt-2">Do Prompt ao Produto</h4>
                 </div>
               </div>
               <div className="lg:col-span-5 grid grid-rows-2 gap-4">
-                <div className="detail-item card-hover-glow relative p-8 rounded-sm border border-vice-pink/10 backdrop-blur-sm" style={{ opacity: 0, background: 'hsl(var(--card) / 0.5)' }}>
-                  <div className="text-4xl mb-3">🧠</div>
+                <div className="detail-item card-hover-glow relative p-8 rounded-sm backdrop-blur-sm" style={{ opacity: 0, background: 'hsl(var(--card) / 0.5)', border: `1px solid hsl(${colors.accentHsl} / 0.15)` }}>
+                  <div className="text-4xl mb-3">💠</div>
                   <h4 className="font-[family-name:var(--font-display)] text-foreground text-sm font-semibold tracking-wide uppercase mb-2">Agentes Autônomos</h4>
-                  <p className="text-muted-foreground text-xs leading-relaxed">Workflows inteligentes que pesquisam, analisam, decidem e executam — reduzindo horas de trabalho manual para minutos.</p>
+                  <p className="text-muted-foreground text-xs leading-relaxed">Workflows inteligentes como androides — pesquisam, analisam, decidem e executam com precisão sobre-humana.</p>
                 </div>
-                <div className="detail-item image-hover-zoom card-hover-glow relative h-full rounded-sm overflow-hidden border border-vice-pink/10" style={{ opacity: 0 }}>
+                <div className="detail-item image-hover-zoom card-hover-glow relative h-full rounded-sm overflow-hidden" style={{ opacity: 0, border: `1px solid hsl(${colors.accentHsl} / 0.15)` }}>
                   <img src="/images/automacao-hero.png" alt="RAG Pipeline" loading="lazy" decoding="async" fetchPriority="low" className="w-full h-full object-cover" style={{ filter: 'brightness(0.7) saturate(1.2)' }} />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
                   <div className="absolute bottom-4 left-4">
-                    <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.2em] uppercase text-vice-sunset/80">RAG PIPELINE</span>
+                    <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.2em] uppercase" style={{ color: `hsl(${colors.accentHsl} / 0.8)` }}>🔷 RAG PIPELINE</span>
                   </div>
                 </div>
               </div>
