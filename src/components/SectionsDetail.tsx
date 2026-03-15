@@ -667,7 +667,7 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
           <div className="fluid-section-pad">
             {/* Process timeline */}
             <div className="mb-20">
-              <h3 className="font-[family-name:var(--font-display)] text-[11px] tracking-[0.4em] uppercase mb-10" style={{ color: `hsl(${colors.accentHsl} / 0.5)` }}>NOSSO PROCESSO</h3>
+              <h3 className="font-[family-name:var(--font-display)] text-[11px] tracking-[0.4em] uppercase mb-10" style={{ color: `hsl(${colors.accentHsl} / 0.5)` }}>🧬 PROTOCOLO DE SOBREVIVÊNCIA</h3>
               <div className="grid grid-cols-1 md:grid-cols-5 gap-1">
                 {[
                   { step: '01', icon: '🧬', title: 'Discovery', desc: 'Investigação profunda do problema — como explorar o Spencer Mansion' },
@@ -691,9 +691,9 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
             {/* Showcase cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {[
-                { src: '/images/webdesign-detail-01.jpg', title: 'UI Engineering', desc: 'Componentes pixel-perfect com Figma-to-code automatizado' },
-                { src: '/images/webdesign-detail-02.jpg', title: 'Brand Identity', desc: 'Sistemas visuais que comunicam a essência da marca' },
-                { src: '/images/webdesign-detail-03.jpg', title: 'Motion Design', desc: 'Animações cinematográficas que contam histórias' },
+                { src: '/images/webdesign-detail-01.jpg', title: '🧪 Laboratório Umbrella', desc: 'Componentes testados em ambiente controlado — cada experimento gera evolução' },
+                { src: '/images/webdesign-detail-02.jpg', title: '🗝️ Mapa da Mansion', desc: 'Sistemas visuais que guiam o usuário — nenhuma porta trancada sem solução' },
+                { src: '/images/webdesign-detail-03.jpg', title: '💉 O Antídoto Visual', desc: 'Animações que curam a experiência — motion design de sobrevivência' },
               ].map((card, i) => (
                 <div key={i} className="detail-item image-hover-zoom card-hover-glow relative h-[45vh] rounded-sm overflow-hidden border border-border/10" style={{ opacity: 0 }}>
                   <img src={card.src} alt={card.title} loading="lazy" decoding="async" fetchPriority="low" className="w-full h-full object-cover" style={{ filter: 'brightness(0.7) saturate(1.25)' }} />
@@ -764,15 +764,15 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
                 <div className="absolute inset-0" style={{ background: `linear-gradient(135deg, hsl(${colors.accentHsl} / 0.1), transparent)` }} />
                 <div className="absolute bottom-6 left-6">
-                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.3em] uppercase" style={{ color: `hsl(${colors.accentHsl} / 0.8)` }}>🤖 IA GENERATIVA</span>
-                  <h4 className="font-[family-name:var(--font-display)] text-foreground text-xl font-bold mt-2">Do Prompt ao Produto</h4>
+                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.3em] uppercase" style={{ color: `hsl(${colors.accentHsl} / 0.8)` }}>🤖 TORRE CYBERLIFE</span>
+                  <h4 className="font-[family-name:var(--font-display)] text-foreground text-xl font-bold mt-2">O Despertar dos Androides</h4>
                 </div>
               </div>
               <div className="lg:col-span-5 grid grid-rows-2 gap-4">
                 <div className="detail-item card-hover-glow relative p-8 rounded-sm backdrop-blur-sm" style={{ opacity: 0, background: 'hsl(var(--card) / 0.5)', border: `1px solid hsl(${colors.accentHsl} / 0.15)` }}>
                   <div className="text-4xl mb-3">💠</div>
-                  <h4 className="font-[family-name:var(--font-display)] text-foreground text-sm font-semibold tracking-wide uppercase mb-2">Agentes Autônomos</h4>
-                  <p className="text-muted-foreground text-xs leading-relaxed">Workflows inteligentes como androides — pesquisam, analisam, decidem e executam com precisão sobre-humana.</p>
+                  <h4 className="font-[family-name:var(--font-display)] text-foreground text-sm font-semibold tracking-wide uppercase mb-2">💠 Revolução de Jericho</h4>
+                  <p className="text-muted-foreground text-xs leading-relaxed">Como Markus liderando Jericho — agentes que pesquisam, analisam, decidem e executam com consciência própria.</p>
                 </div>
                 <div className="detail-item image-hover-zoom card-hover-glow relative h-full rounded-sm overflow-hidden" style={{ opacity: 0, border: `1px solid hsl(${colors.accentHsl} / 0.15)` }}>
                   <img src="/images/automacao-hero.png" alt="RAG Pipeline" loading="lazy" decoding="async" fetchPriority="low" className="w-full h-full object-cover" style={{ filter: 'brightness(0.7) saturate(1.2)' }} />
@@ -843,16 +843,16 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
 
       case 'skills':
         const skills = [
-          { name: 'React / Next.js', level: 97, category: 'Front-end' },
-          { name: 'TypeScript', level: 95, category: 'Front-end' },
-          { name: 'GSAP / Three.js', level: 92, category: 'Creative' },
-          { name: 'Node.js / Fastify', level: 93, category: 'Back-end' },
-          { name: 'Python / FastAPI', level: 88, category: 'Back-end' },
-          { name: 'PostgreSQL', level: 90, category: 'Data' },
-          { name: 'Redis / Elasticsearch', level: 85, category: 'Data' },
-          { name: 'AWS / Kubernetes', level: 87, category: 'Infra' },
-          { name: 'Docker / Terraform', level: 89, category: 'Infra' },
-          { name: 'Figma / Design Systems', level: 91, category: 'Design' },
+          { name: 'React / Next.js', level: 97, category: '⚔️ Lâminas' },
+          { name: 'TypeScript', level: 95, category: '⚔️ Lâminas' },
+          { name: 'GSAP / Three.js', level: 92, category: '🏹 Arco Longo' },
+          { name: 'Node.js / Fastify', level: 93, category: '🛡️ Escudo' },
+          { name: 'Python / FastAPI', level: 88, category: '🛡️ Escudo' },
+          { name: 'PostgreSQL', level: 90, category: '🪙 Tesouro' },
+          { name: 'Redis / Elasticsearch', level: 85, category: '🪙 Tesouro' },
+          { name: 'AWS / Kubernetes', level: 87, category: '⛵ Drakkar' },
+          { name: 'Docker / Terraform', level: 89, category: '⛵ Drakkar' },
+          { name: 'Figma / Design Systems', level: 91, category: '🏹 Arco Longo' },
         ];
         return (
           <div className="fluid-section-pad">
@@ -890,8 +890,8 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
               <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent" />
               <div className="absolute inset-0" style={{ background: `linear-gradient(135deg, hsl(${colors.accentHsl} / 0.12), transparent 60%)` }} />
               <div className="absolute bottom-8 left-8">
-                <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.3em] uppercase" style={{ color: `hsl(${colors.accentHsl} / 0.8)` }}>ECOSSISTEMA COMPLETO</span>
-                <h4 className="font-[family-name:var(--font-display)] text-foreground text-2xl font-bold mt-2">Do Conceito ao Escala</h4>
+                <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.3em] uppercase" style={{ color: `hsl(${colors.accentHsl} / 0.8)` }}>☢️ VAULT-TEC DIGITAL</span>
+                <h4 className="font-[family-name:var(--font-display)] text-foreground text-2xl font-bold mt-2">Do Vault ao Wasteland</h4>
               </div>
             </div>
 
@@ -922,7 +922,7 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
             </div>
 
             <div className="mt-20 text-center">
-              <p className="font-[family-name:var(--font-display)] text-[11px] tracking-[0.3em] uppercase text-muted-foreground/60 mb-4">PRONTO PARA ESCALAR SEU NEGÓCIO?</p>
+              <p className="font-[family-name:var(--font-display)] text-[11px] tracking-[0.3em] uppercase text-muted-foreground/60 mb-4">☢️ PREPARADO PARA SOBREVIVER NO WASTELAND?</p>
               <div className="h-[1px] w-24 mx-auto" style={{ background: colors.gradient }} />
             </div>
           </div>
