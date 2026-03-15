@@ -331,11 +331,11 @@ const DeepDiveContent = memo(function DeepDiveContent({ sectionId, accentHsl, gr
     <div className="relative z-10 bg-background">
       <div className="fluid-section-pad">
         <div className="flex items-center gap-4 mb-2">
-          <div className="h-[2px] flex-1" style={{ background: `linear-gradient(90deg, hsl(${accentHsl} / 0.4), transparent)` }} />
-          <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.4em] uppercase" style={{ color: `hsl(${accentHsl} / 0.6)` }}>
+          <div className="h-[2px] flex-1" style={{ background: `linear-gradient(90deg, hsl(${accentHsl} / 0.5), transparent)` }} />
+          <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.5em] uppercase font-medium" style={{ color: `hsl(${accentHsl} / 0.7)` }}>
             EM PROFUNDIDADE
           </span>
-          <div className="h-[2px] flex-1" style={{ background: `linear-gradient(90deg, transparent, hsl(${accentHsl} / 0.4))` }} />
+          <div className="h-[2px] flex-1" style={{ background: `linear-gradient(90deg, transparent, hsl(${accentHsl} / 0.5))` }} />
         </div>
       </div>
 
@@ -343,64 +343,67 @@ const DeepDiveContent = memo(function DeepDiveContent({ sectionId, accentHsl, gr
         <div
           key={i}
           className="detail-item"
-          style={{ opacity: 0, padding: `clamp(2rem, 4vw, 4rem) clamp(1.5rem, 4vw, 6rem)` }}
+          style={{ opacity: 0, padding: `clamp(2.5rem, 5vw, 5rem) clamp(1.5rem, 4vw, 6rem)` }}
         >
-          <div className="max-w-5xl mx-auto">
-            <div className="flex items-start gap-4 mb-6">
+          <div className="max-w-5xl mx-auto premium-card rounded-lg p-8 md:p-10">
+            <div className="flex items-start gap-5 mb-6">
               <span
-                className="font-[family-name:var(--font-display)] text-[11px] tracking-[0.3em] mt-2 shrink-0"
-                style={{ color: `hsl(${accentHsl} / 0.35)` }}
+                className="font-[family-name:var(--font-display)] text-[12px] tracking-[0.3em] mt-2 shrink-0 font-semibold"
+                style={{ color: `hsl(${accentHsl} / 0.45)` }}
               >
                 {String(i + 1).padStart(2, '0')}
               </span>
-              <div>
+              <div className="flex-1">
                 <h3
                   className="font-[family-name:var(--font-display)] font-bold tracking-tight uppercase mb-4"
-                  style={{ fontSize: 'clamp(1.25rem, 2.5vw, 2rem)', color: 'hsl(var(--foreground) / 0.95)' }}
+                  style={{ fontSize: 'clamp(1.3rem, 2.5vw, 2.2rem)', color: 'hsl(var(--foreground) / 0.95)' }}
                 >
                   {block.heading}
                 </h3>
-                <div className="h-[2px] w-12" style={{ background: gradient }} />
+                <div className="h-[2px] w-16" style={{ background: gradient }} />
               </div>
             </div>
 
             <p
-              className="text-foreground/75 leading-relaxed mb-8 max-w-3xl ml-[calc(clamp(11px,1vw,14px)*3+1rem)]"
-              style={{ fontSize: 'clamp(0.875rem, 1.3vw, 1.125rem)' }}
+              className="text-foreground/70 leading-[1.8] mb-8 max-w-3xl ml-[calc(clamp(12px,1vw,15px)*3+1.25rem)]"
+              style={{ fontSize: 'clamp(0.9rem, 1.3vw, 1.15rem)' }}
             >
               {block.body}
             </p>
 
             {block.stat && (
               <div
-                className="inline-flex items-center gap-6 rounded-md px-8 py-5 mb-8 ml-[calc(clamp(11px,1vw,14px)*3+1rem)]"
+                className="stat-card inline-flex items-center gap-8 rounded-lg px-10 py-6 mb-8 ml-[calc(clamp(12px,1vw,15px)*3+1.25rem)]"
                 style={{
-                  background: `hsl(${accentHsl} / 0.06)`,
-                  border: `1px solid hsl(${accentHsl} / 0.15)`,
+                  background: `hsl(${accentHsl} / 0.08)`,
+                  border: `1px solid hsl(${accentHsl} / 0.2)`,
+                  boxShadow: `0 0 30px hsl(${accentHsl} / 0.06)`,
                 }}
               >
                 <span
-                  className="font-[family-name:var(--font-display)] font-bold"
-                  style={{ fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', color: `hsl(${accentHsl})` }}
+                  className="font-[family-name:var(--font-display)] font-black"
+                  style={{ fontSize: 'clamp(1.75rem, 3.5vw, 3rem)', color: `hsl(${accentHsl})`, textShadow: `0 0 30px hsl(${accentHsl} / 0.3)` }}
                 >
                   {block.stat.value}
                 </span>
-                <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.2em] uppercase text-muted-foreground">
+                <div className="h-8 w-[1px]" style={{ background: `hsl(${accentHsl} / 0.2)` }} />
+                <span className="font-[family-name:var(--font-display)] text-[11px] tracking-[0.25em] uppercase text-muted-foreground font-medium">
                   {block.stat.label}
                 </span>
               </div>
             )}
 
             {block.highlights && (
-              <div className="flex flex-wrap gap-2 ml-[calc(clamp(11px,1vw,14px)*3+1rem)]">
+              <div className="flex flex-wrap gap-2.5 ml-[calc(clamp(12px,1vw,15px)*3+1.25rem)]">
                 {block.highlights.map((h, j) => (
                   <span
                     key={j}
-                    className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.12em] uppercase px-3 py-1.5 rounded-sm transition-all duration-300 cursor-default hover:scale-[1.03]"
+                    className="tech-badge font-[family-name:var(--font-display)] text-[10px] tracking-[0.15em] uppercase px-4 py-2 rounded-md cursor-default hover:scale-[1.04]"
                     style={{
-                      border: `1px solid hsl(${accentHsl} / 0.2)`,
-                      color: `hsl(${accentHsl} / 0.8)`,
-                      background: `hsl(${accentHsl} / 0.05)`,
+                      border: `1px solid hsl(${accentHsl} / 0.25)`,
+                      color: `hsl(${accentHsl} / 0.85)`,
+                      background: `hsl(${accentHsl} / 0.06)`,
+                      boxShadow: `inset 0 1px 0 hsl(${accentHsl} / 0.06)`,
                     }}
                   >
                     {h}
@@ -409,18 +412,12 @@ const DeepDiveContent = memo(function DeepDiveContent({ sectionId, accentHsl, gr
               </div>
             )}
           </div>
-
-          {i < blocks.length - 1 && (
-            <div className="max-w-5xl mx-auto mt-10">
-              <div className="h-[1px]" style={{ background: `linear-gradient(90deg, transparent, hsl(${accentHsl} / 0.15), transparent)` }} />
-            </div>
-          )}
         </div>
       ))}
 
-      <div className="text-center py-16">
-        <div className="h-[1px] w-20 mx-auto mb-6" style={{ background: gradient }} />
-        <p className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.4em] uppercase text-muted-foreground/50">
+      <div className="text-center py-20">
+        <div className="h-[2px] w-24 mx-auto mb-8" style={{ background: gradient }} />
+        <p className="font-[family-name:var(--font-display)] text-[11px] tracking-[0.5em] uppercase text-muted-foreground/60 font-medium">
           VAMOS TRANSFORMAR SUA IDEIA EM REALIDADE?
         </p>
       </div>
