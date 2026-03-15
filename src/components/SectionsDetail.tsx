@@ -771,8 +771,8 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
               <div className="lg:col-span-5 grid grid-rows-2 gap-4">
                 <div className="detail-item card-hover-glow relative p-8 rounded-sm backdrop-blur-sm" style={{ opacity: 0, background: 'hsl(var(--card) / 0.5)', border: `1px solid hsl(${colors.accentHsl} / 0.15)` }}>
                   <div className="text-4xl mb-3">💠</div>
-                  <h4 className="font-[family-name:var(--font-display)] text-foreground text-sm font-semibold tracking-wide uppercase mb-2">Agentes Autônomos</h4>
-                  <p className="text-muted-foreground text-xs leading-relaxed">Workflows inteligentes como androides — pesquisam, analisam, decidem e executam com precisão sobre-humana.</p>
+                  <h4 className="font-[family-name:var(--font-display)] text-foreground text-sm font-semibold tracking-wide uppercase mb-2">💠 Revolução de Jericho</h4>
+                  <p className="text-muted-foreground text-xs leading-relaxed">Como Markus liderando Jericho — agentes que pesquisam, analisam, decidem e executam com consciência própria.</p>
                 </div>
                 <div className="detail-item image-hover-zoom card-hover-glow relative h-full rounded-sm overflow-hidden" style={{ opacity: 0, border: `1px solid hsl(${colors.accentHsl} / 0.15)` }}>
                   <img src="/images/automacao-hero.png" alt="RAG Pipeline" loading="lazy" decoding="async" fetchPriority="low" className="w-full h-full object-cover" style={{ filter: 'brightness(0.7) saturate(1.2)' }} />
