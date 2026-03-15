@@ -897,12 +897,12 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl">
               {[
-                { icon: '📈', title: 'Growth Marketing', desc: 'Campanhas data-driven com ROAS acima de 4x. Google Ads, Meta Ads, TikTok Ads com tracking server-side e atribuição multi-touch.', accent: 'vice-pink' },
-                { icon: '🌐', title: 'Plataformas Web', desc: 'Experiências imersivas com Next.js, edge computing e Core Web Vitals no verde. SEO técnico que coloca você no topo.', accent: 'vice-teal' },
-                { icon: '📱', title: 'Apps Mobile', desc: 'React Native com performance nativa. Publicação nas stores, updates OTA com CodePush e analytics de engajamento.', accent: 'vice-sunset' },
-                { icon: '⚙️', title: 'SaaS & Plataformas', desc: 'Arquitetura multi-tenant escalável com billing Stripe, dashboards em tempo real e admin panel white-label.', accent: 'vice-sky' },
-                { icon: '🚀', title: 'Landing Pages', desc: 'Conversão otimizada com A/B testing, heatmaps, copywriting estratégico e integração com CRM e automação.', accent: 'vice-gold' },
-                { icon: '🎨', title: 'Branding Digital', desc: 'Identidade visual que posiciona e diferencia. Logo, tipografia, paleta, guidelines e assets para todos os canais.', accent: 'vice-palm' },
+                { icon: '☢️', title: 'Growth Marketing', desc: 'Campanhas data-driven com ROAS acima de 4x — penetrando o mercado como radiação no Wasteland.', accent: '120 75% 50%' },
+                { icon: '🔧', title: 'Plataformas Web', desc: 'Experiências imersivas construídas para sobreviver. Next.js, edge computing e Core Web Vitals no verde.', accent: '45 90% 50%' },
+                { icon: '📻', title: 'Apps Mobile', desc: 'React Native com performance nativa — sintonize na frequência certa. Updates OTA e analytics de engajamento.', accent: '120 60% 45%' },
+                { icon: '💊', title: 'SaaS & Plataformas', desc: 'Arquitetura multi-tenant escalável como um Vault-Tec — billing Stripe e dashboards em tempo real.', accent: '160 70% 45%' },
+                { icon: '🏗️', title: 'Landing Pages', desc: 'Conversão otimizada para reconstruir o mundo. A/B testing, heatmaps e integração com CRM.', accent: '80 60% 45%' },
+                { icon: '⚡', title: 'Branding Digital', desc: 'Identidade visual que sobrevive ao apocalipse. Logo, tipografia, paleta e guidelines para todos os canais.', accent: '50 85% 50%' },
               ].map((card, i) => (
                 <div key={i} className="detail-item magnetic-card card-hover-glow relative p-8 rounded-sm overflow-hidden group cursor-pointer"
                   style={{ opacity: 0, background: 'hsl(var(--card) / 0.4)', border: '1px solid hsl(var(--border) / 0.15)' }}>
