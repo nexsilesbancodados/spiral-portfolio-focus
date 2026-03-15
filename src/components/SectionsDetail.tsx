@@ -711,10 +711,10 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
 
       case 'desenvolvimento':
         const devCards = [
-          { icon: '⚡', title: 'APIs de Alta Performance', desc: 'Endpoints que respondem em <50ms, com rate limiting adaptativo, caching em múltiplas camadas e documentação OpenAPI gerada automaticamente.', accent: 'var(--vice-sunset)' },
-          { icon: '🏗️', title: 'Arquitetura Evolutiva', desc: 'Começamos simples, escalamos com elegância. Monolitos modulares que se transformam em microsserviços quando o negócio demanda.', accent: 'var(--vice-teal)' },
-          { icon: '🔄', title: 'Pipeline Zero-Downtime', desc: 'Deploy blue-green automatizado, canary releases, feature flags e rollback instantâneo. Sua aplicação nunca para.', accent: 'var(--vice-gold)' },
-          { icon: '🗄️', title: 'Dados Inteligentes', desc: 'Modelagem otimizada com índices compostos, materialized views, partitioning e queries que escalam de 100 a 100M registros.', accent: 'var(--vice-sky)' },
+          { icon: '❄️', title: 'APIs de Alta Performance', desc: 'Endpoints que respondem em <50ms — precisos como o Machado Leviatã. Cache inteligente, rate limiting e documentação OpenAPI.', accent: '200 85% 60%' },
+          { icon: '🔥', title: 'Arquitetura Evolutiva', desc: 'Começamos simples, escalamos com a fúria das Lâminas do Caos. Monolitos modulares que evoluem em microsserviços.', accent: '15 90% 55%' },
+          { icon: '⚡', title: 'Pipeline Zero-Downtime', desc: 'Deploy blue-green como os Bifröst — instantâneo e sem falhas. Canary releases, feature flags e rollback.', accent: '38 90% 50%' },
+          { icon: '🪨', title: 'Dados Inteligentes', desc: 'Modelagem sólida como as runas nórdicas. Índices compostos, materialized views e queries que escalam aos milhões.', accent: '200 70% 50%' },
         ];
         return (
           <div className="fluid-section-pad">
