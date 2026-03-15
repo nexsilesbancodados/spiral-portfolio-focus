@@ -764,8 +764,8 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
                 <div className="absolute inset-0" style={{ background: `linear-gradient(135deg, hsl(${colors.accentHsl} / 0.1), transparent)` }} />
                 <div className="absolute bottom-6 left-6">
-                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.3em] uppercase" style={{ color: `hsl(${colors.accentHsl} / 0.8)` }}>🤖 IA GENERATIVA</span>
-                  <h4 className="font-[family-name:var(--font-display)] text-foreground text-xl font-bold mt-2">Do Prompt ao Produto</h4>
+                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.3em] uppercase" style={{ color: `hsl(${colors.accentHsl} / 0.8)` }}>🤖 TORRE CYBERLIFE</span>
+                  <h4 className="font-[family-name:var(--font-display)] text-foreground text-xl font-bold mt-2">O Despertar dos Androides</h4>
                 </div>
               </div>
               <div className="lg:col-span-5 grid grid-rows-2 gap-4">
