@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState, useCallback, lazy, Suspense, memo } from 'react';
 import { MediaButton } from '@/components/ui/media-button';
+import { ParallaxHero } from '@/components/ui/parallax-scrolling';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
