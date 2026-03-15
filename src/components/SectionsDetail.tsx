@@ -885,13 +885,13 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
       case 'servicos':
         return (
           <div className="fluid-section-pad">
-            <div className="detail-item relative w-full h-[50vh] md:h-[60vh] overflow-hidden rounded-sm mb-16" style={{ opacity: 0 }}>
-              <img src="/images/hero-servicos.jpg" alt="Serviços" className="w-full h-full object-cover" style={{ filter: 'brightness(0.75) saturate(1.3) contrast(1.05)' }} />
+            <div className="detail-item relative w-full h-[50vh] md:h-[60vh] overflow-hidden rounded-lg mb-16" style={{ opacity: 0, border: `1px solid hsl(${colors.accentHsl} / 0.12)` }}>
+              <img src="/images/hero-servicos.jpg" alt="Serviços" className="w-full h-full object-cover" style={{ filter: 'brightness(0.7) saturate(1.35) contrast(1.05)' }} />
               <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent" />
-              <div className="absolute inset-0" style={{ background: `linear-gradient(135deg, hsl(${colors.accentHsl} / 0.12), transparent 60%)` }} />
-              <div className="absolute bottom-8 left-8">
-                <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.3em] uppercase" style={{ color: `hsl(${colors.accentHsl} / 0.8)` }}>☢️ VAULT-TEC DIGITAL</span>
-                <h4 className="font-[family-name:var(--font-display)] text-foreground text-2xl font-bold mt-2">Do Vault ao Wasteland</h4>
+              <div className="absolute inset-0" style={{ background: `linear-gradient(135deg, hsl(${colors.accentHsl} / 0.14), transparent 60%)` }} />
+              <div className="absolute bottom-0 left-0 right-0 p-8" style={{ background: 'linear-gradient(to top, hsl(var(--background) / 0.85), transparent)' }}>
+                <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.35em] uppercase font-medium" style={{ color: `hsl(${colors.accentHsl} / 0.9)` }}>☢️ VAULT-TEC DIGITAL</span>
+                <h4 className="font-[family-name:var(--font-display)] text-foreground text-2xl md:text-3xl font-bold mt-2">Do Vault ao Wasteland</h4>
               </div>
             </div>
 
