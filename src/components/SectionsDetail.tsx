@@ -805,6 +805,12 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
                 </span>
               ))}
             </div>
+
+            {/* CTA Detroit */}
+            <div className="flex flex-wrap gap-4 mt-16 justify-center">
+              <MediaButton label="🤖 Despertar Consciência" mediaUrl="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjk5YjI2MzE5ZjJhZTU0MDczMWMzYTNlNGUzZTk2MGZkODgzNzJkNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7btPCcdNniyf0ArS/giphy.gif" />
+              <MediaButton label="💠 Conectar a Jericho" mediaUrl="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExZjk4OWM5ZWY0ZjAyZTUzN2RjNTVlNjZlMzQ2ZjJkZTQ0NjFhMjM4OCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xT9IgzoKnwFNmISR8I/giphy.gif" />
+            </div>
           </div>
         );
 
