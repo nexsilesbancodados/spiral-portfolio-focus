@@ -373,23 +373,27 @@ const DeepDiveContent = memo(function DeepDiveContent({ sectionId, accentHsl, gr
 
             {block.stat && (
               <div
-                className="stat-card inline-flex items-center gap-8 rounded-lg px-10 py-6 mb-8 ml-[calc(clamp(12px,1vw,15px)*3+1.25rem)]"
+                className="stat-card inline-flex items-center gap-0 rounded-xl overflow-hidden mb-8 ml-[calc(clamp(12px,1vw,15px)*3+1.25rem)]"
                 style={{
-                  background: `hsl(${accentHsl} / 0.08)`,
+                  background: `linear-gradient(135deg, hsl(${accentHsl} / 0.12), hsl(${accentHsl} / 0.04))`,
                   border: `1px solid hsl(${accentHsl} / 0.2)`,
-                  boxShadow: `0 0 30px hsl(${accentHsl} / 0.06)`,
+                  boxShadow: `0 0 40px hsl(${accentHsl} / 0.08), inset 0 1px 0 hsl(${accentHsl} / 0.08)`,
                 }}
               >
-                <span
-                  className="font-[family-name:var(--font-display)] font-black"
-                  style={{ fontSize: 'clamp(1.75rem, 3.5vw, 3rem)', color: `hsl(${accentHsl})`, textShadow: `0 0 30px hsl(${accentHsl} / 0.3)` }}
-                >
-                  {block.stat.value}
-                </span>
-                <div className="h-8 w-[1px]" style={{ background: `hsl(${accentHsl} / 0.2)` }} />
-                <span className="font-[family-name:var(--font-display)] text-[11px] tracking-[0.25em] uppercase text-muted-foreground font-medium">
-                  {block.stat.label}
-                </span>
+                <div className="px-8 py-5 flex items-center justify-center" style={{ background: `hsl(${accentHsl} / 0.06)` }}>
+                  <span
+                    className="font-[family-name:var(--font-display)] font-black whitespace-nowrap"
+                    style={{ fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', color: `hsl(${accentHsl})`, textShadow: `0 0 30px hsl(${accentHsl} / 0.4), 0 0 60px hsl(${accentHsl} / 0.15)` }}
+                  >
+                    {block.stat.value}
+                  </span>
+                </div>
+                <div className="w-[1px] h-10 self-center" style={{ background: `hsl(${accentHsl} / 0.25)` }} />
+                <div className="px-8 py-5">
+                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.25em] uppercase text-muted-foreground font-medium leading-tight block">
+                    {block.stat.label}
+                  </span>
+                </div>
               </div>
             )}
 
@@ -673,9 +677,9 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
                   { step: '04', icon: '🔬', title: 'Protótipo', desc: 'Testes de usabilidade e refinamento — sobreviver é iterar' },
                   { step: '05', icon: '💉', title: 'Handoff', desc: 'Entrega precisa com tokens e documentação — o antídoto final' },
                 ].map((item, i) => (
-                  <div key={i} className="detail-item magnetic-card premium-card group relative p-7 rounded-lg overflow-hidden" style={{ opacity: 0 }}>
+                  <div key={i} className="detail-item magnetic-card premium-card card-biohazard group relative p-7 rounded-lg overflow-hidden" style={{ opacity: 0 }}>
                     <div className="absolute top-0 left-0 right-0 h-[2px] opacity-40 group-hover:opacity-100 transition-opacity duration-500" style={{ background: colors.gradient }} />
-                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-600 pointer-events-none" style={{ background: `radial-gradient(ellipse at top, hsl(${colors.accentHsl} / 0.08), transparent 70%)` }} />
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-600 pointer-events-none" style={{ background: `radial-gradient(ellipse at top, hsl(${colors.accentHsl} / 0.1), transparent 70%)` }} />
                     <div className="relative z-10">
                       <div className="flex items-center gap-3 mb-4">
                         <span className="text-xl">{item.icon}</span>
@@ -695,11 +699,12 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
                 { src: '/images/webdesign-detail-02.jpg', title: '🗝️ Mapa da Mansion', desc: 'Sistemas visuais que guiam o usuário — nenhuma porta trancada sem solução' },
                 { src: '/images/webdesign-detail-03.jpg', title: '💉 O Antídoto Visual', desc: 'Animações que curam a experiência — motion design de sobrevivência' },
               ].map((card, i) => (
-                <div key={i} className="detail-item image-hover-zoom card-hover-glow relative h-[48vh] rounded-lg overflow-hidden" style={{ opacity: 0, border: `1px solid hsl(${colors.accentHsl} / 0.12)` }}>
-                  <img src={card.src} alt={card.title} loading="lazy" decoding="async" fetchPriority="low" className="w-full h-full object-cover" style={{ filter: 'brightness(0.65) saturate(1.3)' }} />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent" />
-                  <div className="absolute inset-0" style={{ background: `linear-gradient(135deg, hsl(${colors.accentHsl} / 0.1), transparent 60%)` }} />
-                  <div className="absolute bottom-0 left-0 right-0 p-7" style={{ background: 'linear-gradient(to top, hsl(var(--background) / 0.9), transparent)' }}>
+                <div key={i} className="detail-item image-hover-zoom card-hover-glow relative h-[48vh] rounded-lg overflow-hidden group" style={{ opacity: 0, border: `1px solid hsl(${colors.accentHsl} / 0.15)` }}>
+                  <img src={card.src} alt={card.title} loading="lazy" decoding="async" fetchPriority="low" className="w-full h-full object-cover" style={{ filter: 'brightness(0.6) saturate(1.4)' }} />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{ background: `linear-gradient(135deg, hsl(${colors.accentHsl} / 0.15), transparent 60%)` }} />
+                  <div className="absolute bottom-0 left-0 right-0 p-7" style={{ background: 'linear-gradient(to top, hsl(var(--background) / 0.95), hsl(var(--background) / 0.5) 60%, transparent)' }}>
+                    <div className="h-[2px] w-8 mb-4 group-hover:w-16 transition-all duration-500" style={{ background: `hsl(${colors.accentHsl} / 0.6)` }} />
                     <h4 className="font-[family-name:var(--font-display)] text-foreground font-bold text-base tracking-[0.08em] uppercase mb-2">{card.title}</h4>
                     <p className="text-foreground/60 text-[13px] leading-relaxed">{card.desc}</p>
                   </div>
@@ -711,30 +716,41 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
 
       case 'desenvolvimento':
         const devCards = [
-          { icon: '❄️', title: 'APIs de Alta Performance', desc: 'Endpoints que respondem em <50ms — precisos como o Machado Leviatã. Cache inteligente, rate limiting e documentação OpenAPI.', accent: '200 85% 60%' },
-          { icon: '🔥', title: 'Arquitetura Evolutiva', desc: 'Começamos simples, escalamos com a fúria das Lâminas do Caos. Monolitos modulares que evoluem em microsserviços.', accent: '15 90% 55%' },
-          { icon: '⚡', title: 'Pipeline Zero-Downtime', desc: 'Deploy blue-green como os Bifröst — instantâneo e sem falhas. Canary releases, feature flags e rollback.', accent: '38 90% 50%' },
-          { icon: '🪨', title: 'Dados Inteligentes', desc: 'Modelagem sólida como as runas nórdicas. Índices compostos, materialized views e queries que escalam aos milhões.', accent: '200 70% 50%' },
+          { icon: '❄️', title: 'APIs de Alta Performance', desc: 'Endpoints que respondem em <50ms — precisos como o Machado Leviatã. Cache inteligente, rate limiting e documentação OpenAPI.', accent: '200 85% 60%', element: 'GELO' },
+          { icon: '🔥', title: 'Arquitetura Evolutiva', desc: 'Começamos simples, escalamos com a fúria das Lâminas do Caos. Monolitos modulares que evoluem em microsserviços.', accent: '15 90% 55%', element: 'FOGO' },
+          { icon: '⚡', title: 'Pipeline Zero-Downtime', desc: 'Deploy blue-green como os Bifröst — instantâneo e sem falhas. Canary releases, feature flags e rollback.', accent: '38 90% 50%', element: 'RELÂMPAGO' },
+          { icon: '🪨', title: 'Dados Inteligentes', desc: 'Modelagem sólida como as runas nórdicas. Índices compostos, materialized views e queries que escalam aos milhões.', accent: '200 70% 50%', element: 'PEDRA' },
         ];
         return (
           <div className="fluid-section-pad">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-6xl">
               {devCards.map((card, i) => (
-                <div key={i} className="detail-item magnetic-card premium-card group relative rounded-lg overflow-hidden cursor-pointer"
+                <div key={i} className="detail-item magnetic-card premium-card group relative rounded-xl overflow-hidden cursor-pointer"
                   style={{ opacity: 0 }}>
+                  {/* Top accent bar with gradient */}
+                  <div className="absolute top-0 left-0 right-0 h-[3px] opacity-60 group-hover:opacity-100 transition-opacity duration-500"
+                    style={{ background: `linear-gradient(90deg, hsl(${card.accent}), hsl(${card.accent} / 0.3))` }} />
+                  {/* Hover radial glow */}
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
-                    style={{ background: `linear-gradient(160deg, hsl(${card.accent} / 0.1), transparent 60%)` }} />
-                  <div className="absolute top-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-80 transition-opacity duration-500"
-                    style={{ background: `linear-gradient(90deg, transparent, hsl(${card.accent} / 0.7), transparent)` }} />
+                    style={{ background: `radial-gradient(ellipse at top left, hsl(${card.accent} / 0.12), transparent 60%)` }} />
+                  {/* Bottom glow line on hover */}
+                  <div className="absolute bottom-0 left-0 right-0 h-[1px] opacity-0 group-hover:opacity-60 transition-opacity duration-700"
+                    style={{ background: `linear-gradient(90deg, transparent, hsl(${card.accent} / 0.4), transparent)` }} />
                   <div className="relative z-10 p-9 md:p-11">
-                    <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-7 text-xl border"
-                      style={{ background: `hsl(${card.accent} / 0.1)`, borderColor: `hsl(${card.accent} / 0.2)`, boxShadow: `0 0 30px hsl(${card.accent} / 0.1)` }}>
-                      {card.icon}
+                    <div className="flex items-center justify-between mb-7">
+                      <div className="w-14 h-14 rounded-xl flex items-center justify-center text-2xl border"
+                        style={{ background: `hsl(${card.accent} / 0.1)`, borderColor: `hsl(${card.accent} / 0.25)`, boxShadow: `0 0 30px hsl(${card.accent} / 0.12)` }}>
+                        {card.icon}
+                      </div>
+                      <span className="font-[family-name:var(--font-display)] text-[8px] tracking-[0.4em] uppercase font-bold opacity-0 group-hover:opacity-60 transition-opacity duration-500" style={{ color: `hsl(${card.accent})` }}>{card.element}</span>
                     </div>
                     <h4 className="font-[family-name:var(--font-display)] text-foreground text-base md:text-lg font-bold tracking-[0.12em] uppercase mb-4">{card.title}</h4>
                     <p className="text-muted-foreground text-sm leading-[1.7] mb-9">{card.desc}</p>
-                    <div className="h-[2px] w-12 group-hover:w-24 transition-all duration-700 ease-out"
-                      style={{ background: `hsl(${card.accent} / 0.5)` }} />
+                    <div className="flex items-center gap-3">
+                      <div className="h-[2px] w-12 group-hover:w-24 transition-all duration-700 ease-out rounded-full"
+                        style={{ background: `linear-gradient(90deg, hsl(${card.accent}), hsl(${card.accent} / 0.2))` }} />
+                      <div className="w-1.5 h-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: `hsl(${card.accent})`, boxShadow: `0 0 6px hsl(${card.accent} / 0.5)` }} />
+                    </div>
                   </div>
                 </div>
               ))}
@@ -768,8 +784,9 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
                   <h4 className="font-[family-name:var(--font-display)] text-foreground text-xl md:text-2xl font-bold mt-2">O Despertar dos Androides</h4>
                 </div>
               </div>
-              <div className="lg:col-span-5 grid grid-rows-2 gap-5">
-                <div className="detail-item premium-card card-hover-glow relative p-9 rounded-lg" style={{ opacity: 0 }}>
+                <div className="lg:col-span-5 grid grid-rows-2 gap-5">
+                <div className="detail-item premium-card card-led-indicator card-hover-glow relative p-9 rounded-xl" style={{ opacity: 0 }}>
+                  <div className="absolute top-0 left-0 right-0 h-[2px] opacity-40" style={{ background: `linear-gradient(90deg, hsl(${colors.accentHsl}), transparent)` }} />
                   <div className="text-4xl mb-4">💠</div>
                   <h4 className="font-[family-name:var(--font-display)] text-foreground text-sm font-bold tracking-[0.12em] uppercase mb-3">Revolução de Jericho</h4>
                   <p className="text-muted-foreground text-[13px] leading-[1.7]">Como Markus liderando Jericho — agentes que pesquisam, analisam, decidem e executam com consciência própria.</p>
@@ -826,14 +843,18 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
               {/* Performance metrics */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {[
-                  { value: '60fps', label: 'Animações' },
-                  { value: '<1s', label: 'Cold Start' },
-                  { value: '95%', label: 'Código Compartilhado' },
-                  { value: '99.5%', label: 'Crash-Free Rate' },
+                  { value: '60fps', label: 'Animações', icon: '🔓' },
+                  { value: '<1s', label: 'Cold Start', icon: '⚡' },
+                  { value: '95%', label: 'Código Compartilhado', icon: '📡' },
+                  { value: '99.5%', label: 'Crash-Free Rate', icon: '🛡️' },
                 ].map((metric, i) => (
-                  <div key={i} className="detail-item stat-card text-center p-7 rounded-lg" style={{ opacity: 0 }}>
-                    <span className="font-[family-name:var(--font-display)] font-black text-2xl md:text-3xl block mb-2" style={{ color: `hsl(${colors.accentHsl})`, textShadow: `0 0 25px hsl(${colors.accentHsl} / 0.2)` }}>{metric.value}</span>
-                    <span className="font-[family-name:var(--font-display)] text-[9px] tracking-[0.25em] uppercase text-muted-foreground font-medium">{metric.label}</span>
+                  <div key={i} className="detail-item stat-card card-ctos-grid group relative rounded-xl overflow-hidden" style={{ opacity: 0 }}>
+                    <div className="absolute top-0 left-0 right-0 h-[2px] opacity-40 group-hover:opacity-100 transition-opacity duration-500" style={{ background: `linear-gradient(90deg, hsl(${colors.accentHsl}), transparent)` }} />
+                    <div className="relative z-10 p-6 text-center">
+                      <span className="text-lg mb-2 block">{metric.icon}</span>
+                      <span className="font-[family-name:var(--font-display)] font-black text-2xl md:text-3xl block mb-1" style={{ color: `hsl(${colors.accentHsl})`, textShadow: `0 0 25px hsl(${colors.accentHsl} / 0.3)` }}>{metric.value}</span>
+                      <span className="font-[family-name:var(--font-display)] text-[9px] tracking-[0.25em] uppercase text-muted-foreground font-medium">{metric.label}</span>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -858,15 +879,17 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
           <div className="fluid-section-pad">
             <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-10">
               {skills.map((skill, i) => (
-                <div key={i} className="detail-item group" style={{ opacity: 0 }}>
+                <div key={i} className="detail-item group card-runic-border rounded-lg p-5" style={{ opacity: 0 }}>
                   <div className="flex justify-between items-center mb-3">
-                    <span className="font-[family-name:var(--font-display)] text-foreground/90 text-sm tracking-wide uppercase font-medium">{skill.name}</span>
-                    <span className="font-[family-name:var(--font-display)] text-[11px] tracking-widest font-semibold" style={{ color: `hsl(${colors.accentHsl} / 0.7)` }}>{skill.level}%</span>
+                    <div className="flex items-center gap-3">
+                      <span className="font-[family-name:var(--font-display)] text-[9px] tracking-[0.25em] uppercase text-muted-foreground/40 font-medium">{skill.category}</span>
+                      <span className="font-[family-name:var(--font-display)] text-foreground/90 text-sm tracking-wide uppercase font-medium">{skill.name}</span>
+                    </div>
+                    <span className="font-[family-name:var(--font-display)] text-sm tracking-widest font-black" style={{ color: `hsl(${colors.accentHsl})`, textShadow: `0 0 15px hsl(${colors.accentHsl} / 0.3)` }}>{skill.level}%</span>
                   </div>
-                  <div className="skill-progress-bar" style={{ height: '4px', borderRadius: '4px' }}>
-                    <div className="skill-progress-fill" data-width={`${skill.level}%`} style={{ width: 0, borderRadius: '4px' }} />
+                  <div className="skill-progress-bar" style={{ height: '5px', borderRadius: '4px' }}>
+                    <div className="skill-progress-fill" data-width={`${skill.level}%`} style={{ width: 0, borderRadius: '4px', boxShadow: `0 0 10px hsl(${colors.accentHsl} / 0.3)` }} />
                   </div>
-                  <span className="font-[family-name:var(--font-display)] text-[9px] tracking-[0.25em] uppercase text-muted-foreground/50 mt-2 block font-medium">{skill.category}</span>
                 </div>
               ))}
             </div>
@@ -904,18 +927,25 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
                 { icon: '🏗️', title: 'Landing Pages', desc: 'Conversão otimizada para reconstruir o mundo. A/B testing, heatmaps e integração com CRM.', accent: '80 60% 45%' },
                 { icon: '⚡', title: 'Branding Digital', desc: 'Identidade visual que sobrevive ao apocalipse. Logo, tipografia, paleta e guidelines para todos os canais.', accent: '50 85% 50%' },
               ].map((card, i) => (
-                <div key={i} className="detail-item magnetic-card premium-card card-hover-glow group relative p-9 rounded-lg overflow-hidden cursor-pointer"
+                <div key={i} className="detail-item magnetic-card premium-card card-scanlines card-hover-glow group relative p-9 rounded-xl overflow-hidden cursor-pointer"
                   style={{ opacity: 0 }}>
-                  <div className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
-                    style={{ background: `radial-gradient(ellipse at top left, hsl(${colors.accentHsl} / 0.1), transparent 60%)` }} />
-                  <div className="absolute top-0 left-0 right-0 h-[2px] opacity-50 group-hover:opacity-100 transition-opacity duration-500"
-                    style={{ background: colors.gradient }} />
+                  {/* Pip-Boy green scanline top */}
+                  <div className="absolute top-0 left-0 right-0 h-[3px] opacity-50 group-hover:opacity-100 transition-opacity duration-500"
+                    style={{ background: `linear-gradient(90deg, hsl(${card.accent}), transparent 70%)` }} />
+                  <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+                    style={{ background: `radial-gradient(ellipse at top left, hsl(${colors.accentHsl} / 0.12), transparent 60%)` }} />
                   <div className="relative z-10">
-                    <span className="text-4xl mb-6 block drop-shadow-lg">{card.icon}</span>
+                    <div className="flex items-center justify-between mb-5">
+                      <span className="text-4xl drop-shadow-lg">{card.icon}</span>
+                      <span className="font-[family-name:var(--font-display)] text-[9px] tracking-[0.3em] uppercase font-bold opacity-0 group-hover:opacity-50 transition-opacity duration-500" style={{ color: `hsl(${card.accent})` }}>VAULT-TEC</span>
+                    </div>
                     <h4 className="font-[family-name:var(--font-display)] text-foreground text-base font-bold tracking-[0.15em] uppercase mb-4">{card.title}</h4>
-                    <p className="text-muted-foreground text-[13px] leading-[1.7]">{card.desc}</p>
-                    <div className="h-[2px] w-14 mt-7 transition-all duration-700 group-hover:w-full ease-out"
-                      style={{ background: colors.gradient }} />
+                    <p className="text-muted-foreground text-[13px] leading-[1.7] mb-6">{card.desc}</p>
+                    <div className="flex items-center gap-2">
+                      <div className="h-[2px] w-14 transition-all duration-700 group-hover:w-full ease-out rounded-full"
+                        style={{ background: `linear-gradient(90deg, hsl(${card.accent}), hsl(${card.accent} / 0.15))` }} />
+                      <div className="w-1 h-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: `hsl(${card.accent})`, boxShadow: `0 0 4px hsl(${card.accent} / 0.6)` }} />
+                    </div>
                   </div>
                 </div>
               ))}
@@ -1224,17 +1254,21 @@ export function SectionsDetail() {
                         { value: '98', suffix: '%', label: 'Satisfação dos Clientes', target: 98 },
                         { value: '∞', suffix: '', label: 'Curiosidade', target: null },
                       ].map((stat, i) => (
-                        <div key={i} className="anim-el stat-card relative p-6 rounded-lg overflow-hidden group"
+                        <div key={i} className="anim-el stat-card relative p-6 rounded-xl overflow-hidden group"
                           style={{ opacity: 0 }}>
-                          <div className="absolute top-0 left-0 right-0 h-[2px] opacity-60"
-                            style={{ background: 'linear-gradient(90deg, transparent, hsl(var(--accent) / 0.6), transparent)' }} />
-                          {stat.target !== null ? (
-                            <span className="stat-value-animated block font-[family-name:var(--font-display)] text-2xl md:text-3xl font-black text-accent mb-2"
-                              data-target={stat.target} data-suffix={stat.suffix} style={{ textShadow: '0 0 25px hsl(var(--accent) / 0.2)' }}>0{stat.suffix}</span>
-                          ) : (
-                            <span className="block font-[family-name:var(--font-display)] text-2xl md:text-3xl font-black text-accent mb-2" style={{ textShadow: '0 0 25px hsl(var(--accent) / 0.2)' }}>∞</span>
-                          )}
-                          <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.2em] uppercase text-muted-foreground font-medium">{stat.label}</span>
+                          <div className="absolute top-0 left-0 right-0 h-[3px] opacity-50 group-hover:opacity-100 transition-opacity duration-500"
+                            style={{ background: 'linear-gradient(90deg, hsl(var(--accent)), hsl(var(--accent) / 0.2))' }} />
+                          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+                            style={{ background: 'radial-gradient(ellipse at top, hsl(var(--accent) / 0.08), transparent 70%)' }} />
+                          <div className="relative z-10">
+                            {stat.target !== null ? (
+                              <span className="stat-value-animated block font-[family-name:var(--font-display)] text-2xl md:text-3xl font-black text-accent mb-2"
+                                data-target={stat.target} data-suffix={stat.suffix} style={{ textShadow: '0 0 30px hsl(var(--accent) / 0.3), 0 0 60px hsl(var(--accent) / 0.1)' }}>0{stat.suffix}</span>
+                            ) : (
+                              <span className="block font-[family-name:var(--font-display)] text-2xl md:text-3xl font-black text-accent mb-2" style={{ textShadow: '0 0 30px hsl(var(--accent) / 0.3), 0 0 60px hsl(var(--accent) / 0.1)' }}>∞</span>
+                            )}
+                            <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.2em] uppercase text-muted-foreground font-medium">{stat.label}</span>
+                          </div>
                         </div>
                       ))}
                     </div>
