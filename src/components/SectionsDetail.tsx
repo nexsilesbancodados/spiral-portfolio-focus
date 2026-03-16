@@ -924,18 +924,25 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
                 { icon: '🏗️', title: 'Landing Pages', desc: 'Conversão otimizada para reconstruir o mundo. A/B testing, heatmaps e integração com CRM.', accent: '80 60% 45%' },
                 { icon: '⚡', title: 'Branding Digital', desc: 'Identidade visual que sobrevive ao apocalipse. Logo, tipografia, paleta e guidelines para todos os canais.', accent: '50 85% 50%' },
               ].map((card, i) => (
-                <div key={i} className="detail-item magnetic-card premium-card card-hover-glow group relative p-9 rounded-lg overflow-hidden cursor-pointer"
+                <div key={i} className="detail-item magnetic-card premium-card card-scanlines card-hover-glow group relative p-9 rounded-xl overflow-hidden cursor-pointer"
                   style={{ opacity: 0 }}>
-                  <div className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
-                    style={{ background: `radial-gradient(ellipse at top left, hsl(${colors.accentHsl} / 0.1), transparent 60%)` }} />
-                  <div className="absolute top-0 left-0 right-0 h-[2px] opacity-50 group-hover:opacity-100 transition-opacity duration-500"
-                    style={{ background: colors.gradient }} />
+                  {/* Pip-Boy green scanline top */}
+                  <div className="absolute top-0 left-0 right-0 h-[3px] opacity-50 group-hover:opacity-100 transition-opacity duration-500"
+                    style={{ background: `linear-gradient(90deg, hsl(${card.accent}), transparent 70%)` }} />
+                  <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+                    style={{ background: `radial-gradient(ellipse at top left, hsl(${colors.accentHsl} / 0.12), transparent 60%)` }} />
                   <div className="relative z-10">
-                    <span className="text-4xl mb-6 block drop-shadow-lg">{card.icon}</span>
+                    <div className="flex items-center justify-between mb-5">
+                      <span className="text-4xl drop-shadow-lg">{card.icon}</span>
+                      <span className="font-[family-name:var(--font-display)] text-[9px] tracking-[0.3em] uppercase font-bold opacity-0 group-hover:opacity-50 transition-opacity duration-500" style={{ color: `hsl(${card.accent})` }}>VAULT-TEC</span>
+                    </div>
                     <h4 className="font-[family-name:var(--font-display)] text-foreground text-base font-bold tracking-[0.15em] uppercase mb-4">{card.title}</h4>
-                    <p className="text-muted-foreground text-[13px] leading-[1.7]">{card.desc}</p>
-                    <div className="h-[2px] w-14 mt-7 transition-all duration-700 group-hover:w-full ease-out"
-                      style={{ background: colors.gradient }} />
+                    <p className="text-muted-foreground text-[13px] leading-[1.7] mb-6">{card.desc}</p>
+                    <div className="flex items-center gap-2">
+                      <div className="h-[2px] w-14 transition-all duration-700 group-hover:w-full ease-out rounded-full"
+                        style={{ background: `linear-gradient(90deg, hsl(${card.accent}), hsl(${card.accent} / 0.15))` }} />
+                      <div className="w-1 h-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: `hsl(${card.accent})`, boxShadow: `0 0 4px hsl(${card.accent} / 0.6)` }} />
+                    </div>
                   </div>
                 </div>
               ))}
