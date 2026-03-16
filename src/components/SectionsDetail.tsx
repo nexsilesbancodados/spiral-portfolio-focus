@@ -373,23 +373,27 @@ const DeepDiveContent = memo(function DeepDiveContent({ sectionId, accentHsl, gr
 
             {block.stat && (
               <div
-                className="stat-card inline-flex items-center gap-8 rounded-lg px-10 py-6 mb-8 ml-[calc(clamp(12px,1vw,15px)*3+1.25rem)]"
+                className="stat-card inline-flex items-center gap-0 rounded-xl overflow-hidden mb-8 ml-[calc(clamp(12px,1vw,15px)*3+1.25rem)]"
                 style={{
-                  background: `hsl(${accentHsl} / 0.08)`,
+                  background: `linear-gradient(135deg, hsl(${accentHsl} / 0.12), hsl(${accentHsl} / 0.04))`,
                   border: `1px solid hsl(${accentHsl} / 0.2)`,
-                  boxShadow: `0 0 30px hsl(${accentHsl} / 0.06)`,
+                  boxShadow: `0 0 40px hsl(${accentHsl} / 0.08), inset 0 1px 0 hsl(${accentHsl} / 0.08)`,
                 }}
               >
-                <span
-                  className="font-[family-name:var(--font-display)] font-black"
-                  style={{ fontSize: 'clamp(1.75rem, 3.5vw, 3rem)', color: `hsl(${accentHsl})`, textShadow: `0 0 30px hsl(${accentHsl} / 0.3)` }}
-                >
-                  {block.stat.value}
-                </span>
-                <div className="h-8 w-[1px]" style={{ background: `hsl(${accentHsl} / 0.2)` }} />
-                <span className="font-[family-name:var(--font-display)] text-[11px] tracking-[0.25em] uppercase text-muted-foreground font-medium">
-                  {block.stat.label}
-                </span>
+                <div className="px-8 py-5 flex items-center justify-center" style={{ background: `hsl(${accentHsl} / 0.06)` }}>
+                  <span
+                    className="font-[family-name:var(--font-display)] font-black whitespace-nowrap"
+                    style={{ fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', color: `hsl(${accentHsl})`, textShadow: `0 0 30px hsl(${accentHsl} / 0.4), 0 0 60px hsl(${accentHsl} / 0.15)` }}
+                  >
+                    {block.stat.value}
+                  </span>
+                </div>
+                <div className="w-[1px] h-10 self-center" style={{ background: `hsl(${accentHsl} / 0.25)` }} />
+                <div className="px-8 py-5">
+                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.25em] uppercase text-muted-foreground font-medium leading-tight block">
+                    {block.stat.label}
+                  </span>
+                </div>
               </div>
             )}
 
