@@ -784,8 +784,9 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
                   <h4 className="font-[family-name:var(--font-display)] text-foreground text-xl md:text-2xl font-bold mt-2">O Despertar dos Androides</h4>
                 </div>
               </div>
-              <div className="lg:col-span-5 grid grid-rows-2 gap-5">
-                <div className="detail-item premium-card card-hover-glow relative p-9 rounded-lg" style={{ opacity: 0 }}>
+                <div className="lg:col-span-5 grid grid-rows-2 gap-5">
+                <div className="detail-item premium-card card-led-indicator card-hover-glow relative p-9 rounded-xl" style={{ opacity: 0 }}>
+                  <div className="absolute top-0 left-0 right-0 h-[2px] opacity-40" style={{ background: `linear-gradient(90deg, hsl(${colors.accentHsl}), transparent)` }} />
                   <div className="text-4xl mb-4">💠</div>
                   <h4 className="font-[family-name:var(--font-display)] text-foreground text-sm font-bold tracking-[0.12em] uppercase mb-3">Revolução de Jericho</h4>
                   <p className="text-muted-foreground text-[13px] leading-[1.7]">Como Markus liderando Jericho — agentes que pesquisam, analisam, decidem e executam com consciência própria.</p>
