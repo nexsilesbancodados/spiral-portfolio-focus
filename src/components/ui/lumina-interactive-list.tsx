@@ -213,6 +213,7 @@ export function LuminaSlider() {
     const onResize = () => {
       renderer.setSize(window.innerWidth, window.innerHeight);
       material.uniforms.uResolution.value.set(window.innerWidth, window.innerHeight);
+      renderer.render(scene, camera);
     };
     window.addEventListener('resize', onResize);
 

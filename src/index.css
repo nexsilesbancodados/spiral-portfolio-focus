@@ -295,10 +295,8 @@ All colors MUST be HSL.
 
 /* Premium card base */
 .premium-card {
-  background: hsl(var(--card) / 0.4);
+  background: hsl(var(--card) / 0.5);
   border: 1px solid hsl(var(--foreground) / 0.06);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
   transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   position: relative;
   overflow: hidden;
