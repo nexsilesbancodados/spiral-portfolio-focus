@@ -879,15 +879,17 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
           <div className="fluid-section-pad">
             <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-10">
               {skills.map((skill, i) => (
-                <div key={i} className="detail-item group" style={{ opacity: 0 }}>
+                <div key={i} className="detail-item group card-runic-border rounded-lg p-5" style={{ opacity: 0 }}>
                   <div className="flex justify-between items-center mb-3">
-                    <span className="font-[family-name:var(--font-display)] text-foreground/90 text-sm tracking-wide uppercase font-medium">{skill.name}</span>
-                    <span className="font-[family-name:var(--font-display)] text-[11px] tracking-widest font-semibold" style={{ color: `hsl(${colors.accentHsl} / 0.7)` }}>{skill.level}%</span>
+                    <div className="flex items-center gap-3">
+                      <span className="font-[family-name:var(--font-display)] text-[9px] tracking-[0.25em] uppercase text-muted-foreground/40 font-medium">{skill.category}</span>
+                      <span className="font-[family-name:var(--font-display)] text-foreground/90 text-sm tracking-wide uppercase font-medium">{skill.name}</span>
+                    </div>
+                    <span className="font-[family-name:var(--font-display)] text-sm tracking-widest font-black" style={{ color: `hsl(${colors.accentHsl})`, textShadow: `0 0 15px hsl(${colors.accentHsl} / 0.3)` }}>{skill.level}%</span>
                   </div>
-                  <div className="skill-progress-bar" style={{ height: '4px', borderRadius: '4px' }}>
-                    <div className="skill-progress-fill" data-width={`${skill.level}%`} style={{ width: 0, borderRadius: '4px' }} />
+                  <div className="skill-progress-bar" style={{ height: '5px', borderRadius: '4px' }}>
+                    <div className="skill-progress-fill" data-width={`${skill.level}%`} style={{ width: 0, borderRadius: '4px', boxShadow: `0 0 10px hsl(${colors.accentHsl} / 0.3)` }} />
                   </div>
-                  <span className="font-[family-name:var(--font-display)] text-[9px] tracking-[0.25em] uppercase text-muted-foreground/50 mt-2 block font-medium">{skill.category}</span>
                 </div>
               ))}
             </div>
