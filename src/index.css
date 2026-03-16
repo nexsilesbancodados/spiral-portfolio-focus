@@ -291,16 +291,12 @@ All colors MUST be HSL.
 /* Magnetic card effect */
 .magnetic-card {
   transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
 }
 
 /* Premium card base */
 .premium-card {
-  background: hsl(var(--card) / 0.4);
+  background: hsl(var(--card) / 0.5);
   border: 1px solid hsl(var(--foreground) / 0.06);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
   transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   position: relative;
   overflow: hidden;
@@ -325,10 +321,8 @@ All colors MUST be HSL.
 
 /* Stat card — premium inline stat display */
 .stat-card {
-  background: hsl(var(--card) / 0.35);
+  background: hsl(var(--card) / 0.45);
   border: 1px solid hsl(var(--foreground) / 0.06);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
   transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   position: relative;
   overflow: hidden;
@@ -480,8 +474,6 @@ All colors MUST be HSL.
 
 /* Tech badge */
 .tech-badge {
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
   transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
   position: relative;
 }

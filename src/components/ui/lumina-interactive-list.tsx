@@ -200,17 +200,20 @@ export function LuminaSlider() {
 
     loadAll();
 
-    // Render loop
-    const render = () => {
-      rafRef.current = requestAnimationFrame(render);
+    // Render once, then only on demand (transitions trigger via GSAP)
+    const renderOnce = () => {
       renderer.render(scene, camera);
     };
-    render();
+    renderOnce();
+
+    // Store render function for transition use
+    (renderer as any).__renderOnce = renderOnce;
 
     // Resize handler
     const onResize = () => {
       renderer.setSize(window.innerWidth, window.innerHeight);
       material.uniforms.uResolution.value.set(window.innerWidth, window.innerHeight);
+      renderer.render(scene, camera);
     };
     window.addEventListener('resize', onResize);
 
@@ -240,6 +243,18 @@ export function LuminaSlider() {
     mat.uniforms.uTexture1Size.value = fromTex.userData.size;
     mat.uniforms.uTexture2Size.value = toTex.userData.size;
 
+    // Start a render loop for the duration of the transition
+    const renderer = rendererRef.current;
+    const scene = sceneRef.current;
+    const camera = cameraRef.current;
+    const renderDuringTransition = () => {
+      if (renderer && scene && camera) renderer.render(scene, camera);
+      if (isTransitioningRef.current) {
+        rafRef.current = requestAnimationFrame(renderDuringTransition);
+      }
+    };
+    rafRef.current = requestAnimationFrame(renderDuringTransition);
+
     gsap.fromTo(
       mat.uniforms.uProgress,
       { value: 0 },
@@ -253,6 +268,8 @@ export function LuminaSlider() {
           mat.uniforms.uTexture1Size.value = toTex.userData.size;
           isTransitioningRef.current = false;
           setIsTransitioning(false);
+          // Final render
+          if (renderer && scene && camera) renderer.render(scene, camera);
         },
       }
     );
