@@ -842,14 +842,18 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
               {/* Performance metrics */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {[
-                  { value: '60fps', label: 'Animações' },
-                  { value: '<1s', label: 'Cold Start' },
-                  { value: '95%', label: 'Código Compartilhado' },
-                  { value: '99.5%', label: 'Crash-Free Rate' },
+                  { value: '60fps', label: 'Animações', icon: '🔓' },
+                  { value: '<1s', label: 'Cold Start', icon: '⚡' },
+                  { value: '95%', label: 'Código Compartilhado', icon: '📡' },
+                  { value: '99.5%', label: 'Crash-Free Rate', icon: '🛡️' },
                 ].map((metric, i) => (
-                  <div key={i} className="detail-item stat-card text-center p-7 rounded-lg" style={{ opacity: 0 }}>
-                    <span className="font-[family-name:var(--font-display)] font-black text-2xl md:text-3xl block mb-2" style={{ color: `hsl(${colors.accentHsl})`, textShadow: `0 0 25px hsl(${colors.accentHsl} / 0.2)` }}>{metric.value}</span>
-                    <span className="font-[family-name:var(--font-display)] text-[9px] tracking-[0.25em] uppercase text-muted-foreground font-medium">{metric.label}</span>
+                  <div key={i} className="detail-item stat-card card-ctos-grid group relative rounded-xl overflow-hidden" style={{ opacity: 0 }}>
+                    <div className="absolute top-0 left-0 right-0 h-[2px] opacity-40 group-hover:opacity-100 transition-opacity duration-500" style={{ background: `linear-gradient(90deg, hsl(${colors.accentHsl}), transparent)` }} />
+                    <div className="relative z-10 p-6 text-center">
+                      <span className="text-lg mb-2 block">{metric.icon}</span>
+                      <span className="font-[family-name:var(--font-display)] font-black text-2xl md:text-3xl block mb-1" style={{ color: `hsl(${colors.accentHsl})`, textShadow: `0 0 25px hsl(${colors.accentHsl} / 0.3)` }}>{metric.value}</span>
+                      <span className="font-[family-name:var(--font-display)] text-[9px] tracking-[0.25em] uppercase text-muted-foreground font-medium">{metric.label}</span>
+                    </div>
                   </div>
                 ))}
               </div>
