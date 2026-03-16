@@ -1251,17 +1251,21 @@ export function SectionsDetail() {
                         { value: '98', suffix: '%', label: 'Satisfação dos Clientes', target: 98 },
                         { value: '∞', suffix: '', label: 'Curiosidade', target: null },
                       ].map((stat, i) => (
-                        <div key={i} className="anim-el stat-card relative p-6 rounded-lg overflow-hidden group"
+                        <div key={i} className="anim-el stat-card relative p-6 rounded-xl overflow-hidden group"
                           style={{ opacity: 0 }}>
-                          <div className="absolute top-0 left-0 right-0 h-[2px] opacity-60"
-                            style={{ background: 'linear-gradient(90deg, transparent, hsl(var(--accent) / 0.6), transparent)' }} />
-                          {stat.target !== null ? (
-                            <span className="stat-value-animated block font-[family-name:var(--font-display)] text-2xl md:text-3xl font-black text-accent mb-2"
-                              data-target={stat.target} data-suffix={stat.suffix} style={{ textShadow: '0 0 25px hsl(var(--accent) / 0.2)' }}>0{stat.suffix}</span>
-                          ) : (
-                            <span className="block font-[family-name:var(--font-display)] text-2xl md:text-3xl font-black text-accent mb-2" style={{ textShadow: '0 0 25px hsl(var(--accent) / 0.2)' }}>∞</span>
-                          )}
-                          <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.2em] uppercase text-muted-foreground font-medium">{stat.label}</span>
+                          <div className="absolute top-0 left-0 right-0 h-[3px] opacity-50 group-hover:opacity-100 transition-opacity duration-500"
+                            style={{ background: 'linear-gradient(90deg, hsl(var(--accent)), hsl(var(--accent) / 0.2))' }} />
+                          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+                            style={{ background: 'radial-gradient(ellipse at top, hsl(var(--accent) / 0.08), transparent 70%)' }} />
+                          <div className="relative z-10">
+                            {stat.target !== null ? (
+                              <span className="stat-value-animated block font-[family-name:var(--font-display)] text-2xl md:text-3xl font-black text-accent mb-2"
+                                data-target={stat.target} data-suffix={stat.suffix} style={{ textShadow: '0 0 30px hsl(var(--accent) / 0.3), 0 0 60px hsl(var(--accent) / 0.1)' }}>0{stat.suffix}</span>
+                            ) : (
+                              <span className="block font-[family-name:var(--font-display)] text-2xl md:text-3xl font-black text-accent mb-2" style={{ textShadow: '0 0 30px hsl(var(--accent) / 0.3), 0 0 60px hsl(var(--accent) / 0.1)' }}>∞</span>
+                            )}
+                            <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.2em] uppercase text-muted-foreground font-medium">{stat.label}</span>
+                          </div>
                         </div>
                       ))}
                     </div>
