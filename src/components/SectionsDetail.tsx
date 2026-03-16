@@ -677,9 +677,9 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
                   { step: '04', icon: '🔬', title: 'Protótipo', desc: 'Testes de usabilidade e refinamento — sobreviver é iterar' },
                   { step: '05', icon: '💉', title: 'Handoff', desc: 'Entrega precisa com tokens e documentação — o antídoto final' },
                 ].map((item, i) => (
-                  <div key={i} className="detail-item magnetic-card premium-card group relative p-7 rounded-lg overflow-hidden" style={{ opacity: 0 }}>
+                  <div key={i} className="detail-item magnetic-card premium-card card-biohazard group relative p-7 rounded-lg overflow-hidden" style={{ opacity: 0 }}>
                     <div className="absolute top-0 left-0 right-0 h-[2px] opacity-40 group-hover:opacity-100 transition-opacity duration-500" style={{ background: colors.gradient }} />
-                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-600 pointer-events-none" style={{ background: `radial-gradient(ellipse at top, hsl(${colors.accentHsl} / 0.08), transparent 70%)` }} />
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-600 pointer-events-none" style={{ background: `radial-gradient(ellipse at top, hsl(${colors.accentHsl} / 0.1), transparent 70%)` }} />
                     <div className="relative z-10">
                       <div className="flex items-center gap-3 mb-4">
                         <span className="text-xl">{item.icon}</span>
@@ -699,11 +699,12 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
                 { src: '/images/webdesign-detail-02.jpg', title: '🗝️ Mapa da Mansion', desc: 'Sistemas visuais que guiam o usuário — nenhuma porta trancada sem solução' },
                 { src: '/images/webdesign-detail-03.jpg', title: '💉 O Antídoto Visual', desc: 'Animações que curam a experiência — motion design de sobrevivência' },
               ].map((card, i) => (
-                <div key={i} className="detail-item image-hover-zoom card-hover-glow relative h-[48vh] rounded-lg overflow-hidden" style={{ opacity: 0, border: `1px solid hsl(${colors.accentHsl} / 0.12)` }}>
-                  <img src={card.src} alt={card.title} loading="lazy" decoding="async" fetchPriority="low" className="w-full h-full object-cover" style={{ filter: 'brightness(0.65) saturate(1.3)' }} />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent" />
-                  <div className="absolute inset-0" style={{ background: `linear-gradient(135deg, hsl(${colors.accentHsl} / 0.1), transparent 60%)` }} />
-                  <div className="absolute bottom-0 left-0 right-0 p-7" style={{ background: 'linear-gradient(to top, hsl(var(--background) / 0.9), transparent)' }}>
+                <div key={i} className="detail-item image-hover-zoom card-hover-glow relative h-[48vh] rounded-lg overflow-hidden group" style={{ opacity: 0, border: `1px solid hsl(${colors.accentHsl} / 0.15)` }}>
+                  <img src={card.src} alt={card.title} loading="lazy" decoding="async" fetchPriority="low" className="w-full h-full object-cover" style={{ filter: 'brightness(0.6) saturate(1.4)' }} />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{ background: `linear-gradient(135deg, hsl(${colors.accentHsl} / 0.15), transparent 60%)` }} />
+                  <div className="absolute bottom-0 left-0 right-0 p-7" style={{ background: 'linear-gradient(to top, hsl(var(--background) / 0.95), hsl(var(--background) / 0.5) 60%, transparent)' }}>
+                    <div className="h-[2px] w-8 mb-4 group-hover:w-16 transition-all duration-500" style={{ background: `hsl(${colors.accentHsl} / 0.6)` }} />
                     <h4 className="font-[family-name:var(--font-display)] text-foreground font-bold text-base tracking-[0.08em] uppercase mb-2">{card.title}</h4>
                     <p className="text-foreground/60 text-[13px] leading-relaxed">{card.desc}</p>
                   </div>
