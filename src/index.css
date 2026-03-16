@@ -395,26 +395,47 @@ All colors MUST be HSL.
   opacity: 1;
 }
 
-/* LED pulse for Detroit cards */
-@keyframes led-pulse {
-  0%, 100% { opacity: 0.6; }
-  50% { opacity: 1; }
+/* Strand pulse for Death Stranding cards */
+@keyframes strand-pulse {
+  0%, 100% { opacity: 0.4; box-shadow: 0 0 8px hsl(28 90% 55% / 0.3); }
+  50% { opacity: 1; box-shadow: 0 0 16px hsl(28 90% 55% / 0.6); }
 }
-.card-led-indicator {
+.card-strand-pulse {
   position: relative;
 }
-.card-led-indicator::before {
+.card-strand-pulse::before {
   content: '';
   position: absolute;
   top: 12px;
   right: 12px;
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
-  background: hsl(195 90% 55%);
-  box-shadow: 0 0 8px hsl(195 90% 55% / 0.6);
-  animation: led-pulse 2.5s ease-in-out infinite;
+  background: hsl(28 90% 55%);
+  box-shadow: 0 0 10px hsl(28 90% 55% / 0.6);
+  animation: strand-pulse 3s ease-in-out infinite;
   z-index: 2;
+}
+
+/* Timefall rain overlay for Death Stranding cards */
+.card-timefall::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    180deg,
+    transparent,
+    transparent 8px,
+    hsl(185 60% 45% / 0.02) 8px,
+    hsl(185 60% 45% / 0.02) 9px
+  );
+  pointer-events: none;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.card-strand:hover .card-timefall::after {
+  opacity: 1;
 }
 
 /* Biohazard corner for RE cards */
