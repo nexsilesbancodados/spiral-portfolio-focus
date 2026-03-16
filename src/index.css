@@ -474,8 +474,6 @@ All colors MUST be HSL.
 
 /* Tech badge */
 .tech-badge {
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
   transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
   position: relative;
 }
