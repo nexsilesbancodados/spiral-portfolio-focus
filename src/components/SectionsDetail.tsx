@@ -716,30 +716,41 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
 
       case 'desenvolvimento':
         const devCards = [
-          { icon: '❄️', title: 'APIs de Alta Performance', desc: 'Endpoints que respondem em <50ms — precisos como o Machado Leviatã. Cache inteligente, rate limiting e documentação OpenAPI.', accent: '200 85% 60%' },
-          { icon: '🔥', title: 'Arquitetura Evolutiva', desc: 'Começamos simples, escalamos com a fúria das Lâminas do Caos. Monolitos modulares que evoluem em microsserviços.', accent: '15 90% 55%' },
-          { icon: '⚡', title: 'Pipeline Zero-Downtime', desc: 'Deploy blue-green como os Bifröst — instantâneo e sem falhas. Canary releases, feature flags e rollback.', accent: '38 90% 50%' },
-          { icon: '🪨', title: 'Dados Inteligentes', desc: 'Modelagem sólida como as runas nórdicas. Índices compostos, materialized views e queries que escalam aos milhões.', accent: '200 70% 50%' },
+          { icon: '❄️', title: 'APIs de Alta Performance', desc: 'Endpoints que respondem em <50ms — precisos como o Machado Leviatã. Cache inteligente, rate limiting e documentação OpenAPI.', accent: '200 85% 60%', element: 'GELO' },
+          { icon: '🔥', title: 'Arquitetura Evolutiva', desc: 'Começamos simples, escalamos com a fúria das Lâminas do Caos. Monolitos modulares que evoluem em microsserviços.', accent: '15 90% 55%', element: 'FOGO' },
+          { icon: '⚡', title: 'Pipeline Zero-Downtime', desc: 'Deploy blue-green como os Bifröst — instantâneo e sem falhas. Canary releases, feature flags e rollback.', accent: '38 90% 50%', element: 'RELÂMPAGO' },
+          { icon: '🪨', title: 'Dados Inteligentes', desc: 'Modelagem sólida como as runas nórdicas. Índices compostos, materialized views e queries que escalam aos milhões.', accent: '200 70% 50%', element: 'PEDRA' },
         ];
         return (
           <div className="fluid-section-pad">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-6xl">
               {devCards.map((card, i) => (
-                <div key={i} className="detail-item magnetic-card premium-card group relative rounded-lg overflow-hidden cursor-pointer"
+                <div key={i} className="detail-item magnetic-card premium-card group relative rounded-xl overflow-hidden cursor-pointer"
                   style={{ opacity: 0 }}>
+                  {/* Top accent bar with gradient */}
+                  <div className="absolute top-0 left-0 right-0 h-[3px] opacity-60 group-hover:opacity-100 transition-opacity duration-500"
+                    style={{ background: `linear-gradient(90deg, hsl(${card.accent}), hsl(${card.accent} / 0.3))` }} />
+                  {/* Hover radial glow */}
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
-                    style={{ background: `linear-gradient(160deg, hsl(${card.accent} / 0.1), transparent 60%)` }} />
-                  <div className="absolute top-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-80 transition-opacity duration-500"
-                    style={{ background: `linear-gradient(90deg, transparent, hsl(${card.accent} / 0.7), transparent)` }} />
+                    style={{ background: `radial-gradient(ellipse at top left, hsl(${card.accent} / 0.12), transparent 60%)` }} />
+                  {/* Bottom glow line on hover */}
+                  <div className="absolute bottom-0 left-0 right-0 h-[1px] opacity-0 group-hover:opacity-60 transition-opacity duration-700"
+                    style={{ background: `linear-gradient(90deg, transparent, hsl(${card.accent} / 0.4), transparent)` }} />
                   <div className="relative z-10 p-9 md:p-11">
-                    <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-7 text-xl border"
-                      style={{ background: `hsl(${card.accent} / 0.1)`, borderColor: `hsl(${card.accent} / 0.2)`, boxShadow: `0 0 30px hsl(${card.accent} / 0.1)` }}>
-                      {card.icon}
+                    <div className="flex items-center justify-between mb-7">
+                      <div className="w-14 h-14 rounded-xl flex items-center justify-center text-2xl border"
+                        style={{ background: `hsl(${card.accent} / 0.1)`, borderColor: `hsl(${card.accent} / 0.25)`, boxShadow: `0 0 30px hsl(${card.accent} / 0.12)` }}>
+                        {card.icon}
+                      </div>
+                      <span className="font-[family-name:var(--font-display)] text-[8px] tracking-[0.4em] uppercase font-bold opacity-0 group-hover:opacity-60 transition-opacity duration-500" style={{ color: `hsl(${card.accent})` }}>{card.element}</span>
                     </div>
                     <h4 className="font-[family-name:var(--font-display)] text-foreground text-base md:text-lg font-bold tracking-[0.12em] uppercase mb-4">{card.title}</h4>
                     <p className="text-muted-foreground text-sm leading-[1.7] mb-9">{card.desc}</p>
-                    <div className="h-[2px] w-12 group-hover:w-24 transition-all duration-700 ease-out"
-                      style={{ background: `hsl(${card.accent} / 0.5)` }} />
+                    <div className="flex items-center gap-3">
+                      <div className="h-[2px] w-12 group-hover:w-24 transition-all duration-700 ease-out rounded-full"
+                        style={{ background: `linear-gradient(90deg, hsl(${card.accent}), hsl(${card.accent} / 0.2))` }} />
+                      <div className="w-1.5 h-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: `hsl(${card.accent})`, boxShadow: `0 0 6px hsl(${card.accent} / 0.5)` }} />
+                    </div>
                   </div>
                 </div>
               ))}
