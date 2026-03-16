@@ -200,12 +200,14 @@ export function LuminaSlider() {
 
     loadAll();
 
-    // Render loop
-    const render = () => {
-      rafRef.current = requestAnimationFrame(render);
+    // Render once, then only on demand (transitions trigger via GSAP)
+    const renderOnce = () => {
       renderer.render(scene, camera);
     };
-    render();
+    renderOnce();
+
+    // Store render function for transition use
+    (renderer as any).__renderOnce = renderOnce;
 
     // Resize handler
     const onResize = () => {
