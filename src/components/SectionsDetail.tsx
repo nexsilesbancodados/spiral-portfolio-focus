@@ -1272,58 +1272,119 @@ export function SectionsDetail() {
           {/* FOCUSS DEV */}
           {isFocussDev && (
             <div className="absolute inset-0 overflow-y-auto gta-vi-scroll">
-              <div className="relative min-h-screen flex items-center">
+              {/* Hero fullscreen */}
+              <div className="relative min-h-screen flex items-end">
                 <div className="absolute inset-0">
-                  <img src={section.image} alt={section.title} loading="lazy" decoding="async" className="w-full h-full object-cover" style={{ position: 'sticky', top: 0 }} />
-                  <div className="absolute inset-0 bg-background/80" />
-                  <div className="absolute inset-0 opacity-20" style={{ background: `linear-gradient(135deg, hsl(45 100% 55% / 0.2) 0%, transparent 60%)` }} />
+                  <img src={section.image} alt={section.title} loading="lazy" decoding="async" className="w-full h-full object-cover" style={{ position: 'sticky', top: 0, filter: 'brightness(0.6) saturate(1.2) contrast(1.05)' }} />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-background/30" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-background/80 via-transparent to-transparent" />
+                  <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, transparent 20%, hsl(var(--background) / 0.6) 60%, hsl(var(--background)) 95%)' }} />
+                  <div className="absolute inset-0 opacity-20" style={{ background: `radial-gradient(ellipse at 30% 70%, hsl(45 100% 55% / 0.15), transparent 60%)` }} />
                 </div>
-                <div className="relative z-10 w-full px-6 md:px-16 lg:px-24 py-24">
-                  <div className="w-full max-w-4xl mx-auto">
-                    <div className="anim-el h-[2px] w-16 mb-6 origin-left bg-accent" style={{ opacity: 0 }} />
-                    <span className="anim-el block font-[family-name:var(--font-display)] text-xs tracking-[0.2em] uppercase mb-3 text-accent" style={{ opacity: 0 }}>{section.subtitle}</span>
-                    <h2 className="anim-el font-[family-name:var(--font-display)] text-4xl md:text-6xl lg:text-7xl font-light text-foreground mb-6 leading-tight tracking-tight" style={{ opacity: 0 }}>{section.title}</h2>
-                    <p className="anim-el text-muted-foreground text-base md:text-lg leading-relaxed mb-10 max-w-2xl" style={{ opacity: 0 }}>{section.description}</p>
+                <div className="relative z-10 w-full" style={{ padding: `0 clamp(1.5rem, 4vw, 6rem) clamp(3rem, 5vw, 5rem)` }}>
+                  <div className="max-w-7xl mx-auto">
+                    {/* Subtitle with decorative line */}
+                    <div className="anim-el flex items-center gap-4 mb-6" style={{ opacity: 0 }}>
+                      <div className="h-[3px] bg-accent" style={{ width: 'clamp(2rem, 4vw, 5rem)' }} />
+                      <span className="font-[family-name:var(--font-display)] text-[11px] tracking-[0.5em] uppercase text-accent font-semibold">{section.subtitle}</span>
+                    </div>
 
-                    {/* Stats */}
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+                    {/* Title */}
+                    <h2 className="anim-el font-[family-name:var(--font-display)] font-black leading-[0.85] tracking-[-0.04em] uppercase mb-8" style={{ opacity: 0, fontSize: 'clamp(3.5rem, 11vw, 12rem)' }}>
+                      {section.title.split(' ').map((word, i) => (
+                        <span key={i} className="block" style={{
+                          background: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(45 100% 65%) 40%, hsl(25 95% 55%) 70%, hsl(45 100% 50%) 100%)',
+                          WebkitBackgroundClip: 'text',
+                          WebkitTextFillColor: 'transparent',
+                          filter: 'drop-shadow(0 0 40px hsl(45 100% 55% / 0.3)) drop-shadow(0 4px 25px hsl(0 0% 0% / 0.6))',
+                        }}>{word}</span>
+                      ))}
+                    </h2>
+
+                    {/* Description */}
+                    <p className="anim-el text-foreground/80 leading-[1.8] font-light tracking-tight max-w-3xl mb-12" style={{ opacity: 0, fontSize: 'clamp(1rem, 1.8vw, 1.6rem)' }}>{section.description}</p>
+
+                    {/* Stats row - Premium cards */}
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
                       {[
-                        { value: '6', suffix: '+', label: 'Anos no Mercado', target: 6 },
-                        { value: '200', suffix: '+', label: 'Projetos Entregues', target: 200 },
-                        { value: '98', suffix: '%', label: 'Satisfação dos Clientes', target: 98 },
-                        { value: '∞', suffix: '', label: 'Curiosidade', target: null },
+                        { value: '6', suffix: '+', label: 'Anos no Mercado', target: 6, icon: '🏆' },
+                        { value: '200', suffix: '+', label: 'Projetos Entregues', target: 200, icon: '🚀' },
+                        { value: '98', suffix: '%', label: 'Satisfação dos Clientes', target: 98, icon: '💎' },
+                        { value: '∞', suffix: '', label: 'Curiosidade', target: null, icon: '🧠' },
                       ].map((stat, i) => (
-                        <div key={i} className="anim-el stat-card relative p-6 rounded-xl overflow-hidden group"
+                        <div key={i} className="anim-el premium-card group relative rounded-2xl overflow-hidden cursor-default"
                           style={{ opacity: 0 }}>
-                          <div className="absolute top-0 left-0 right-0 h-[3px] opacity-50 group-hover:opacity-100 transition-opacity duration-500"
+                          {/* Top gradient bar */}
+                          <div className="absolute top-0 left-0 right-0 h-[3px] opacity-60 group-hover:opacity-100 transition-opacity duration-500"
                             style={{ background: 'linear-gradient(90deg, hsl(var(--accent)), hsl(var(--accent) / 0.2))' }} />
+                          {/* Hover glow */}
                           <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
-                            style={{ background: 'radial-gradient(ellipse at top, hsl(var(--accent) / 0.08), transparent 70%)' }} />
-                          <div className="relative z-10">
+                            style={{ background: 'radial-gradient(ellipse at top, hsl(var(--accent) / 0.1), transparent 70%)' }} />
+                          <div className="relative z-10 p-7 md:p-8">
+                            <span className="text-xl mb-4 block opacity-60 group-hover:opacity-100 transition-opacity duration-500">{stat.icon}</span>
                             {stat.target !== null ? (
-                              <span className="stat-value-animated block font-[family-name:var(--font-display)] text-2xl md:text-3xl font-black text-accent mb-2"
-                                data-target={stat.target} data-suffix={stat.suffix} style={{ textShadow: '0 0 30px hsl(var(--accent) / 0.3), 0 0 60px hsl(var(--accent) / 0.1)' }}>0{stat.suffix}</span>
+                              <span className="stat-value-animated block font-[family-name:var(--font-display)] font-black mb-2"
+                                data-target={stat.target} data-suffix={stat.suffix}
+                                style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', color: 'hsl(var(--accent))', textShadow: '0 0 30px hsl(var(--accent) / 0.35), 0 0 60px hsl(var(--accent) / 0.12)' }}>0{stat.suffix}</span>
                             ) : (
-                              <span className="block font-[family-name:var(--font-display)] text-2xl md:text-3xl font-black text-accent mb-2" style={{ textShadow: '0 0 30px hsl(var(--accent) / 0.3), 0 0 60px hsl(var(--accent) / 0.1)' }}>∞</span>
+                              <span className="block font-[family-name:var(--font-display)] font-black mb-2"
+                                style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', color: 'hsl(var(--accent))', textShadow: '0 0 30px hsl(var(--accent) / 0.35), 0 0 60px hsl(var(--accent) / 0.12)' }}>∞</span>
                             )}
-                            <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.2em] uppercase text-muted-foreground font-medium">{stat.label}</span>
+                            <span className="font-[family-name:var(--font-display)] text-[9px] md:text-[10px] tracking-[0.25em] uppercase text-muted-foreground font-medium leading-tight block">{stat.label}</span>
                           </div>
+                          {/* Bottom subtle line */}
+                          <div className="absolute bottom-0 left-0 right-0 h-[1px] opacity-0 group-hover:opacity-40 transition-opacity duration-700"
+                            style={{ background: 'linear-gradient(90deg, transparent, hsl(var(--accent) / 0.5), transparent)' }} />
                         </div>
                       ))}
                     </div>
 
-                    <ul className="space-y-4">
-                      {section.details.map((detail, i) => (
-                        <li key={i} className="anim-el flex items-start gap-4 text-muted-foreground text-sm md:text-base group" style={{ opacity: 0 }}>
-                          <span className="mt-1 flex items-center justify-center w-6 h-6 rounded-full shrink-0 border border-accent/30 text-accent font-[family-name:var(--font-display)] text-[10px]">{String(i + 1).padStart(2, '0')}</span>
-                          <span className="group-hover:text-foreground/90 transition-colors duration-300">{detail}</span>
-                        </li>
-                      ))}
-                    </ul>
+                    {/* Scroll indicator */}
+                    <div className="anim-el flex items-center gap-4 mt-10 opacity-50" style={{ opacity: 0 }}>
+                      <div className="h-[1px] flex-shrink-0 bg-accent/30" style={{ width: 'clamp(2rem, 4vw, 4rem)' }} />
+                      <span className="font-[family-name:var(--font-display)] text-[9px] tracking-[0.4em] uppercase text-accent/60 font-medium">Role para saber mais</span>
+                      <div className="w-[1px] h-6 bg-accent/30 animate-pulse ml-2" />
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-                    <div className="flex flex-col items-center mt-16 opacity-50">
-                      <span className="font-[family-name:var(--font-display)] text-[9px] tracking-[0.3em] uppercase text-accent/60 mb-2">Role para saber mais</span>
-                      <div className="w-[1px] h-8 bg-accent/30 animate-pulse" />
+              {/* Details section */}
+              <div className="relative z-10 bg-background">
+                <div className="w-full h-[1px]" style={{ background: 'linear-gradient(90deg, transparent, hsl(var(--accent) / 0.3), hsl(var(--accent) / 0.15), transparent)' }} />
+                
+                <div style={{ padding: 'clamp(3rem, 6vw, 6rem) clamp(1.5rem, 4vw, 6rem)' }}>
+                  <div className="max-w-6xl mx-auto">
+                    {/* Section header */}
+                    <div className="anim-el flex items-center gap-4 mb-12" style={{ opacity: 0 }}>
+                      <div className="h-[2px] flex-1 max-w-[4rem]" style={{ background: 'linear-gradient(90deg, hsl(var(--accent) / 0.5), transparent)' }} />
+                      <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.5em] uppercase text-accent/60 font-medium">O QUE NOS DEFINE</span>
+                      <div className="h-[2px] flex-1 max-w-[4rem]" style={{ background: 'linear-gradient(90deg, transparent, hsl(var(--accent) / 0.5))' }} />
+                    </div>
+
+                    {/* Premium detail cards */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                      {section.details.map((detail, i) => (
+                        <div key={i} className="anim-el premium-card magnetic-card group relative rounded-xl overflow-hidden cursor-default"
+                          style={{ opacity: 0 }}>
+                          <div className="absolute top-0 left-0 right-0 h-[2px] opacity-40 group-hover:opacity-100 transition-opacity duration-500"
+                            style={{ background: `linear-gradient(90deg, hsl(var(--accent)), hsl(var(--accent) / 0.15))` }} />
+                          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+                            style={{ background: `radial-gradient(ellipse at top left, hsl(var(--accent) / 0.08), transparent 60%)` }} />
+                          <div className="relative z-10 p-8 md:p-10">
+                            <div className="flex items-center gap-4 mb-5">
+                              <span className="flex items-center justify-center w-10 h-10 rounded-xl border font-[family-name:var(--font-display)] text-sm font-bold"
+                                style={{ borderColor: 'hsl(var(--accent) / 0.3)', color: 'hsl(var(--accent))', background: 'hsl(var(--accent) / 0.08)', boxShadow: '0 0 20px hsl(var(--accent) / 0.1)' }}>
+                                {String(i + 1).padStart(2, '0')}
+                              </span>
+                              <div className="h-[1px] flex-1 opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{ background: 'linear-gradient(90deg, hsl(var(--accent) / 0.3), transparent)' }} />
+                            </div>
+                            <p className="text-foreground/80 text-base md:text-lg leading-[1.7] group-hover:text-foreground/95 transition-colors duration-300">{detail}</p>
+                            <div className="h-[2px] w-10 mt-6 group-hover:w-20 transition-all duration-700 ease-out rounded-full"
+                              style={{ background: 'linear-gradient(90deg, hsl(var(--accent)), hsl(var(--accent) / 0.2))' }} />
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   </div>
                 </div>
