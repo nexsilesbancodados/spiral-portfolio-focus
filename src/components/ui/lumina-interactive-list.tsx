@@ -242,6 +242,18 @@ export function LuminaSlider() {
     mat.uniforms.uTexture1Size.value = fromTex.userData.size;
     mat.uniforms.uTexture2Size.value = toTex.userData.size;
 
+    // Start a render loop for the duration of the transition
+    const renderer = rendererRef.current;
+    const scene = sceneRef.current;
+    const camera = cameraRef.current;
+    const renderDuringTransition = () => {
+      if (renderer && scene && camera) renderer.render(scene, camera);
+      if (isTransitioningRef.current) {
+        rafRef.current = requestAnimationFrame(renderDuringTransition);
+      }
+    };
+    rafRef.current = requestAnimationFrame(renderDuringTransition);
+
     gsap.fromTo(
       mat.uniforms.uProgress,
       { value: 0 },
@@ -255,6 +267,8 @@ export function LuminaSlider() {
           mat.uniforms.uTexture1Size.value = toTex.userData.size;
           isTransitioningRef.current = false;
           setIsTransitioning(false);
+          // Final render
+          if (renderer && scene && camera) renderer.render(scene, camera);
         },
       }
     );
