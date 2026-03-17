@@ -117,9 +117,9 @@ const sectionGallery: Record<string, { images: { src: string; alt: string }[]; l
   'inovacao-ia': {
     layout: 'trio',
     images: [
-      { src: '/images/ia-gallery-01.jpg', alt: 'Laboratório IA' },
-      { src: '/images/ia-detail-02.jpg', alt: 'Automação' },
-      { src: '/images/ia-detail-01.jpg', alt: 'Futuro' },
+      { src: '/images/ia-gallery-01.jpg', alt: 'BB Pod - Chiral Network' },
+      { src: '/images/ia-detail-02.jpg', alt: 'Heartman - Laboratório IA' },
+      { src: '/images/ia-gallery-02.jpg', alt: 'Deadman - Análise de Dados' },
     ],
   },
   'mobile-web': {
