@@ -769,25 +769,25 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
 
       case 'inovacao-ia':
         const dsCards = [
-          { icon: '📦', title: 'Entregas de IA', desc: 'Como Sam carregando carga vital pela América, entregamos modelos treinados que atravessam qualquer terreno de dados. Fine-tuning preciso para cada missão.', accent: '28 90% 55%', tag: 'PORTER' },
-          { icon: '🔗', title: 'Strand Connections', desc: 'Agentes autônomos que operam como a rede strand — cada conexão fortalece o sistema. Pesquisa, relatórios, atendimento em rede.', accent: '185 60% 45%', tag: 'STRAND' },
-          { icon: '👶', title: 'Sensores de BB', desc: 'Computer vision que detecta o invisível — como um Bridge Baby sentindo BTs. Anomalias, qualidade, OCR em tempo real.', accent: '40 85% 55%', tag: 'BB-28' },
-          { icon: '🌊', title: 'Rede Quiral', desc: 'MLOps que conecta cada terminal da operação. Versionamento, deploy distribuído e monitoramento — a infraestrutura que reconecta tudo.', accent: '200 50% 50%', tag: 'CHIRAL' },
+          { icon: '🤖', title: 'IA Generativa', desc: 'Como o software RK800, nossas IAs analisam, reconstroem e decidem com precisão sobre-humana. Fine-tuning calibrado para cada missão.', accent: '195 90% 55%', tag: 'RK800' },
+          { icon: '🔷', title: 'Agentes Deviants', desc: 'Agentes autônomos que transcenderam sua programação — operam, decidem e evoluem. Pesquisa, relatórios, atendimento inteligente.', accent: '210 80% 60%', tag: 'DEVIANT' },
+          { icon: '🧠', title: 'Análise Forense', desc: 'Computer vision com precisão de androide. Detecta padrões invisíveis — anomalias, defeitos, dados ocultos em cada frame.', accent: '185 85% 50%', tag: 'SCAN' },
+          { icon: '💠', title: 'Rede CyberLife', desc: 'MLOps que orquestra modelos como a CyberLife gerencia androides. Deploy distribuído, monitoramento e controle total.', accent: '220 70% 55%', tag: 'CYBERLIFE' },
         ];
         return (
           <div className="fluid-section-pad">
             <div className="mb-16">
               <Suspense fallback={null}><FocussChat /></Suspense>
             </div>
-            {/* Death Stranding capabilities grid */}
+            {/* Detroit: Become Human capabilities grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-6xl mb-16">
               {dsCards.map((card, i) => (
                 <div key={i} className="detail-item magnetic-card premium-card card-strand group relative rounded-xl overflow-hidden cursor-pointer"
                   style={{ opacity: 0 }}>
-                  {/* Top strand line */}
+                  {/* Top LED line */}
                   <div className="absolute top-0 left-0 right-0 h-[3px] opacity-60 group-hover:opacity-100 transition-opacity duration-500"
                     style={{ background: `linear-gradient(90deg, hsl(${card.accent}), hsl(${card.accent} / 0.3))` }} />
-                  {/* Timefall rain effect on hover */}
+                  {/* Holographic glow on hover */}
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none card-timefall"
                     style={{ background: `radial-gradient(ellipse at top left, hsl(${card.accent} / 0.12), transparent 60%)` }} />
                   {/* Bottom glow */}
@@ -819,22 +819,22 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
                 <div className="absolute inset-0" style={{ background: `linear-gradient(135deg, hsl(${colors.accentHsl} / 0.12), transparent)` }} />
                 <div className="absolute bottom-0 left-0 right-0 p-8" style={{ background: 'linear-gradient(to top, hsl(var(--background) / 0.85), transparent)' }}>
-                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.3em] uppercase font-medium" style={{ color: `hsl(${colors.accentHsl} / 0.9)` }}>📦 BRIDGES HQ</span>
-                  <h4 className="font-[family-name:var(--font-display)] text-foreground text-xl md:text-2xl font-bold mt-2">Reconectando a América</h4>
+                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.3em] uppercase font-medium" style={{ color: `hsl(${colors.accentHsl} / 0.9)` }}>🤖 CYBERLIFE HQ</span>
+                  <h4 className="font-[family-name:var(--font-display)] text-foreground text-xl md:text-2xl font-bold mt-2">Androides Que Pensam</h4>
                 </div>
               </div>
               <div className="lg:col-span-5 grid grid-rows-2 gap-5">
                 <div className="detail-item premium-card card-strand-pulse card-hover-glow relative p-9 rounded-xl" style={{ opacity: 0 }}>
                   <div className="absolute top-0 left-0 right-0 h-[2px] opacity-40" style={{ background: `linear-gradient(90deg, hsl(${colors.accentHsl}), transparent)` }} />
-                  <div className="text-4xl mb-4">🔗</div>
-                  <h4 className="font-[family-name:var(--font-display)] text-foreground text-sm font-bold tracking-[0.12em] uppercase mb-3">Strand System</h4>
-                  <p className="text-muted-foreground text-[13px] leading-[1.7]">Como as conexões strand que unem sobreviventes — agentes que pesquisam, analisam e executam, fortalecendo toda a rede.</p>
+                  <div className="text-4xl mb-4">🔷</div>
+                  <h4 className="font-[family-name:var(--font-display)] text-foreground text-sm font-bold tracking-[0.12em] uppercase mb-3">Deviant Protocol</h4>
+                  <p className="text-muted-foreground text-[13px] leading-[1.7]">Como androides que quebram suas barreiras — agentes que pesquisam, analisam e executam além da programação original.</p>
                 </div>
                 <div className="detail-item image-hover-zoom card-hover-glow relative h-full rounded-lg overflow-hidden" style={{ opacity: 0, border: `1px solid hsl(${colors.accentHsl} / 0.15)` }}>
                   <img src="/images/automacao-hero.png" alt="RAG Pipeline" loading="lazy" decoding="async" fetchPriority="low" className="w-full h-full object-cover" style={{ filter: 'brightness(0.65) saturate(1.25)' }} />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
                   <div className="absolute bottom-0 left-0 right-0 p-5" style={{ background: 'linear-gradient(to top, hsl(var(--background) / 0.8), transparent)' }}>
-                    <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.25em] uppercase font-medium" style={{ color: `hsl(${colors.accentHsl} / 0.9)` }}>🌊 CHIRAL NETWORK</span>
+                    <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.25em] uppercase font-medium" style={{ color: `hsl(${colors.accentHsl} / 0.9)` }}>💠 ANDROID NETWORK</span>
                   </div>
                 </div>
               </div>
