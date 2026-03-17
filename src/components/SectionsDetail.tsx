@@ -255,24 +255,24 @@ const sectionDeepDive: Record<string, DeepDiveBlock[]> = {
   ],
   'inovacao-ia': [
     {
-      heading: '🤖 IA Generativa — Protocolo RK800',
-      body: 'Como Connor analisando uma cena de crime, nossas IAs processam e conectam dados com precisão sobre-humana. GPT-4, Claude, Gemini e modelos open-source — cada modelo é calibrado como o software de um androide CyberLife.',
+      heading: '🦀 IA Generativa — Entregas de Sam Bridges',
+      body: 'Como Sam atravessando terrenos impossíveis com sua carga, nossas IAs processam e entregam resultados onde ninguém mais alcança. GPT-4, Claude, Gemini — cada modelo é calibrado como o equipamento de um porter lendário da Bridges.',
       highlights: ['GPT-4 / Claude', 'LLaMA / Mistral', 'Fine-tuning', 'RAG Avançado', 'Prompt Engineering'],
     },
     {
-      heading: '🔷 Agentes — Deviants Autônomos',
-      body: 'Nossos agentes de IA são como androides deviants — transcenderam sua programação original. Operam com autonomia, tomam decisões em tempo real, e evoluem a cada interação. Pesquisa, relatórios, moderação — cada agente pensa por si.',
-      stat: { value: '85%', label: 'Redução — Tarefas Automatizadas' },
+      heading: '⚡ Agentes — A Rede Fragile Express',
+      body: 'Como Fragile teleportando entregas pela Beach, nossos agentes operam com velocidade sobrenatural. Atravessam barreiras, tomam decisões em tempo real e conectam pontos que pareciam impossíveis. Cada agente é um strand na rede.',
+      stat: { value: '85%', label: 'Redução — Entregas Automatizadas' },
     },
     {
-      heading: '🧠 Visão Computacional — Análise Forense',
-      body: 'Pipelines de computer vision com a precisão de Connor reconstruindo uma cena do crime. Detectam padrões invisíveis ao olho humano — anomalias, defeitos, dados ocultos. Cada frame é analisado como evidência.',
+      heading: '👶 Visão Computacional — Sensor BB',
+      body: 'Como o Bridge Baby de Sam detectando BTs invisíveis, nossos pipelines de computer vision enxergam o que olhos humanos não podem. Anomalias, padrões ocultos, ameaças invisíveis — cada frame é escaneado com precisão de DOOMS nível 3.',
       highlights: ['OCR Avançado', 'Controle de Qualidade', 'Análise de Documentos', 'Detecção de Anomalias', 'Edge AI'],
     },
     {
-      heading: '💠 MLOps — Rede CyberLife',
-      body: 'Como a CyberLife orquestra milhões de androides simultaneamente, nosso MLOps gerencia modelos em produção com controle total. Versionamento, treinamento distribuído, A/B testing e monitoramento — cada nó da rede opera em sincronia.',
-      stat: { value: '<80ms', label: 'Latência — Velocidade Androide' },
+      heading: '🌊 MLOps — Chiral Network',
+      body: 'Como a Chiral Network reconectando cada nó da América, nosso MLOps orquestra modelos em produção com controle total. Heartman monitora cada heartbeat do sistema, Deadman analisa cada corpo de dados — a rede nunca cai.',
+      stat: { value: '<80ms', label: 'Latência — Velocidade Chiral' },
     },
   ],
   'mobile-web': [
