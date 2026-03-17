@@ -779,7 +779,7 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
             <div className="mb-16">
               <Suspense fallback={null}><FocussChat /></Suspense>
             </div>
-            {/* Detroit: Become Human capabilities grid */}
+            {/* Death Stranding capabilities grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-6xl mb-16">
               {dsCards.map((card, i) => (
                 <div key={i} className="detail-item magnetic-card premium-card card-strand group relative rounded-xl overflow-hidden cursor-pointer"
