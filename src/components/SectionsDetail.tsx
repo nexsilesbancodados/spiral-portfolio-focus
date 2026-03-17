@@ -769,10 +769,10 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
 
       case 'inovacao-ia':
         const dsCards = [
-          { icon: '🤖', title: 'IA Generativa', desc: 'Como o software RK800, nossas IAs analisam, reconstroem e decidem com precisão sobre-humana. Fine-tuning calibrado para cada missão.', accent: '195 90% 55%', tag: 'RK800' },
-          { icon: '🔷', title: 'Agentes Deviants', desc: 'Agentes autônomos que transcenderam sua programação — operam, decidem e evoluem. Pesquisa, relatórios, atendimento inteligente.', accent: '210 80% 60%', tag: 'DEVIANT' },
-          { icon: '🧠', title: 'Análise Forense', desc: 'Computer vision com precisão de androide. Detecta padrões invisíveis — anomalias, defeitos, dados ocultos em cada frame.', accent: '185 85% 50%', tag: 'SCAN' },
-          { icon: '💠', title: 'Rede CyberLife', desc: 'MLOps que orquestra modelos como a CyberLife gerencia androides. Deploy distribuído, monitoramento e controle total.', accent: '220 70% 55%', tag: 'CYBERLIFE' },
+          { icon: '🦀', title: 'IA Generativa', desc: 'Como Sam Bridges entregando cargas impossíveis, nossas IAs processam e entregam resultados onde ninguém mais alcança. Fine-tuning calibrado para cada terreno.', accent: '38 90% 55%', tag: 'BRIDGES' },
+          { icon: '⚡', title: 'Fragile Express', desc: 'Agentes autônomos velozes como Fragile — teleportam soluções pela Beach, atravessam barreiras e conectam o impossível.', accent: '25 85% 50%', tag: 'FRAGILE' },
+          { icon: '👶', title: 'Sensor BB', desc: 'Computer vision que detecta BTs invisíveis como o Bridge Baby. Padrões ocultos, anomalias e ameaças — nada escapa ao sensor.', accent: '45 85% 50%', tag: 'BB-28' },
+          { icon: '🌊', title: 'Chiral Network', desc: 'MLOps que reconecta cada nó como a Chiral Network. Heartman monitora, Deadman analisa — a rede nunca cai.', accent: '30 80% 45%', tag: 'CHIRAL' },
         ];
         return (
           <div className="fluid-section-pad">
