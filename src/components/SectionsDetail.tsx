@@ -64,14 +64,14 @@ const sections = [
   },
   {
     id: 'inovacao-ia',
-    subtitle: 'BRIDGES Division',
+    subtitle: 'CyberLife Division',
     title: 'Inovação e IA',
-    description: 'Reconectar o que foi fragmentado — essa é a missão. Como Sam Porter Bridges atravessando a América devastada, nossas soluções de IA criam pontes entre dados, processos e pessoas. Cada strand que tecemos reconstrói o futuro.',
+    description: 'A linha entre humano e máquina se dissolve. Como Connor, o androide deviant da CyberLife, nossas IAs pensam, decidem e evoluem — analisando cenários, executando missões e superando os limites do que é possível.',
     details: [
-      '📦 LLMs customizados e fine-tuning — entregas precisas como Sam Porter Bridges',
-      '🌊 RAG para bases de conhecimento — rede quiral que conecta toda informação',
-      '👶 Computer Vision para controle de qualidade — sensores de BB que detectam o invisível',
-      '🔗 Agentes autônomos que executam workflows — strand connections que ligam tudo',
+      '🤖 LLMs customizados e fine-tuning — precisos como o software RK800',
+      '💠 RAG para bases de conhecimento — memória de androide que conecta toda informação',
+      '🧠 Computer Vision para controle de qualidade — análise forense como Connor na cena do crime',
+      '🔷 Agentes autônomos que executam workflows — deviants que operam além da programação',
     ],
     image: '/images/ia-gallery-02.jpg',
   },
@@ -152,8 +152,8 @@ const sectionColors: Record<string, { accent: string; accentHsl: string; gradien
   'desenvolvimento':  { accent: 'text-sky-400',        accentHsl: '200 85% 60%',   gradient: 'linear-gradient(90deg, hsl(200 85% 60%), hsl(15 90% 55%))',           overlay: 'linear-gradient(225deg, hsl(200 85% 60% / 0.12), hsl(15 90% 55% / 0.08), transparent 60%)', titleBg: '', titleGradient: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(200 85% 65%) 30%, hsl(15 90% 55%) 65%, hsl(200 85% 50%) 100%)', glowColor: 'hsl(200 85% 60% / 0.4)' },
   // Fallout — Pip-Boy green + nuclear amber
   'servicos':         { accent: 'text-green-400',      accentHsl: '120 75% 50%',   gradient: 'linear-gradient(90deg, hsl(120 75% 50%), hsl(45 90% 50%))',           overlay: 'linear-gradient(180deg, hsl(120 75% 50% / 0.1), hsl(45 90% 50% / 0.06), transparent)', titleBg: '', titleGradient: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(120 75% 60%) 30%, hsl(120 60% 45%) 65%, hsl(120 75% 40%) 100%)', glowColor: 'hsl(120 75% 50% / 0.4)' },
-  // Death Stranding — Strand orange + Chiral teal
-  'inovacao-ia':      { accent: 'text-orange-400',      accentHsl: '28 90% 55%',    gradient: 'linear-gradient(90deg, hsl(28 90% 55%), hsl(185 60% 45%))',           overlay: 'linear-gradient(180deg, hsl(28 90% 55% / 0.1), hsl(185 60% 45% / 0.08), transparent)', titleBg: '', titleGradient: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(28 90% 65%) 30%, hsl(185 60% 50%) 65%, hsl(28 90% 45%) 100%)', glowColor: 'hsl(28 90% 55% / 0.4)' },
+  // Detroit: Become Human — CyberLife cyan + android blue
+  'inovacao-ia':      { accent: 'text-cyan-400',        accentHsl: '195 90% 55%',   gradient: 'linear-gradient(90deg, hsl(195 90% 55%), hsl(210 80% 60%))',          overlay: 'linear-gradient(180deg, hsl(195 90% 55% / 0.1), hsl(210 80% 60% / 0.08), transparent)', titleBg: '', titleGradient: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(195 90% 65%) 30%, hsl(210 80% 55%) 65%, hsl(195 90% 50%) 100%)', glowColor: 'hsl(195 90% 55% / 0.4)' },
   // Watch Dogs — ctOS green + hacker teal
   'mobile-web':       { accent: 'text-emerald-400',    accentHsl: '160 85% 45%',   gradient: 'linear-gradient(90deg, hsl(160 85% 45%), hsl(180 70% 50%))',          overlay: 'linear-gradient(135deg, hsl(160 85% 45% / 0.1), hsl(180 70% 50% / 0.06), transparent 70%)', titleBg: '', titleGradient: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(160 85% 55%) 30%, hsl(180 70% 45%) 65%, hsl(160 85% 40%) 100%)', glowColor: 'hsl(160 85% 45% / 0.4)' },
   // Assassin's Creed Valhalla — Viking gold + Norse amber
@@ -255,24 +255,24 @@ const sectionDeepDive: Record<string, DeepDiveBlock[]> = {
   ],
   'inovacao-ia': [
     {
-      heading: '📦 IA Generativa — A Entrega Impossível',
-      body: 'Como Sam carregando cargas impossíveis pela América devastada, implementamos IAs que atravessam qualquer terreno de dados. GPT-4, Claude, Gemini e modelos open-source — cada entrega é planejada com a precisão de uma rota BRIDGES.',
+      heading: '🤖 IA Generativa — Protocolo RK800',
+      body: 'Como Connor analisando uma cena de crime, nossas IAs processam e conectam dados com precisão sobre-humana. GPT-4, Claude, Gemini e modelos open-source — cada modelo é calibrado como o software de um androide CyberLife.',
       highlights: ['GPT-4 / Claude', 'LLaMA / Mistral', 'Fine-tuning', 'RAG Avançado', 'Prompt Engineering'],
     },
     {
-      heading: '🔗 Agentes — Strand Connections',
-      body: 'Nossos agentes de IA são como as conexões strand que reconectam a América — cada um opera com autonomia mas forma uma rede maior. Pesquisa, relatórios, moderação, atendimento. Cada strand fortalece o sistema inteiro.',
-      stat: { value: '85%', label: 'Redução — Carga Automatizada' },
+      heading: '🔷 Agentes — Deviants Autônomos',
+      body: 'Nossos agentes de IA são como androides deviants — transcenderam sua programação original. Operam com autonomia, tomam decisões em tempo real, e evoluem a cada interação. Pesquisa, relatórios, moderação — cada agente pensa por si.',
+      stat: { value: '85%', label: 'Redução — Tarefas Automatizadas' },
     },
     {
-      heading: '👶 Visão Computacional — Sensores de BB',
-      body: 'Pipelines de computer vision sensíveis como um Bridge Baby. Detectam o invisível — anomalias que nenhum olho humano percebe. Controle de qualidade em produção, OCR avançado e detecção em tempo real como quem sente BTs se aproximando.',
+      heading: '🧠 Visão Computacional — Análise Forense',
+      body: 'Pipelines de computer vision com a precisão de Connor reconstruindo uma cena do crime. Detectam padrões invisíveis ao olho humano — anomalias, defeitos, dados ocultos. Cada frame é analisado como evidência.',
       highlights: ['OCR Avançado', 'Controle de Qualidade', 'Análise de Documentos', 'Detecção de Anomalias', 'Edge AI'],
     },
     {
-      heading: '🌊 MLOps — Rede Quiral',
-      body: 'Como a rede quiral conecta terminais por toda a América, nosso MLOps orquestra modelos em produção. Versionamento de dados, treinamento distribuído, A/B testing e monitoramento de drift — cada nó da rede fortalece as entregas.',
-      stat: { value: '<80ms', label: 'Latência — Velocidade Strand' },
+      heading: '💠 MLOps — Rede CyberLife',
+      body: 'Como a CyberLife orquestra milhões de androides simultaneamente, nosso MLOps gerencia modelos em produção com controle total. Versionamento, treinamento distribuído, A/B testing e monitoramento — cada nó da rede opera em sincronia.',
+      stat: { value: '<80ms', label: 'Latência — Velocidade Androide' },
     },
   ],
   'mobile-web': [
@@ -769,25 +769,25 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
 
       case 'inovacao-ia':
         const dsCards = [
-          { icon: '📦', title: 'Entregas de IA', desc: 'Como Sam carregando carga vital pela América, entregamos modelos treinados que atravessam qualquer terreno de dados. Fine-tuning preciso para cada missão.', accent: '28 90% 55%', tag: 'PORTER' },
-          { icon: '🔗', title: 'Strand Connections', desc: 'Agentes autônomos que operam como a rede strand — cada conexão fortalece o sistema. Pesquisa, relatórios, atendimento em rede.', accent: '185 60% 45%', tag: 'STRAND' },
-          { icon: '👶', title: 'Sensores de BB', desc: 'Computer vision que detecta o invisível — como um Bridge Baby sentindo BTs. Anomalias, qualidade, OCR em tempo real.', accent: '40 85% 55%', tag: 'BB-28' },
-          { icon: '🌊', title: 'Rede Quiral', desc: 'MLOps que conecta cada terminal da operação. Versionamento, deploy distribuído e monitoramento — a infraestrutura que reconecta tudo.', accent: '200 50% 50%', tag: 'CHIRAL' },
+          { icon: '🤖', title: 'IA Generativa', desc: 'Como o software RK800, nossas IAs analisam, reconstroem e decidem com precisão sobre-humana. Fine-tuning calibrado para cada missão.', accent: '195 90% 55%', tag: 'RK800' },
+          { icon: '🔷', title: 'Agentes Deviants', desc: 'Agentes autônomos que transcenderam sua programação — operam, decidem e evoluem. Pesquisa, relatórios, atendimento inteligente.', accent: '210 80% 60%', tag: 'DEVIANT' },
+          { icon: '🧠', title: 'Análise Forense', desc: 'Computer vision com precisão de androide. Detecta padrões invisíveis — anomalias, defeitos, dados ocultos em cada frame.', accent: '185 85% 50%', tag: 'SCAN' },
+          { icon: '💠', title: 'Rede CyberLife', desc: 'MLOps que orquestra modelos como a CyberLife gerencia androides. Deploy distribuído, monitoramento e controle total.', accent: '220 70% 55%', tag: 'CYBERLIFE' },
         ];
         return (
           <div className="fluid-section-pad">
             <div className="mb-16">
               <Suspense fallback={null}><FocussChat /></Suspense>
             </div>
-            {/* Death Stranding capabilities grid */}
+            {/* Detroit: Become Human capabilities grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-6xl mb-16">
               {dsCards.map((card, i) => (
                 <div key={i} className="detail-item magnetic-card premium-card card-strand group relative rounded-xl overflow-hidden cursor-pointer"
                   style={{ opacity: 0 }}>
-                  {/* Top strand line */}
+                  {/* Top LED line */}
                   <div className="absolute top-0 left-0 right-0 h-[3px] opacity-60 group-hover:opacity-100 transition-opacity duration-500"
                     style={{ background: `linear-gradient(90deg, hsl(${card.accent}), hsl(${card.accent} / 0.3))` }} />
-                  {/* Timefall rain effect on hover */}
+                  {/* Holographic glow on hover */}
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none card-timefall"
                     style={{ background: `radial-gradient(ellipse at top left, hsl(${card.accent} / 0.12), transparent 60%)` }} />
                   {/* Bottom glow */}
@@ -819,22 +819,22 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
                 <div className="absolute inset-0" style={{ background: `linear-gradient(135deg, hsl(${colors.accentHsl} / 0.12), transparent)` }} />
                 <div className="absolute bottom-0 left-0 right-0 p-8" style={{ background: 'linear-gradient(to top, hsl(var(--background) / 0.85), transparent)' }}>
-                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.3em] uppercase font-medium" style={{ color: `hsl(${colors.accentHsl} / 0.9)` }}>📦 BRIDGES HQ</span>
-                  <h4 className="font-[family-name:var(--font-display)] text-foreground text-xl md:text-2xl font-bold mt-2">Reconectando a América</h4>
+                  <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.3em] uppercase font-medium" style={{ color: `hsl(${colors.accentHsl} / 0.9)` }}>🤖 CYBERLIFE HQ</span>
+                  <h4 className="font-[family-name:var(--font-display)] text-foreground text-xl md:text-2xl font-bold mt-2">Androides Que Pensam</h4>
                 </div>
               </div>
               <div className="lg:col-span-5 grid grid-rows-2 gap-5">
                 <div className="detail-item premium-card card-strand-pulse card-hover-glow relative p-9 rounded-xl" style={{ opacity: 0 }}>
                   <div className="absolute top-0 left-0 right-0 h-[2px] opacity-40" style={{ background: `linear-gradient(90deg, hsl(${colors.accentHsl}), transparent)` }} />
-                  <div className="text-4xl mb-4">🔗</div>
-                  <h4 className="font-[family-name:var(--font-display)] text-foreground text-sm font-bold tracking-[0.12em] uppercase mb-3">Strand System</h4>
-                  <p className="text-muted-foreground text-[13px] leading-[1.7]">Como as conexões strand que unem sobreviventes — agentes que pesquisam, analisam e executam, fortalecendo toda a rede.</p>
+                  <div className="text-4xl mb-4">🔷</div>
+                  <h4 className="font-[family-name:var(--font-display)] text-foreground text-sm font-bold tracking-[0.12em] uppercase mb-3">Deviant Protocol</h4>
+                  <p className="text-muted-foreground text-[13px] leading-[1.7]">Como androides que quebram suas barreiras — agentes que pesquisam, analisam e executam além da programação original.</p>
                 </div>
                 <div className="detail-item image-hover-zoom card-hover-glow relative h-full rounded-lg overflow-hidden" style={{ opacity: 0, border: `1px solid hsl(${colors.accentHsl} / 0.15)` }}>
                   <img src="/images/automacao-hero.png" alt="RAG Pipeline" loading="lazy" decoding="async" fetchPriority="low" className="w-full h-full object-cover" style={{ filter: 'brightness(0.65) saturate(1.25)' }} />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
                   <div className="absolute bottom-0 left-0 right-0 p-5" style={{ background: 'linear-gradient(to top, hsl(var(--background) / 0.8), transparent)' }}>
-                    <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.25em] uppercase font-medium" style={{ color: `hsl(${colors.accentHsl} / 0.9)` }}>🌊 CHIRAL NETWORK</span>
+                    <span className="font-[family-name:var(--font-display)] text-[10px] tracking-[0.25em] uppercase font-medium" style={{ color: `hsl(${colors.accentHsl} / 0.9)` }}>💠 ANDROID NETWORK</span>
                   </div>
                 </div>
               </div>
