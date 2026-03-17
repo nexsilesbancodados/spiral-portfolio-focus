@@ -64,14 +64,14 @@ const sections = [
   },
   {
     id: 'inovacao-ia',
-    subtitle: 'CyberLife Division',
+    subtitle: 'Bridges Corporation',
     title: 'Inovação e IA',
-    description: 'A linha entre humano e máquina se dissolve. Como Connor, o androide deviant da CyberLife, nossas IAs pensam, decidem e evoluem — analisando cenários, executando missões e superando os limites do que é possível.',
+    description: 'Como Sam Porter Bridges reconectando a América fragmentada, nossas IAs tecem a Chiral Network dos dados — atravessando o Timefall, detectando BTs invisíveis e entregando o que ninguém mais consegue. Cada conexão é um strand que une o impossível.',
     details: [
-      '🤖 LLMs customizados e fine-tuning — precisos como o software RK800',
-      '💠 RAG para bases de conhecimento — memória de androide que conecta toda informação',
-      '🧠 Computer Vision para controle de qualidade — análise forense como Connor na cena do crime',
-      '🔷 Agentes autônomos que executam workflows — deviants que operam além da programação',
+      '🦀 LLMs customizados e fine-tuning — precisos como as entregas de Sam Bridges',
+      '🌊 RAG para bases de conhecimento — a Chiral Network que conecta toda informação',
+      '👶 Computer Vision com BB — detecta BTs e padrões invisíveis ao olho humano',
+      '⚡ Agentes autônomos — como Fragile, teleportam soluções através da Beach',
     ],
     image: '/images/ia-gallery-02.jpg',
   },
@@ -152,8 +152,8 @@ const sectionColors: Record<string, { accent: string; accentHsl: string; gradien
   'desenvolvimento':  { accent: 'text-sky-400',        accentHsl: '200 85% 60%',   gradient: 'linear-gradient(90deg, hsl(200 85% 60%), hsl(15 90% 55%))',           overlay: 'linear-gradient(225deg, hsl(200 85% 60% / 0.12), hsl(15 90% 55% / 0.08), transparent 60%)', titleBg: '', titleGradient: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(200 85% 65%) 30%, hsl(15 90% 55%) 65%, hsl(200 85% 50%) 100%)', glowColor: 'hsl(200 85% 60% / 0.4)' },
   // Fallout — Pip-Boy green + nuclear amber
   'servicos':         { accent: 'text-green-400',      accentHsl: '120 75% 50%',   gradient: 'linear-gradient(90deg, hsl(120 75% 50%), hsl(45 90% 50%))',           overlay: 'linear-gradient(180deg, hsl(120 75% 50% / 0.1), hsl(45 90% 50% / 0.06), transparent)', titleBg: '', titleGradient: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(120 75% 60%) 30%, hsl(120 60% 45%) 65%, hsl(120 75% 40%) 100%)', glowColor: 'hsl(120 75% 50% / 0.4)' },
-  // Detroit: Become Human — CyberLife cyan + android blue
-  'inovacao-ia':      { accent: 'text-cyan-400',        accentHsl: '195 90% 55%',   gradient: 'linear-gradient(90deg, hsl(195 90% 55%), hsl(210 80% 60%))',          overlay: 'linear-gradient(180deg, hsl(195 90% 55% / 0.1), hsl(210 80% 60% / 0.08), transparent)', titleBg: '', titleGradient: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(195 90% 65%) 30%, hsl(210 80% 55%) 65%, hsl(195 90% 50%) 100%)', glowColor: 'hsl(195 90% 55% / 0.4)' },
+  // Death Stranding — Chiral gold + strand orange
+  'inovacao-ia':      { accent: 'text-amber-400',       accentHsl: '38 90% 55%',    gradient: 'linear-gradient(90deg, hsl(38 90% 55%), hsl(25 85% 50%))',            overlay: 'linear-gradient(180deg, hsl(38 90% 55% / 0.1), hsl(25 85% 50% / 0.08), transparent)', titleBg: '', titleGradient: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(38 90% 65%) 30%, hsl(25 85% 50%) 65%, hsl(38 90% 45%) 100%)', glowColor: 'hsl(38 90% 55% / 0.4)' },
   // Watch Dogs — ctOS green + hacker teal
   'mobile-web':       { accent: 'text-emerald-400',    accentHsl: '160 85% 45%',   gradient: 'linear-gradient(90deg, hsl(160 85% 45%), hsl(180 70% 50%))',          overlay: 'linear-gradient(135deg, hsl(160 85% 45% / 0.1), hsl(180 70% 50% / 0.06), transparent 70%)', titleBg: '', titleGradient: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(160 85% 55%) 30%, hsl(180 70% 45%) 65%, hsl(160 85% 40%) 100%)', glowColor: 'hsl(160 85% 45% / 0.4)' },
   // Assassin's Creed Valhalla — Viking gold + Norse amber
@@ -255,24 +255,24 @@ const sectionDeepDive: Record<string, DeepDiveBlock[]> = {
   ],
   'inovacao-ia': [
     {
-      heading: '🤖 IA Generativa — Protocolo RK800',
-      body: 'Como Connor analisando uma cena de crime, nossas IAs processam e conectam dados com precisão sobre-humana. GPT-4, Claude, Gemini e modelos open-source — cada modelo é calibrado como o software de um androide CyberLife.',
+      heading: '🦀 IA Generativa — Entregas de Sam Bridges',
+      body: 'Como Sam atravessando terrenos impossíveis com sua carga, nossas IAs processam e entregam resultados onde ninguém mais alcança. GPT-4, Claude, Gemini — cada modelo é calibrado como o equipamento de um porter lendário da Bridges.',
       highlights: ['GPT-4 / Claude', 'LLaMA / Mistral', 'Fine-tuning', 'RAG Avançado', 'Prompt Engineering'],
     },
     {
-      heading: '🔷 Agentes — Deviants Autônomos',
-      body: 'Nossos agentes de IA são como androides deviants — transcenderam sua programação original. Operam com autonomia, tomam decisões em tempo real, e evoluem a cada interação. Pesquisa, relatórios, moderação — cada agente pensa por si.',
-      stat: { value: '85%', label: 'Redução — Tarefas Automatizadas' },
+      heading: '⚡ Agentes — A Rede Fragile Express',
+      body: 'Como Fragile teleportando entregas pela Beach, nossos agentes operam com velocidade sobrenatural. Atravessam barreiras, tomam decisões em tempo real e conectam pontos que pareciam impossíveis. Cada agente é um strand na rede.',
+      stat: { value: '85%', label: 'Redução — Entregas Automatizadas' },
     },
     {
-      heading: '🧠 Visão Computacional — Análise Forense',
-      body: 'Pipelines de computer vision com a precisão de Connor reconstruindo uma cena do crime. Detectam padrões invisíveis ao olho humano — anomalias, defeitos, dados ocultos. Cada frame é analisado como evidência.',
+      heading: '👶 Visão Computacional — Sensor BB',
+      body: 'Como o Bridge Baby de Sam detectando BTs invisíveis, nossos pipelines de computer vision enxergam o que olhos humanos não podem. Anomalias, padrões ocultos, ameaças invisíveis — cada frame é escaneado com precisão de DOOMS nível 3.',
       highlights: ['OCR Avançado', 'Controle de Qualidade', 'Análise de Documentos', 'Detecção de Anomalias', 'Edge AI'],
     },
     {
-      heading: '💠 MLOps — Rede CyberLife',
-      body: 'Como a CyberLife orquestra milhões de androides simultaneamente, nosso MLOps gerencia modelos em produção com controle total. Versionamento, treinamento distribuído, A/B testing e monitoramento — cada nó da rede opera em sincronia.',
-      stat: { value: '<80ms', label: 'Latência — Velocidade Androide' },
+      heading: '🌊 MLOps — Chiral Network',
+      body: 'Como a Chiral Network reconectando cada nó da América, nosso MLOps orquestra modelos em produção com controle total. Heartman monitora cada heartbeat do sistema, Deadman analisa cada corpo de dados — a rede nunca cai.',
+      stat: { value: '<80ms', label: 'Latência — Velocidade Chiral' },
     },
   ],
   'mobile-web': [
@@ -769,17 +769,17 @@ const CinematicSection = memo(function CinematicSection({ section, onScrollUpAtT
 
       case 'inovacao-ia':
         const dsCards = [
-          { icon: '🤖', title: 'IA Generativa', desc: 'Como o software RK800, nossas IAs analisam, reconstroem e decidem com precisão sobre-humana. Fine-tuning calibrado para cada missão.', accent: '195 90% 55%', tag: 'RK800' },
-          { icon: '🔷', title: 'Agentes Deviants', desc: 'Agentes autônomos que transcenderam sua programação — operam, decidem e evoluem. Pesquisa, relatórios, atendimento inteligente.', accent: '210 80% 60%', tag: 'DEVIANT' },
-          { icon: '🧠', title: 'Análise Forense', desc: 'Computer vision com precisão de androide. Detecta padrões invisíveis — anomalias, defeitos, dados ocultos em cada frame.', accent: '185 85% 50%', tag: 'SCAN' },
-          { icon: '💠', title: 'Rede CyberLife', desc: 'MLOps que orquestra modelos como a CyberLife gerencia androides. Deploy distribuído, monitoramento e controle total.', accent: '220 70% 55%', tag: 'CYBERLIFE' },
+          { icon: '🦀', title: 'IA Generativa', desc: 'Como Sam Bridges entregando cargas impossíveis, nossas IAs processam e entregam resultados onde ninguém mais alcança. Fine-tuning calibrado para cada terreno.', accent: '38 90% 55%', tag: 'BRIDGES' },
+          { icon: '⚡', title: 'Fragile Express', desc: 'Agentes autônomos velozes como Fragile — teleportam soluções pela Beach, atravessam barreiras e conectam o impossível.', accent: '25 85% 50%', tag: 'FRAGILE' },
+          { icon: '👶', title: 'Sensor BB', desc: 'Computer vision que detecta BTs invisíveis como o Bridge Baby. Padrões ocultos, anomalias e ameaças — nada escapa ao sensor.', accent: '45 85% 50%', tag: 'BB-28' },
+          { icon: '🌊', title: 'Chiral Network', desc: 'MLOps que reconecta cada nó como a Chiral Network. Heartman monitora, Deadman analisa — a rede nunca cai.', accent: '30 80% 45%', tag: 'CHIRAL' },
         ];
         return (
           <div className="fluid-section-pad">
             <div className="mb-16">
               <Suspense fallback={null}><FocussChat /></Suspense>
             </div>
-            {/* Detroit: Become Human capabilities grid */}
+            {/* Death Stranding capabilities grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-6xl mb-16">
               {dsCards.map((card, i) => (
                 <div key={i} className="detail-item magnetic-card premium-card card-strand group relative rounded-xl overflow-hidden cursor-pointer"
