@@ -171,7 +171,7 @@ const Index = () => {
 
           <div className="text-center mt-16" data-animate style={{ opacity: 0 }}>
             <p className="text-muted-foreground mb-6 text-lg">
-              Antes de qualquer estratégia funcionar, <span className="text-foreground font-semibold">a base precisa estar certa.</span>
+              Cada projeto é único. <span className="text-foreground font-semibold">Código limpo, arquitetura sólida e entrega profissional.</span>
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <a
