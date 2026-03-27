@@ -278,6 +278,9 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Vibe Codes */}
+      <VibeCodesSection />
+
       {/* CTA Final */}
       <section id="contato" className="py-24 lg:py-32 bg-secondary/20 border-y border-border/50">
         <div className="max-w-3xl mx-auto px-6 text-center" data-animate>
