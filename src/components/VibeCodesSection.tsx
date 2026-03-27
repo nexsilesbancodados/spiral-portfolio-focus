@@ -98,7 +98,7 @@ export const VibeCodesSection = () => {
             <div className="vibe-shimmer absolute top-[-50%] h-[200%] w-[120px] -skew-x-[25deg] pointer-events-none select-none z-[5] opacity-0 mix-blend-overlay bg-gradient-to-r from-white/80 to-transparent" />
 
             <span className="relative z-10 text-lg font-black tracking-[0.15em] text-background uppercase transition-colors duration-300 group-hover:text-foreground">
-              Entrar agora
+              Quero participar
             </span>
             <div className="relative z-10 flex w-0 translate-x-4 items-center justify-center overflow-hidden opacity-0 transition-all duration-500 group-hover:w-10 group-hover:translate-x-0 group-hover:opacity-100"
               style={{ transitionTimingFunction: 'cubic-bezier(0.8,0,0.1,1)' }}
