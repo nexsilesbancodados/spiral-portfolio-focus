@@ -54,43 +54,45 @@ export const WaveDivider = ({
   return (
     <div
       ref={containerRef}
-      className="relative w-full overflow-hidden leading-[0]"
-      style={{ height: '200px' }}
+      className="relative w-full leading-[0]"
+      style={{ height: '200px', overflow: 'visible' }}
     >
-      {/* Light wave */}
-      <svg
-        ref={lightRef}
-        className="wave-shape absolute bottom-5 block"
-        viewBox="0 0 1000 100"
-        preserveAspectRatio="none"
-        xmlns="http://www.w3.org/2000/svg"
-        style={{
-          width: '200%',
-          height: '160px',
-          zIndex: 2,
-          opacity: 0.5,
-          animation: 'waveShift 10s ease-in-out infinite',
-        }}
-      >
-        <path d={wavePath} fill={topColor} />
-      </svg>
+      <div className="absolute inset-0 overflow-hidden" style={{ left: '-30%', right: '-30%', width: '160%' }}>
+        {/* Light wave */}
+        <svg
+          ref={lightRef}
+          className="wave-shape absolute bottom-5 block"
+          viewBox="0 0 1000 100"
+          preserveAspectRatio="none"
+          xmlns="http://www.w3.org/2000/svg"
+          style={{
+            width: '200%',
+            height: '160px',
+            zIndex: 2,
+            opacity: 0.5,
+            animation: 'waveShift 10s ease-in-out infinite',
+          }}
+        >
+          <path d={wavePath} fill={topColor} />
+        </svg>
 
-      {/* Main wave */}
-      <svg
-        ref={mainRef}
-        className="wave-shape absolute bottom-0 block"
-        viewBox="0 0 1000 100"
-        preserveAspectRatio="none"
-        xmlns="http://www.w3.org/2000/svg"
-        style={{
-          width: '200%',
-          height: '160px',
-          zIndex: 3,
-          animation: 'waveShift 10s ease-in-out infinite',
-        }}
-      >
-        <path d={wavePath} fill={bottomColor} />
-      </svg>
+        {/* Main wave */}
+        <svg
+          ref={mainRef}
+          className="wave-shape absolute bottom-0 block"
+          viewBox="0 0 1000 100"
+          preserveAspectRatio="none"
+          xmlns="http://www.w3.org/2000/svg"
+          style={{
+            width: '200%',
+            height: '160px',
+            zIndex: 3,
+            animation: 'waveShift 10s ease-in-out infinite',
+          }}
+        >
+          <path d={wavePath} fill={bottomColor} />
+        </svg>
+      </div>
     </div>
   )
 }
