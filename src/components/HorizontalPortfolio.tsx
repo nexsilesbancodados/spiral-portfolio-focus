@@ -101,10 +101,10 @@ export const HorizontalPortfolio = () => {
         {portfolioCards.map((card, i) => (
           <div
             key={i}
-            className="flex-shrink-0 flex flex-col justify-between rounded-[2rem] p-10 sm:p-12 border border-border/50"
+            className="flex-shrink-0 flex flex-col justify-between rounded-[2rem] p-10 sm:p-12 border border-border/50 min-w-[85vw] sm:min-w-[420px] h-[520px] bg-card"
             style={{
-              minWidth: window.innerWidth > 768 ? '420px' : '85vw',
-              height: '520px',
+              boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
+            }}
               background: 'hsl(var(--card))',
               boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
             }}
