@@ -1,9 +1,11 @@
 import { useEffect, useRef } from 'react'
-import { ArrowRight, Instagram, Linkedin, Mail } from 'lucide-react'
+import { ArrowRight, Instagram, Mail, MessageCircle } from 'lucide-react'
 import { ServicesReveal } from '@/components/ServicesReveal'
 import { DesignStackCards } from '@/components/DesignStackCards'
 
-const WHATSAPP_LINK = "https://api.whatsapp.com/send/?phone=5500000000000&text=Olá! Vim pelo site e gostaria de saber mais sobre os serviços."
+const WHATSAPP_LINK = "https://api.whatsapp.com/send/?phone=5533984123591&text=Olá! Vim pelo site e gostaria de saber mais sobre os serviços."
+const INSTAGRAM_LINK = "https://instagram.com/focussdev"
+const EMAIL = "devcriador1@gmail.com"
 
 const Index = () => {
   const observerRef = useRef<IntersectionObserver | null>(null)
@@ -311,13 +313,13 @@ const Index = () => {
               </p>
             </div>
             <div className="flex items-center gap-4">
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors" aria-label="Instagram">
+              <a href={INSTAGRAM_LINK} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors" aria-label="Instagram">
                 <Instagram className="w-5 h-5" />
               </a>
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors" aria-label="LinkedIn">
-                <Linkedin className="w-5 h-5" />
+              <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors" aria-label="WhatsApp">
+                <MessageCircle className="w-5 h-5" />
               </a>
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors" aria-label="Email">
+              <a href={`mailto:${EMAIL}`} className="text-muted-foreground hover:text-primary transition-colors" aria-label="Email">
                 <Mail className="w-5 h-5" />
               </a>
             </div>
