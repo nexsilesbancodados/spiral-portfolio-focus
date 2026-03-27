@@ -270,16 +270,16 @@ const Index = () => {
             <div className="space-y-6" data-animate style={{ opacity: 0 }}>
               <p className="text-xs uppercase tracking-[0.2em] text-primary font-semibold">Conheça um pouco mais sobre mim</p>
               <h2 className="text-3xl sm:text-4xl font-bold leading-tight">
-                Desenvolvedor Web<br />
-                <span className="text-muted-foreground">& Designer Digital</span>
+                Desenvolvedor<br />
+                <span className="text-muted-foreground">Full Stack</span>
               </h2>
               <p className="text-muted-foreground leading-relaxed">
-                Desenvolvedor Web e Designer Digital, focado em criar experiências digitais que convertem.
-                Transformo ideias em estruturas profissionais que posicionam marcas e geram resultados reais.
+                Especialista em criar produtos digitais completos — de SaaS a sistemas web complexos.
+                Trabalho com React, TypeScript, Node.js, bancos de dados e deploy em cloud.
               </p>
               <p className="text-muted-foreground leading-relaxed">
-                Já colaborei com diversos projetos e empresas de diferentes segmentos,
-                sempre com o mesmo compromisso: entregar uma base sólida para o crescimento digital.
+                Já desenvolvi plataformas, painéis administrativos, landing pages e sites para
+                empresas de diferentes segmentos. Foco em código limpo, performance e escalabilidade.
               </p>
               <a
                 href={WHATSAPP_LINK}
