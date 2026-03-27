@@ -60,7 +60,7 @@ const Index = () => {
       </header>
 
       {/* Hero */}
-      <section id="inicio" className="relative min-h-screen flex items-center pt-16">
+      <section id="inicio" className="relative min-h-screen flex items-center pt-16" style={{ backgroundImage: 'url(/images/bg-hero.jpg)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
         <div className="max-w-6xl mx-auto px-6 w-full grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-6 stagger-children">
             <p className="text-xs uppercase tracking-[0.2em] text-primary font-semibold">
