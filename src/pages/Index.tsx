@@ -77,15 +77,13 @@ const Index = () => {
               Da ideia ao deploy. Eu projeto, desenvolvo e entrego o produto completo para o seu negócio escalar.
             </p>
             <div className="flex flex-wrap gap-4 pt-2">
-              <a
-                href={WHATSAPP_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                onClick={() => setContactOpen(true)}
                 className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 font-semibold rounded-md hover:brightness-110 transition-all text-sm"
               >
                 Criar meu projeto
                 <ArrowRight className="w-4 h-4" />
-              </a>
+              </button>
               <a
                 href="#portfolio"
                 className="inline-flex items-center gap-2 border border-border text-foreground px-6 py-3 font-medium rounded-md hover:bg-secondary transition-all text-sm"
