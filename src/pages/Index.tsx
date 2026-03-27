@@ -6,6 +6,7 @@ import { TiltedCard } from '@/components/TiltedCard'
 import { DesignStackCards } from '@/components/DesignStackCards'
 import { VibeCodesSection } from '@/components/VibeCodesSection'
 import { HorizontalPortfolio } from '@/components/HorizontalPortfolio'
+import { WaveDivider } from '@/components/WaveDivider'
 
 const WHATSAPP_LINK = "https://api.whatsapp.com/send/?phone=5533984123591&text=Olá! Vim pelo site e gostaria de saber mais sobre os serviços."
 const INSTAGRAM_LINK = "https://instagram.com/focussdev"
@@ -125,6 +126,8 @@ const Index = () => {
         </div>
       </section>
 
+      <WaveDivider />
+
       {/* Services */}
       <section id="servicos" className="py-24 lg:py-32">
         <div className="max-w-6xl mx-auto px-6">
@@ -191,6 +194,8 @@ const Index = () => {
         <HorizontalPortfolio />
       </section>
 
+
+      <WaveDivider topColor="hsl(var(--primary) / 0.2)" />
 
       {/* About */}
       <section id="sobre" className="py-24 lg:py-32">
