@@ -1,5 +1,6 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { ArrowRight, Instagram, Mail, MessageCircle } from 'lucide-react'
+import { ContactModal } from '@/components/ContactModal'
 import { ServicesReveal } from '@/components/ServicesReveal'
 import { TiltedCard } from '@/components/TiltedCard'
 import { DesignStackCards } from '@/components/DesignStackCards'
@@ -12,6 +13,7 @@ const EMAIL = "devcriador1@gmail.com"
 
 const Index = () => {
   const observerRef = useRef<IntersectionObserver | null>(null)
+  const [contactOpen, setContactOpen] = useState(false)
 
   useEffect(() => {
     observerRef.current = new IntersectionObserver(
@@ -46,14 +48,12 @@ const Index = () => {
             <a href="#portfolio" className="hover:text-foreground transition-colors">Portfólio</a>
             <a href="#sobre" className="hover:text-foreground transition-colors">Sobre mim</a>
           </nav>
-          <a
-            href={WHATSAPP_LINK}
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            onClick={() => setContactOpen(true)}
             className="bg-primary text-primary-foreground px-5 py-2 text-sm font-semibold rounded-md hover:brightness-110 transition-all"
           >
             Contratar
-          </a>
+          </button>
         </div>
       </header>
 
@@ -77,15 +77,13 @@ const Index = () => {
               Da ideia ao deploy. Eu projeto, desenvolvo e entrego o produto completo para o seu negócio escalar.
             </p>
             <div className="flex flex-wrap gap-4 pt-2">
-              <a
-                href={WHATSAPP_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                onClick={() => setContactOpen(true)}
                 className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 font-semibold rounded-md hover:brightness-110 transition-all text-sm"
               >
                 Criar meu projeto
                 <ArrowRight className="w-4 h-4" />
-              </a>
+              </button>
               <a
                 href="#portfolio"
                 className="inline-flex items-center gap-2 border border-border text-foreground px-6 py-3 font-medium rounded-md hover:bg-secondary transition-all text-sm"
@@ -145,15 +143,13 @@ const Index = () => {
               Cada projeto é único. <span className="text-foreground font-semibold">Código limpo, arquitetura sólida e entrega profissional.</span>
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <a
-                href={WHATSAPP_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                onClick={() => setContactOpen(true)}
                 className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 font-semibold rounded-md hover:brightness-110 transition-all text-sm"
               >
                 Criar meu projeto
                 <ArrowRight className="w-4 h-4" />
-              </a>
+              </button>
               <a
                 href="#portfolio"
                 className="inline-flex items-center gap-2 border border-border text-foreground px-6 py-3 font-medium rounded-md hover:bg-secondary transition-all text-sm"
@@ -235,15 +231,13 @@ const Index = () => {
                 Já desenvolvi plataformas, painéis administrativos, landing pages e sites para
                 empresas de diferentes segmentos. Foco em código limpo, performance e escalabilidade.
               </p>
-              <a
-                href={WHATSAPP_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                onClick={() => setContactOpen(true)}
                 className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 font-semibold rounded-md hover:brightness-110 transition-all text-sm"
               >
                 Entrar em contato
                 <ArrowRight className="w-4 h-4" />
-              </a>
+              </button>
             </div>
           </div>
         </div>
@@ -263,15 +257,13 @@ const Index = () => {
             SaaS, sistemas, landing pages ou sites — eu projeto, desenvolvo e entrego
             o produto digital completo para o seu negócio.
           </p>
-          <a
-            href={WHATSAPP_LINK}
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            onClick={() => setContactOpen(true)}
             className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-4 font-bold rounded-md hover:brightness-110 transition-all text-base"
           >
             Quero meu projeto profissional
             <ArrowRight className="w-5 h-5" />
-          </a>
+          </button>
         </div>
       </section>
 
@@ -301,6 +293,13 @@ const Index = () => {
           </div>
         </div>
       </footer>
+      <ContactModal
+        open={contactOpen}
+        onClose={() => setContactOpen(false)}
+        whatsappLink={WHATSAPP_LINK}
+        instagramLink={INSTAGRAM_LINK}
+        email={EMAIL}
+      />
     </div>
   )
 }
