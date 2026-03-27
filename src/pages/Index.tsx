@@ -313,13 +313,13 @@ const Index = () => {
               </p>
             </div>
             <div className="flex items-center gap-4">
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors" aria-label="Instagram">
+              <a href={INSTAGRAM_LINK} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors" aria-label="Instagram">
                 <Instagram className="w-5 h-5" />
               </a>
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors" aria-label="LinkedIn">
-                <Linkedin className="w-5 h-5" />
+              <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors" aria-label="WhatsApp">
+                <Mail className="w-5 h-5" />
               </a>
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors" aria-label="Email">
+              <a href={`mailto:${EMAIL}`} className="text-muted-foreground hover:text-primary transition-colors" aria-label="Email">
                 <Mail className="w-5 h-5" />
               </a>
             </div>
