@@ -132,43 +132,7 @@ const Index = () => {
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              {
-                icon: Database,
-                title: 'Plataformas SaaS',
-                description: 'Sistemas completos com autenticação, dashboards, pagamentos e APIs. Do MVP ao produto final.',
-              },
-              {
-                icon: Code,
-                title: 'Sistemas Web',
-                description: 'Aplicações web robustas com painéis administrativos, CRUD, integrações e lógica de negócio personalizada.',
-              },
-              {
-                icon: Layout,
-                title: 'Landing Pages',
-                description: 'Páginas de alta conversão, otimizadas para SEO e performance. Design profissional e responsivo.',
-              },
-              {
-                icon: Globe,
-                title: 'Sites Institucionais',
-                description: 'Sites completos que transmitem autoridade e profissionalismo. Multi-páginas, blog e CMS.',
-              },
-            ].map((service, i) => (
-              <div
-                key={i}
-                data-animate
-                className="bg-card border border-border rounded-xl p-7 hover:border-primary/30 hover:-translate-y-1 transition-all duration-300 group"
-                style={{ opacity: 0, animationDelay: `${i * 0.1}s` }}
-              >
-                <div className="w-11 h-11 rounded-lg bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-colors">
-                  <service.icon className="w-5 h-5 text-primary" />
-                </div>
-                <h3 className="text-base font-bold mb-2">{service.title}</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">{service.description}</p>
-              </div>
-            ))}
-          </div>
+          <ServicesReveal />
 
           <div className="text-center mt-16" data-animate style={{ opacity: 0 }}>
             <p className="text-muted-foreground mb-6 text-lg">
