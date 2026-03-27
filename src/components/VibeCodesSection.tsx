@@ -1,12 +1,12 @@
 import { ArrowRight } from 'lucide-react'
 
 const images = [
-  'https://i.postimg.cc/Y0frvpYt/Whats-App-Image-2025-12-23-at-11-20-57.jpg',
-  'https://i.postimg.cc/jjQZ3mHj/Whats-App-Image-2025-12-23-at-11-25-15.jpg',
-  'https://i.postimg.cc/L47BD2cV/Whats-App-Image-2025-12-23-at-11-26-40.jpg',
-  'https://i.postimg.cc/gjLF8g3v/Whats-App-Image-2025-12-23-at-09-27-02.jpg',
-  'https://i.postimg.cc/J4RS172T/Whats-App-Image-2025-12-23-at-09-29-54.jpg',
-  'https://i.postimg.cc/d10nNkkJ/Whats-App-Image-2025-12-22-at-15-45-07.jpg',
+  '/images/vibe-01.jpg',
+  '/images/vibe-02.jpg',
+  '/images/vibe-03.jpg',
+  '/images/vibe-04.jpg',
+  '/images/vibe-05.jpg',
+  '/images/vibe-06.jpg',
 ]
 
 const MarqueeRow = ({ offset = 0 }: { offset?: number }) => {
@@ -98,7 +98,7 @@ export const VibeCodesSection = () => {
             <div className="vibe-shimmer absolute top-[-50%] h-[200%] w-[120px] -skew-x-[25deg] pointer-events-none select-none z-[5] opacity-0 mix-blend-overlay bg-gradient-to-r from-white/80 to-transparent" />
 
             <span className="relative z-10 text-lg font-black tracking-[0.15em] text-background uppercase transition-colors duration-300 group-hover:text-foreground">
-              Entrar agora
+              Quero participar
             </span>
             <div className="relative z-10 flex w-0 translate-x-4 items-center justify-center overflow-hidden opacity-0 transition-all duration-500 group-hover:w-10 group-hover:translate-x-0 group-hover:opacity-100"
               style={{ transitionTimingFunction: 'cubic-bezier(0.8,0,0.1,1)' }}
