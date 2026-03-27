@@ -1,12 +1,12 @@
 import { ArrowRight } from 'lucide-react'
 
 const images = [
-  'https://i.postimg.cc/Y0frvpYt/Whats-App-Image-2025-12-23-at-11-20-57.jpg',
-  'https://i.postimg.cc/jjQZ3mHj/Whats-App-Image-2025-12-23-at-11-25-15.jpg',
-  'https://i.postimg.cc/L47BD2cV/Whats-App-Image-2025-12-23-at-11-26-40.jpg',
-  'https://i.postimg.cc/gjLF8g3v/Whats-App-Image-2025-12-23-at-09-27-02.jpg',
-  'https://i.postimg.cc/J4RS172T/Whats-App-Image-2025-12-23-at-09-29-54.jpg',
-  'https://i.postimg.cc/d10nNkkJ/Whats-App-Image-2025-12-22-at-15-45-07.jpg',
+  '/images/vibe-01.jpg',
+  '/images/vibe-02.jpg',
+  '/images/vibe-03.jpg',
+  '/images/vibe-04.jpg',
+  '/images/vibe-05.jpg',
+  '/images/vibe-06.jpg',
 ]
 
 const MarqueeRow = ({ offset = 0 }: { offset?: number }) => {
