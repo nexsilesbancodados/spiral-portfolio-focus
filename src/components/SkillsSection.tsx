@@ -27,7 +27,7 @@ const skills: Skill[] = [
   { name: 'Supabase', icon: <SiSupabase />, level: 90, category: 'Backend' },
   { name: 'Python', icon: <SiPython />, level: 75, category: 'Backend' },
   { name: 'Docker', icon: <SiDocker />, level: 70, category: 'DevOps' },
-  { name: 'AWS', icon: <SiAmazonwebservices />, level: 72, category: 'DevOps' },
+  { name: 'AWS', icon: <Cloud />, level: 72, category: 'DevOps' },
   { name: 'Figma', icon: <SiFigma />, level: 85, category: 'Design' },
   { name: 'Git', icon: <SiGit />, level: 90, category: 'DevOps' },
 ]
