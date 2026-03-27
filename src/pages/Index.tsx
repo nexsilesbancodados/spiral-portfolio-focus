@@ -240,14 +240,24 @@ const Index = () => {
       <section id="sobre" className="py-24 lg:py-32">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div className="relative" data-animate>
-              <img
-                src="/images/hero-portrait.jpg"
-                alt="Sobre FOCUSS DEV"
-                loading="lazy"
-                width={1024}
-                height={1280}
-                className="w-full max-w-md rounded-xl"
+            <div className="relative flex items-center justify-center" data-animate>
+              <TiltedCard
+                imageSrc="https://i.postimg.cc/Y0HCSbqG/Whats-App-Image-2025-12-22-at-12-38-53.jpg"
+                altText="Raiam Santos McArn"
+                captionText="Raiam Santos McArn"
+                containerHeight="450px"
+                containerWidth="400px"
+                imageHeight="450px"
+                imageWidth="400px"
+                rotateAmplitude={12}
+                scaleOnHover={1.1}
+                showTooltip={true}
+                displayOverlayContent={true}
+                overlayContent={
+                  <p className="text-foreground font-bold text-lg drop-shadow-lg">
+                    Raiam Santos McArn
+                  </p>
+                }
               />
               <div className="absolute -bottom-6 -right-6 w-48 h-48 bg-primary/10 rounded-full blur-3xl" />
             </div>
