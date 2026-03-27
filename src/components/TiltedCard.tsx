@@ -85,7 +85,7 @@ export const TiltedCard = ({
           rotateX,
           rotateY,
           scale,
-          transformStyle: 'preserve3d',
+          transformStyle: 'preserve-3d',
         }}
       >
         <motion.img
