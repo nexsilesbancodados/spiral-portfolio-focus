@@ -82,6 +82,22 @@ html {
   animation: marquee 25s linear infinite;
 }
 
+/* Vibe Codes marquee */
+@keyframes marqueeVibe {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes marqueeVibeReverse {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+.animate-marquee-vibe {
+  animation: marqueeVibe 40s linear infinite;
+}
+.animate-marquee-vibe-reverse {
+  animation: marqueeVibeReverse 40s linear infinite;
+}
+
 /* Fade in up animation */
 @keyframes fadeInUp {
   from {
