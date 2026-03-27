@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { ArrowRight, Instagram, Mail, MessageCircle } from 'lucide-react'
 import { ServicesReveal } from '@/components/ServicesReveal'
+import { TiltedCard } from '@/components/TiltedCard'
 import { DesignStackCards } from '@/components/DesignStackCards'
 import { VibeCodesSection } from '@/components/VibeCodesSection'
 
