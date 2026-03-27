@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { ArrowRight, Instagram, Mail, MessageCircle } from 'lucide-react'
+import { ContainerScroll } from '@/components/ContainerScroll'
 import { ContactModal } from '@/components/ContactModal'
 import { ServicesReveal } from '@/components/ServicesReveal'
 import { TiltedCard } from '@/components/TiltedCard'
