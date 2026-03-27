@@ -124,41 +124,46 @@ const Index = () => {
       <section id="servicos" className="py-24 lg:py-32">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16" data-animate>
-            <p className="text-xs uppercase tracking-[0.2em] text-primary font-semibold mb-4">O que eu faço?</p>
+            <p className="text-xs uppercase tracking-[0.2em] text-primary font-semibold mb-4">O que eu construo</p>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
-              Estruturo seu negócio<br />
-              <span className="text-muted-foreground">para crescer online.</span>
+              Soluções digitais<br />
+              <span className="text-muted-foreground">sob medida.</span>
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
-                icon: Monitor,
-                title: 'Landing Page Profissional',
-                description: 'Criação de landing pages focadas em conversão, clareza de mensagem e posicionamento. Sem template pronto. Sem improviso.',
+                icon: Database,
+                title: 'Plataformas SaaS',
+                description: 'Sistemas completos com autenticação, dashboards, pagamentos e APIs. Do MVP ao produto final.',
               },
               {
-                icon: Paintbrush,
-                title: 'Posicionamento Visual',
-                description: 'Design alinhado à proposta de valor da sua marca, para transmitir confiança, autoridade e coerência em todos os pontos de contato.',
+                icon: Code,
+                title: 'Sistemas Web',
+                description: 'Aplicações web robustas com painéis administrativos, CRUD, integrações e lógica de negócio personalizada.',
               },
               {
-                icon: Target,
-                title: 'Direção Estratégica',
-                description: 'Direcionamento estratégico para que sua estrutura digital funcione em cada parte do seu funil de vendas.',
+                icon: Layout,
+                title: 'Landing Pages',
+                description: 'Páginas de alta conversão, otimizadas para SEO e performance. Design profissional e responsivo.',
+              },
+              {
+                icon: Globe,
+                title: 'Sites Institucionais',
+                description: 'Sites completos que transmitem autoridade e profissionalismo. Multi-páginas, blog e CMS.',
               },
             ].map((service, i) => (
               <div
                 key={i}
                 data-animate
-                className="bg-card border border-border rounded-xl p-8 hover:border-primary/30 hover:-translate-y-1 transition-all duration-300 group"
-                style={{ opacity: 0, animationDelay: `${i * 0.15}s` }}
+                className="bg-card border border-border rounded-xl p-7 hover:border-primary/30 hover:-translate-y-1 transition-all duration-300 group"
+                style={{ opacity: 0, animationDelay: `${i * 0.1}s` }}
               >
-                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
-                  <service.icon className="w-6 h-6 text-primary" />
+                <div className="w-11 h-11 rounded-lg bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-colors">
+                  <service.icon className="w-5 h-5 text-primary" />
                 </div>
-                <h3 className="text-lg font-bold mb-3">{service.title}</h3>
+                <h3 className="text-base font-bold mb-2">{service.title}</h3>
                 <p className="text-muted-foreground text-sm leading-relaxed">{service.description}</p>
               </div>
             ))}
