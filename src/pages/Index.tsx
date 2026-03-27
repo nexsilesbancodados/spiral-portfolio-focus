@@ -126,6 +126,8 @@ const Index = () => {
         </div>
       </section>
 
+      <WaveDivider />
+
       {/* Services */}
       <section id="servicos" className="py-24 lg:py-32">
         <div className="max-w-6xl mx-auto px-6">
