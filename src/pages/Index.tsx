@@ -198,21 +198,21 @@ const Index = () => {
       <section id="portfolio" className="py-24 lg:py-32 bg-secondary/20">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16" data-animate>
-            <p className="text-xs uppercase tracking-[0.2em] text-primary font-semibold mb-4">Meu trabalho na prática</p>
+            <p className="text-xs uppercase tracking-[0.2em] text-primary font-semibold mb-4">Projetos recentes</p>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
-              Landing Pages<br />
-              <span className="text-muted-foreground">de Alto Padrão</span>
+              SaaS, Sistemas<br />
+              <span className="text-muted-foreground">& Landing Pages</span>
             </h2>
             <p className="text-muted-foreground mt-4 max-w-lg mx-auto">
-              Criações visuais com padrão profissional, pensadas para posicionar marcas e aumentar percepção de valor.
+              Produtos digitais desenvolvidos com tecnologias modernas, performance otimizada e design de alto padrão.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { img: '/images/portfolio-01.jpg', title: 'Landing Page SaaS', desc: 'Página de Vendas · Plataforma Digital' },
-              { img: '/images/portfolio-02.jpg', title: 'E-commerce Premium', desc: 'Loja Online · Marca de Moda' },
-              { img: '/images/portfolio-03.jpg', title: 'Dashboard Analytics', desc: 'Painel de Gestão · Startup Tech' },
+              { img: '/images/portfolio-01.jpg', title: 'Plataforma SaaS de Gestão', desc: 'SaaS · Dashboard · API REST' },
+              { img: '/images/portfolio-02.jpg', title: 'E-commerce com Painel Admin', desc: 'Sistema Web · Pagamentos · CMS' },
+              { img: '/images/portfolio-03.jpg', title: 'Dashboard Analytics', desc: 'Sistema · Relatórios · Integrações' },
             ].map((item, i) => (
               <div
                 key={i}
