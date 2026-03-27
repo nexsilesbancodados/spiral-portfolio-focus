@@ -257,15 +257,13 @@ const Index = () => {
             SaaS, sistemas, landing pages ou sites — eu projeto, desenvolvo e entrego
             o produto digital completo para o seu negócio.
           </p>
-          <a
-            href={WHATSAPP_LINK}
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            onClick={() => setContactOpen(true)}
             className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-4 font-bold rounded-md hover:brightness-110 transition-all text-base"
           >
             Quero meu projeto profissional
             <ArrowRight className="w-5 h-5" />
-          </a>
+          </button>
         </div>
       </section>
 
