@@ -1,56 +1,41 @@
-/* Fonts loaded via HTML <link> tag — no CSS @import to avoid render-blocking */
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
-
 @layer base {
   :root {
-    --background: 0 0% 2%;
+    --background: 0 0% 7%;
     --foreground: 0 0% 95%;
 
-    --card: 0 0% 5%;
+    --card: 0 0% 10%;
     --card-foreground: 0 0% 95%;
 
-    --popover: 0 0% 5%;
+    --popover: 0 0% 10%;
     --popover-foreground: 0 0% 95%;
 
-    --primary: 45 100% 55%;
+    --primary: 142 72% 48%;
     --primary-foreground: 0 0% 2%;
 
-    --secondary: 0 0% 12%;
+    --secondary: 0 0% 14%;
     --secondary-foreground: 0 0% 95%;
 
-    --muted: 0 0% 10%;
+    --muted: 0 0% 12%;
     --muted-foreground: 0 0% 55%;
 
-    --accent: 45 90% 50%;
+    --accent: 142 72% 48%;
     --accent-foreground: 0 0% 2%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 95%;
 
-    --border: 0 0% 15%;
-    --input: 0 0% 15%;
-    --ring: 45 100% 55%;
+    --border: 0 0% 16%;
+    --input: 0 0% 16%;
+    --ring: 142 72% 48%;
 
     --radius: 0.5rem;
-    
-    --glow-primary: 0 0 40px hsl(45 100% 55% / 0.3);
+
     --font-display: 'Space Grotesk', sans-serif;
     --font-body: 'Inter', sans-serif;
-
-    /* GTA VI Tropical Vice palette */
-    --vice-teal: 175 70% 45%;
-    --vice-sunset: 25 95% 55%;
-    --vice-pink: 335 75% 55%;
-    --vice-palm: 145 50% 35%;
-    --vice-sky: 200 60% 50%;
-    --vice-gold: 40 100% 50%;
   }
 }
 
@@ -64,602 +49,61 @@ All colors MUST be HSL.
     font-family: var(--font-body);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    -webkit-tap-highlight-color: transparent;
-    text-rendering: optimizeSpeed;
+  }
+
+  h1, h2, h3, h4, h5 {
+    font-family: var(--font-display);
   }
 }
 
-/* Accessibility: reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-  .animate-text-fill, .animate-pulse, .explore-btn-arrow {
-    animation: none !important;
-  }
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
 }
 
-
-/* ===== Lumina Slider Styles ===== */
-.slider-wrapper {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
   background: hsl(var(--background));
-  opacity: 0;
-  transition: opacity 0.35s ease;
-  contain: layout style paint;
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.3);
+  border-radius: 3px;
 }
 
-.slider-wrapper.loaded {
-  opacity: 1;
-}
-
-.slide-number {
-  position: absolute;
-  top: clamp(1rem, 2vw, 2rem);
-  left: clamp(1.25rem, 2.5vw, 2.5rem);
-  font-family: 'Space Grotesk', monospace;
-  font-size: clamp(9px, 0.8vw, 12px);
-  letter-spacing: 0.15em;
-  color: hsl(var(--primary));
-  opacity: 0.7;
-  z-index: 10;
-}
-
-.slide-total {
-  position: absolute;
-  top: clamp(1rem, 2vw, 2rem);
-  right: clamp(1.25rem, 2.5vw, 2.5rem);
-  font-family: 'Space Grotesk', monospace;
-  font-size: clamp(9px, 0.8vw, 12px);
-  letter-spacing: 0.15em;
-  color: hsl(var(--foreground) / 0.45);
-  z-index: 10;
-}
-
-.slide-content {
-  position: absolute;
-  bottom: clamp(7rem, 12vw, 10rem);
-  left: clamp(1.25rem, 2.5vw, 2.5rem);
-  right: clamp(1.25rem, 2.5vw, auto);
-  z-index: 10;
-  max-width: clamp(320px, 45vw, 650px);
-  pointer-events: none;
-}
-
-.slide-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(2rem, 6vw, 6rem);
-  font-weight: 900;
-  color: hsl(var(--foreground));
-  line-height: 0.88;
-  margin: 0 0 clamp(0.5rem, 1vw, 0.75rem) 0;
-  letter-spacing: -0.03em;
-  text-transform: uppercase;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.slide-title-word {
-  display: block;
-}
-
-.slide-description {
-  font-family: var(--font-body);
-  font-size: clamp(0.75rem, 1.1vw, 1rem);
-  color: hsl(var(--foreground) / 0.7);
-  font-weight: 300;
-  line-height: 1.6;
-  max-width: clamp(280px, 32vw, 450px);
-  margin: 0;
-}
-
-.slide-skills {
-  display: flex;
-  gap: clamp(0.4rem, 0.6vw, 0.6rem);
-  margin-top: clamp(0.6rem, 1vw, 1rem);
-  flex-wrap: wrap;
-}
-
-.skill-tag {
-  display: inline-block;
-  padding: clamp(0.3rem, 0.5vw, 0.45rem) clamp(0.5rem, 0.8vw, 0.9rem);
-  min-height: clamp(28px, 2.5vw, 36px);
-  border: 1px solid hsl(var(--primary) / 0.4);
-  color: hsl(var(--primary));
-  font-family: 'Space Grotesk', monospace;
-  font-size: clamp(8px, 0.75vw, 12px);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  background: hsl(var(--primary) / 0.08);
-  transition: border-color 0.2s ease, background-color 0.2s ease;
-}
-.skill-tag:hover {
-  background: hsl(var(--primary) / 0.16);
-  border-color: hsl(var(--primary) / 0.7);
-}
-
-.slides-navigation {
-  position: absolute;
-  bottom: clamp(1.5rem, 2.5vw, 2.5rem);
-  left: clamp(1.25rem, 2.5vw, 2.5rem);
-  right: clamp(1.25rem, 2.5vw, 2.5rem);
-  display: flex;
-  gap: clamp(0.4rem, 0.8vw, 1rem);
-  z-index: 10;
-}
-
-.slide-nav-item {
-  flex: 1;
-  cursor: pointer;
-  padding: clamp(0.3rem, 0.5vw, 0.5rem) 0;
-  transition: opacity 0.2s ease;
-  opacity: 0.55;
-  background: transparent;
-  border: 0;
-  text-align: left;
-}
-
-.slide-nav-item.active {
-  opacity: 1;
-}
-
-.slide-progress-line {
-  width: 100%;
-  height: 1px;
-  background: hsl(var(--foreground) / 0.2);
-  margin-bottom: clamp(0.3rem, 0.5vw, 0.5rem);
-  position: relative;
-  overflow: hidden;
-}
-
-.slide-progress-fill {
-  height: 100%;
-  width: 0%;
-  background: hsl(var(--primary));
-  transition: width 0.2s ease;
-}
-
-.slide-nav-title {
-  font-family: 'Space Grotesk', monospace;
-  font-size: clamp(7px, 0.7vw, 11px);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: hsl(var(--foreground) / 0.65);
-}
-
-@media (max-width: 768px) {
-  .slide-nav-title {
-    display: none;
-  }
-}
-
-/* GTA VI Cinematic Scroll */
-.gta-vi-scroll {
-  -webkit-overflow-scrolling: touch;
-}
-
-.gta-vi-scroll::-webkit-scrollbar {
-  width: 3px;
-}
-
-.gta-vi-scroll::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.gta-vi-scroll::-webkit-scrollbar-thumb {
-  background: hsl(var(--vice-sunset) / 0.2);
-  border-radius: 2px;
-}
-
-.gta-vi-scroll::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--vice-sunset) / 0.35);
-}
-
-/* Vice City inspired overlays */
-.vice-overlay-sunset {
-  background: linear-gradient(135deg, hsl(var(--vice-sunset) / 0.12), hsl(var(--vice-pink) / 0.08), transparent 70%);
-}
-
-.vice-overlay-teal {
-  background: linear-gradient(225deg, hsl(var(--vice-teal) / 0.1), hsl(var(--vice-sky) / 0.08), transparent 70%);
-}
-
-.vice-overlay-warm {
-  background: linear-gradient(180deg, hsl(var(--vice-gold) / 0.06), hsl(var(--vice-sunset) / 0.1), transparent);
-}
-
-.vice-glow {
-  box-shadow: 0 0 40px hsl(var(--vice-pink) / 0.05);
-}
-
-/* Card hover effects */
-.card-hover-glow {
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
-}
-.card-hover-glow:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 40px -8px hsl(0 0% 0% / 0.5), 0 0 0 1px hsl(var(--foreground) / 0.05);
-}
-
-/* Magnetic card effect */
-.magnetic-card {
-  transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-/* Premium card base */
-.premium-card {
-  background: hsl(var(--card) / 0.5);
-  border: 1px solid hsl(var(--foreground) / 0.06);
-  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-  position: relative;
-  overflow: hidden;
-}
-.premium-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(135deg, hsl(var(--foreground) / 0.08), transparent 50%, hsl(var(--foreground) / 0.04));
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-}
-.premium-card:hover {
-  border-color: hsl(var(--foreground) / 0.12);
-  transform: translateY(-3px);
-  box-shadow: 0 16px 48px -12px hsl(0 0% 0% / 0.5);
-}
-
-/* Stat card — premium inline stat display */
-.stat-card {
-  background: hsl(var(--card) / 0.45);
-  border: 1px solid hsl(var(--foreground) / 0.06);
-  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-  position: relative;
-  overflow: hidden;
-}
-.stat-card::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  pointer-events: none;
-}
-.stat-card:hover {
-  background: hsl(var(--card) / 0.55);
-  border-color: hsl(var(--foreground) / 0.12);
-  transform: translateY(-2px);
-  box-shadow: 0 12px 40px -8px hsl(0 0% 0% / 0.4);
-}
-.stat-card:hover::after {
-  opacity: 1;
-}
-
-/* Themed card accents */
-.card-theme-re { --card-accent: 0 80% 50%; }
-.card-theme-gow { --card-accent: 200 85% 60%; }
-.card-theme-gow-fire { --card-accent: 15 90% 55%; }
-.card-theme-fallout { --card-accent: 120 75% 50%; }
-.card-theme-ds { --card-accent: 28 90% 55%; }
-.card-theme-watchdogs { --card-accent: 160 85% 45%; }
-.card-theme-valhalla { --card-accent: 38 90% 50%; }
-
-/* Scanline overlay for Fallout/retro cards */
-.card-scanlines::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    hsl(0 0% 0% / 0.03) 2px,
-    hsl(0 0% 0% / 0.03) 4px
-  );
-  pointer-events: none;
-  z-index: 1;
-  border-radius: inherit;
-}
-
-/* Runic border glow for Valhalla cards */
-.card-runic-border {
-  position: relative;
-}
-.card-runic-border::after {
-  content: '';
-  position: absolute;
-  inset: -1px;
-  border-radius: inherit;
-  background: linear-gradient(135deg, hsl(38 90% 50% / 0.3), transparent 40%, transparent 60%, hsl(25 80% 45% / 0.3));
-  z-index: -1;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-.card-runic-border:hover::after {
-  opacity: 1;
-}
-
-/* Strand pulse for Death Stranding cards */
-@keyframes strand-pulse {
-  0%, 100% { opacity: 0.4; box-shadow: 0 0 8px hsl(28 90% 55% / 0.3); }
-  50% { opacity: 1; box-shadow: 0 0 16px hsl(28 90% 55% / 0.6); }
-}
-.card-strand-pulse {
-  position: relative;
-}
-.card-strand-pulse::before {
-  content: '';
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: hsl(28 90% 55%);
-  box-shadow: 0 0 10px hsl(28 90% 55% / 0.6);
-  animation: strand-pulse 3s ease-in-out infinite;
-  z-index: 2;
-}
-
-/* Timefall rain overlay for Death Stranding cards */
-.card-timefall::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(
-    180deg,
-    transparent,
-    transparent 8px,
-    hsl(185 60% 45% / 0.02) 8px,
-    hsl(185 60% 45% / 0.02) 9px
-  );
-  pointer-events: none;
-  border-radius: inherit;
-  opacity: 0;
-  transition: opacity 0.5s ease;
-}
-.card-strand:hover .card-timefall::after {
-  opacity: 1;
-}
-
-/* Biohazard corner for RE cards */
-.card-biohazard {
-  position: relative;
-}
-.card-biohazard::after {
-  content: '⚠';
-  position: absolute;
-  top: 8px;
-  right: 10px;
-  font-size: 10px;
-  opacity: 0;
-  color: hsl(0 80% 50% / 0.5);
-  transition: opacity 0.3s ease;
-}
-.card-biohazard:hover::after {
-  opacity: 1;
-}
-
-/* ctOS grid pattern for Watch Dogs */
-.card-ctos-grid {
-  position: relative;
-}
-.card-ctos-grid::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: 
-    linear-gradient(hsl(160 85% 45% / 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, hsl(160 85% 45% / 0.03) 1px, transparent 1px);
-  background-size: 20px 20px;
-  pointer-events: none;
-  border-radius: inherit;
-  z-index: 0;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-.card-ctos-grid:hover::before {
-  opacity: 1;
-}
-
-/* Tech badge */
-.tech-badge {
-  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-  position: relative;
-}
-.tech-badge:hover {
-  transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 4px 12px hsl(0 0% 0% / 0.3);
-}
-
-/* Card hover glow — enhanced */
-.card-hover-glow {
-  transition: box-shadow 0.4s ease, border-color 0.4s ease;
-}
-.card-hover-glow:hover {
-  box-shadow: 0 0 30px -5px hsl(var(--foreground) / 0.08);
-}
-
-.image-hover-zoom {
-  overflow: hidden;
-}
-.image-hover-zoom img {
-  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.image-hover-zoom:hover img {
-  transform: scale(1.04);
-}
-
-/* Skills progress bar */
-.skill-progress-bar {
-  height: 3px;
-  background: hsl(var(--muted));
-  border-radius: 2px;
-  overflow: hidden;
-}
-.skill-progress-fill {
-  height: 100%;
-  border-radius: 2px;
-  background: linear-gradient(90deg, hsl(38 90% 50%), hsl(25 80% 45%));
-}
-
-/* Parallax container */
-.parallax-hero img {
-  transform: translateZ(0);
-  backface-visibility: hidden;
-}
-
-
-/* Chat slide-in animation */
-@keyframes chatSlideIn {
-  from { opacity: 0; transform: translateY(20px) scale(0.95); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-/* Performance: contain layout for heavy sections */
-#detail-section {
-  contain: layout style;
-}
-
-/* Fluid responsive padding utility */
-.fluid-section-pad {
-  padding: clamp(1rem, 3vw, 1.5rem) clamp(1.5rem, 4vw, 6rem);
-}
-
-/* Tech logos marquee */
-@keyframes marquee-left {
+/* Logo marquee */
+@keyframes marquee {
   0% { transform: translateX(0); }
-  100% { transform: translateX(-33.333%); }
+  100% { transform: translateX(-50%); }
 }
-@keyframes marquee-right {
-  0% { transform: translateX(-33.333%); }
-  100% { transform: translateX(0); }
-}
-
-/* Text fill animation for section titles */
-@keyframes text-bg-move {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+.animate-marquee {
+  animation: marquee 25s linear infinite;
 }
 
-.animate-text-fill {
-  animation: text-bg-move 8s ease-in-out infinite;
-  background-size: 200% auto;
-}
-
-/* Slide content stagger transitions */
-.slide-transition-title {
-  animation: slide-text-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
-  animation-delay: 0.05s;
-}
-.slide-transition-desc {
-  animation: slide-text-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
-  animation-delay: 0.15s;
-}
-.slide-transition-skills {
-  animation: slide-text-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
-  animation-delay: 0.25s;
-}
-
-@keyframes slide-text-in {
-  0% {
-    opacity: 0;
-    transform: translateY(16px);
-    filter: blur(4px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
-  }
-}
-
-/* Detail section transitions */
-@keyframes detail-enter {
-  0% {
-    opacity: 0;
-    transform: translateY(40px) scale(0.98);
-    filter: blur(6px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    filter: blur(0);
-  }
-}
-
-@keyframes detail-exit {
-  0% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    filter: blur(0);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(-20px) scale(0.99);
-    filter: blur(4px);
-  }
-}
-
-.detail-section-enter {
-  animation: detail-enter 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  will-change: opacity, transform, filter;
-}
-
-.detail-section-exit {
-  animation: detail-exit 0.35s cubic-bezier(0.55, 0, 1, 0.45) forwards;
-  will-change: opacity, transform, filter;
-}
-
-/* Cinematic hero content reveal */
-@keyframes hero-content-reveal {
-  0% {
+/* Fade in up animation */
+@keyframes fadeInUp {
+  from {
     opacity: 0;
     transform: translateY(30px);
-    filter: blur(4px);
   }
-  100% {
+  to {
     opacity: 1;
     transform: translateY(0);
-    filter: blur(0);
   }
 }
-
-.hero-reveal {
-  animation: hero-content-reveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease forwards;
 }
 
-.hero-reveal-delay-1 { animation-delay: 0.1s; opacity: 0; }
-.hero-reveal-delay-2 { animation-delay: 0.2s; opacity: 0; }
-.hero-reveal-delay-3 { animation-delay: 0.3s; opacity: 0; }
-
-/* Ken Burns subtle effect on hero images */
-@keyframes ken-burns {
-  0% { transform: scale(1.05); }
-  100% { transform: scale(1.12); }
+/* Stagger children */
+.stagger-children > * {
+  opacity: 0;
+  animation: fadeInUp 0.6s ease forwards;
 }
-
-.ken-burns-hero {
-  animation: ken-burns 20s ease-in-out alternate infinite;
-  will-change: transform;
-}
-
-/* Title split wrapper for clip reveal */
-.title-split-wrapper {
-  overflow: hidden;
-  display: block;
-}
-.title-word {
-  display: inline-block;
-}
+.stagger-children > *:nth-child(1) { animation-delay: 0.1s; }
+.stagger-children > *:nth-child(2) { animation-delay: 0.2s; }
+.stagger-children > *:nth-child(3) { animation-delay: 0.3s; }
+.stagger-children > *:nth-child(4) { animation-delay: 0.4s; }
+.stagger-children > *:nth-child(5) { animation-delay: 0.5s; }

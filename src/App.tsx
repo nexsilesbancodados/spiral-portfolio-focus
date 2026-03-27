@@ -6,7 +6,6 @@ const Index = lazy(() => import("./pages/Index"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const App = () => {
-
   return (
     <TooltipProvider>
       <BrowserRouter>

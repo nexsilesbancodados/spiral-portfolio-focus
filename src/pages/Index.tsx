@@ -1,23 +1,345 @@
-import { lazy, Suspense } from 'react'
-import { LuminaSlider } from '@/components/ui/lumina-interactive-list'
-import { HamburgerMenu } from '@/components/HamburgerMenu'
+import { useEffect, useRef } from 'react'
+import { Monitor, Paintbrush, Target, ArrowRight, Instagram, Linkedin, Mail } from 'lucide-react'
 
-const SectionsDetail = lazy(() => 
-  import('@/components/SectionsDetail').then(m => ({ default: m.SectionsDetail }))
-)
+const WHATSAPP_LINK = "https://api.whatsapp.com/send/?phone=5500000000000&text=Olá! Vim pelo site e gostaria de saber mais sobre os serviços."
 
 const Index = () => {
-  const handleMenuNavigate = (index: number) => {
-    window.dispatchEvent(new CustomEvent('explore-slide', { detail: { slideIndex: index } }));
-  };
+  const observerRef = useRef<IntersectionObserver | null>(null)
+
+  useEffect(() => {
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-fade-in-up')
+            observerRef.current?.unobserve(entry.target)
+          }
+        })
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+    )
+
+    document.querySelectorAll('[data-animate]').forEach((el) => {
+      observerRef.current?.observe(el)
+    })
+
+    return () => observerRef.current?.disconnect()
+  }, [])
 
   return (
-    <div className="relative h-screen overflow-hidden">
-      <HamburgerMenu onNavigate={handleMenuNavigate} />
-      <LuminaSlider />
-      <Suspense fallback={<div className="absolute inset-0 bg-background flex items-center justify-center"><div className="w-8 h-8 border-2 border-foreground/20 border-t-foreground/60 rounded-full animate-spin" /></div>}>
-        <SectionsDetail />
-      </Suspense>
+    <div className="min-h-screen bg-background text-foreground">
+      {/* Header */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50">
+        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+          <a href="#inicio" className="font-display text-xl font-bold tracking-tight">
+            FOCUSS<span className="text-primary"> DEV</span>
+          </a>
+          <nav className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
+            <a href="#servicos" className="hover:text-foreground transition-colors">Serviços</a>
+            <a href="#portfolio" className="hover:text-foreground transition-colors">Portfólio</a>
+            <a href="#sobre" className="hover:text-foreground transition-colors">Sobre mim</a>
+          </nav>
+          <a
+            href={WHATSAPP_LINK}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-primary text-primary-foreground px-5 py-2 text-sm font-semibold rounded-md hover:brightness-110 transition-all"
+          >
+            Contratar
+          </a>
+        </div>
+      </header>
+
+      {/* Hero */}
+      <section id="inicio" className="relative min-h-screen flex items-center pt-16">
+        <div className="max-w-6xl mx-auto px-6 w-full grid lg:grid-cols-2 gap-12 items-center">
+          <div className="space-y-6 stagger-children">
+            <p className="text-xs uppercase tracking-[0.2em] text-primary font-semibold">
+              Desenvolvimento Web & Design Digital
+            </p>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight">
+              Sem estrutura,{' '}
+              <br />
+              <span className="text-muted-foreground">você não cresce.</span>
+            </h1>
+            <p className="text-muted-foreground text-base lg:text-lg max-w-md leading-relaxed">
+              Você pode ter tráfego, indicação e uma boa entrega.
+              Sem uma <span className="text-primary font-medium">estrutura digital profissional</span> você não escala.
+            </p>
+            <p className="text-muted-foreground/70 text-sm max-w-md">
+              Eu construo a base que posiciona seu negócio e transforma interesse em resultados.
+            </p>
+            <div className="flex flex-wrap gap-4 pt-2">
+              <a
+                href={WHATSAPP_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 font-semibold rounded-md hover:brightness-110 transition-all text-sm"
+              >
+                Criar meu projeto
+                <ArrowRight className="w-4 h-4" />
+              </a>
+              <a
+                href="#portfolio"
+                className="inline-flex items-center gap-2 border border-border text-foreground px-6 py-3 font-medium rounded-md hover:bg-secondary transition-all text-sm"
+              >
+                Ver Portfólio
+              </a>
+            </div>
+          </div>
+          <div className="relative hidden lg:block">
+            <div className="relative z-10">
+              <img
+                src="/images/hero-portrait.jpg"
+                alt="FOCUSS DEV - Desenvolvedor Web"
+                width={1024}
+                height={1280}
+                className="w-full max-w-lg ml-auto rounded-lg"
+              />
+            </div>
+            <div className="absolute -bottom-8 -left-8 w-72 h-72 bg-primary/10 rounded-full blur-3xl" />
+          </div>
+        </div>
+      </section>
+
+      {/* Logo Bar */}
+      <section className="border-y border-border/50 bg-secondary/30 py-6 overflow-hidden">
+        <div className="max-w-6xl mx-auto px-6 flex items-center gap-8">
+          <p className="text-sm font-semibold text-muted-foreground whitespace-nowrap min-w-fit">
+            Experiência com<br />grandes empresas
+          </p>
+          <div className="overflow-hidden flex-1">
+            <div className="flex gap-12 animate-marquee whitespace-nowrap">
+              {['TechCorp', 'StartupX', 'DigitalFlow', 'AppVerse', 'CloudBase', 'DataSync', 'TechCorp', 'StartupX', 'DigitalFlow', 'AppVerse', 'CloudBase', 'DataSync'].map((name, i) => (
+                <span key={i} className="text-muted-foreground/40 font-bold text-xl tracking-wider uppercase">
+                  {name}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Services */}
+      <section id="servicos" className="py-24 lg:py-32">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center mb-16" data-animate>
+            <p className="text-xs uppercase tracking-[0.2em] text-primary font-semibold mb-4">O que eu faço?</p>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
+              Estruturo seu negócio<br />
+              <span className="text-muted-foreground">para crescer online.</span>
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
+            {[
+              {
+                icon: Monitor,
+                title: 'Landing Page Profissional',
+                description: 'Criação de landing pages focadas em conversão, clareza de mensagem e posicionamento. Sem template pronto. Sem improviso.',
+              },
+              {
+                icon: Paintbrush,
+                title: 'Posicionamento Visual',
+                description: 'Design alinhado à proposta de valor da sua marca, para transmitir confiança, autoridade e coerência em todos os pontos de contato.',
+              },
+              {
+                icon: Target,
+                title: 'Direção Estratégica',
+                description: 'Direcionamento estratégico para que sua estrutura digital funcione em cada parte do seu funil de vendas.',
+              },
+            ].map((service, i) => (
+              <div
+                key={i}
+                data-animate
+                className="bg-card border border-border rounded-xl p-8 hover:border-primary/30 hover:-translate-y-1 transition-all duration-300 group"
+                style={{ opacity: 0, animationDelay: `${i * 0.15}s` }}
+              >
+                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
+                  <service.icon className="w-6 h-6 text-primary" />
+                </div>
+                <h3 className="text-lg font-bold mb-3">{service.title}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">{service.description}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-16" data-animate style={{ opacity: 0 }}>
+            <p className="text-muted-foreground mb-6 text-lg">
+              Antes de qualquer estratégia funcionar, <span className="text-foreground font-semibold">a base precisa estar certa.</span>
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <a
+                href={WHATSAPP_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 font-semibold rounded-md hover:brightness-110 transition-all text-sm"
+              >
+                Criar meu projeto
+                <ArrowRight className="w-4 h-4" />
+              </a>
+              <a
+                href="#portfolio"
+                className="inline-flex items-center gap-2 border border-border text-foreground px-6 py-3 font-medium rounded-md hover:bg-secondary transition-all text-sm"
+              >
+                Ver Portfólio
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Portfolio */}
+      <section id="portfolio" className="py-24 lg:py-32 bg-secondary/20">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center mb-16" data-animate>
+            <p className="text-xs uppercase tracking-[0.2em] text-primary font-semibold mb-4">Meu trabalho na prática</p>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
+              Landing Pages<br />
+              <span className="text-muted-foreground">de Alto Padrão</span>
+            </h2>
+            <p className="text-muted-foreground mt-4 max-w-lg mx-auto">
+              Criações visuais com padrão profissional, pensadas para posicionar marcas e aumentar percepção de valor.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              { img: '/images/portfolio-01.jpg', title: 'Landing Page SaaS', desc: 'Página de Vendas · Plataforma Digital' },
+              { img: '/images/portfolio-02.jpg', title: 'E-commerce Premium', desc: 'Loja Online · Marca de Moda' },
+              { img: '/images/portfolio-03.jpg', title: 'Dashboard Analytics', desc: 'Painel de Gestão · Startup Tech' },
+            ].map((item, i) => (
+              <div
+                key={i}
+                data-animate
+                className="group rounded-xl overflow-hidden bg-card border border-border hover:border-primary/30 transition-all duration-300"
+                style={{ opacity: 0, animationDelay: `${i * 0.15}s` }}
+              >
+                <div className="overflow-hidden aspect-[3/4]">
+                  <img
+                    src={item.img}
+                    alt={item.title}
+                    loading="lazy"
+                    width={800}
+                    height={1200}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <div className="p-5">
+                  <h3 className="font-bold text-base">{item.title}</h3>
+                  <p className="text-muted-foreground text-sm mt-1">{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-12" data-animate style={{ opacity: 0 }}>
+            <a
+              href={WHATSAPP_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 font-semibold rounded-md hover:brightness-110 transition-all text-sm"
+            >
+              Quero meu projeto profissional
+              <ArrowRight className="w-4 h-4" />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* About */}
+      <section id="sobre" className="py-24 lg:py-32">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div className="relative" data-animate>
+              <img
+                src="/images/hero-portrait.jpg"
+                alt="Sobre FOCUSS DEV"
+                loading="lazy"
+                width={1024}
+                height={1280}
+                className="w-full max-w-md rounded-xl"
+              />
+              <div className="absolute -bottom-6 -right-6 w-48 h-48 bg-primary/10 rounded-full blur-3xl" />
+            </div>
+            <div className="space-y-6" data-animate style={{ opacity: 0 }}>
+              <p className="text-xs uppercase tracking-[0.2em] text-primary font-semibold">Conheça um pouco mais sobre mim</p>
+              <h2 className="text-3xl sm:text-4xl font-bold leading-tight">
+                Desenvolvedor Web<br />
+                <span className="text-muted-foreground">& Designer Digital</span>
+              </h2>
+              <p className="text-muted-foreground leading-relaxed">
+                Desenvolvedor Web e Designer Digital, focado em criar experiências digitais que convertem.
+                Transformo ideias em estruturas profissionais que posicionam marcas e geram resultados reais.
+              </p>
+              <p className="text-muted-foreground leading-relaxed">
+                Já colaborei com diversos projetos e empresas de diferentes segmentos,
+                sempre com o mesmo compromisso: entregar uma base sólida para o crescimento digital.
+              </p>
+              <a
+                href={WHATSAPP_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 font-semibold rounded-md hover:brightness-110 transition-all text-sm"
+              >
+                Entrar em contato
+                <ArrowRight className="w-4 h-4" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Final */}
+      <section id="contato" className="py-24 lg:py-32 bg-secondary/20 border-y border-border/50">
+        <div className="max-w-3xl mx-auto px-6 text-center" data-animate>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-6">
+            Estrutura<br />
+            <span className="text-primary">não é opcional.</span><br />
+            <span className="text-muted-foreground">É requisito mínimo.</span>
+          </h2>
+          <p className="text-muted-foreground mb-8 max-w-lg mx-auto">
+            Eu crio landing pages e experiências digitais profissionais para transformar
+            tráfego, indicação e interesse em resultados reais.
+          </p>
+          <a
+            href={WHATSAPP_LINK}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-4 font-bold rounded-md hover:brightness-110 transition-all text-base"
+          >
+            Quero meu projeto profissional
+            <ArrowRight className="w-5 h-5" />
+          </a>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-12 border-t border-border/50">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div>
+              <p className="font-display text-lg font-bold">
+                FOCUSS<span className="text-primary"> DEV</span>
+              </p>
+              <p className="text-muted-foreground text-xs mt-1">
+                © {new Date().getFullYear()} – FOCUSS DEV. Todos os Direitos Reservados.
+              </p>
+            </div>
+            <div className="flex items-center gap-4">
+              <a href="#" className="text-muted-foreground hover:text-primary transition-colors" aria-label="Instagram">
+                <Instagram className="w-5 h-5" />
+              </a>
+              <a href="#" className="text-muted-foreground hover:text-primary transition-colors" aria-label="LinkedIn">
+                <Linkedin className="w-5 h-5" />
+              </a>
+              <a href="#" className="text-muted-foreground hover:text-primary transition-colors" aria-label="Email">
+                <Mail className="w-5 h-5" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   )
 }
