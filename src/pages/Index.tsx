@@ -180,20 +180,8 @@ const Index = () => {
         <DesignStackCards />
       </section>
 
-      {/* Portfolio - Horizontal Scroll */}
-      <section id="portfolio">
-        <div className="text-center pt-24 lg:pt-32 pb-8 px-6" data-animate>
-          <p className="text-xs uppercase tracking-[0.2em] text-primary font-semibold mb-4">Projetos & Serviços</p>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
-            SaaS, Sistemas<br />
-            <span className="text-muted-foreground">& Landing Pages</span>
-          </h2>
-          <p className="text-muted-foreground mt-4 max-w-lg mx-auto">
-            Produtos digitais desenvolvidos com tecnologias modernas, performance otimizada e design de alto padrão.
-          </p>
-        </div>
-        <HorizontalPortfolio />
-      </section>
+      {/* Portfolio */}
+      <section id="portfolio" />
 
 
       {/* Tablet Scroll Showcase */}
