@@ -4,7 +4,9 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const wavePath = "M0,1.7c10.2,3.2,35.2,10.2,76.5,10.1C117.9,11.7,156.3,1.3,204.7,0.3c48.3-1,76.2,11.5,108.2,11 c32,0.5,86.5-1.2,109-3.7c22.6-2.5,51.5,0.4,75.5,5.3c23.6,4.9,70.2,26.9,145.1,36.2c75.3,9.3,145.3,8.5,188.6,10.3 c43.4,1.8,89.4,19,147.3,18.4c58.7-0.6,85.3-7.7,103.6-11V100H0V1.7z"
+const wave1 = "M0,40 C150,80 350,0 500,50 C650,100 850,20 1000,60 L1000,100 L0,100 Z"
+const wave2 = "M0,60 C200,20 300,90 500,40 C700,-10 800,70 1000,30 L1000,100 L0,100 Z"
+const wave3 = "M0,50 C100,90 250,10 400,55 C550,100 750,25 1000,45 L1000,100 L0,100 Z"
 
 interface WaveDividerProps {
   topColor?: string
@@ -18,34 +20,52 @@ export const WaveDivider = ({
   triggerId = 'wave-trigger',
 }: WaveDividerProps) => {
   const containerRef = useRef<HTMLDivElement>(null)
-  const lightRef = useRef<SVGSVGElement>(null)
-  const mainRef = useRef<SVGSVGElement>(null)
+  const wave1Ref = useRef<SVGSVGElement>(null)
+  const wave2Ref = useRef<SVGSVGElement>(null)
+  const wave3Ref = useRef<SVGSVGElement>(null)
 
   useEffect(() => {
     const container = containerRef.current
-    if (!container || !lightRef.current || !mainRef.current) return
+    if (!container) return
 
     const ctx = gsap.context(() => {
-      gsap.to(lightRef.current, {
-        xPercent: 15,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: container,
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: 1.5,
-        },
-      })
-      gsap.to(mainRef.current, {
-        xPercent: -30,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: container,
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: 1,
-        },
-      })
+      // Parallax scroll on each wave layer
+      if (wave1Ref.current) {
+        gsap.to(wave1Ref.current, {
+          xPercent: -15,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: container,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 1.5,
+          },
+        })
+      }
+      if (wave2Ref.current) {
+        gsap.to(wave2Ref.current, {
+          xPercent: 20,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: container,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 1,
+          },
+        })
+      }
+      if (wave3Ref.current) {
+        gsap.to(wave3Ref.current, {
+          xPercent: -25,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: container,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 2,
+          },
+        })
+      }
     })
 
     return () => ctx.revert()
@@ -55,31 +75,49 @@ export const WaveDivider = ({
     <div
       ref={containerRef}
       className="relative w-full leading-[0]"
-      style={{ height: '200px', overflow: 'visible' }}
+      style={{ height: '220px', overflow: 'visible' }}
     >
       <div className="absolute inset-0 overflow-hidden" style={{ left: '-30%', right: '-30%', width: '160%' }}>
-        {/* Light wave */}
+        {/* Wave 1 — deepest, most transparent */}
         <svg
-          ref={lightRef}
-          className="wave-shape absolute bottom-5 block"
+          ref={wave1Ref}
+          className="absolute bottom-4 block"
           viewBox="0 0 1000 100"
           preserveAspectRatio="none"
           xmlns="http://www.w3.org/2000/svg"
           style={{
             width: '200%',
-            height: '160px',
-            zIndex: 2,
-            opacity: 0.5,
-            animation: 'waveShift 10s ease-in-out infinite',
+            height: '180px',
+            zIndex: 1,
+            opacity: 0.25,
+            animation: 'waveShift 12s ease-in-out infinite',
           }}
         >
-          <path d={wavePath} fill={topColor} />
+          <path d={wave1} fill={topColor} />
         </svg>
 
-        {/* Main wave */}
+        {/* Wave 2 — mid layer */}
         <svg
-          ref={mainRef}
-          className="wave-shape absolute bottom-0 block"
+          ref={wave2Ref}
+          className="absolute bottom-2 block"
+          viewBox="0 0 1000 100"
+          preserveAspectRatio="none"
+          xmlns="http://www.w3.org/2000/svg"
+          style={{
+            width: '200%',
+            height: '170px',
+            zIndex: 2,
+            opacity: 0.5,
+            animation: 'waveShift 8s ease-in-out infinite reverse',
+          }}
+        >
+          <path d={wave2} fill={topColor} />
+        </svg>
+
+        {/* Wave 3 — front, solid */}
+        <svg
+          ref={wave3Ref}
+          className="absolute bottom-0 block"
           viewBox="0 0 1000 100"
           preserveAspectRatio="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -90,7 +128,7 @@ export const WaveDivider = ({
             animation: 'waveShift 10s ease-in-out infinite',
           }}
         >
-          <path d={wavePath} fill={bottomColor} />
+          <path d={wave3} fill={bottomColor} />
         </svg>
       </div>
     </div>
