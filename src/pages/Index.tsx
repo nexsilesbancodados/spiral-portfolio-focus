@@ -96,11 +96,12 @@ const Index = () => {
           <div className="relative hidden lg:block">
             <div className="relative z-10">
               <img
-                src="/images/hero-portrait.jpg"
-                alt="FOCUSS DEV - Desenvolvedor Web"
+                src="/images/hero-portrait.png"
+                alt="FOCUSS DEV - Lee, Desenvolvedor Web"
                 width={1024}
                 height={1280}
-                className="w-full max-w-lg ml-auto rounded-lg"
+                className="w-full max-w-lg ml-auto"
+                style={{ mixBlendMode: 'lighten' }}
               />
             </div>
             <div className="absolute -bottom-8 -left-8 w-72 h-72 bg-primary/10 rounded-full blur-3xl" />
@@ -203,9 +204,9 @@ const Index = () => {
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="relative flex items-center justify-center" data-animate>
               <TiltedCard
-                imageSrc="https://i.postimg.cc/Y0HCSbqG/Whats-App-Image-2025-12-22-at-12-38-53.jpg"
-                altText="Raiam Santos McArn"
-                captionText="Raiam Santos McArn"
+                imageSrc="/images/hero-portrait.png"
+                altText="Lee - FOCUSS DEV"
+                captionText="Lee - FOCUSS DEV"
                 containerHeight="450px"
                 containerWidth="400px"
                 imageHeight="450px"
@@ -216,7 +217,7 @@ const Index = () => {
                 displayOverlayContent={true}
                 overlayContent={
                   <p className="text-foreground font-bold text-lg drop-shadow-lg">
-                    Raiam Santos McArn
+                    Lee
                   </p>
                 }
               />
