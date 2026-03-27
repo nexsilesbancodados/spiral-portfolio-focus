@@ -299,13 +299,12 @@ const Index = () => {
       <section id="contato" className="py-24 lg:py-32 bg-secondary/20 border-y border-border/50">
         <div className="max-w-3xl mx-auto px-6 text-center" data-animate>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-6">
-            Estrutura<br />
-            <span className="text-primary">não é opcional.</span><br />
-            <span className="text-muted-foreground">É requisito mínimo.</span>
+            Tem uma ideia?<br />
+            <span className="text-primary">Eu transformo em produto.</span>
           </h2>
           <p className="text-muted-foreground mb-8 max-w-lg mx-auto">
-            Eu crio landing pages e experiências digitais profissionais para transformar
-            tráfego, indicação e interesse em resultados reais.
+            SaaS, sistemas, landing pages ou sites — eu projeto, desenvolvo e entrego
+            o produto digital completo para o seu negócio.
           </p>
           <a
             href={WHATSAPP_LINK}
