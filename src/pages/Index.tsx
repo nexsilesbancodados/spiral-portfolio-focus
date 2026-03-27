@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react'
 import { ArrowRight, Instagram, Mail, MessageCircle } from 'lucide-react'
 import { ServicesReveal } from '@/components/ServicesReveal'
 import { DesignStackCards } from '@/components/DesignStackCards'
+import { VibeCodesSection } from '@/components/VibeCodesSection'
 
 const WHATSAPP_LINK = "https://api.whatsapp.com/send/?phone=5533984123591&text=Olá! Vim pelo site e gostaria de saber mais sobre os serviços."
 const INSTAGRAM_LINK = "https://instagram.com/focussdev"
