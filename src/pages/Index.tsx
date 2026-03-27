@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { Monitor, Paintbrush, Target, ArrowRight, Instagram, Linkedin, Mail } from 'lucide-react'
+import { Monitor, Code, Smartphone, Layout, ArrowRight, Instagram, Linkedin, Mail, Database, Globe } from 'lucide-react'
 
 const WHATSAPP_LINK = "https://api.whatsapp.com/send/?phone=5500000000000&text=Olá! Vim pelo site e gostaria de saber mais sobre os serviços."
 
@@ -55,19 +55,19 @@ const Index = () => {
         <div className="max-w-6xl mx-auto px-6 w-full grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-6 stagger-children">
             <p className="text-xs uppercase tracking-[0.2em] text-primary font-semibold">
-              Desenvolvimento Web & Design Digital
+              SaaS · Sistemas · Landing Pages · Sites
             </p>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight">
-              Sem estrutura,{' '}
+              Transformo ideias{' '}
               <br />
-              <span className="text-muted-foreground">você não cresce.</span>
+              <span className="text-muted-foreground">em produtos digitais.</span>
             </h1>
             <p className="text-muted-foreground text-base lg:text-lg max-w-md leading-relaxed">
-              Você pode ter tráfego, indicação e uma boa entrega.
-              Sem uma <span className="text-primary font-medium">estrutura digital profissional</span> você não escala.
+              Desenvolvimento de <span className="text-primary font-medium">SaaS, sistemas web, landing pages e sites</span> com
+              código limpo, performance e foco em resultado.
             </p>
             <p className="text-muted-foreground/70 text-sm max-w-md">
-              Eu construo a base que posiciona seu negócio e transforma interesse em resultados.
+              Da ideia ao deploy. Eu projeto, desenvolvo e entrego o produto completo para o seu negócio escalar.
             </p>
             <div className="flex flex-wrap gap-4 pt-2">
               <a
@@ -124,41 +124,46 @@ const Index = () => {
       <section id="servicos" className="py-24 lg:py-32">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16" data-animate>
-            <p className="text-xs uppercase tracking-[0.2em] text-primary font-semibold mb-4">O que eu faço?</p>
+            <p className="text-xs uppercase tracking-[0.2em] text-primary font-semibold mb-4">O que eu construo</p>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
-              Estruturo seu negócio<br />
-              <span className="text-muted-foreground">para crescer online.</span>
+              Soluções digitais<br />
+              <span className="text-muted-foreground">sob medida.</span>
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
-                icon: Monitor,
-                title: 'Landing Page Profissional',
-                description: 'Criação de landing pages focadas em conversão, clareza de mensagem e posicionamento. Sem template pronto. Sem improviso.',
+                icon: Database,
+                title: 'Plataformas SaaS',
+                description: 'Sistemas completos com autenticação, dashboards, pagamentos e APIs. Do MVP ao produto final.',
               },
               {
-                icon: Paintbrush,
-                title: 'Posicionamento Visual',
-                description: 'Design alinhado à proposta de valor da sua marca, para transmitir confiança, autoridade e coerência em todos os pontos de contato.',
+                icon: Code,
+                title: 'Sistemas Web',
+                description: 'Aplicações web robustas com painéis administrativos, CRUD, integrações e lógica de negócio personalizada.',
               },
               {
-                icon: Target,
-                title: 'Direção Estratégica',
-                description: 'Direcionamento estratégico para que sua estrutura digital funcione em cada parte do seu funil de vendas.',
+                icon: Layout,
+                title: 'Landing Pages',
+                description: 'Páginas de alta conversão, otimizadas para SEO e performance. Design profissional e responsivo.',
+              },
+              {
+                icon: Globe,
+                title: 'Sites Institucionais',
+                description: 'Sites completos que transmitem autoridade e profissionalismo. Multi-páginas, blog e CMS.',
               },
             ].map((service, i) => (
               <div
                 key={i}
                 data-animate
-                className="bg-card border border-border rounded-xl p-8 hover:border-primary/30 hover:-translate-y-1 transition-all duration-300 group"
-                style={{ opacity: 0, animationDelay: `${i * 0.15}s` }}
+                className="bg-card border border-border rounded-xl p-7 hover:border-primary/30 hover:-translate-y-1 transition-all duration-300 group"
+                style={{ opacity: 0, animationDelay: `${i * 0.1}s` }}
               >
-                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
-                  <service.icon className="w-6 h-6 text-primary" />
+                <div className="w-11 h-11 rounded-lg bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-colors">
+                  <service.icon className="w-5 h-5 text-primary" />
                 </div>
-                <h3 className="text-lg font-bold mb-3">{service.title}</h3>
+                <h3 className="text-base font-bold mb-2">{service.title}</h3>
                 <p className="text-muted-foreground text-sm leading-relaxed">{service.description}</p>
               </div>
             ))}
@@ -166,7 +171,7 @@ const Index = () => {
 
           <div className="text-center mt-16" data-animate style={{ opacity: 0 }}>
             <p className="text-muted-foreground mb-6 text-lg">
-              Antes de qualquer estratégia funcionar, <span className="text-foreground font-semibold">a base precisa estar certa.</span>
+              Cada projeto é único. <span className="text-foreground font-semibold">Código limpo, arquitetura sólida e entrega profissional.</span>
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <a
@@ -193,21 +198,21 @@ const Index = () => {
       <section id="portfolio" className="py-24 lg:py-32 bg-secondary/20">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16" data-animate>
-            <p className="text-xs uppercase tracking-[0.2em] text-primary font-semibold mb-4">Meu trabalho na prática</p>
+            <p className="text-xs uppercase tracking-[0.2em] text-primary font-semibold mb-4">Projetos recentes</p>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
-              Landing Pages<br />
-              <span className="text-muted-foreground">de Alto Padrão</span>
+              SaaS, Sistemas<br />
+              <span className="text-muted-foreground">& Landing Pages</span>
             </h2>
             <p className="text-muted-foreground mt-4 max-w-lg mx-auto">
-              Criações visuais com padrão profissional, pensadas para posicionar marcas e aumentar percepção de valor.
+              Produtos digitais desenvolvidos com tecnologias modernas, performance otimizada e design de alto padrão.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { img: '/images/portfolio-01.jpg', title: 'Landing Page SaaS', desc: 'Página de Vendas · Plataforma Digital' },
-              { img: '/images/portfolio-02.jpg', title: 'E-commerce Premium', desc: 'Loja Online · Marca de Moda' },
-              { img: '/images/portfolio-03.jpg', title: 'Dashboard Analytics', desc: 'Painel de Gestão · Startup Tech' },
+              { img: '/images/portfolio-01.jpg', title: 'Plataforma SaaS de Gestão', desc: 'SaaS · Dashboard · API REST' },
+              { img: '/images/portfolio-02.jpg', title: 'E-commerce com Painel Admin', desc: 'Sistema Web · Pagamentos · CMS' },
+              { img: '/images/portfolio-03.jpg', title: 'Dashboard Analytics', desc: 'Sistema · Relatórios · Integrações' },
             ].map((item, i) => (
               <div
                 key={i}
@@ -265,16 +270,16 @@ const Index = () => {
             <div className="space-y-6" data-animate style={{ opacity: 0 }}>
               <p className="text-xs uppercase tracking-[0.2em] text-primary font-semibold">Conheça um pouco mais sobre mim</p>
               <h2 className="text-3xl sm:text-4xl font-bold leading-tight">
-                Desenvolvedor Web<br />
-                <span className="text-muted-foreground">& Designer Digital</span>
+                Desenvolvedor<br />
+                <span className="text-muted-foreground">Full Stack</span>
               </h2>
               <p className="text-muted-foreground leading-relaxed">
-                Desenvolvedor Web e Designer Digital, focado em criar experiências digitais que convertem.
-                Transformo ideias em estruturas profissionais que posicionam marcas e geram resultados reais.
+                Especialista em criar produtos digitais completos — de SaaS a sistemas web complexos.
+                Trabalho com React, TypeScript, Node.js, bancos de dados e deploy em cloud.
               </p>
               <p className="text-muted-foreground leading-relaxed">
-                Já colaborei com diversos projetos e empresas de diferentes segmentos,
-                sempre com o mesmo compromisso: entregar uma base sólida para o crescimento digital.
+                Já desenvolvi plataformas, painéis administrativos, landing pages e sites para
+                empresas de diferentes segmentos. Foco em código limpo, performance e escalabilidade.
               </p>
               <a
                 href={WHATSAPP_LINK}
@@ -294,13 +299,12 @@ const Index = () => {
       <section id="contato" className="py-24 lg:py-32 bg-secondary/20 border-y border-border/50">
         <div className="max-w-3xl mx-auto px-6 text-center" data-animate>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-6">
-            Estrutura<br />
-            <span className="text-primary">não é opcional.</span><br />
-            <span className="text-muted-foreground">É requisito mínimo.</span>
+            Tem uma ideia?<br />
+            <span className="text-primary">Eu transformo em produto.</span>
           </h2>
           <p className="text-muted-foreground mb-8 max-w-lg mx-auto">
-            Eu crio landing pages e experiências digitais profissionais para transformar
-            tráfego, indicação e interesse em resultados reais.
+            SaaS, sistemas, landing pages ou sites — eu projeto, desenvolvo e entrego
+            o produto digital completo para o seu negócio.
           </p>
           <a
             href={WHATSAPP_LINK}
