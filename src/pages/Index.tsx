@@ -183,9 +183,15 @@ const Index = () => {
         <DesignStackCards />
       </section>
 
-      {/* Portfolio */}
-      <section id="portfolio" />
+      {/* Projects Showcase */}
+      <ProjectsShowcase />
 
+      {/* Skills */}
+      <section id="skills">
+        <SkillsSection />
+      </section>
+
+      <WaveDivider />
 
       {/* Tablet Scroll Showcase */}
       <ContainerScroll
