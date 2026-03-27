@@ -96,11 +96,12 @@ const Index = () => {
           <div className="relative hidden lg:block">
             <div className="relative z-10">
               <img
-                src="/images/hero-portrait.jpg"
-                alt="FOCUSS DEV - Desenvolvedor Web"
+                src="/images/hero-portrait.png"
+                alt="FOCUSS DEV - Lee, Desenvolvedor Web"
                 width={1024}
                 height={1280}
-                className="w-full max-w-lg ml-auto rounded-lg"
+                className="w-full max-w-lg ml-auto"
+                style={{ mixBlendMode: 'lighten' }}
               />
             </div>
             <div className="absolute -bottom-8 -left-8 w-72 h-72 bg-primary/10 rounded-full blur-3xl" />
