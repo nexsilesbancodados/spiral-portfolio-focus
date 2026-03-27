@@ -4,7 +4,9 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import {
   SiReact, SiTypescript, SiNodedotjs, SiTailwindcss,
   SiPostgresql, SiDocker, SiFigma, SiGit,
-  SiNextdotjs, SiSupabase, SiPython, SiAmazon
+  SiNextdotjs, SiSupabase, SiPython
+} from 'react-icons/si'
+import { Cloud } from 'lucide-react'
 } from 'react-icons/si'
 
 gsap.registerPlugin(ScrollTrigger)
