@@ -101,7 +101,6 @@ const Index = () => {
                 width={1024}
                 height={1280}
                 className="w-full max-w-lg ml-auto"
-                style={{ mixBlendMode: 'lighten' }}
               />
             </div>
             <div className="absolute -bottom-8 -left-8 w-72 h-72 bg-primary/10 rounded-full blur-3xl" />
