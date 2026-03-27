@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { ArrowRight, Instagram, Mail, MessageCircle } from 'lucide-react'
+import { ContainerScroll } from '@/components/ContainerScroll'
 import { ContactModal } from '@/components/ContactModal'
 import { ServicesReveal } from '@/components/ServicesReveal'
 import { TiltedCard } from '@/components/TiltedCard'
@@ -194,6 +195,27 @@ const Index = () => {
         <HorizontalPortfolio />
       </section>
 
+
+      {/* Tablet Scroll Showcase */}
+      <ContainerScroll
+        titleComponent={
+          <>
+            <h2 className="text-3xl sm:text-4xl font-semibold text-foreground">
+              Experiência digital<br />
+              <span className="text-4xl md:text-[5rem] font-bold mt-1 leading-none text-primary">
+                de alto nível.
+              </span>
+            </h2>
+          </>
+        }
+      >
+        <img
+          src="/images/hero-portrait.png"
+          alt="FOCUSS DEV - Projeto em destaque"
+          className="mx-auto object-cover h-full w-full object-top"
+          draggable={false}
+        />
+      </ContainerScroll>
 
       <WaveDivider topColor="hsl(var(--primary) / 0.2)" />
 
