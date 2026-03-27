@@ -4,6 +4,7 @@ import { ServicesReveal } from '@/components/ServicesReveal'
 import { TiltedCard } from '@/components/TiltedCard'
 import { DesignStackCards } from '@/components/DesignStackCards'
 import { VibeCodesSection } from '@/components/VibeCodesSection'
+import { HorizontalPortfolio } from '@/components/HorizontalPortfolio'
 
 const WHATSAPP_LINK = "https://api.whatsapp.com/send/?phone=5533984123591&text=Olá! Vim pelo site e gostaria de saber mais sobre os serviços."
 const INSTAGRAM_LINK = "https://instagram.com/focussdev"
@@ -179,62 +180,21 @@ const Index = () => {
         <DesignStackCards />
       </section>
 
-      <section id="portfolio" className="py-24 lg:py-32 bg-secondary/20">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center mb-16" data-animate>
-            <p className="text-xs uppercase tracking-[0.2em] text-primary font-semibold mb-4">Projetos recentes</p>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
-              SaaS, Sistemas<br />
-              <span className="text-muted-foreground">& Landing Pages</span>
-            </h2>
-            <p className="text-muted-foreground mt-4 max-w-lg mx-auto">
-              Produtos digitais desenvolvidos com tecnologias modernas, performance otimizada e design de alto padrão.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              { img: '/images/portfolio-01.jpg', title: 'Plataforma SaaS de Gestão', desc: 'SaaS · Dashboard · API REST' },
-              { img: '/images/portfolio-02.jpg', title: 'E-commerce com Painel Admin', desc: 'Sistema Web · Pagamentos · CMS' },
-              { img: '/images/portfolio-03.jpg', title: 'Dashboard Analytics', desc: 'Sistema · Relatórios · Integrações' },
-            ].map((item, i) => (
-              <div
-                key={i}
-                data-animate
-                className="group rounded-xl overflow-hidden bg-card border border-border hover:border-primary/30 transition-all duration-300"
-                style={{ opacity: 0, animationDelay: `${i * 0.15}s` }}
-              >
-                <div className="overflow-hidden aspect-[3/4]">
-                  <img
-                    src={item.img}
-                    alt={item.title}
-                    loading="lazy"
-                    width={800}
-                    height={1200}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
-                <div className="p-5">
-                  <h3 className="font-bold text-base">{item.title}</h3>
-                  <p className="text-muted-foreground text-sm mt-1">{item.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="text-center mt-12" data-animate style={{ opacity: 0 }}>
-            <a
-              href={WHATSAPP_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 font-semibold rounded-md hover:brightness-110 transition-all text-sm"
-            >
-              Quero meu projeto profissional
-              <ArrowRight className="w-4 h-4" />
-            </a>
-          </div>
+      {/* Portfolio - Horizontal Scroll */}
+      <section id="portfolio">
+        <div className="text-center pt-24 lg:pt-32 pb-8 px-6" data-animate>
+          <p className="text-xs uppercase tracking-[0.2em] text-primary font-semibold mb-4">Projetos & Serviços</p>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
+            SaaS, Sistemas<br />
+            <span className="text-muted-foreground">& Landing Pages</span>
+          </h2>
+          <p className="text-muted-foreground mt-4 max-w-lg mx-auto">
+            Produtos digitais desenvolvidos com tecnologias modernas, performance otimizada e design de alto padrão.
+          </p>
         </div>
+        <HorizontalPortfolio />
       </section>
+
 
       {/* About */}
       <section id="sobre" className="py-24 lg:py-32">
