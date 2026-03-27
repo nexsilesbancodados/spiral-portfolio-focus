@@ -7,7 +7,6 @@ import {
   SiNextdotjs, SiSupabase, SiPython
 } from 'react-icons/si'
 import { Cloud } from 'lucide-react'
-} from 'react-icons/si'
 
 gsap.registerPlugin(ScrollTrigger)
 
