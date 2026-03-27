@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { ArrowRight, Instagram, Linkedin, Mail } from 'lucide-react'
+import { ArrowRight, Instagram, Mail, MessageCircle } from 'lucide-react'
 import { ServicesReveal } from '@/components/ServicesReveal'
 import { DesignStackCards } from '@/components/DesignStackCards'
 
