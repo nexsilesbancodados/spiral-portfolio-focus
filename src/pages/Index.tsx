@@ -48,14 +48,12 @@ const Index = () => {
             <a href="#portfolio" className="hover:text-foreground transition-colors">Portfólio</a>
             <a href="#sobre" className="hover:text-foreground transition-colors">Sobre mim</a>
           </nav>
-          <a
-            href={WHATSAPP_LINK}
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            onClick={() => setContactOpen(true)}
             className="bg-primary text-primary-foreground px-5 py-2 text-sm font-semibold rounded-md hover:brightness-110 transition-all"
           >
             Contratar
-          </a>
+          </button>
         </div>
       </header>
 
