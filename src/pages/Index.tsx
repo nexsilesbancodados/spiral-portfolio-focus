@@ -55,19 +55,19 @@ const Index = () => {
         <div className="max-w-6xl mx-auto px-6 w-full grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-6 stagger-children">
             <p className="text-xs uppercase tracking-[0.2em] text-primary font-semibold">
-              Desenvolvimento Web & Design Digital
+              SaaS · Sistemas · Landing Pages · Sites
             </p>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight">
-              Sem estrutura,{' '}
+              Transformo ideias{' '}
               <br />
-              <span className="text-muted-foreground">você não cresce.</span>
+              <span className="text-muted-foreground">em produtos digitais.</span>
             </h1>
             <p className="text-muted-foreground text-base lg:text-lg max-w-md leading-relaxed">
-              Você pode ter tráfego, indicação e uma boa entrega.
-              Sem uma <span className="text-primary font-medium">estrutura digital profissional</span> você não escala.
+              Desenvolvimento de <span className="text-primary font-medium">SaaS, sistemas web, landing pages e sites</span> com
+              código limpo, performance e foco em resultado.
             </p>
             <p className="text-muted-foreground/70 text-sm max-w-md">
-              Eu construo a base que posiciona seu negócio e transforma interesse em resultados.
+              Da ideia ao deploy. Eu projeto, desenvolvo e entrego o produto completo para o seu negócio escalar.
             </p>
             <div className="flex flex-wrap gap-4 pt-2">
               <a
