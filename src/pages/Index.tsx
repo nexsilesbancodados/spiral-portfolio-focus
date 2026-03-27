@@ -160,7 +160,21 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Portfolio */}
+      {/* Design */}
+      <section className="relative">
+        <div className="text-center pt-24 lg:pt-32 pb-8 px-6" data-animate>
+          <p className="text-xs uppercase tracking-[0.2em] text-primary font-semibold mb-4">Design Digital</p>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
+            Design que<br />
+            <span className="text-muted-foreground">comunica e converte.</span>
+          </h2>
+          <p className="text-muted-foreground mt-4 max-w-lg mx-auto">
+            Cada interface é pensada para guiar o usuário, transmitir profissionalismo e gerar resultados.
+          </p>
+        </div>
+        <DesignStackCards />
+      </section>
+
       <section id="portfolio" className="py-24 lg:py-32 bg-secondary/20">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16" data-animate>
