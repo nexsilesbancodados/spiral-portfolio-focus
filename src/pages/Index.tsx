@@ -231,15 +231,13 @@ const Index = () => {
                 Já desenvolvi plataformas, painéis administrativos, landing pages e sites para
                 empresas de diferentes segmentos. Foco em código limpo, performance e escalabilidade.
               </p>
-              <a
-                href={WHATSAPP_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                onClick={() => setContactOpen(true)}
                 className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 font-semibold rounded-md hover:brightness-110 transition-all text-sm"
               >
                 Entrar em contato
                 <ArrowRight className="w-4 h-4" />
-              </a>
+              </button>
             </div>
           </div>
         </div>
