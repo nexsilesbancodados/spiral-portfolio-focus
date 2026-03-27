@@ -13,6 +13,7 @@ const EMAIL = "devcriador1@gmail.com"
 
 const Index = () => {
   const observerRef = useRef<IntersectionObserver | null>(null)
+  const [contactOpen, setContactOpen] = useState(false)
 
   useEffect(() => {
     observerRef.current = new IntersectionObserver(
