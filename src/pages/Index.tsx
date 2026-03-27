@@ -293,6 +293,13 @@ const Index = () => {
           </div>
         </div>
       </footer>
+      <ContactModal
+        open={contactOpen}
+        onClose={() => setContactOpen(false)}
+        whatsappLink={WHATSAPP_LINK}
+        instagramLink={INSTAGRAM_LINK}
+        email={EMAIL}
+      />
     </div>
   )
 }
