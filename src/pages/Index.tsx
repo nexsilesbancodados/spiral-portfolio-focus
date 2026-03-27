@@ -195,6 +195,8 @@ const Index = () => {
       </section>
 
 
+      <WaveDivider topColor="hsl(var(--primary) / 0.2)" />
+
       {/* About */}
       <section id="sobre" className="py-24 lg:py-32">
         <div className="max-w-6xl mx-auto px-6">
