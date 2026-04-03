@@ -5,8 +5,7 @@ import heroStatue from "@/assets/hero-statue.png";
 export const HeroSection = () => {
   return (
     <section id="hero" className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Overlay */}
-      <div className="absolute inset-0 z-0 bg-black/30" />
+      {/* Radial glow */}
       {/* Radial glow */}
       <div className="absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_center,hsl(160_100%_45%/0.08)_0%,transparent_70%)]" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-primary/5 blur-[120px] z-[1]" />

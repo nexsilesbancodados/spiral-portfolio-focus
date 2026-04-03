@@ -71,7 +71,7 @@ const FlipCard = () => {
 
 export const AboutSection = () => {
   return (
-    <section id="about" className="relative py-20 md:py-32 overflow-hidden">
+    <section id="about" className="relative py-20 md:py-32 overflow-hidden bg-transparent">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Flip Card */}
