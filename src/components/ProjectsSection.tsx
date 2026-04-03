@@ -6,6 +6,8 @@ const projects = [
   { title: "E-commerce Premium", category: "Landing Page" },
   { title: "App de Produtividade", category: "Aplicação Web" },
   { title: "Portal Corporativo", category: "Website Institucional" },
+  { title: "Dashboard Analytics", category: "Painel Inteligente" },
+  { title: "Marketplace Digital", category: "Plataforma Web" },
 ];
 
 export const ProjectsSection = () => {
