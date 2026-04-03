@@ -59,7 +59,7 @@ export const SkillsSection = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="absolute z-10 h-[340px] md:h-[420px] object-contain drop-shadow-[0_0_40px_rgba(0,255,150,0.15)]"
+            className="absolute z-10 h-[340px] md:h-[420px] object-contain drop-shadow-[0_0_40px_rgba(0,255,150,0.15)] translate-y-10 md:translate-y-14"
           />
 
           {/* Orbiting skills */}
