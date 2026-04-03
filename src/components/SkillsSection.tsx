@@ -1,4 +1,7 @@
+import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
+import gsap from "gsap";
+import skillsStatue from "@/assets/skills-statue.png";
 
 const skillCategories = [
   {
@@ -26,53 +29,95 @@ const item = {
 };
 
 export const SkillsSection = () => {
+  const statueRef = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReduced || !statueRef.current) return;
+
+    const ctx = gsap.context(() => {
+      gsap.to(statueRef.current, {
+        y: -10,
+        duration: 3.5,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+      });
+    });
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <section id="skills" className="relative py-20 md:py-32">
-      <div className="absolute inset-0" />
-
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <span className="text-primary text-sm font-medium tracking-widest uppercase">
-            Tecnologias
-          </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mt-4">
-            Stack <span className="text-primary">técnico</span>
-          </h2>
-        </motion.div>
+        <div className="grid lg:grid-cols-2 gap-12 xl:gap-20 items-center">
+          {/* Coluna esquerda — Estátua */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="flex justify-center lg:justify-start"
+          >
+            <div className="relative w-full max-w-[22rem] sm:max-w-[26rem] lg:max-w-[30rem]">
+              <div className="absolute inset-0 bg-gradient-to-t from-primary/20 via-transparent to-transparent blur-3xl rounded-full" />
+              <img
+                ref={statueRef}
+                src={skillsStatue}
+                alt="Estátua grega com óculos lendo tablet — representação artística do domínio técnico"
+                className="relative z-10 w-full drop-shadow-2xl will-change-transform"
+                loading="lazy"
+              />
+            </div>
+          </motion.div>
 
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          className="grid md:grid-cols-3 gap-8"
-        >
-          {skillCategories.map((cat) => (
+          {/* Coluna direita — Skills */}
+          <div>
             <motion.div
-              key={cat.title}
-              variants={item}
-              className="p-6 md:p-8 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="mb-10"
             >
-              <h3 className="text-lg font-semibold text-primary mb-6">{cat.title}</h3>
-              <div className="flex flex-wrap gap-3">
-                {cat.skills.map((skill) => (
-                  <motion.span
-                    key={skill}
-                    whileHover={{ scale: 1.05 }}
-                    className="px-4 py-2 rounded-full border border-white/20 bg-white/10 text-sm text-white hover:border-primary/40 hover:text-primary transition-all cursor-default"
-                  >
-                    {skill}
-                  </motion.span>
-                ))}
-              </div>
+              <span className="text-primary text-sm font-medium tracking-widest uppercase">
+                Tecnologias
+              </span>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mt-4 text-white">
+                Stack <span className="text-primary">técnico</span>
+              </h2>
             </motion.div>
-          ))}
-        </motion.div>
+
+            <motion.div
+              variants={container}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+              className="space-y-6"
+            >
+              {skillCategories.map((cat) => (
+                <motion.div
+                  key={cat.title}
+                  variants={item}
+                  className="p-5 md:p-6 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20"
+                >
+                  <h3 className="text-lg font-semibold text-primary mb-4">{cat.title}</h3>
+                  <div className="flex flex-wrap gap-3">
+                    {cat.skills.map((skill) => (
+                      <motion.span
+                        key={skill}
+                        whileHover={{ scale: 1.05 }}
+                        className="px-4 py-2 rounded-full border border-white/20 bg-white/10 text-sm text-white hover:border-primary/40 hover:text-primary transition-all cursor-default"
+                      >
+                        {skill}
+                      </motion.span>
+                    ))}
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   );
