@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import gsap from "gsap";
 import skillsStatue from "@/assets/skills-statue.png";
 import cloudCover from "@/assets/cloud-cover.png";
+import "./SkillsSection.css";
 
 const skillCategories = [
   {
@@ -70,7 +71,6 @@ export const SkillsSection = () => {
                 className="relative z-10 w-full drop-shadow-2xl will-change-transform"
                 loading="lazy"
               />
-              {/* Nuvem cobrindo a base da estátua */}
               <img
                 src={cloudCover}
                 alt=""
@@ -109,15 +109,24 @@ export const SkillsSection = () => {
                   className="p-5 md:p-6 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20"
                 >
                   <h3 className="text-lg font-semibold text-primary mb-4">{cat.title}</h3>
-                  <div className="flex flex-wrap gap-3">
+                  <div className="flex flex-wrap gap-4">
                     {cat.skills.map((skill) => (
-                      <motion.span
-                        key={skill}
-                        whileHover={{ scale: 1.05 }}
-                        className="px-4 py-2 rounded-full border border-white/20 bg-white/10 text-sm text-white hover:border-primary/40 hover:text-primary transition-all cursor-default"
-                      >
-                        {skill}
-                      </motion.span>
+                      <button key={skill} className="skill-bloom-button">
+                        <div className="bloom-container">
+                          <div className="button-container-main">
+                            <div className="button-inner">
+                              <div className="back" />
+                              <div className="front" />
+                              <div className="content-wrapper">
+                                <span className="text-content">{skill}</span>
+                              </div>
+                            </div>
+                            <div className="button-glass" />
+                          </div>
+                          <div className="bloom bloom1" />
+                          <div className="bloom bloom2" />
+                        </div>
+                      </button>
                     ))}
                   </div>
                 </motion.div>
