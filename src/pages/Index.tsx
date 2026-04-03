@@ -9,8 +9,6 @@ const Index = () => {
       <Header />
       <HeroSection />
       <CloudDivider />
-      {/* Espaço para o efeito de scroll da nuvem funcionar */}
-      <div className="h-[100vh]" />
     </div>
   );
 };
