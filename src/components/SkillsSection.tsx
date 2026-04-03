@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import skillsStatue from "@/assets/skills-statue.png";
 
 const allSkills = [
   "React", "Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "shadcn/ui",
@@ -28,6 +29,9 @@ const skillColors: Record<string, string> = {
 };
 
 export const SkillsSection = () => {
+  const radius = 280; // px radius for the orbit
+  const radiusMobile = 150;
+
   return (
     <section id="skills" className="relative pt-0 pb-20 md:pt-0 md:pb-32 -mt-60">
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -40,36 +44,65 @@ export const SkillsSection = () => {
           <span className="text-primary text-sm font-medium tracking-widest uppercase">
             Tecnologias
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mt-4 text-white">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mt-4 text-foreground">
             Stack <span className="text-primary">técnico</span>
           </h2>
         </motion.div>
 
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={{ visible: { transition: { staggerChildren: 0.06 } } }}
-          className="flex flex-wrap justify-center gap-3"
-        >
-          {allSkills.map((skill) => {
+        {/* Orbit container */}
+        <div className="relative flex items-center justify-center mx-auto" style={{ height: 620 }}>
+          {/* Center statue */}
+          <motion.img
+            src={skillsStatue}
+            alt="Estátua clássica representando sabedoria tecnológica"
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="absolute z-10 h-[340px] md:h-[420px] object-contain drop-shadow-[0_0_40px_rgba(0,255,150,0.15)]"
+          />
+
+          {/* Orbiting skills */}
+          {allSkills.map((skill, i) => {
+            const angle = (i / allSkills.length) * 360;
+            const rad = (angle * Math.PI) / 180;
             const gradient = skillColors[skill] || "from-primary to-primary";
+
             return (
               <motion.div
                 key={skill}
-                variants={{
-                  hidden: { opacity: 0, scale: 0.7 },
-                  visible: { opacity: 1, scale: 1 },
+                initial={{ opacity: 0, scale: 0 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.06, type: "spring", stiffness: 200 }}
+                className="absolute z-20"
+                style={{
+                  // Desktop position
+                  left: `calc(50% + ${Math.cos(rad) * radius}px)`,
+                  top: `calc(50% + ${Math.sin(rad) * radius}px)`,
+                  transform: "translate(-50%, -50%)",
                 }}
-                whileHover={{ scale: 1.1, y: -4 }}
-                whileTap={{ scale: 0.95 }}
-                className={`px-5 py-2.5 rounded-full bg-gradient-to-r ${gradient} text-white text-sm font-semibold shadow-lg border border-white/20 cursor-default select-none`}
               >
-                {skill}
+                <motion.div
+                  animate={{
+                    y: [0, -8, 0, 6, 0],
+                    x: [0, 4, 0, -4, 0],
+                  }}
+                  transition={{
+                    duration: 4 + (i % 3),
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: i * 0.3,
+                  }}
+                  whileHover={{ scale: 1.15, y: -6 }}
+                  className={`px-4 py-2 md:px-5 md:py-2.5 rounded-full bg-gradient-to-r ${gradient} text-white text-xs md:text-sm font-semibold shadow-lg border border-white/20 cursor-default select-none whitespace-nowrap backdrop-blur-sm`}
+                >
+                  {skill}
+                </motion.div>
               </motion.div>
             );
           })}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
