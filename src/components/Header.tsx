@@ -29,8 +29,7 @@ export const Header = () => {
         style={{ backgroundImage: `url(${skyBg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
       />
       <div className="absolute inset-0 z-0 bg-black/20 backdrop-blur-sm" />
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
         {/* Left nav links */}
         <nav className="hidden md:flex items-center gap-6 flex-1">
           {navLinks.slice(0, 3).map((link) => (
