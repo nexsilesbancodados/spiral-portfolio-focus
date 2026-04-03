@@ -129,23 +129,10 @@ export const ProjectsShowcase = () => {
                 </div>
               )}
 
-              <div className="relative h-48 overflow-hidden">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  loading="lazy"
-                  width={1280}
-                  height={800}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                <div
-                  className="absolute inset-0 transition-opacity duration-300"
-                  style={{
-                    background:
-                      'linear-gradient(to top, hsl(var(--card)) 0%, transparent 60%)',
-                    opacity: hoveredIndex === i ? 0.9 : 0.6,
-                  }}
-                />
+              <div className="relative h-48 overflow-hidden bg-gradient-to-br from-primary/10 via-secondary to-primary/5 flex items-center justify-center">
+                <span className="text-4xl font-bold text-primary/30 group-hover:text-primary/50 transition-colors duration-300">
+                  {project.category}
+                </span>
                 <div className="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <div className="w-9 h-9 rounded-full bg-primary flex items-center justify-center">
                     <ExternalLink className="w-4 h-4 text-primary-foreground" />
