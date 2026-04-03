@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import projectsStatue from "@/assets/projects-statue.png";
+import cloudOverlay from "@/assets/cloud-overlay.png";
 
 const projects = [
   { title: "Plataforma SaaS de Gestão", category: "Sistema Web" },
