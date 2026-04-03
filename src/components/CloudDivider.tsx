@@ -48,7 +48,7 @@ export const CloudDivider = () => {
         ref={cloudRef}
         src={cloudImg}
         alt=""
-        className="relative left-1/2 z-[2] h-auto w-[140%] max-w-none -translate-x-1/2 will-change-transform mix-blend-screen drop-shadow-[0_10px_40px_rgba(0,0,0,0.3)]"
+        className="relative left-1/2 z-[2] h-auto w-[100%] max-w-none -translate-x-1/2 will-change-transform mix-blend-screen drop-shadow-[0_10px_40px_rgba(0,0,0,0.3)]"
         loading="eager"
         draggable={false}
       />
