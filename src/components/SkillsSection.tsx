@@ -27,8 +27,8 @@ const item = {
 
 export const SkillsSection = () => {
   return (
-    <section id="skills" className="relative py-20 md:py-32 bg-grid">
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background" />
+    <section id="skills" className="relative py-20 md:py-32">
+      <div className="absolute inset-0" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
