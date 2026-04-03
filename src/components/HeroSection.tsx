@@ -1,17 +1,13 @@
 import { motion } from "framer-motion";
 import { ArrowDown } from "lucide-react";
 import heroStatue from "@/assets/hero-statue.png";
-import skyBg from "@/assets/sky-bg.jpg";
 
 export const HeroSection = () => {
   return (
     <section id="hero" className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Sky background */}
-      <div
-        className="absolute inset-0 z-0"
-        style={{ backgroundImage: `url(${skyBg})`, backgroundSize: 'cover', backgroundPosition: 'center top' }}
-      />
-      <div className="absolute inset-0 z-0 bg-black/40" />
+      {/* Unified sky gradient — pure CSS, no image */}
+      <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#1a6fc4] via-[#5ba3d9] to-[#a8d4f0]" />
+      <div className="absolute inset-0 z-0 bg-black/30" />
       {/* Radial glow */}
       <div className="absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_center,hsl(160_100%_45%/0.08)_0%,transparent_70%)]" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-primary/5 blur-[120px] z-[1]" />
@@ -34,7 +30,7 @@ export const HeroSection = () => {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.15 }}
-              className="text-4xl sm:text-5xl lg:text-7xl font-bold leading-[1.05] tracking-tight"
+              className="text-4xl sm:text-5xl lg:text-7xl font-bold leading-[1.05] tracking-tight text-white"
             >
               Criamos{" "}
               <span className="text-primary glow-text">experiências</span>
@@ -47,7 +43,7 @@ export const HeroSection = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.3 }}
-              className="mt-6 text-muted-foreground text-lg max-w-lg leading-relaxed"
+              className="mt-6 text-white/70 text-lg max-w-lg leading-relaxed"
             >
               Estruturas digitais profissionais que posicionam seu negócio e convertem visitantes em resultados reais.
             </motion.p>
@@ -66,7 +62,7 @@ export const HeroSection = () => {
               </a>
               <a
                 href="#about"
-                className="px-8 py-3.5 rounded-full border border-border text-foreground font-medium hover:border-primary/50 hover:text-primary transition-all"
+                className="px-8 py-3.5 rounded-full border border-white/30 text-white font-medium hover:border-primary/50 hover:text-primary transition-all"
               >
                 Saiba Mais
               </a>
@@ -103,7 +99,7 @@ export const HeroSection = () => {
             animate={{ y: [0, 8, 0] }}
             transition={{ repeat: Infinity, duration: 2 }}
           >
-            <ArrowDown className="text-muted-foreground" size={20} />
+            <ArrowDown className="text-white/60" size={20} />
           </motion.div>
         </motion.div>
       </div>
