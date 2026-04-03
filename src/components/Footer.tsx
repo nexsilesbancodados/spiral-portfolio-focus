@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import logoMedallion from "@/assets/logo-medallion.png";
 
 const footerLinks = [
   {
@@ -38,9 +39,24 @@ const footerLinks = [
 export const Footer = () => {
   return (
     <footer className="relative overflow-hidden border-t border-foreground/5 bg-background pt-16 sm:pt-24">
-      {/* Navigation Links */}
+      {/* Logo + Navigation Links */}
       <div className="relative z-20 w-full px-4 sm:px-6 lg:px-12 pb-12">
-        <div className="mx-auto max-w-7xl grid grid-cols-2 md:grid-cols-4 gap-8 sm:gap-12">
+        <div className="mx-auto max-w-7xl flex flex-col items-center gap-12">
+          {/* Logo */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="flex flex-col items-center gap-3"
+          >
+            <img
+              src={logoMedallion}
+              alt="FOCUSS DEV logo"
+              className="w-16 h-16 sm:w-20 sm:h-20 opacity-60"
+            />
+          </motion.div>
+
+          <div className="w-full grid grid-cols-2 md:grid-cols-4 gap-8 sm:gap-12">
           {footerLinks.map((group) => (
             <motion.div
               key={group.title}
@@ -66,6 +82,7 @@ export const Footer = () => {
               </ul>
             </motion.div>
           ))}
+          </div>
         </div>
       </div>
 
