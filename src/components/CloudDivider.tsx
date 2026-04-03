@@ -40,7 +40,7 @@ export const CloudDivider = () => {
   return (
     <div
       ref={wrapperRef}
-      className="relative w-full z-[12] pointer-events-none select-none overflow-visible"
+      className="relative z-[12] w-full overflow-visible pointer-events-none select-none"
       style={{ marginTop: "-28vw" }}
       aria-hidden="true"
     >
@@ -52,7 +52,6 @@ export const CloudDivider = () => {
         loading="eager"
         draggable={false}
       />
-    </div>
     </div>
   );
 };
