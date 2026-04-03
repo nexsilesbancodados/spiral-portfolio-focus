@@ -4,6 +4,7 @@ import { HeroSection } from "@/components/HeroSection";
 import { CloudDivider } from "@/components/CloudDivider";
 import { AboutSection } from "@/components/AboutSection";
 import { MarqueeSection } from "@/components/MarqueeSection";
+import { SkillsSection } from "@/components/SkillsSection";
 
 const Index = () => {
   return (
@@ -13,6 +14,7 @@ const Index = () => {
       <CloudDivider />
       <AboutSection />
       <MarqueeSection />
+      <SkillsSection />
     </div>
   );
 };
