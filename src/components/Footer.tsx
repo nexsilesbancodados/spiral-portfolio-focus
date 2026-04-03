@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import logoMedallion from "@/assets/logo-medallion.png";
 
 const footerLinks = [
   {
