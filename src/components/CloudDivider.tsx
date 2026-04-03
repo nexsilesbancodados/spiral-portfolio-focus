@@ -40,7 +40,7 @@ export const CloudDivider = () => {
   return (
     <div
       ref={wrapperRef}
-      className="relative z-[12] -mt-[30vw] flex w-full justify-center overflow-visible pointer-events-none select-none sm:-mt-[28vw] lg:-mt-[22vw] xl:-mt-[19vw]"
+      className="relative z-[12] -mt-[42vw] flex w-full justify-center overflow-visible pointer-events-none select-none sm:-mt-[38vw] lg:-mt-[32vw] xl:-mt-[28vw]"
       aria-hidden="true"
     >
       <img
