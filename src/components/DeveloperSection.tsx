@@ -1,30 +1,40 @@
 import { motion } from "framer-motion";
-import gustavoPortrait from "@/assets/gustavo-portrait.jpg";
+import gustavoPortrait from "@/assets/gustavo-portrait.png";
 
 export const DeveloperSection = () => {
   return (
-    <section className="relative overflow-hidden"
-      style={{ paddingTop: "clamp(5rem, 10vw, 10rem)", paddingBottom: "clamp(6rem, 12vw, 12rem)" }}
+    <section
+      className="relative overflow-hidden"
+      style={{
+        paddingTop: "clamp(5rem, 10vw, 10rem)",
+        paddingBottom: "clamp(6rem, 12vw, 12rem)",
+      }}
     >
       {/* Gradient transition to white at bottom */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[50%]"
-        style={{ background: "linear-gradient(to bottom, transparent 0%, white 100%)" }}
+      <div
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-[60%]"
+        style={{
+          background: "linear-gradient(to bottom, transparent 0%, white 100%)",
+        }}
       />
 
       {/* Ambient glow behind portrait */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[70%] w-[60%] rounded-full opacity-20"
-          style={{ background: "radial-gradient(ellipse, hsl(var(--primary) / 0.4) 0%, transparent 70%)" }}
+        <div
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[40%] h-[50%] w-[40%] rounded-full opacity-30"
+          style={{
+            background:
+              "radial-gradient(ellipse, hsl(var(--primary) / 0.5) 0%, transparent 70%)",
+          }}
         />
       </div>
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Hero composition */}
         <div className="relative flex flex-col items-center">
-          
           {/* Name + Portrait composition */}
-          <div className="relative flex items-center justify-center w-full"
-            style={{ minHeight: "clamp(16rem, 40vw, 36rem)" }}
+          <div
+            className="relative flex items-center justify-center w-full"
+            style={{ minHeight: "clamp(18rem, 45vw, 40rem)" }}
           >
             {/* Giant name text — behind */}
             <motion.h2
@@ -32,18 +42,19 @@ export const DeveloperSection = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="absolute inset-0 flex flex-col items-center justify-center select-none font-bold uppercase tracking-tighter text-primary/90 glow-text"
+              className="absolute inset-0 flex flex-col items-center justify-center select-none font-bold uppercase tracking-tighter"
               aria-hidden="true"
               style={{
-                fontSize: "clamp(4.5rem, 16vw, 16rem)",
+                fontSize: "clamp(5rem, 18vw, 18rem)",
                 lineHeight: 0.82,
+                color: "hsl(var(--primary) / 0.15)",
               }}
             >
               <span className="block">GUSTAVO</span>
               <span className="block">LOPES</span>
             </motion.h2>
 
-            {/* Portrait — in front, overlapping the text */}
+            {/* Portrait — in front */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -54,16 +65,14 @@ export const DeveloperSection = () => {
               <img
                 src={gustavoPortrait}
                 alt="Gustavo Lopes — Desenvolvedor Full-Stack & Fundador da FOCUSS DEV"
-                className="w-auto object-cover object-top rounded-lg"
+                className="w-auto object-cover object-top drop-shadow-2xl"
                 style={{
-                  height: "clamp(14rem, 35vw, 30rem)",
-                  maskImage: "linear-gradient(to bottom, black 60%, transparent 98%)",
-                  WebkitMaskImage: "linear-gradient(to bottom, black 60%, transparent 98%)",
+                  height: "clamp(16rem, 40vw, 34rem)",
+                  maskImage:
+                    "linear-gradient(to bottom, black 65%, transparent 100%)",
+                  WebkitMaskImage:
+                    "linear-gradient(to bottom, black 65%, transparent 100%)",
                 }}
-              />
-              {/* Glow ring under portrait */}
-              <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 h-8 w-[80%] rounded-full blur-2xl opacity-40"
-                style={{ background: "hsl(var(--primary))" }}
               />
             </motion.div>
           </div>
@@ -74,15 +83,23 @@ export const DeveloperSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="mt-8 max-w-xl text-center"
+            className="relative z-20 -mt-4 max-w-xl text-center"
           >
-            <p className="text-xs font-semibold uppercase tracking-[0.4em] text-primary/80"
-              style={{ fontSize: "clamp(0.65rem, 1.2vw, 0.8rem)" }}
+            <p
+              className="font-semibold uppercase tracking-[0.4em]"
+              style={{
+                fontSize: "clamp(0.65rem, 1.2vw, 0.8rem)",
+                color: "hsl(var(--primary))",
+              }}
             >
               Fundador &amp; Desenvolvedor Full-Stack
             </p>
-            <p className="mt-4 leading-relaxed text-foreground/60"
-              style={{ fontSize: "clamp(0.9rem, 1.5vw, 1.125rem)" }}
+            <p
+              className="mt-4 leading-relaxed"
+              style={{
+                fontSize: "clamp(0.9rem, 1.5vw, 1.125rem)",
+                color: "hsl(210 20% 30% / 0.7)",
+              }}
             >
               Especialista em React, TypeScript e soluções digitais de alta
               performance. Transformando visão em código que converte.
