@@ -39,7 +39,7 @@ export const MarqueeSection = () => {
       aria-hidden="true"
     >
       <svg
-        className="overflow-visible"
+        className="overflow-visible my-[555px] py-0 pb-[555px]"
         style={{ width: "130%", height: "100%" }}
         viewBox="0 0 1600 600"
         preserveAspectRatio="xMidYMid slice"
