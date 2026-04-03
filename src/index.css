@@ -6,6 +6,9 @@
   :root {
     --background: 240 10% 4%;
     --foreground: 0 0% 95%;
+    --sky-top: 209 74% 44%;
+    --sky-mid: 204 63% 60%;
+    --sky-base: 204 70% 79%;
 
     --card: 240 8% 8%;
     --card-foreground: 0 0% 95%;
@@ -103,6 +106,36 @@ html {
   background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
   pointer-events: none;
   z-index: 1;
+}
+
+.sky-page {
+  background: linear-gradient(
+    to bottom,
+    hsl(var(--sky-top)) 0%,
+    hsl(var(--sky-mid)) 30%,
+    hsl(var(--sky-base)) 60%,
+    hsl(var(--sky-base)) 100%
+  );
+}
+
+.sky-header {
+  background: linear-gradient(
+    to bottom,
+    hsl(var(--sky-top) / 0.94) 0%,
+    hsl(var(--sky-mid) / 0.88) 100%
+  );
+}
+
+.primary-aura {
+  background: radial-gradient(ellipse at center, hsl(var(--primary) / 0.08) 0%, transparent 70%);
+}
+
+.primary-aura-bottom {
+  background: radial-gradient(ellipse at bottom, hsl(var(--primary) / 0.2) 0%, transparent 60%);
+}
+
+.primary-aura-soft {
+  background: radial-gradient(ellipse at center, hsl(var(--primary) / 0.06) 0%, transparent 70%);
 }
 
 @media (prefers-reduced-motion: reduce) {

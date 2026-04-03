@@ -21,43 +21,39 @@ export const Header = () => {
       initial={{ y: -80 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 overflow-hidden"
+      className="fixed inset-x-0 top-0 z-50 overflow-hidden border-b border-foreground/10"
     >
-      {/* Sky gradient synced with hero */}
-      <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#1a6fc4] via-[#3a8ad4] to-[#5ba3d9]" />
-      <div className="absolute inset-0 z-0 bg-black/30 backdrop-blur-sm" />
-      <div className="relative z-10 max-w-7xl px-4 sm:px-6 flex items-center justify-between h-16 mx-[212px] lg:px-[2px]">
-        {/* Left nav links */}
-        <nav className="hidden md:flex items-center gap-6 flex-1">
+      <div className="sky-header absolute inset-0 z-0" />
+      <div className="absolute inset-0 z-0 bg-background/10 backdrop-blur-md" />
+      <div className="relative z-10 mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:h-20 lg:px-8">
+        <nav className="hidden flex-1 basis-0 items-center gap-6 md:flex lg:gap-8">
           {navLinks.slice(0, 3).map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="text-sm text-white/80 hover:text-white transition-colors duration-300"
+              className="text-sm text-foreground/80 transition-colors duration-300 hover:text-foreground"
             >
               {link.label}
             </a>
           ))}
         </nav>
 
-        {/* Center logo with statue */}
-        <a href="#hero" className="flex items-center gap-2 shrink-0">
+        <a href="#hero" className="absolute left-1/2 flex -translate-x-1/2 items-center gap-2 shrink-0 md:static md:translate-x-0">
           <span className="text-xl font-bold tracking-tight text-primary glow-text">FOCUSS</span>
           <img
             src={statueCard}
             alt="FOCUSS DEV"
             className="h-10 w-auto object-contain drop-shadow-[0_0_8px_hsl(160_100%_45%/0.4)]"
           />
-          <span className="text-xl font-bold tracking-tight text-white font-light">DEV</span>
+          <span className="text-xl font-light tracking-tight text-foreground/90">DEV</span>
         </a>
 
-        {/* Right nav links */}
-        <nav className="hidden md:flex items-center gap-6 flex-1 justify-end">
+        <nav className="hidden flex-1 basis-0 items-center justify-end gap-6 md:flex lg:gap-8">
           {navLinks.slice(3).map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="text-sm text-white/80 hover:text-white transition-colors duration-300"
+              className="text-sm text-foreground/80 transition-colors duration-300 hover:text-foreground"
             >
               {link.label}
             </a>
@@ -66,7 +62,7 @@ export const Header = () => {
 
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden text-white p-2"
+          className="rounded-full border border-foreground/10 bg-background/10 p-2 text-foreground backdrop-blur-sm md:hidden"
           aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
         >
           {menuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -79,7 +75,7 @@ export const Header = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-background/95 backdrop-blur-xl border-b border-border overflow-hidden"
+            className="overflow-hidden border-b border-foreground/10 bg-background/80 backdrop-blur-xl md:hidden"
           >
             <nav className="flex flex-col px-6 py-4 gap-4">
               {navLinks.map((link) => (
@@ -87,7 +83,7 @@ export const Header = () => {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMenuOpen(false)}
-                  className="text-muted-foreground hover:text-primary transition-colors py-2"
+                  className="py-2 text-foreground/80 transition-colors hover:text-primary"
                 >
                   {link.label}
                 </a>
