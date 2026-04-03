@@ -66,6 +66,8 @@ export const DeveloperSection = () => {
               <img
                 src={gustavoPortrait}
                 alt="Gustavo Lopes — Desenvolvedor Full-Stack & Fundador da FOCUSS DEV"
+                loading="lazy"
+                decoding="async"
                 className="w-auto object-cover object-top drop-shadow-2xl"
                 style={{
                   height: "clamp(16rem, 40vw, 34rem)",

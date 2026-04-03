@@ -60,9 +60,10 @@ export const SkillsSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
             className="absolute z-10 h-[220px] sm:h-[280px] md:h-[340px] lg:h-[420px] object-contain drop-shadow-[0_0_40px_rgba(0,255,150,0.15)] translate-y-6 sm:translate-y-10 md:translate-y-14"
+            loading="lazy"
           />
 
-          {/* Orbiting skills */}
+          {/* Orbiting skills — static positions, no infinite animations */}
           {allSkills.map((skill, i) => {
             const angle = (i / allSkills.length) * 360;
             const rad = (angle * Math.PI) / 180;
@@ -75,28 +76,16 @@ export const SkillsSection = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.06, type: "spring", stiffness: 200 }}
-                className="absolute z-20 skill-orbit-item"
+                className="absolute z-20"
                 style={{
-                  "--orbit-angle-cos": Math.cos(rad),
-                  "--orbit-angle-sin": Math.sin(rad),
                   left: `calc(50% + ${Math.cos(rad)} * clamp(120px, 22vw, 280px))`,
                   top: `calc(50% + ${Math.sin(rad)} * clamp(120px, 22vw, 280px))`,
                   transform: "translate(-50%, -50%)",
-                } as React.CSSProperties}
+                }}
               >
                 <motion.div
-                  animate={{
-                    y: [0, -8, 0, 6, 0],
-                    x: [0, 4, 0, -4, 0],
-                  }}
-                  transition={{
-                    duration: 4 + (i % 3),
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: i * 0.3,
-                  }}
                   whileHover={{ scale: 1.15, y: -6 }}
-                  className={`px-3 py-1.5 sm:px-4 sm:py-2 md:px-5 md:py-2.5 rounded-full bg-gradient-to-r ${gradient} text-white text-[10px] sm:text-xs md:text-sm font-semibold shadow-lg border border-white/20 cursor-default select-none whitespace-nowrap backdrop-blur-sm`}
+                  className={`px-3 py-1.5 sm:px-4 sm:py-2 md:px-5 md:py-2.5 rounded-full bg-gradient-to-r ${gradient} text-white text-[10px] sm:text-xs md:text-sm font-semibold shadow-lg border border-white/20 cursor-default select-none whitespace-nowrap`}
                 >
                   {skill}
                 </motion.div>
