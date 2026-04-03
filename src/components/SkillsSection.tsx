@@ -56,7 +56,7 @@ export const SkillsSection = () => {
             <motion.div
               key={cat.title}
               variants={item}
-              className="p-6 md:p-8 rounded-2xl bg-card border border-border"
+              className="p-6 md:p-8 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20"
             >
               <h3 className="text-lg font-semibold text-primary mb-6">{cat.title}</h3>
               <div className="flex flex-wrap gap-3">
