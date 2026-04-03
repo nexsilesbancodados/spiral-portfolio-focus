@@ -27,8 +27,8 @@ const item = {
 
 export const SkillsSection = () => {
   return (
-    <section id="skills" className="relative py-20 md:py-32 bg-grid">
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background" />
+    <section id="skills" className="relative py-20 md:py-32">
+      <div className="absolute inset-0" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
@@ -56,7 +56,7 @@ export const SkillsSection = () => {
             <motion.div
               key={cat.title}
               variants={item}
-              className="p-6 md:p-8 rounded-2xl bg-card border border-border"
+              className="p-6 md:p-8 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20"
             >
               <h3 className="text-lg font-semibold text-primary mb-6">{cat.title}</h3>
               <div className="flex flex-wrap gap-3">
@@ -64,7 +64,7 @@ export const SkillsSection = () => {
                   <motion.span
                     key={skill}
                     whileHover={{ scale: 1.05 }}
-                    className="px-4 py-2 rounded-full border border-border bg-secondary/50 text-sm text-foreground hover:border-primary/40 hover:text-primary transition-all cursor-default"
+                    className="px-4 py-2 rounded-full border border-white/20 bg-white/10 text-sm text-white hover:border-primary/40 hover:text-primary transition-all cursor-default"
                   >
                     {skill}
                   </motion.span>
