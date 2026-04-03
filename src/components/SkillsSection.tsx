@@ -70,6 +70,12 @@ export const SkillsSection = () => {
                 className="relative z-10 w-full drop-shadow-2xl will-change-transform"
                 loading="lazy"
               />
+              {/* Nuvem cobrindo a base da estátua */}
+              <img
+                src={cloudCover}
+                alt=""
+                className="absolute -bottom-8 left-1/2 -translate-x-1/2 z-20 w-[120%] max-w-none pointer-events-none"
+              />
             </div>
           </motion.div>
 
