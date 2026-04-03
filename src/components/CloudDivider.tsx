@@ -44,14 +44,6 @@ export const CloudDivider = () => {
       style={{ marginTop: "-18vw" }}
       aria-hidden="true"
     >
-      {/* Sky gradient behind the cloud — connects hero sky to dark bg */}
-      <div
-        className="absolute inset-0 z-0"
-        style={{
-          background: "linear-gradient(to bottom, #a8d4f0 0%, #8cc3e6 25%, hsl(240 10% 4%) 55%)",
-        }}
-      />
-
       <img
         ref={cloudRef}
         src={cloudImg}
