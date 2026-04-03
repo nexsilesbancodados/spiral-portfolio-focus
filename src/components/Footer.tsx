@@ -82,6 +82,7 @@ export const Footer = () => {
               </ul>
             </motion.div>
           ))}
+          </div>
         </div>
       </div>
 
