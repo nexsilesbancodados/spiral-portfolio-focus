@@ -2,6 +2,12 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import statueCard from "@/assets/statue-card.png";
 
+const stats = [
+  { value: "50+", label: "Projetos Entregues" },
+  { value: "3+", label: "Anos de Experiência" },
+  { value: "100%", label: "Clientes Satisfeitos" },
+];
+
 const FlipCard = () => {
   const [isFlipped, setIsFlipped] = useState(false);
 
