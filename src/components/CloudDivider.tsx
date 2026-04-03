@@ -41,7 +41,7 @@ export const CloudDivider = () => {
     <div
       ref={wrapperRef}
       className="relative w-full z-[12] pointer-events-none select-none"
-      style={{ marginTop: "-18vw", transform: "scale(1.4)" }}
+      style={{ marginTop: "-35vw", transform: "scale(1.4)" }}
       aria-hidden="true"
     >
       <img
