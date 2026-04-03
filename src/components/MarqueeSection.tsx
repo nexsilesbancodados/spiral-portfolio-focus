@@ -5,7 +5,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const MARQUEE_TEXT =
-  "NOISE • NEXUS • ALL IN • VOITURE • LEGACY • NOISE • NEXUS • ALL IN • VOITURE • LEGACY • NOISE • NEXUS • ALL IN • VOITURE • LEGACY • ";
+  "SITES • APLICATIVOS • DESIGN • SISTEMAS • LANDING PAGES • SAAS • UI/UX • BRANDING • E-COMMERCE • DASHBOARDS • SITES • APLICATIVOS • DESIGN • SISTEMAS • LANDING PAGES • SAAS • UI/UX • BRANDING • E-COMMERCE • DASHBOARDS • ";
 
 export const MarqueeSection = () => {
   const textPathRef = useRef<SVGTextPathElement>(null);
