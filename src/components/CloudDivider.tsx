@@ -40,14 +40,14 @@ export const CloudDivider = () => {
   return (
     <div
       ref={wrapperRef}
-      className="relative z-[12] -mt-[24vw] w-full overflow-visible pointer-events-none select-none sm:-mt-[22vw] lg:-mt-[18vw] xl:-mt-[16vw]"
+      className="relative z-[12] -mt-[24vw] w-full overflow-visible pointer-events-none select-none sm:-mt-[22vw] lg:-mt-[18vw] xl:-mt-[16vw] flex justify-center"
       aria-hidden="true"
     >
       <img
         ref={cloudRef}
         src={cloudImg}
         alt=""
-        className="relative left-1/2 z-[2] h-auto w-[138%] max-w-none -translate-x-1/2 will-change-transform mix-blend-screen drop-shadow-2xl sm:w-[132%] lg:w-[126%] xl:w-[120%]"
+        className="relative z-[2] h-auto w-[138%] max-w-none will-change-transform mix-blend-screen drop-shadow-2xl sm:w-[132%] lg:w-[126%] xl:w-[120%]"
         loading="eager"
         draggable={false}
       />
