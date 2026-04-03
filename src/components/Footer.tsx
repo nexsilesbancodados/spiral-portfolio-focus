@@ -16,8 +16,8 @@ export const Footer = () => {
         {/* Logo */}
         <a href="#hero" className="flex items-center gap-2">
           <img src={logoMedallion} alt="FOCUSS DEV" className="h-8 w-8 opacity-60" />
-          <span className="text-lg font-bold tracking-tight text-primary glow-text">FOCUSS</span>
-          <span className="text-lg font-light tracking-tight text-foreground/80">DEV</span>
+          <span className="text-lg font-bold tracking-tight text-primary">FOCUSS</span>
+          <span className="text-lg font-light tracking-tight text-black/70">DEV</span>
         </a>
 
         {/* Links inline */}
