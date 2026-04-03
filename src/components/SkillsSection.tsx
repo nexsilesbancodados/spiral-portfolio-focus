@@ -4,44 +4,47 @@ import gsap from "gsap";
 import skillsStatue from "@/assets/skills-statue.png";
 import "./SkillsSection.css";
 
+const skillColors: Record<string, string> = {
+  React: "from-cyan-400 to-blue-500",
+  "Next.js": "from-gray-700 to-gray-900",
+  TypeScript: "from-blue-500 to-blue-700",
+  "Tailwind CSS": "from-teal-400 to-cyan-500",
+  "Framer Motion": "from-purple-500 to-pink-500",
+  "shadcn/ui": "from-zinc-400 to-zinc-600",
+  "Node.js": "from-green-500 to-emerald-600",
+  Supabase: "from-emerald-400 to-green-600",
+  PostgreSQL: "from-blue-600 to-indigo-700",
+  "Edge Functions": "from-orange-400 to-amber-500",
+  "REST APIs": "from-rose-400 to-red-500",
+  Python: "from-yellow-400 to-amber-500",
+  Git: "from-orange-500 to-red-600",
+  Docker: "from-blue-400 to-cyan-600",
+  Vercel: "from-gray-600 to-black",
+  AWS: "from-amber-500 to-orange-600",
+  "CI/CD": "from-violet-500 to-purple-600",
+  Figma: "from-pink-400 to-rose-500",
+};
+
 const allSkills = [
-  { label: "React", category: "Frontend" },
-  { label: "Next.js", category: "Frontend" },
-  { label: "TypeScript", category: "Frontend" },
-  { label: "Tailwind CSS", category: "Frontend" },
-  { label: "Framer Motion", category: "Frontend" },
-  { label: "shadcn/ui", category: "Frontend" },
-  { label: "Node.js", category: "Backend" },
-  { label: "Supabase", category: "Backend" },
-  { label: "PostgreSQL", category: "Backend" },
-  { label: "Edge Functions", category: "Backend" },
-  { label: "REST APIs", category: "Backend" },
-  { label: "Python", category: "Backend" },
-  { label: "Git", category: "DevOps" },
-  { label: "Docker", category: "DevOps" },
-  { label: "Vercel", category: "DevOps" },
-  { label: "AWS", category: "DevOps" },
-  { label: "CI/CD", category: "DevOps" },
-  { label: "Figma", category: "DevOps" },
+  "React", "Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "shadcn/ui",
+  "Node.js", "Supabase", "PostgreSQL", "Edge Functions", "REST APIs", "Python",
+  "Git", "Docker", "Vercel", "AWS", "CI/CD", "Figma",
+];
+
+// Grid-based positions: 3 columns x 6 rows, right half only (45%-95%)
+const gridPositions = [
+  { top: "2%",  left: "46%" }, { top: "2%",  left: "68%" }, { top: "2%",  left: "88%" },
+  { top: "18%", left: "50%" }, { top: "18%", left: "72%" }, { top: "18%", left: "92%" },
+  { top: "34%", left: "46%" }, { top: "34%", left: "66%" }, { top: "34%", left: "86%" },
+  { top: "50%", left: "52%" }, { top: "50%", left: "74%" }, { top: "50%", left: "90%" },
+  { top: "66%", left: "48%" }, { top: "66%", left: "70%" }, { top: "66%", left: "88%" },
+  { top: "82%", left: "46%" }, { top: "82%", left: "68%" }, { top: "82%", left: "90%" },
 ];
 
 function seededRandom(seed: number) {
   const x = Math.sin(seed) * 10000;
   return x - Math.floor(x);
 }
-
-export const SkillsSection = () => {
-  const statueRef = useRef<HTMLImageElement>(null);
-
-  const positions = useMemo(() => {
-    return allSkills.map((_, i) => ({
-      top: `${8 + seededRandom(i * 3 + 1) * 78}%`,
-      left: `${45 + seededRandom(i * 3 + 2) * 50}%`,
-      delay: seededRandom(i * 3 + 3) * 0.8,
-      floatDuration: 3 + seededRandom(i * 7) * 3,
-      floatY: 8 + seededRandom(i * 11) * 12,
-    }));
-  }, []);
 
   useEffect(() => {
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
