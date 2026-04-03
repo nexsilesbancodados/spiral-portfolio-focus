@@ -1,28 +1,43 @@
-import { useEffect, useRef, useMemo } from "react";
+import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import gsap from "gsap";
 import skillsStatue from "@/assets/skills-statue.png";
 import "./SkillsSection.css";
 
+const skillColors: Record<string, string> = {
+  React: "from-cyan-400 to-blue-500",
+  "Next.js": "from-gray-700 to-gray-900",
+  TypeScript: "from-blue-500 to-blue-700",
+  "Tailwind CSS": "from-teal-400 to-cyan-500",
+  "Framer Motion": "from-purple-500 to-pink-500",
+  "shadcn/ui": "from-zinc-400 to-zinc-600",
+  "Node.js": "from-green-500 to-emerald-600",
+  Supabase: "from-emerald-400 to-green-600",
+  PostgreSQL: "from-blue-600 to-indigo-700",
+  "Edge Functions": "from-orange-400 to-amber-500",
+  "REST APIs": "from-rose-400 to-red-500",
+  Python: "from-yellow-400 to-amber-500",
+  Git: "from-orange-500 to-red-600",
+  Docker: "from-blue-400 to-cyan-600",
+  Vercel: "from-gray-600 to-black",
+  AWS: "from-amber-500 to-orange-600",
+  "CI/CD": "from-violet-500 to-purple-600",
+  Figma: "from-pink-400 to-rose-500",
+};
+
 const allSkills = [
-  { label: "React", category: "Frontend" },
-  { label: "Next.js", category: "Frontend" },
-  { label: "TypeScript", category: "Frontend" },
-  { label: "Tailwind CSS", category: "Frontend" },
-  { label: "Framer Motion", category: "Frontend" },
-  { label: "shadcn/ui", category: "Frontend" },
-  { label: "Node.js", category: "Backend" },
-  { label: "Supabase", category: "Backend" },
-  { label: "PostgreSQL", category: "Backend" },
-  { label: "Edge Functions", category: "Backend" },
-  { label: "REST APIs", category: "Backend" },
-  { label: "Python", category: "Backend" },
-  { label: "Git", category: "DevOps" },
-  { label: "Docker", category: "DevOps" },
-  { label: "Vercel", category: "DevOps" },
-  { label: "AWS", category: "DevOps" },
-  { label: "CI/CD", category: "DevOps" },
-  { label: "Figma", category: "DevOps" },
+  "React", "Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "shadcn/ui",
+  "Node.js", "Supabase", "PostgreSQL", "Edge Functions", "REST APIs", "Python",
+  "Git", "Docker", "Vercel", "AWS", "CI/CD", "Figma",
+];
+
+const gridPositions = [
+  { top: "2%",  left: "46%" }, { top: "2%",  left: "68%" }, { top: "2%",  left: "88%" },
+  { top: "18%", left: "50%" }, { top: "18%", left: "72%" }, { top: "18%", left: "92%" },
+  { top: "34%", left: "46%" }, { top: "34%", left: "66%" }, { top: "34%", left: "86%" },
+  { top: "50%", left: "52%" }, { top: "50%", left: "74%" }, { top: "50%", left: "90%" },
+  { top: "66%", left: "48%" }, { top: "66%", left: "70%" }, { top: "66%", left: "88%" },
+  { top: "82%", left: "46%" }, { top: "82%", left: "68%" }, { top: "82%", left: "90%" },
 ];
 
 function seededRandom(seed: number) {
@@ -32,16 +47,6 @@ function seededRandom(seed: number) {
 
 export const SkillsSection = () => {
   const statueRef = useRef<HTMLImageElement>(null);
-
-  const positions = useMemo(() => {
-    return allSkills.map((_, i) => ({
-      top: `${8 + seededRandom(i * 3 + 1) * 78}%`,
-      left: `${45 + seededRandom(i * 3 + 2) * 50}%`,
-      delay: seededRandom(i * 3 + 3) * 0.8,
-      floatDuration: 3 + seededRandom(i * 7) * 3,
-      floatY: 8 + seededRandom(i * 11) * 12,
-    }));
-  }, []);
 
   useEffect(() => {
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -80,7 +85,7 @@ export const SkillsSection = () => {
 
         {/* Área com estátua + skills flutuantes */}
         <div className="relative min-h-[600px] md:min-h-[700px]">
-          {/* Estátua centralizada */}
+          {/* Estátua à esquerda */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -100,48 +105,44 @@ export const SkillsSection = () => {
             </div>
           </motion.div>
 
-          {/* Skills flutuantes */}
-          {allSkills.map((skill, i) => (
-            <motion.div
-              key={skill.label}
-              initial={{ opacity: 0, scale: 0.5 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: positions[i].delay }}
-              className="absolute z-20"
-              style={{
-                top: positions[i].top,
-                left: positions[i].left,
-              }}
-            >
+          {/* Skills flutuantes com cores */}
+          {allSkills.map((skill, i) => {
+            const floatDuration = 3 + seededRandom(i * 7) * 3;
+            const floatY = 8 + seededRandom(i * 11) * 12;
+            const delay = seededRandom(i * 3 + 3) * 0.8;
+            const gradient = skillColors[skill] || "from-primary to-primary";
+
+            return (
               <motion.div
-                animate={{ y: [-positions[i].floatY / 2, positions[i].floatY / 2] }}
-                transition={{
-                  duration: positions[i].floatDuration,
-                  repeat: Infinity,
-                  repeatType: "reverse",
-                  ease: "easeInOut",
+                key={skill}
+                initial={{ opacity: 0, scale: 0.5 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay }}
+                className="absolute z-20"
+                style={{
+                  top: gridPositions[i].top,
+                  left: gridPositions[i].left,
                 }}
               >
-                <button className="skill-bloom-button">
-                  <div className="bloom-container">
-                    <div className="button-container-main">
-                      <div className="button-inner">
-                        <div className="back" />
-                        <div className="front" />
-                        <div className="content-wrapper">
-                          <span className="text-content">{skill.label}</span>
-                        </div>
-                      </div>
-                      <div className="button-glass" />
-                    </div>
-                    <div className="bloom bloom1" />
-                    <div className="bloom bloom2" />
+                <motion.div
+                  animate={{ y: [-floatY / 2, floatY / 2] }}
+                  transition={{
+                    duration: floatDuration,
+                    repeat: Infinity,
+                    repeatType: "reverse",
+                    ease: "easeInOut",
+                  }}
+                >
+                  <div
+                    className={`px-4 py-2 rounded-full bg-gradient-to-r ${gradient} text-white text-sm font-semibold shadow-lg backdrop-blur-sm border border-white/20 cursor-default select-none whitespace-nowrap`}
+                  >
+                    {skill}
                   </div>
-                </button>
+                </motion.div>
               </motion.div>
-            </motion.div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
