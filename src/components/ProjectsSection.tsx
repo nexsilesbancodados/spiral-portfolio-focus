@@ -76,7 +76,7 @@ export const ProjectsSection = () => {
             >
               {/* Gradient preview area */}
               <div className={`h-48 bg-gradient-to-br ${project.gradient} flex items-center justify-center`}>
-                <div className="w-3/4 h-28 rounded-lg bg-background/60 backdrop-blur border border-border/50" />
+                <div className="w-3/4 h-28 rounded-lg bg-background/60 border border-border/50" />
               </div>
 
               <div className="p-6 md:p-8">

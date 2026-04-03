@@ -81,7 +81,7 @@ export const AboutSection = () => {
               {stats.map((stat) => (
                 <div
                   key={stat.label}
-                  className="rounded-2xl border border-foreground/10 bg-background/10 p-4 text-center backdrop-blur-[2px] lg:border-0 lg:bg-transparent lg:p-0 lg:text-left lg:backdrop-blur-0"
+                  className="rounded-2xl border border-foreground/10 bg-background/10 p-4 text-center lg:border-0 lg:bg-transparent lg:p-0 lg:text-left"
                 >
                   <div className="text-3xl font-bold text-primary glow-text">{stat.value}</div>
                   <div className="mt-1 text-sm text-foreground/70">{stat.label}</div>
