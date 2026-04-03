@@ -70,15 +70,17 @@ export const CloudDivider = () => {
     if (prefersReduced || !wrapperRef.current || !cloudRef.current) return;
 
     const ctx = gsap.context(() => {
+      // Smooth infinite float using a single repeating tween
       gsap.to(cloudRef.current, {
-        y: "random(-6, 6)",
-        duration: 5,
+        y: -8,
+        duration: 3,
         repeat: -1,
         yoyo: true,
         ease: "sine.inOut",
       });
 
-      gsap.to(cloudRef.current, {
+      // Parallax on scroll applied to the wrapper to avoid conflicting with the float
+      gsap.to(wrapperRef.current, {
         y: -30,
         ease: "none",
         scrollTrigger: {
