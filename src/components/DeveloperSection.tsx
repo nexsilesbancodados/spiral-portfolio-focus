@@ -3,9 +3,14 @@ import gustavoPortrait from "@/assets/gustavo-portrait.jpg";
 
 export const DeveloperSection = () => {
   return (
-    <section className="relative overflow-hidden bg-background"
-      style={{ paddingTop: "clamp(5rem, 10vw, 10rem)", paddingBottom: "clamp(4rem, 8vw, 8rem)" }}
+    <section className="relative overflow-hidden"
+      style={{ paddingTop: "clamp(5rem, 10vw, 10rem)", paddingBottom: "clamp(6rem, 12vw, 12rem)" }}
     >
+      {/* Gradient transition to white at bottom */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[50%]"
+        style={{ background: "linear-gradient(to bottom, transparent 0%, white 100%)" }}
+      />
+
       {/* Ambient glow behind portrait */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[70%] w-[60%] rounded-full opacity-20"
