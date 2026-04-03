@@ -5,6 +5,7 @@ import { CloudDivider } from "@/components/CloudDivider";
 import { AboutSection } from "@/components/AboutSection";
 import { MarqueeSection } from "@/components/MarqueeSection";
 import { SkillsSection } from "@/components/SkillsSection";
+import { DeveloperSection } from "@/components/DeveloperSection";
 import { ProjectsSection } from "@/components/ProjectsSection";
 import { Footer } from "@/components/Footer";
 
@@ -17,6 +18,7 @@ const Index = () => {
       <AboutSection />
       <MarqueeSection />
       <SkillsSection />
+      <DeveloperSection />
       <ProjectsSection />
       <Footer />
     </div>
