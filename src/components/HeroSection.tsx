@@ -48,11 +48,11 @@ export const HeroSection = () => {
               transition={{ duration: 0.7, delay: 0.15 }}
               className="text-4xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-5xl lg:text-6xl xl:text-7xl"
             >
-              Criamos{" "}
-              <span className="text-primary glow-text">experiências</span>
+              Código que{" "}
+              <span className="text-primary glow-text">eleva</span>,
               <br />
-              digitais que{" "}
-              <span className="text-primary glow-text">transformam</span>
+              design que{" "}
+              <span className="text-primary glow-text">conquista</span>
             </motion.h1>
 
             <motion.p

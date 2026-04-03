@@ -53,10 +53,10 @@ export const ProjectsSection = () => {
           className="text-center mb-16"
         >
           <span className="text-primary text-sm font-medium tracking-widest uppercase">
-            Portfólio
+            Resultados
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mt-4">
-            Projetos em <span className="text-primary">destaque</span>
+            Cada projeto, uma <span className="text-primary">obra-prima</span>
           </h2>
         </motion.div>
 

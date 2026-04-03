@@ -34,7 +34,7 @@ export const AboutSection = () => {
               viewport={{ once: true }}
               className="text-primary text-sm font-medium tracking-widest uppercase"
             >
-              Sobre Nós
+              Quem Somos
             </motion.span>
 
             <motion.h2
@@ -44,8 +44,8 @@ export const AboutSection = () => {
               transition={{ delay: 0.1 }}
               className="mt-4 text-3xl font-bold leading-tight text-foreground sm:text-4xl lg:text-5xl"
             >
-              Unindo <span className="text-primary">arte</span> e{" "}
-              <span className="text-primary">tecnologia</span>
+              Onde <span className="text-primary">visão</span> encontra{" "}
+              <span className="text-primary">execução</span>
             </motion.h2>
 
             <motion.p

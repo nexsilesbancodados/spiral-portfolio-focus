@@ -13,13 +13,13 @@ export const ContactSection = () => {
           viewport={{ once: true }}
         >
           <span className="text-primary text-sm font-medium tracking-widest uppercase">
-            Contato
+            Próximo Passo
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mt-4">
-            Vamos criar algo <span className="text-primary glow-text">incrível</span>?
+            Pronto para <span className="text-primary glow-text">decolar</span>?
           </h2>
           <p className="mt-6 text-muted-foreground text-lg max-w-xl mx-auto leading-relaxed">
-            Tem um projeto em mente? Entre em contato e vamos transformar sua ideia em realidade digital.
+            Sua ideia merece virar realidade. Fale com a gente e vamos construir algo extraordinário juntos.
           </p>
         </motion.div>
 
