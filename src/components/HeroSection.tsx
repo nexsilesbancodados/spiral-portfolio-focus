@@ -1,5 +1,7 @@
+import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { ArrowDown } from "lucide-react";
+import gsap from "gsap";
 import heroStatue from "@/assets/hero-statue.png";
 
 export const HeroSection = () => {
