@@ -1,35 +1,84 @@
-import "./MarqueeSection.css";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-const ITEMS = ["Noise", "Nexus", "All in", "Voiture", "Legacy"];
+gsap.registerPlugin(ScrollTrigger);
 
-const RepeatedItems = () => (
-  <>
-    {Array.from({ length: 8 }).map((_, i) =>
-      ITEMS.map((text, j) => (
-        <span key={`${i}-${j}`} className="marquee-item">
-          {text} <span className="marquee-dot" />
-        </span>
-      ))
-    )}
-  </>
-);
+const MARQUEE_TEXT =
+  "NOISE • NEXUS • ALL IN • VOITURE • LEGACY • NOISE • NEXUS • ALL IN • VOITURE • LEGACY • NOISE • NEXUS • ALL IN • VOITURE • LEGACY • ";
 
 export const MarqueeSection = () => {
-  return (
-    <section className="marquee-wrapper" aria-hidden="true">
-      {/* Black band (behind) */}
-      <div className="marquee-stripe black-band">
-        <div className="marquee-scroller marquee-reverse">
-          <RepeatedItems />
-        </div>
-      </div>
+  const textPathRef = useRef<SVGTextPathElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-      {/* White band (front) */}
-      <div className="marquee-stripe white-band">
-        <div className="marquee-scroller">
-          <RepeatedItems />
-        </div>
-      </div>
+  useEffect(() => {
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReduced || !textPathRef.current || !containerRef.current) return;
+
+    const ctx = gsap.context(() => {
+      gsap.to(textPathRef.current, {
+        attr: { startOffset: "-40%" },
+        ease: "none",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 3,
+        },
+      });
+    });
+
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <section
+      ref={containerRef}
+      className="relative w-full flex items-center justify-center my-5"
+      style={{ height: "500px" }}
+      aria-hidden="true"
+    >
+      <svg
+        className="overflow-visible"
+        style={{ width: "130%", height: "100%" }}
+        viewBox="0 0 1600 600"
+        preserveAspectRatio="xMidYMid slice"
+      >
+        <defs>
+          <path
+            id="masterPath"
+            d="M-300,300 C50,50 450,550 800,300 C1150,50 1550,550 1900,300"
+          />
+        </defs>
+
+        {/* Faixa vermelha de fundo */}
+        <use
+          href="#masterPath"
+          fill="none"
+          stroke="hsl(var(--primary))"
+          strokeWidth={130}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+
+        {/* Texto ondulado */}
+        <text
+          dy="18"
+          style={{
+            fontFamily: "'Inter', sans-serif",
+            fontWeight: 900,
+            fontSize: "50px",
+            fill: "white",
+            textTransform: "uppercase",
+            pointerEvents: "none",
+            userSelect: "none",
+          }}
+        >
+          <textPath ref={textPathRef} href="#masterPath" startOffset="10%">
+            {MARQUEE_TEXT}
+          </textPath>
+        </text>
+      </svg>
     </section>
   );
 };
