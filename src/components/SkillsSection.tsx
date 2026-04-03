@@ -33,7 +33,7 @@ export const SkillsSection = () => {
   const radiusMobile = 150;
 
   return (
-    <section id="skills" className="relative pt-0 pb-20 md:pt-0 md:pb-32 -mt-60">
+    <section id="skills" className="relative pt-20 pb-20 md:pt-24 md:pb-32">
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
