@@ -1,34 +1,82 @@
 import { motion } from "framer-motion";
-import aboutStatue from "@/assets/about-statue.jpg";
+import { useState } from "react";
+import statueCard from "@/assets/statue-card.png";
 
-const stats = [
-  { value: "50+", label: "Projetos Entregues" },
-  { value: "3+", label: "Anos de Experiência" },
-  { value: "100%", label: "Clientes Satisfeitos" },
-];
+const FlipCard = () => {
+  const [isFlipped, setIsFlipped] = useState(false);
+
+  return (
+    <div
+      className="relative w-full aspect-[3/4] cursor-pointer"
+      style={{ perspective: "1200px" }}
+      onMouseEnter={() => setIsFlipped(true)}
+      onMouseLeave={() => setIsFlipped(false)}
+    >
+      <motion.div
+        className="relative w-full h-full"
+        style={{ transformStyle: "preserve-3d" }}
+        animate={{ rotateY: isFlipped ? 180 : 0 }}
+        transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
+      >
+        {/* Front */}
+        <div
+          className="absolute inset-0 rounded-2xl overflow-hidden glow-border"
+          style={{ backfaceVisibility: "hidden" }}
+        >
+          <img
+            src={statueCard}
+            alt="Estátua grega com olhos neon — FOCUSS DEV"
+            className="w-full h-full object-cover"
+            loading="lazy"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
+          <div className="absolute bottom-6 left-6 right-6">
+            <p className="text-sm text-primary font-medium tracking-widest uppercase">Passe o mouse</p>
+          </div>
+        </div>
+
+        {/* Back */}
+        <div
+          className="absolute inset-0 rounded-2xl overflow-hidden bg-card border border-border glow-border flex flex-col items-center justify-center p-8 text-center"
+          style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
+        >
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(160_100%_45%/0.06)_0%,transparent_70%)]" />
+          <div className="relative z-10 space-y-6">
+            <div className="w-16 h-16 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center mx-auto">
+              <span className="text-primary text-2xl font-bold">F</span>
+            </div>
+            <h3 className="text-2xl font-bold text-foreground">FOCUSS DEV</h3>
+            <p className="text-muted-foreground leading-relaxed">
+              Transformamos ideias em experiências digitais de alto impacto. Design premium, código limpo, resultados reais.
+            </p>
+            <div className="flex gap-4 justify-center pt-2">
+              {["React", "TypeScript", "Supabase"].map((tech) => (
+                <span key={tech} className="px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-medium">
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </motion.div>
+    </div>
+  );
+};
 
 export const AboutSection = () => {
   return (
     <section id="about" className="relative py-20 md:py-32 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Image */}
+          {/* Flip Card */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="relative"
+            className="relative max-w-md mx-auto lg:mx-0"
           >
-            <div className="relative rounded-2xl overflow-hidden glow-border">
-              <img
-                src={aboutStatue}
-                alt="Arte neoclássica representando a fusão entre tradição e tecnologia"
-                className="w-full aspect-[4/5] object-cover"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
-            </div>
+            <FlipCard />
           </motion.div>
 
           {/* Text */}
