@@ -54,7 +54,7 @@ export const ProjectsSection = () => {
               <img
                 src={cloudOverlay}
                 alt=""
-                className="absolute -bottom-20 left-1/2 -translate-x-1/2 w-[140%] max-w-none pointer-events-none z-20"
+                className="absolute -bottom-40 left-1/2 -translate-x-1/2 w-[160%] max-w-none pointer-events-none z-20"
                 aria-hidden="true"
               />
             </div>
