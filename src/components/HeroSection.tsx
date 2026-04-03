@@ -1,13 +1,20 @@
 import { motion } from "framer-motion";
 import { ArrowDown } from "lucide-react";
 import heroStatue from "@/assets/hero-statue.png";
+import skyBg from "@/assets/sky-bg.jpg";
 
 export const HeroSection = () => {
   return (
-    <section id="hero" className="relative min-h-screen flex items-center overflow-hidden bg-grid">
+    <section id="hero" className="relative min-h-screen flex items-center overflow-hidden">
+      {/* Sky background */}
+      <div
+        className="absolute inset-0 z-0"
+        style={{ backgroundImage: `url(${skyBg})`, backgroundSize: 'cover', backgroundPosition: 'center top' }}
+      />
+      <div className="absolute inset-0 z-0 bg-black/40" />
       {/* Radial glow */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(160_100%_45%/0.08)_0%,transparent_70%)]" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-primary/5 blur-[120px]" />
+      <div className="absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_center,hsl(160_100%_45%/0.08)_0%,transparent_70%)]" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-primary/5 blur-[120px] z-[1]" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-20">
         <div className="grid lg:grid-cols-2 gap-8 items-center">
