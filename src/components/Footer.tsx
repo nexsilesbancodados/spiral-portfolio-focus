@@ -34,8 +34,8 @@ export const Footer = () => {
         </nav>
 
         {/* Divider + Copyright */}
-        <div className="w-full max-w-xs h-px bg-foreground/5" />
-        <p className="text-[10px] text-muted-foreground/40 font-mono uppercase tracking-[0.3em]">
+        <div className="w-full max-w-xs h-px bg-black/10" />
+        <p className="text-[10px] text-black/30 font-mono uppercase tracking-[0.3em]">
           © {new Date().getFullYear()} FOCUSS DEV
         </p>
       </div>
