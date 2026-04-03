@@ -219,24 +219,16 @@ const Index = () => {
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="relative flex items-center justify-center" data-animate>
-              <TiltedCard
-                imageSrc="/images/hero-portrait.png"
-                altText="Lee - FOCUSS DEV"
-                captionText="Lee - FOCUSS DEV"
-                containerHeight="450px"
-                containerWidth="400px"
-                imageHeight="450px"
-                imageWidth="400px"
-                rotateAmplitude={12}
-                scaleOnHover={1.1}
-                showTooltip={true}
-                displayOverlayContent={true}
-                overlayContent={
-                  <p className="text-foreground font-bold text-lg drop-shadow-lg">
-                    Lee
-                  </p>
-                }
-              />
+              <div className="w-[400px] h-[450px] rounded-2xl border border-border/50 bg-card flex items-center justify-center relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-primary/5" />
+                <div className="relative z-10 text-center space-y-4">
+                  <div className="w-24 h-24 rounded-full bg-primary/20 flex items-center justify-center mx-auto">
+                    <span className="text-3xl font-bold text-primary">L</span>
+                  </div>
+                  <p className="text-foreground font-bold text-xl">Lee</p>
+                  <p className="text-muted-foreground text-sm">Full Stack Developer</p>
+                </div>
+              </div>
               <div className="absolute -bottom-6 -right-6 w-48 h-48 bg-primary/10 rounded-full blur-3xl" />
             </div>
             <div className="space-y-6" data-animate style={{ opacity: 0 }}>
