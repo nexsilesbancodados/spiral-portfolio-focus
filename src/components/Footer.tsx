@@ -11,7 +11,7 @@ const allLinks = [
 
 export const Footer = () => {
   return (
-    <footer className="relative border-t border-foreground/5 bg-background py-10">
+    <footer className="relative border-t border-black/5 bg-white py-10">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col items-center gap-6">
         {/* Logo */}
         <a href="#hero" className="flex items-center gap-2">
