@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import statueCard from "@/assets/statue-card.png";
-import skyBg from "@/assets/sky-bg.jpg";
+
 
 const navLinks = [
   { label: "Início", href: "#hero" },
@@ -23,12 +23,9 @@ export const Header = () => {
       transition={{ duration: 0.6, ease: "easeOut" }}
       className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 overflow-hidden"
     >
-      {/* Sky background */}
-      <div
-        className="absolute inset-0 z-0"
-        style={{ backgroundImage: `url(${skyBg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
-      />
-      <div className="absolute inset-0 z-0 bg-black/20 backdrop-blur-sm" />
+      {/* Sky gradient synced with hero */}
+      <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#1a6fc4] via-[#3a8ad4] to-[#5ba3d9]" />
+      <div className="absolute inset-0 z-0 bg-black/30 backdrop-blur-sm" />
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
         {/* Left nav links */}
         <nav className="hidden md:flex items-center gap-6 flex-1">
