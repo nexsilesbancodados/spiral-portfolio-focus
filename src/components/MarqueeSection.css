@@ -56,12 +56,11 @@
 
 /* White band (front) */
 .white-band {
-  background-color: #fff;
+  background-color: transparent;
   color: #000;
   transform: rotate(-3deg);
   z-index: 10;
   top: 48%;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7);
 }
 .white-band .marquee-dot { background-color: #000; }
 
