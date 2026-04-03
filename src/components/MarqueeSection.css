@@ -66,13 +66,11 @@
 
 /* Black band (behind) */
 .black-band {
-  background-color: #000;
-  color: #fff;
+  background-color: transparent;
+  color: hsl(var(--foreground));
   transform: rotate(0.8deg);
   z-index: 5;
   top: 50%;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 .black-band .marquee-dot { background-color: #fff; }
 
