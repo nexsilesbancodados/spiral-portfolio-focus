@@ -75,7 +75,7 @@ export const HeroSection = () => {
               <img
                 src={heroStatue}
                 alt="Estátua grega com óculos usando laptop — representação artística da FOCUSS DEV"
-                className="relative z-10 w-full drop-shadow-2xl"
+                className="relative z-10 w-full drop-shadow-2xl text-xs rounded-3xl"
                 loading="eager"
               />
             </div>
