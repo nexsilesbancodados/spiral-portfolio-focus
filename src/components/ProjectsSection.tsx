@@ -48,7 +48,7 @@ export const ProjectsSection = () => {
               <img
                 src={projectsStatue}
                 alt="Estátua grega com laptop — representação artística de projetos FOCUSS DEV"
-                className="relative z-10 w-full max-w-[22rem] md:max-w-[26rem] drop-shadow-[0_0_60px_rgba(0,255,150,0.15)]"
+                className="relative z-10 w-full max-w-[22rem] md:max-w-[26rem] drop-shadow-[0_0_60px_rgba(0,255,150,0.15)] object-contain mx-0 my-[106px] px-0 py-[55px]"
                 loading="lazy"
               />
               <img
