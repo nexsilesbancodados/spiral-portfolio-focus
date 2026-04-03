@@ -1,4 +1,4 @@
-import { useEffect, useRef, useMemo } from "react";
+import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import gsap from "gsap";
 import skillsStatue from "@/assets/skills-statue.png";
@@ -31,7 +31,6 @@ const allSkills = [
   "Git", "Docker", "Vercel", "AWS", "CI/CD", "Figma",
 ];
 
-// Grid-based positions: 3 columns x 6 rows, right half only (45%-95%)
 const gridPositions = [
   { top: "2%",  left: "46%" }, { top: "2%",  left: "68%" }, { top: "2%",  left: "88%" },
   { top: "18%", left: "50%" }, { top: "18%", left: "72%" }, { top: "18%", left: "92%" },
@@ -45,6 +44,9 @@ function seededRandom(seed: number) {
   const x = Math.sin(seed) * 10000;
   return x - Math.floor(x);
 }
+
+export const SkillsSection = () => {
+  const statueRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -83,7 +85,7 @@ function seededRandom(seed: number) {
 
         {/* Área com estátua + skills flutuantes */}
         <div className="relative min-h-[600px] md:min-h-[700px]">
-          {/* Estátua centralizada */}
+          {/* Estátua à esquerda */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -103,48 +105,44 @@ function seededRandom(seed: number) {
             </div>
           </motion.div>
 
-          {/* Skills flutuantes */}
-          {allSkills.map((skill, i) => (
-            <motion.div
-              key={skill.label}
-              initial={{ opacity: 0, scale: 0.5 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: positions[i].delay }}
-              className="absolute z-20"
-              style={{
-                top: positions[i].top,
-                left: positions[i].left,
-              }}
-            >
+          {/* Skills flutuantes com cores */}
+          {allSkills.map((skill, i) => {
+            const floatDuration = 3 + seededRandom(i * 7) * 3;
+            const floatY = 8 + seededRandom(i * 11) * 12;
+            const delay = seededRandom(i * 3 + 3) * 0.8;
+            const gradient = skillColors[skill] || "from-primary to-primary";
+
+            return (
               <motion.div
-                animate={{ y: [-positions[i].floatY / 2, positions[i].floatY / 2] }}
-                transition={{
-                  duration: positions[i].floatDuration,
-                  repeat: Infinity,
-                  repeatType: "reverse",
-                  ease: "easeInOut",
+                key={skill}
+                initial={{ opacity: 0, scale: 0.5 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay }}
+                className="absolute z-20"
+                style={{
+                  top: gridPositions[i].top,
+                  left: gridPositions[i].left,
                 }}
               >
-                <button className="skill-bloom-button">
-                  <div className="bloom-container">
-                    <div className="button-container-main">
-                      <div className="button-inner">
-                        <div className="back" />
-                        <div className="front" />
-                        <div className="content-wrapper">
-                          <span className="text-content">{skill.label}</span>
-                        </div>
-                      </div>
-                      <div className="button-glass" />
-                    </div>
-                    <div className="bloom bloom1" />
-                    <div className="bloom bloom2" />
+                <motion.div
+                  animate={{ y: [-floatY / 2, floatY / 2] }}
+                  transition={{
+                    duration: floatDuration,
+                    repeat: Infinity,
+                    repeatType: "reverse",
+                    ease: "easeInOut",
+                  }}
+                >
+                  <div
+                    className={`px-4 py-2 rounded-full bg-gradient-to-r ${gradient} text-white text-sm font-semibold shadow-lg backdrop-blur-sm border border-white/20 cursor-default select-none whitespace-nowrap`}
+                  >
+                    {skill}
                   </div>
-                </button>
+                </motion.div>
               </motion.div>
-            </motion.div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
