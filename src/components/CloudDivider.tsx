@@ -4,82 +4,96 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
+/**
+ * Fixed overlay cloud that scales up on scroll creating an immersive fog transition.
+ * Inspired by: radial-gradient cloud + GSAP scrub timeline.
+ * The cloud appears between Hero and About, engulfs the screen, then fades away.
+ */
 export const CloudDivider = () => {
+  const cloudRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const layer1 = useRef<HTMLDivElement>(null);
-  const layer2 = useRef<HTMLDivElement>(null);
-  const layer3 = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReduced || !containerRef.current) return;
+    if (prefersReduced || !cloudRef.current || !containerRef.current) return;
+
+    const cloud = cloudRef.current;
 
     const ctx = gsap.context(() => {
-      // Each cloud layer moves at different speed for depth
-      gsap.fromTo(layer1.current, { x: "-5%" }, {
-        x: "5%",
-        ease: "none",
-        scrollTrigger: { trigger: containerRef.current, start: "top bottom", end: "bottom top", scrub: 1 },
+      // Subtle idle float
+      gsap.to(cloud, {
+        x: "random(-30, 30)",
+        y: "random(-30, 30)",
+        duration: 8,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
       });
-      gsap.fromTo(layer2.current, { x: "5%" }, {
-        x: "-5%",
-        ease: "none",
-        scrollTrigger: { trigger: containerRef.current, start: "top bottom", end: "bottom top", scrub: 1.5 },
+
+      // Main scroll timeline — cloud enters, engulfs, exits
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 1.5,
+        },
       });
-      gsap.fromTo(layer3.current, { y: "20%" }, {
-        y: "-20%",
-        ease: "none",
-        scrollTrigger: { trigger: containerRef.current, start: "top bottom", end: "bottom top", scrub: 2 },
-      });
-    }, containerRef);
+
+      tl
+        // Cloud fades in and grows
+        .fromTo(cloud,
+          { opacity: 0, scale: 0.1 },
+          { opacity: 0.95, scale: 2.5, ease: "power2.inOut", duration: 1 }
+        )
+        // Peak density — fully immersed
+        .to(cloud, {
+          scale: 6,
+          opacity: 1,
+          ease: "none",
+          duration: 0.8,
+        })
+        // Cloud expands and fades out
+        .to(cloud, {
+          scale: 12,
+          opacity: 0,
+          ease: "power2.in",
+          duration: 1,
+        });
+    });
 
     return () => ctx.revert();
   }, []);
 
-  const cloudLayerBase = "absolute inset-0 w-[120%] -left-[10%] will-change-transform";
-
   return (
-    <div
-      ref={containerRef}
-      className="relative z-20 h-[200px] -mt-16 overflow-hidden pointer-events-none select-none"
-    >
-      {/* Cloud layer 1 — dense bottom fog */}
+    <>
+      {/* Scroll trigger area — placed in document flow between Hero and About */}
       <div
-        ref={layer1}
-        className={cloudLayerBase}
-        style={{
-          background: `
-            radial-gradient(ellipse 80% 60% at 20% 80%, rgba(255,255,255,0.9) 0%, transparent 70%),
-            radial-gradient(ellipse 60% 50% at 60% 90%, rgba(255,255,255,0.85) 0%, transparent 60%),
-            radial-gradient(ellipse 70% 40% at 85% 85%, rgba(255,255,255,0.8) 0%, transparent 65%)
-          `,
-        }}
+        ref={containerRef}
+        className="relative h-[60vh] -mt-8 pointer-events-none select-none"
+        aria-hidden="true"
       />
-      {/* Cloud layer 2 — mid wisps */}
-      <div
-        ref={layer2}
-        className={cloudLayerBase}
-        style={{
-          background: `
-            radial-gradient(ellipse 50% 40% at 30% 60%, rgba(255,255,255,0.7) 0%, transparent 70%),
-            radial-gradient(ellipse 40% 35% at 70% 50%, rgba(255,255,255,0.6) 0%, transparent 65%),
-            radial-gradient(ellipse 60% 45% at 50% 70%, rgba(255,255,255,0.65) 0%, transparent 60%)
-          `,
-        }}
-      />
-      {/* Cloud layer 3 — top thin haze */}
-      <div
-        ref={layer3}
-        className={cloudLayerBase}
-        style={{
-          background: `
-            radial-gradient(ellipse 90% 30% at 40% 40%, rgba(255,255,255,0.4) 0%, transparent 70%),
-            radial-gradient(ellipse 70% 25% at 75% 35%, rgba(255,255,255,0.35) 0%, transparent 65%)
-          `,
-        }}
-      />
-      {/* Bottom fade to dark background */}
-      <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-b from-transparent to-background" />
-    </div>
+
+      {/* Fixed cloud overlay */}
+      <div className="fixed inset-0 z-[15] flex items-center justify-center pointer-events-none overflow-hidden">
+        <div
+          ref={cloudRef}
+          className="absolute will-change-transform"
+          style={{
+            width: "100vmax",
+            height: "100vmax",
+            borderRadius: "50%",
+            background: `radial-gradient(circle at center,
+              rgba(255, 255, 255, 1) 0%,
+              rgba(255, 255, 255, 0.85) 15%,
+              rgba(255, 255, 255, 0.5) 35%,
+              rgba(255, 255, 255, 0) 60%
+            )`,
+            opacity: 0,
+            transform: "scale(0.1)",
+          }}
+        />
+      </div>
+    </>
   );
 };
