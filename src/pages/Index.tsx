@@ -63,7 +63,7 @@ const Index = () => {
       </header>
 
       {/* Hero */}
-      <section id="inicio" className="relative min-h-screen flex items-center pt-16" style={{ backgroundImage: 'url(/images/bg-hero.jpg)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
+      <section id="inicio" className="relative min-h-screen flex items-center pt-16" >
         <div className="max-w-6xl mx-auto px-6 w-full grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-6 stagger-children">
             <p className="text-xs uppercase tracking-[0.2em] text-primary font-semibold">
@@ -97,17 +97,15 @@ const Index = () => {
               </a>
             </div>
           </div>
-          <div className="relative hidden lg:block">
-            <div className="relative z-10">
-              <img
-                src="/images/hero-portrait.png"
-                alt="FOCUSS DEV - Lee, Desenvolvedor Web"
-                width={1024}
-                height={1280}
-                className="w-full max-w-lg ml-auto"
-              />
+          <div className="relative hidden lg:flex items-center justify-center">
+            <div className="w-80 h-80 rounded-full border-2 border-primary/20 flex items-center justify-center relative">
+              <div className="w-60 h-60 rounded-full border border-primary/30 flex items-center justify-center">
+                <div className="w-40 h-40 rounded-full bg-primary/10 flex items-center justify-center">
+                  <span className="text-5xl font-bold text-primary">FD</span>
+                </div>
+              </div>
+              <div className="absolute -bottom-4 -right-4 w-48 h-48 bg-primary/10 rounded-full blur-3xl" />
             </div>
-            <div className="absolute -bottom-8 -left-8 w-72 h-72 bg-primary/10 rounded-full blur-3xl" />
           </div>
         </div>
       </section>
@@ -206,12 +204,12 @@ const Index = () => {
           </>
         }
       >
-        <img
-          src="/images/hero-portrait.png"
-          alt="FOCUSS DEV - Projeto em destaque"
-          className="mx-auto object-cover h-full w-full object-top"
-          draggable={false}
-        />
+        <div className="w-full h-full bg-gradient-to-br from-primary/20 via-secondary to-primary/10 flex items-center justify-center rounded-2xl">
+          <div className="text-center space-y-4 p-8">
+            <span className="text-6xl font-bold text-primary">FOCUSS DEV</span>
+            <p className="text-muted-foreground text-lg">Código limpo · Performance · Resultado</p>
+          </div>
+        </div>
       </ContainerScroll>
 
       <WaveDivider topColor="hsl(var(--primary) / 0.2)" />
@@ -221,24 +219,16 @@ const Index = () => {
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="relative flex items-center justify-center" data-animate>
-              <TiltedCard
-                imageSrc="/images/hero-portrait.png"
-                altText="Lee - FOCUSS DEV"
-                captionText="Lee - FOCUSS DEV"
-                containerHeight="450px"
-                containerWidth="400px"
-                imageHeight="450px"
-                imageWidth="400px"
-                rotateAmplitude={12}
-                scaleOnHover={1.1}
-                showTooltip={true}
-                displayOverlayContent={true}
-                overlayContent={
-                  <p className="text-foreground font-bold text-lg drop-shadow-lg">
-                    Lee
-                  </p>
-                }
-              />
+              <div className="w-[400px] h-[450px] rounded-2xl border border-border/50 bg-card flex items-center justify-center relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-primary/5" />
+                <div className="relative z-10 text-center space-y-4">
+                  <div className="w-24 h-24 rounded-full bg-primary/20 flex items-center justify-center mx-auto">
+                    <span className="text-3xl font-bold text-primary">L</span>
+                  </div>
+                  <p className="text-foreground font-bold text-xl">Lee</p>
+                  <p className="text-muted-foreground text-sm">Full Stack Developer</p>
+                </div>
+              </div>
               <div className="absolute -bottom-6 -right-6 w-48 h-48 bg-primary/10 rounded-full blur-3xl" />
             </div>
             <div className="space-y-6" data-animate style={{ opacity: 0 }}>
