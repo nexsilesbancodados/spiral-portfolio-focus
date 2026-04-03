@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Mail, MessageSquare, ArrowRight } from "lucide-react";
+import { Mail, MessageSquare, Instagram, ArrowRight } from "lucide-react";
 
 export const ContactSection = () => {
   return (
@@ -31,7 +31,7 @@ export const ContactSection = () => {
           className="flex flex-col sm:flex-row gap-4 justify-center mt-10"
         >
           <a
-            href="https://wa.me/5500000000000"
+            href="https://wa.me/5533984123591"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
@@ -41,7 +41,16 @@ export const ContactSection = () => {
             <ArrowRight size={16} />
           </a>
           <a
-            href="mailto:contato@focussdev.com"
+            href="https://instagram.com/Focussdev"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full border border-border text-foreground font-medium hover:border-primary/50 hover:text-primary transition-all"
+          >
+            <Instagram size={20} />
+            Instagram
+          </a>
+          <a
+            href="mailto:contato@focussdev.art"
             className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full border border-border text-foreground font-medium hover:border-primary/50 hover:text-primary transition-all"
           >
             <Mail size={20} />
