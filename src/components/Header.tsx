@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import statueCard from "@/assets/statue-card.png";
 
 const navLinks = [
   { label: "Início", href: "#hero" },
@@ -22,13 +23,9 @@ export const Header = () => {
       className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-background/70 border-b border-border/50"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
-        <a href="#hero" className="text-xl font-bold tracking-tight">
-          <span className="text-primary glow-text">FOCUSS</span>
-          <span className="text-foreground ml-1 font-light">DEV</span>
-        </a>
-
-        <nav className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
+        {/* Left nav links */}
+        <nav className="hidden md:flex items-center gap-6 flex-1">
+          {navLinks.slice(0, 3).map((link) => (
             <a
               key={link.href}
               href={link.href}
@@ -39,12 +36,29 @@ export const Header = () => {
           ))}
         </nav>
 
-        <a
-          href="#contact"
-          className="hidden md:inline-flex items-center px-5 py-2 rounded-full bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity"
-        >
-          Fale Conosco
+        {/* Center logo with statue */}
+        <a href="#hero" className="flex items-center gap-2 shrink-0">
+          <span className="text-xl font-bold tracking-tight text-primary glow-text">FOCUSS</span>
+          <img
+            src={statueCard}
+            alt="FOCUSS DEV"
+            className="h-10 w-auto object-contain drop-shadow-[0_0_8px_hsl(160_100%_45%/0.4)]"
+          />
+          <span className="text-xl font-bold tracking-tight text-foreground font-light">DEV</span>
         </a>
+
+        {/* Right nav links */}
+        <nav className="hidden md:flex items-center gap-6 flex-1 justify-end">
+          {navLinks.slice(3).map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className="text-sm text-muted-foreground hover:text-primary transition-colors duration-300"
+            >
+              {link.label}
+            </a>
+          ))}
+        </nav>
 
         <button
           onClick={() => setMenuOpen(!menuOpen)}
