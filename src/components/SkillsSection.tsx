@@ -51,7 +51,7 @@ export const SkillsSection = () => {
   }, []);
 
   return (
-    <section id="skills" className="relative pt-0 pb-20 md:pt-0 md:pb-32 -mt-40">
+    <section id="skills" className="relative pt-0 pb-20 md:pt-0 md:pb-32 -mt-60">
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 xl:gap-20 items-center">
           {/* Coluna esquerda — Estátua */}
