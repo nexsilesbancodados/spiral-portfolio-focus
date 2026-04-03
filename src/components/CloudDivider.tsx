@@ -105,7 +105,11 @@ export const CloudDivider = () => {
         ref={cloudRef}
         src={cloudImg}
         alt=""
-        className="relative z-[2] h-auto w-[130%] max-w-none will-change-transform mix-blend-screen drop-shadow-2xl sm:w-[126%] lg:w-[121%] xl:w-[116%]"
+        className="relative z-[2] h-auto w-[130%] max-w-none will-change-transform drop-shadow-2xl sm:w-[126%] lg:w-[121%] xl:w-[116%]"
+        style={{
+          maskImage: "radial-gradient(ellipse 90% 85% at 50% 50%, black 60%, transparent 100%)",
+          WebkitMaskImage: "radial-gradient(ellipse 90% 85% at 50% 50%, black 60%, transparent 100%)",
+        }}
         loading="eager"
         draggable={false}
       />
