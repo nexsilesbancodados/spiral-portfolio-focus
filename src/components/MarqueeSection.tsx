@@ -35,7 +35,7 @@ export const MarqueeSection = () => {
     <section
       ref={containerRef}
       className="relative w-full flex items-center justify-center my-5"
-      style={{ height: "500px" }}
+      style={{ height: "clamp(250px, 40vw, 500px)" }}
       aria-hidden="true"
     >
       <svg
@@ -51,7 +51,7 @@ export const MarqueeSection = () => {
           />
         </defs>
 
-        {/* Faixa vermelha de fundo */}
+        {/* Faixa primária de fundo */}
         <use
           href="#masterPath"
           fill="none"

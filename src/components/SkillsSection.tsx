@@ -29,17 +29,14 @@ const skillColors: Record<string, string> = {
 };
 
 export const SkillsSection = () => {
-  const radius = 280; // px radius for the orbit
-  const radiusMobile = 150;
-
   return (
-    <section id="skills" className="relative pt-10 pb-20 md:pt-12 md:pb-32">
+    <section id="skills" className="relative pt-10 pb-20 md:pt-12 md:pb-32 overflow-hidden">
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="text-center mb-8 md:mb-12"
         >
           <span className="text-primary text-sm font-medium tracking-widest uppercase">
             Arsenal
@@ -49,8 +46,11 @@ export const SkillsSection = () => {
           </h2>
         </motion.div>
 
-        {/* Orbit container */}
-        <div className="relative flex items-center justify-center mx-auto" style={{ height: 620 }}>
+        {/* Orbit container — responsive height */}
+        <div
+          className="relative flex items-center justify-center mx-auto"
+          style={{ height: "clamp(400px, 70vw, 620px)" }}
+        >
           {/* Center statue */}
           <motion.img
             src={skillsStatue}
@@ -59,7 +59,7 @@ export const SkillsSection = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="absolute z-10 h-[340px] md:h-[420px] object-contain drop-shadow-[0_0_40px_rgba(0,255,150,0.15)] translate-y-10 md:translate-y-14"
+            className="absolute z-10 h-[220px] sm:h-[280px] md:h-[340px] lg:h-[420px] object-contain drop-shadow-[0_0_40px_rgba(0,255,150,0.15)] translate-y-6 sm:translate-y-10 md:translate-y-14"
           />
 
           {/* Orbiting skills */}
@@ -75,13 +75,14 @@ export const SkillsSection = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.06, type: "spring", stiffness: 200 }}
-                className="absolute z-20"
+                className="absolute z-20 skill-orbit-item"
                 style={{
-                  // Desktop position
-                  left: `calc(50% + ${Math.cos(rad) * radius}px)`,
-                  top: `calc(50% + ${Math.sin(rad) * radius}px)`,
+                  "--orbit-angle-cos": Math.cos(rad),
+                  "--orbit-angle-sin": Math.sin(rad),
+                  left: `calc(50% + ${Math.cos(rad)} * clamp(120px, 22vw, 280px))`,
+                  top: `calc(50% + ${Math.sin(rad)} * clamp(120px, 22vw, 280px))`,
                   transform: "translate(-50%, -50%)",
-                }}
+                } as React.CSSProperties}
               >
                 <motion.div
                   animate={{
@@ -95,7 +96,7 @@ export const SkillsSection = () => {
                     delay: i * 0.3,
                   }}
                   whileHover={{ scale: 1.15, y: -6 }}
-                  className={`px-4 py-2 md:px-5 md:py-2.5 rounded-full bg-gradient-to-r ${gradient} text-white text-xs md:text-sm font-semibold shadow-lg border border-white/20 cursor-default select-none whitespace-nowrap backdrop-blur-sm`}
+                  className={`px-3 py-1.5 sm:px-4 sm:py-2 md:px-5 md:py-2.5 rounded-full bg-gradient-to-r ${gradient} text-white text-[10px] sm:text-xs md:text-sm font-semibold shadow-lg border border-white/20 cursor-default select-none whitespace-nowrap backdrop-blur-sm`}
                 >
                   {skill}
                 </motion.div>
