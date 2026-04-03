@@ -5,8 +5,7 @@ import heroStatue from "@/assets/hero-statue.png";
 export const HeroSection = () => {
   return (
     <section id="hero" className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Unified sky gradient — pure CSS, no image */}
-      <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#1a6fc4] via-[#5ba3d9] to-[#a8d4f0]" />
+      {/* Overlay */}
       <div className="absolute inset-0 z-0 bg-black/30" />
       {/* Radial glow */}
       <div className="absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_center,hsl(160_100%_45%/0.08)_0%,transparent_70%)]" />
