@@ -9,7 +9,7 @@ const Index = () => {
     <div className="sky-page min-h-screen overflow-x-hidden bg-noise">
       <Header />
       <HeroSection />
-      <CloudDivider />
+      
       <AboutSection />
     </div>
   );
