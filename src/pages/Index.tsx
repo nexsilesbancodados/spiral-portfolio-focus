@@ -97,17 +97,15 @@ const Index = () => {
               </a>
             </div>
           </div>
-          <div className="relative hidden lg:block">
-            <div className="relative z-10">
-              <img
-                src="/images/hero-portrait.png"
-                alt="FOCUSS DEV - Lee, Desenvolvedor Web"
-                width={1024}
-                height={1280}
-                className="w-full max-w-lg ml-auto"
-              />
+          <div className="relative hidden lg:flex items-center justify-center">
+            <div className="w-80 h-80 rounded-full border-2 border-primary/20 flex items-center justify-center relative">
+              <div className="w-60 h-60 rounded-full border border-primary/30 flex items-center justify-center">
+                <div className="w-40 h-40 rounded-full bg-primary/10 flex items-center justify-center">
+                  <span className="text-5xl font-bold text-primary">FD</span>
+                </div>
+              </div>
+              <div className="absolute -bottom-4 -right-4 w-48 h-48 bg-primary/10 rounded-full blur-3xl" />
             </div>
-            <div className="absolute -bottom-8 -left-8 w-72 h-72 bg-primary/10 rounded-full blur-3xl" />
           </div>
         </div>
       </section>
