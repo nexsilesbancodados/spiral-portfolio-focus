@@ -26,7 +26,7 @@ export const Header = () => {
       {/* Sky gradient synced with hero */}
       <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#1a6fc4] via-[#3a8ad4] to-[#5ba3d9]" />
       <div className="absolute inset-0 z-0 bg-black/30 backdrop-blur-sm" />
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+      <div className="relative z-10 max-w-7xl px-4 sm:px-6 flex items-center justify-between h-16 mx-[212px] lg:px-[2px]">
         {/* Left nav links */}
         <nav className="hidden md:flex items-center gap-6 flex-1">
           {navLinks.slice(0, 3).map((link) => (
