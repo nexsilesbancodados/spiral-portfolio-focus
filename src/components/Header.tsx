@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import statueCard from "@/assets/statue-card.png";
+import skyBg from "@/assets/sky-bg.jpg";
 
 const navLinks = [
   { label: "Início", href: "#hero" },
@@ -20,16 +21,22 @@ export const Header = () => {
       initial={{ y: -80 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-background/70 border-b border-border/50"
+      className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+      {/* Sky background */}
+      <div
+        className="absolute inset-0 z-0"
+        style={{ backgroundImage: `url(${skyBg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+      />
+      <div className="absolute inset-0 z-0 bg-black/20 backdrop-blur-sm" />
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
         {/* Left nav links */}
         <nav className="hidden md:flex items-center gap-6 flex-1">
           {navLinks.slice(0, 3).map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="text-sm text-muted-foreground hover:text-primary transition-colors duration-300"
+              className="text-sm text-white/80 hover:text-white transition-colors duration-300"
             >
               {link.label}
             </a>
@@ -44,7 +51,7 @@ export const Header = () => {
             alt="FOCUSS DEV"
             className="h-10 w-auto object-contain drop-shadow-[0_0_8px_hsl(160_100%_45%/0.4)]"
           />
-          <span className="text-xl font-bold tracking-tight text-foreground font-light">DEV</span>
+          <span className="text-xl font-bold tracking-tight text-white font-light">DEV</span>
         </a>
 
         {/* Right nav links */}
@@ -53,7 +60,7 @@ export const Header = () => {
             <a
               key={link.href}
               href={link.href}
-              className="text-sm text-muted-foreground hover:text-primary transition-colors duration-300"
+              className="text-sm text-white/80 hover:text-white transition-colors duration-300"
             >
               {link.label}
             </a>
@@ -62,7 +69,7 @@ export const Header = () => {
 
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden text-foreground p-2"
+          className="md:hidden text-white p-2"
           aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
         >
           {menuOpen ? <X size={24} /> : <Menu size={24} />}
