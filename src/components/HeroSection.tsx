@@ -70,7 +70,7 @@ export const HeroSection = () => {
             transition={{ duration: 0.9, delay: 0.2 }}
             className="order-1 flex justify-center lg:order-2 lg:justify-end"
           >
-            <div className="relative w-full max-w-[22rem] sm:max-w-[26rem] lg:max-w-[32rem] xl:max-w-[36rem]">
+            <div className="relative w-full max-w-[26rem] sm:max-w-[30rem] lg:max-w-[38rem] xl:max-w-[42rem]">
               <div className="primary-aura-bottom absolute inset-0 blur-2xl" />
               <img
                 src={heroStatue}
