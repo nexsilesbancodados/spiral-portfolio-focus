@@ -68,7 +68,7 @@ export const SkillsSection = () => {
                 ref={statueRef}
                 src={skillsStatue}
                 alt="Estátua grega com óculos lendo tablet — representação artística do domínio técnico"
-                className="relative z-10 w-full drop-shadow-2xl will-change-transform"
+                className="relative z-10 w-full drop-shadow-2xl will-change-transform py-[55px] mt-0 ml-0 mr-[55555555555px] mx-[5px] px-px"
                 loading="lazy"
               />
               <img
