@@ -69,7 +69,7 @@ export const Header = () => {
 
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden text-foreground p-2"
+          className="md:hidden text-white p-2"
           aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
         >
           {menuOpen ? <X size={24} /> : <Menu size={24} />}
