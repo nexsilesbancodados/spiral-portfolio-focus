@@ -76,7 +76,7 @@ export const Footer = () => {
         </div>
 
         {/* Divider + Copyright */}
-        <div className="w-full max-w-xs h-px bg-black/8" />
+        <div className="w-full max-w-xs h-px bg-black/[0.08]" />
         <p className="text-[10px] text-black/25 font-mono uppercase tracking-[0.3em]">
           © {new Date().getFullYear()} FOCUSS DEV
         </p>
