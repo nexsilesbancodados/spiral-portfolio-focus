@@ -51,7 +51,7 @@ export const Header = () => {
             alt="FOCUSS DEV"
             className="h-10 w-auto object-contain drop-shadow-[0_0_8px_hsl(160_100%_45%/0.4)]"
           />
-          <span className="text-xl font-bold tracking-tight text-foreground font-light">DEV</span>
+          <span className="text-xl font-bold tracking-tight text-white font-light">DEV</span>
         </a>
 
         {/* Right nav links */}
