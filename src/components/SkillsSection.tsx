@@ -75,7 +75,7 @@ export const SkillsSection = () => {
                 src={cloudCover}
                 alt=""
                 className="absolute left-1/2 -translate-x-1/2 z-20 w-[180%] max-w-none pointer-events-none"
-                style={{ bottom: '-75%' }}
+                style={{ bottom: '-95%' }}
               />
             </div>
           </motion.div>
