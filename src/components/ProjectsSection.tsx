@@ -38,12 +38,20 @@ export const ProjectsSection = () => {
             transition={{ duration: 0.7 }}
             className="flex justify-center"
           >
-            <img
-              src={projectsStatue}
-              alt="Estátua grega com laptop — representação artística de projetos FOCUSS DEV"
-              className="w-full max-w-[24rem] md:max-w-[28rem] drop-shadow-[0_0_40px_rgba(0,255,150,0.12)]"
-              loading="lazy"
-            />
+            <div className="relative">
+              <img
+                src={projectsStatue}
+                alt="Estátua grega com laptop — representação artística de projetos FOCUSS DEV"
+                className="w-full max-w-[24rem] md:max-w-[28rem] drop-shadow-[0_0_40px_rgba(0,255,150,0.12)]"
+                loading="lazy"
+              />
+              <img
+                src={cloudOverlay}
+                alt=""
+                className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-[120%] max-w-none pointer-events-none"
+                aria-hidden="true"
+              />
+            </div>
           </motion.div>
 
           {/* Project list */}
