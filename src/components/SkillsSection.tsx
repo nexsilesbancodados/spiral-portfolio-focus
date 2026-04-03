@@ -36,7 +36,7 @@ export const SkillsSection = () => {
   const positions = useMemo(() => {
     return allSkills.map((_, i) => ({
       top: `${8 + seededRandom(i * 3 + 1) * 78}%`,
-      left: `${5 + seededRandom(i * 3 + 2) * 88}%`,
+      left: `${45 + seededRandom(i * 3 + 2) * 50}%`,
       delay: seededRandom(i * 3 + 3) * 0.8,
       floatDuration: 3 + seededRandom(i * 7) * 3,
       floatY: 8 + seededRandom(i * 11) * 12,
