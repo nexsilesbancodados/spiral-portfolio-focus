@@ -36,7 +36,7 @@ export const SkillsSection = () => {
   const positions = useMemo(() => {
     return allSkills.map((_, i) => ({
       top: `${8 + seededRandom(i * 3 + 1) * 78}%`,
-      left: `${5 + seededRandom(i * 3 + 2) * 88}%`,
+      left: `${45 + seededRandom(i * 3 + 2) * 50}%`,
       delay: seededRandom(i * 3 + 3) * 0.8,
       floatDuration: 3 + seededRandom(i * 7) * 3,
       floatY: 8 + seededRandom(i * 11) * 12,
@@ -86,7 +86,7 @@ export const SkillsSection = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10"
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10"
           >
             <div className="relative w-[16rem] sm:w-[20rem] md:w-[24rem]">
               <div className="absolute inset-0 bg-gradient-to-t from-primary/20 via-transparent to-transparent blur-3xl rounded-full" />
