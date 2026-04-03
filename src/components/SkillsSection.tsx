@@ -1,8 +1,4 @@
-import { Suspense, lazy } from "react";
 import { motion } from "framer-motion";
-import { Canvas } from "@react-three/fiber";
-import { GlassDiscs } from "./GlassDiscs";
-import "./SkillsSection.css";
 
 const allSkills = [
   "React", "Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "shadcn/ui",
@@ -31,30 +27,15 @@ const skillColors: Record<string, string> = {
   Figma: "from-pink-400 to-rose-500",
 };
 
-function seededRandom(seed: number) {
-  const x = Math.sin(seed) * 10000;
-  return x - Math.floor(x);
-}
-
-const gridPositions = [
-  { top: "5%",  left: "8%" },  { top: "5%",  left: "30%" }, { top: "5%",  left: "55%" },
-  { top: "5%",  left: "78%" }, { top: "28%", left: "5%" },  { top: "28%", left: "25%" },
-  { top: "28%", left: "50%" }, { top: "28%", left: "72%" }, { top: "28%", left: "90%" },
-  { top: "55%", left: "8%" },  { top: "55%", left: "30%" }, { top: "55%", left: "55%" },
-  { top: "55%", left: "78%" }, { top: "78%", left: "5%" },  { top: "78%", left: "25%" },
-  { top: "78%", left: "48%" }, { top: "78%", left: "70%" }, { top: "78%", left: "90%" },
-];
-
 export const SkillsSection = () => {
   return (
     <section id="skills" className="relative pt-0 pb-20 md:pt-0 md:pb-32 -mt-60">
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Título */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-8"
+          className="text-center mb-12"
         >
           <span className="text-primary text-sm font-medium tracking-widest uppercase">
             Tecnologias
@@ -64,65 +45,31 @@ export const SkillsSection = () => {
           </h2>
         </motion.div>
 
-        {/* Canvas 3D + Skills sobrepostas */}
-        <div className="relative w-full h-[600px] md:h-[700px]">
-          {/* Three.js Canvas como fundo */}
-          <div className="absolute inset-0 z-0">
-            <Canvas
-              camera={{ position: [0, 0, 18], fov: 45 }}
-              gl={{ antialias: true, alpha: true }}
-              style={{ background: "transparent" }}
-              dpr={[1, 1.5]}
-            >
-              <ambientLight intensity={0.3} />
-              <pointLight position={[10, 5, 10]} intensity={5} color="#0055ff" distance={50} />
-              <pointLight position={[-10, -10, 10]} intensity={4} color="#cc00ff" distance={50} />
-              <directionalLight position={[0, 0, 10]} intensity={1} />
-              <Suspense fallback={null}>
-                <GlassDiscs />
-              </Suspense>
-            </Canvas>
-          </div>
-
-          {/* Skill labels flutuantes por cima */}
-          {allSkills.map((skill, i) => {
-            const floatDuration = 3 + seededRandom(i * 7) * 3;
-            const floatY = 6 + seededRandom(i * 11) * 8;
-            const delay = seededRandom(i * 3 + 3) * 0.6;
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={{ visible: { transition: { staggerChildren: 0.06 } } }}
+          className="flex flex-wrap justify-center gap-3"
+        >
+          {allSkills.map((skill) => {
             const gradient = skillColors[skill] || "from-primary to-primary";
-
             return (
               <motion.div
                 key={skill}
-                initial={{ opacity: 0, scale: 0.5 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay }}
-                className="absolute z-20"
-                style={{
-                  top: gridPositions[i].top,
-                  left: gridPositions[i].left,
+                variants={{
+                  hidden: { opacity: 0, scale: 0.7 },
+                  visible: { opacity: 1, scale: 1 },
                 }}
+                whileHover={{ scale: 1.1, y: -4 }}
+                whileTap={{ scale: 0.95 }}
+                className={`px-5 py-2.5 rounded-full bg-gradient-to-r ${gradient} text-white text-sm font-semibold shadow-lg border border-white/20 cursor-default select-none`}
               >
-                <motion.div
-                  animate={{ y: [-floatY / 2, floatY / 2] }}
-                  transition={{
-                    duration: floatDuration,
-                    repeat: Infinity,
-                    repeatType: "reverse",
-                    ease: "easeInOut",
-                  }}
-                >
-                  <div
-                    className={`px-4 py-2 rounded-full bg-gradient-to-r ${gradient} text-white text-xs sm:text-sm font-semibold shadow-lg border border-white/20 cursor-default select-none whitespace-nowrap`}
-                  >
-                    {skill}
-                  </div>
-                </motion.div>
+                {skill}
               </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
