@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import gustavoPortrait from "@/assets/gustavo-portrait.png";
+import gustavoPortrait from "@/assets/gustavo-portrait.jpg";
 
 export const DeveloperSection = () => {
   return (
