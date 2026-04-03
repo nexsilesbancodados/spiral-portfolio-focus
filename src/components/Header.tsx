@@ -37,13 +37,8 @@ export const Header = () => {
           ))}
         </nav>
 
-        <a href="#hero" className="absolute left-1/2 flex -translate-x-1/2 items-center gap-2 shrink-0 md:static md:translate-x-0">
+        <a href="#hero" className="absolute left-1/2 flex -translate-x-1/2 items-center gap-1 shrink-0 md:static md:translate-x-0">
           <span className="text-xl font-bold tracking-tight text-primary glow-text">FOCUSS</span>
-          <img
-            src={statueCard}
-            alt="FOCUSS DEV"
-            className="h-10 w-auto object-contain drop-shadow-[0_0_8px_hsl(160_100%_45%/0.4)]"
-          />
           <span className="text-xl font-light tracking-tight text-foreground/90">DEV</span>
         </a>
 
