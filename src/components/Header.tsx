@@ -36,7 +36,7 @@ export const Header = () => {
             <a
               key={link.href}
               href={link.href}
-              className="text-sm text-muted-foreground hover:text-primary transition-colors duration-300"
+              className="text-sm text-white/80 hover:text-white transition-colors duration-300"
             >
               {link.label}
             </a>
