@@ -204,12 +204,12 @@ const Index = () => {
           </>
         }
       >
-        <img
-          src="/images/hero-portrait.png"
-          alt="FOCUSS DEV - Projeto em destaque"
-          className="mx-auto object-cover h-full w-full object-top"
-          draggable={false}
-        />
+        <div className="w-full h-full bg-gradient-to-br from-primary/20 via-secondary to-primary/10 flex items-center justify-center rounded-2xl">
+          <div className="text-center space-y-4 p-8">
+            <span className="text-6xl font-bold text-primary">FOCUSS DEV</span>
+            <p className="text-muted-foreground text-lg">Código limpo · Performance · Resultado</p>
+          </div>
+        </div>
       </ContainerScroll>
 
       <WaveDivider topColor="hsl(var(--primary) / 0.2)" />
