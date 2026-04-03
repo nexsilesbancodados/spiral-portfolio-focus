@@ -1,81 +1,11 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
-import statueCard from "@/assets/statue-card.png";
+import aboutStatues from "@/assets/about-statues.png";
 
 const stats = [
   { value: "50+", label: "Projetos Entregues" },
   { value: "3+", label: "Anos de Experiência" },
   { value: "100%", label: "Clientes Satisfeitos" },
 ];
-
-const FlipCard = () => {
-  const [isFlipped, setIsFlipped] = useState(false);
-
-  return (
-    <div
-      className="relative mx-auto aspect-[3/4] w-full max-w-[22rem] cursor-pointer sm:max-w-[24rem] lg:mx-0"
-      style={{ perspective: "1200px" }}
-      role="button"
-      tabIndex={0}
-      aria-pressed={isFlipped}
-      onMouseEnter={() => setIsFlipped(true)}
-      onMouseLeave={() => setIsFlipped(false)}
-      onClick={() => setIsFlipped((current) => !current)}
-      onKeyDown={(event) => {
-        if (event.key === "Enter" || event.key === " ") {
-          event.preventDefault();
-          setIsFlipped((current) => !current);
-        }
-      }}
-    >
-      <motion.div
-        className="relative w-full h-full"
-        style={{ transformStyle: "preserve-3d" }}
-        animate={{ rotateY: isFlipped ? 180 : 0 }}
-        transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
-      >
-        <div
-          className="absolute inset-0 rounded-2xl overflow-hidden glow-border"
-          style={{ backfaceVisibility: "hidden" }}
-        >
-          <img
-            src={statueCard}
-            alt="Estátua grega com olhos neon — FOCUSS DEV"
-            className="w-full h-full object-cover"
-            loading="lazy"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
-          <div className="absolute bottom-6 left-6 right-6 text-center sm:text-left">
-            <p className="text-sm text-primary font-medium tracking-widest uppercase">Passe o mouse</p>
-          </div>
-        </div>
-
-        <div
-          className="absolute inset-0 flex flex-col items-center justify-center overflow-hidden rounded-2xl border border-foreground/10 bg-card/90 p-8 text-center glow-border"
-          style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
-        >
-          <div className="primary-aura-soft absolute inset-0" />
-          <div className="relative z-10 space-y-6">
-            <div className="w-16 h-16 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center mx-auto">
-              <span className="text-primary text-2xl font-bold">F</span>
-            </div>
-            <h3 className="text-2xl font-bold text-foreground">FOCUSS DEV</h3>
-            <p className="text-muted-foreground leading-relaxed">
-              Transformamos ideias em experiências digitais de alto impacto. Design premium, código limpo, resultados reais.
-            </p>
-            <div className="flex gap-4 justify-center pt-2">
-              {["React", "TypeScript", "Supabase"].map((tech) => (
-                <span key={tech} className="px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-medium">
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-      </motion.div>
-    </div>
-  );
-};
 
 export const AboutSection = () => {
   return (
@@ -89,7 +19,12 @@ export const AboutSection = () => {
             transition={{ duration: 0.7 }}
             className="relative flex justify-center lg:justify-start"
           >
-            <FlipCard />
+            <img
+              src={aboutStatues}
+              alt="Estátuas gregas com óculos neon — FOCUSS DEV"
+              className="w-full max-w-[28rem] drop-shadow-2xl"
+              loading="lazy"
+            />
           </motion.div>
 
           <div className="mx-auto max-w-xl text-center lg:mx-0 lg:text-left">
