@@ -71,12 +71,6 @@ export const SkillsSection = () => {
                 className="relative z-10 w-full drop-shadow-2xl will-change-transform py-[55px] mt-0 ml-0 mr-[55555555555px] mx-[5px] px-px"
                 loading="lazy"
               />
-              <img
-                src={cloudCover}
-                alt=""
-                className="absolute left-[55%] -translate-x-1/2 z-20 w-[200%] max-w-none pointer-events-none"
-                style={{ bottom: '-88%' }}
-              />
             </div>
           </motion.div>
 
