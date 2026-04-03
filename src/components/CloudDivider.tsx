@@ -1,99 +1,65 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import cloudImg from "@/assets/cloud-divider.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
 /**
- * Fixed overlay cloud that scales up on scroll creating an immersive fog transition.
- * Inspired by: radial-gradient cloud + GSAP scrub timeline.
- * The cloud appears between Hero and About, engulfs the screen, then fades away.
+ * Horizontal cloud bank divider between Hero and next section.
+ * Uses a realistic cloud PNG that floats up with parallax on scroll.
  */
 export const CloudDivider = () => {
-  const cloudRef = useRef<HTMLDivElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const cloudRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReduced || !cloudRef.current || !containerRef.current) return;
-
-    const cloud = cloudRef.current;
+    if (prefersReduced || !wrapperRef.current || !cloudRef.current) return;
 
     const ctx = gsap.context(() => {
       // Subtle idle float
-      gsap.to(cloud, {
-        x: "random(-30, 30)",
-        y: "random(-30, 30)",
-        duration: 8,
+      gsap.to(cloudRef.current, {
+        y: "random(-8, 8)",
+        duration: 4,
         repeat: -1,
         yoyo: true,
         ease: "sine.inOut",
       });
 
-      // Main scroll timeline — cloud enters, engulfs, exits
-      const tl = gsap.timeline({
+      // Parallax on scroll — cloud rises slightly
+      gsap.to(cloudRef.current, {
+        y: -40,
+        ease: "none",
         scrollTrigger: {
-          trigger: containerRef.current,
+          trigger: wrapperRef.current,
           start: "top bottom",
           end: "bottom top",
           scrub: 1.5,
         },
       });
-
-      tl
-        // Cloud fades in and grows
-        .fromTo(cloud,
-          { opacity: 0, scale: 0.1 },
-          { opacity: 0.95, scale: 2.5, ease: "power2.inOut", duration: 1 }
-        )
-        // Peak density — fully immersed
-        .to(cloud, {
-          scale: 6,
-          opacity: 1,
-          ease: "none",
-          duration: 0.8,
-        })
-        // Cloud expands and fades out
-        .to(cloud, {
-          scale: 12,
-          opacity: 0,
-          ease: "power2.in",
-          duration: 1,
-        });
     });
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <>
-      {/* Scroll trigger area — placed in document flow between Hero and About */}
-      <div
-        ref={containerRef}
-        className="relative h-[60vh] -mt-8 pointer-events-none select-none"
-        aria-hidden="true"
-      />
+    <div
+      ref={wrapperRef}
+      className="relative w-full -mt-[8vw] z-[5] pointer-events-none select-none"
+      aria-hidden="true"
+    >
+      {/* Gradient fade from sky to dark background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background z-[1]" />
 
-      {/* Fixed cloud overlay */}
-      <div className="fixed inset-0 z-[15] flex items-center justify-center pointer-events-none overflow-hidden">
-        <div
-          ref={cloudRef}
-          className="absolute will-change-transform"
-          style={{
-            width: "100vmax",
-            height: "100vmax",
-            borderRadius: "50%",
-            background: `radial-gradient(circle at center,
-              rgba(255, 255, 255, 1) 0%,
-              rgba(255, 255, 255, 0.85) 15%,
-              rgba(255, 255, 255, 0.5) 35%,
-              rgba(255, 255, 255, 0) 60%
-            )`,
-            opacity: 0,
-            transform: "scale(0.1)",
-          }}
-        />
-      </div>
-    </>
+      <img
+        ref={cloudRef}
+        src={cloudImg}
+        alt=""
+        className="relative z-[2] w-full h-auto object-cover will-change-transform"
+        loading="eager"
+        draggable={false}
+      />
+    </div>
   );
 };
