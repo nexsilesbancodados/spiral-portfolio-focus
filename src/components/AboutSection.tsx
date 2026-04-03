@@ -24,6 +24,7 @@ export const AboutSection = () => {
               alt="Estátuas gregas com óculos neon — FOCUSS DEV"
               className="w-full max-w-[28rem] drop-shadow-2xl"
               loading="lazy"
+              decoding="async"
             />
           </motion.div>
 
