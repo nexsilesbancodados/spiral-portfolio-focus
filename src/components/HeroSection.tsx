@@ -2,7 +2,9 @@ import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { ArrowDown } from "lucide-react";
 import gsap from "gsap";
-import heroStatue from "@/assets/hero-statue.png";
+import heroStatue from "@/assets/hero-statue.webp";
+
+export const HERO_IMAGE_SRC = heroStatue;
 
 export const HeroSection = () => {
   const statueRef = useRef<HTMLImageElement>(null);
@@ -37,7 +39,7 @@ export const HeroSection = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7 }}
             >
-              <span className="inline-block px-4 py-1.5 rounded-full border border-primary/30 text-primary text-xs font-medium tracking-widest uppercase mb-6">
+              <span className="mb-6 inline-block rounded-full border border-primary/30 px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-primary">
                 Desenvolvimento & Design
               </span>
             </motion.div>
@@ -48,11 +50,9 @@ export const HeroSection = () => {
               transition={{ duration: 0.7, delay: 0.15 }}
               className="text-4xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-5xl lg:text-6xl xl:text-7xl"
             >
-              Código que{" "}
-              <span className="text-primary glow-text">eleva</span>,
+              Código que <span className="text-primary glow-text">eleva</span>,
               <br />
-              design que{" "}
-              <span className="text-primary glow-text">conquista</span>
+              design que <span className="text-primary glow-text">conquista</span>
             </motion.h1>
 
             <motion.p
@@ -72,7 +72,7 @@ export const HeroSection = () => {
             >
               <a
                 href="#projects"
-                className="px-8 py-3.5 rounded-full bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
+                className="rounded-full bg-primary px-8 py-3.5 font-semibold text-primary-foreground transition-opacity hover:opacity-90"
               >
                 Ver Projetos
               </a>
@@ -97,8 +97,10 @@ export const HeroSection = () => {
                 ref={statueRef}
                 src={heroStatue}
                 alt="Estátua grega com óculos usando laptop — representação artística da FOCUSS DEV"
-                className="relative z-10 w-full drop-shadow-2xl text-xs rounded-3xl will-change-transform"
+                className="relative z-10 w-full rounded-3xl text-xs drop-shadow-2xl will-change-transform"
                 loading="eager"
+                decoding="async"
+                fetchPriority="high"
               />
             </div>
           </motion.div>
