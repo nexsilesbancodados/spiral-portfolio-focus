@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import gsap from "gsap";
 import skillsStatue from "@/assets/skills-statue.png";
+import cloudCover from "@/assets/cloud-cover.png";
 
 const skillCategories = [
   {
