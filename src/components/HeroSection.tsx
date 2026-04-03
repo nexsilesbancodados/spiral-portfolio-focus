@@ -1,8 +1,29 @@
+import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { ArrowDown } from "lucide-react";
+import gsap from "gsap";
 import heroStatue from "@/assets/hero-statue.png";
 
 export const HeroSection = () => {
+  const statueRef = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReduced || !statueRef.current) return;
+
+    const ctx = gsap.context(() => {
+      gsap.to(statueRef.current, {
+        y: -8,
+        duration: 3,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+      });
+    });
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <section id="hero" className="relative flex min-h-[100svh] items-center overflow-hidden">
       <div className="primary-aura absolute inset-0 z-[1]" />
@@ -73,9 +94,10 @@ export const HeroSection = () => {
             <div className="relative w-full max-w-[26rem] sm:max-w-[30rem] lg:max-w-[38rem] xl:max-w-[42rem]">
               <div className="primary-aura-bottom absolute inset-0 blur-2xl" />
               <img
+                ref={statueRef}
                 src={heroStatue}
                 alt="Estátua grega com óculos usando laptop — representação artística da FOCUSS DEV"
-                className="relative z-10 w-full drop-shadow-2xl text-xs rounded-3xl"
+                className="relative z-10 w-full drop-shadow-2xl text-xs rounded-3xl will-change-transform"
                 loading="eager"
               />
             </div>
