@@ -47,7 +47,8 @@ export const DeveloperSection = () => {
               style={{
                 fontSize: "clamp(5rem, 18vw, 18rem)",
                 lineHeight: 0.82,
-                color: "hsl(var(--primary) / 0.15)",
+                color: "hsl(var(--primary) / 0.35)",
+                textShadow: "0 0 60px hsl(var(--primary) / 0.2)",
               }}
             >
               <span className="block">GUSTAVO</span>
