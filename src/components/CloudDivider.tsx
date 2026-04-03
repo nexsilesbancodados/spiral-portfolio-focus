@@ -5,10 +5,6 @@ import cloudImg from "@/assets/cloud-divider.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
-/**
- * Horizontal cloud bank divider between Hero and next section.
- * Cloud PNG blends into the sky gradient using mix-blend-mode.
- */
 export const CloudDivider = () => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const cloudRef = useRef<HTMLImageElement>(null);
@@ -44,23 +40,15 @@ export const CloudDivider = () => {
   return (
     <div
       ref={wrapperRef}
-      className="relative w-full -mt-[12vw] z-[5] pointer-events-none select-none"
+      className="relative w-full z-[12] pointer-events-none select-none"
+      style={{ marginTop: "-18vw" }}
       aria-hidden="true"
     >
-      {/* Sky-to-dark gradient behind cloud */}
-      <div
-        className="absolute inset-0 z-0"
-        style={{
-          background: "linear-gradient(to bottom, #a8d4f0 0%, #7ab8de 30%, hsl(240 10% 4%) 70%)",
-        }}
-      />
-
       <img
         ref={cloudRef}
         src={cloudImg}
         alt=""
-        className="relative z-[2] w-full h-auto will-change-transform"
-        style={{ mixBlendMode: "screen" }}
+        className="relative z-[2] w-full h-auto will-change-transform drop-shadow-[0_10px_40px_rgba(0,0,0,0.3)]"
         loading="eager"
         draggable={false}
       />
