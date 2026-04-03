@@ -7,7 +7,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 /**
  * Horizontal cloud bank divider between Hero and next section.
- * Uses a realistic cloud PNG that floats up with parallax on scroll.
+ * Cloud PNG blends into the sky gradient using mix-blend-mode.
  */
 export const CloudDivider = () => {
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -18,18 +18,16 @@ export const CloudDivider = () => {
     if (prefersReduced || !wrapperRef.current || !cloudRef.current) return;
 
     const ctx = gsap.context(() => {
-      // Subtle idle float
       gsap.to(cloudRef.current, {
-        y: "random(-8, 8)",
-        duration: 4,
+        y: "random(-6, 6)",
+        duration: 5,
         repeat: -1,
         yoyo: true,
         ease: "sine.inOut",
       });
 
-      // Parallax on scroll — cloud rises slightly
       gsap.to(cloudRef.current, {
-        y: -40,
+        y: -30,
         ease: "none",
         scrollTrigger: {
           trigger: wrapperRef.current,
@@ -46,17 +44,23 @@ export const CloudDivider = () => {
   return (
     <div
       ref={wrapperRef}
-      className="relative w-full -mt-[8vw] z-[5] pointer-events-none select-none"
+      className="relative w-full -mt-[12vw] z-[5] pointer-events-none select-none"
       aria-hidden="true"
     >
-      {/* Gradient fade from sky to dark background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background z-[1]" />
+      {/* Sky-to-dark gradient behind cloud */}
+      <div
+        className="absolute inset-0 z-0"
+        style={{
+          background: "linear-gradient(to bottom, #a8d4f0 0%, #7ab8de 30%, hsl(240 10% 4%) 70%)",
+        }}
+      />
 
       <img
         ref={cloudRef}
         src={cloudImg}
         alt=""
-        className="relative z-[2] w-full h-auto object-cover will-change-transform"
+        className="relative z-[2] w-full h-auto will-change-transform"
+        style={{ mixBlendMode: "screen" }}
         loading="eager"
         draggable={false}
       />
