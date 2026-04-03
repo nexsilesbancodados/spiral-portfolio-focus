@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import statueCard from "@/assets/statue-card.png";
 
 
 const navLinks = [
