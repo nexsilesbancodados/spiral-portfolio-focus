@@ -57,13 +57,13 @@ export const ServicesSection = () => {
           className="text-center mb-16"
         >
           <span className="text-primary text-sm font-medium tracking-widest uppercase">
-            Serviços
+            Especialidades
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mt-4">
-            O que <span className="text-primary">fazemos</span>
+            Soluções sob <span className="text-primary">medida</span>
           </h2>
           <p className="mt-4 text-muted-foreground max-w-2xl mx-auto text-lg">
-            Soluções completas de ponta a ponta para elevar sua presença digital.
+            Do conceito ao deploy — engenharia digital de alto nível para cada desafio.
           </p>
         </motion.div>
 

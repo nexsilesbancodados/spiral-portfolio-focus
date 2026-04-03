@@ -42,10 +42,10 @@ export const SkillsSection = () => {
           className="text-center mb-12"
         >
           <span className="text-primary text-sm font-medium tracking-widest uppercase">
-            Tecnologias
+            Arsenal
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mt-4 text-foreground">
-            Stack <span className="text-primary">técnico</span>
+            Domínio <span className="text-primary">absoluto</span>
           </h2>
         </motion.div>
 
