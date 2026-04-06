@@ -1,9 +1,5 @@
 import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 const cloudImg = "/images/cloud-divider.webp";
-
-gsap.registerPlugin(ScrollTrigger);
 
 export const CloudDivider = () => {
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -13,35 +9,44 @@ export const CloudDivider = () => {
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReduced || !wrapperRef.current || !cloudRef.current) return;
 
-    let ctx: gsap.Context;
-    const rafId = requestAnimationFrame(() => {
-      ctx = gsap.context(() => {
-        gsap.to(cloudRef.current, {
-          y: -8,
-          duration: 3,
-          repeat: -1,
-          yoyo: true,
-          ease: "sine.inOut",
-          force3D: true,
-        });
+    let ctx: { revert: () => void } | undefined;
+    let rafId: number;
 
-        gsap.to(wrapperRef.current, {
-          y: -30,
-          ease: "none",
-          force3D: true,
-          scrollTrigger: {
-            trigger: wrapperRef.current,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: 1.5,
-            fastScrollEnd: true,
-          },
+    Promise.all([import("gsap"), import("gsap/ScrollTrigger")]).then(
+      ([{ default: gsap }, { ScrollTrigger }]) => {
+        gsap.registerPlugin(ScrollTrigger);
+        if (!wrapperRef.current || !cloudRef.current) return;
+
+        rafId = requestAnimationFrame(() => {
+          ctx = gsap.context(() => {
+            gsap.to(cloudRef.current, {
+              y: -8,
+              duration: 3,
+              repeat: -1,
+              yoyo: true,
+              ease: "sine.inOut",
+              force3D: true,
+            });
+
+            gsap.to(wrapperRef.current, {
+              y: -30,
+              ease: "none",
+              force3D: true,
+              scrollTrigger: {
+                trigger: wrapperRef.current,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 1.5,
+                fastScrollEnd: true,
+              },
+            });
+          });
         });
-      });
-    });
+      }
+    );
 
     return () => {
-      cancelAnimationFrame(rafId);
+      if (rafId) cancelAnimationFrame(rafId);
       ctx?.revert();
     };
   }, []);

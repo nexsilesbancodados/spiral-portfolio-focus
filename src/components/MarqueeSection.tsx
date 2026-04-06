@@ -1,8 +1,4 @@
 import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const MARQUEE_TEXT =
   "SITES • APLICATIVOS • DESIGN • SISTEMAS • LANDING PAGES • SAAS • UI/UX • BRANDING • E-COMMERCE • DASHBOARDS • SITES • APLICATIVOS • DESIGN • SISTEMAS • LANDING PAGES • SAAS • UI/UX • BRANDING • E-COMMERCE • DASHBOARDS • ";
@@ -15,25 +11,34 @@ export const MarqueeSection = () => {
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReduced || !textPathRef.current || !containerRef.current) return;
 
-    let ctx: gsap.Context;
-    const rafId = requestAnimationFrame(() => {
-      ctx = gsap.context(() => {
-        gsap.to(textPathRef.current, {
-          attr: { startOffset: "-40%" },
-          ease: "none",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: 3,
-            fastScrollEnd: true,
-          },
+    let ctx: { revert: () => void } | undefined;
+    let rafId: number;
+
+    Promise.all([import("gsap"), import("gsap/ScrollTrigger")]).then(
+      ([{ default: gsap }, { ScrollTrigger }]) => {
+        gsap.registerPlugin(ScrollTrigger);
+        if (!textPathRef.current || !containerRef.current) return;
+
+        rafId = requestAnimationFrame(() => {
+          ctx = gsap.context(() => {
+            gsap.to(textPathRef.current, {
+              attr: { startOffset: "-40%" },
+              ease: "none",
+              scrollTrigger: {
+                trigger: containerRef.current,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 3,
+                fastScrollEnd: true,
+              },
+            });
+          });
         });
-      });
-    });
+      }
+    );
 
     return () => {
-      cancelAnimationFrame(rafId);
+      if (rafId) cancelAnimationFrame(rafId);
       ctx?.revert();
     };
   }, []);
@@ -58,7 +63,6 @@ export const MarqueeSection = () => {
           />
         </defs>
 
-        {/* Faixa primária de fundo */}
         <use
           href="#masterPath"
           fill="none"
@@ -68,7 +72,6 @@ export const MarqueeSection = () => {
           strokeLinejoin="round"
         />
 
-        {/* Texto ondulado */}
         <text
           dy="18"
           style={{
