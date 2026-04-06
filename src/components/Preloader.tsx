@@ -16,7 +16,7 @@ export const Preloader = ({ onComplete }: { onComplete: () => void }) => {
       if (current >= 100) {
         current = 100;
         clearInterval(timer);
-        setTimeout(onComplete, 500);
+        setTimeout(onComplete, 200);
       }
       setProgress(Math.min(current, 100));
     }, interval);

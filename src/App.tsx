@@ -4,8 +4,8 @@ import { lazy, Suspense, useEffect, useState, useCallback } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Preloader } from "@/components/Preloader";
 import { HERO_IMAGE_SRC } from "@/components/HeroSection";
+import Index from "./pages/Index";
 
-const Index = lazy(() => import("./pages/Index"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const App = () => {
@@ -41,25 +41,18 @@ const App = () => {
 
   return (
     <TooltipProvider>
-      <AnimatePresence mode="wait">
-        {loading ? (
+      <BrowserRouter>
+        <Suspense fallback={<div className="fixed inset-0 bg-background" />}>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
+      </BrowserRouter>
+
+      <AnimatePresence>
+        {loading && (
           <Preloader key="preloader" onComplete={handleComplete} />
-        ) : (
-          <motion.div
-            key="app"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-          >
-            <BrowserRouter>
-              <Suspense fallback={<div className="fixed inset-0 bg-background" />}>
-                <Routes>
-                  <Route path="/" element={<Index />} />
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
-              </Suspense>
-            </BrowserRouter>
-          </motion.div>
         )}
       </AnimatePresence>
     </TooltipProvider>
