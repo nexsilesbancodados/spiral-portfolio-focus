@@ -67,17 +67,14 @@ export const Preloader = ({ onComplete }: { onComplete: () => void }) => {
         </motion.div>
 
         {/* Progress bar */}
-        <motion.div
-          initial={{ opacity: 0, width: 0 }}
-          animate={{ opacity: 1, width: "12rem" }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="h-[2px] overflow-hidden rounded-full bg-white/10"
+        <div
+          className="h-[2px] w-48 overflow-hidden rounded-full bg-white/10"
         >
           <div
             className="h-full rounded-full bg-primary transition-[width] duration-75"
             style={{ width: `${progress}%` }}
           />
-        </motion.div>
+        </div>
       </div>
     </motion.div>
   );
