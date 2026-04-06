@@ -1,13 +1,15 @@
 // FOCUSS DEV Portfolio
+import { lazy, Suspense } from "react";
 import { Header } from "@/components/Header";
 import { HeroSection } from "@/components/HeroSection";
 import { CloudDivider } from "@/components/CloudDivider";
-import { AboutSection } from "@/components/AboutSection";
-import { MarqueeSection } from "@/components/MarqueeSection";
-import { SkillsSection } from "@/components/SkillsSection";
-import { DeveloperSection } from "@/components/DeveloperSection";
-import { ProjectsSection } from "@/components/ProjectsSection";
-import { Footer } from "@/components/Footer";
+
+const AboutSection = lazy(() => import("@/components/AboutSection").then(m => ({ default: m.AboutSection })));
+const MarqueeSection = lazy(() => import("@/components/MarqueeSection").then(m => ({ default: m.MarqueeSection })));
+const SkillsSection = lazy(() => import("@/components/SkillsSection").then(m => ({ default: m.SkillsSection })));
+const ProjectsSection = lazy(() => import("@/components/ProjectsSection").then(m => ({ default: m.ProjectsSection })));
+const DeveloperSection = lazy(() => import("@/components/DeveloperSection").then(m => ({ default: m.DeveloperSection })));
+const Footer = lazy(() => import("@/components/Footer").then(m => ({ default: m.Footer })));
 
 const Index = () => {
   return (
@@ -15,12 +17,14 @@ const Index = () => {
       <Header />
       <HeroSection />
       <CloudDivider />
-      <AboutSection />
-      <MarqueeSection />
-      <SkillsSection />
-      <ProjectsSection />
-      <DeveloperSection />
-      <Footer />
+      <Suspense fallback={null}>
+        <AboutSection />
+        <MarqueeSection />
+        <SkillsSection />
+        <ProjectsSection />
+        <DeveloperSection />
+        <Footer />
+      </Suspense>
     </div>
   );
 };
