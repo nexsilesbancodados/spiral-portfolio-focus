@@ -36,6 +36,8 @@ export const Footer = () => {
           <img
             src={logoMedallion}
             alt="FOCUSS DEV"
+            width={32}
+            height={32}
             className="h-8 w-8 opacity-70"
           />
           <span className="text-lg font-bold tracking-tight text-primary">

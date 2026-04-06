@@ -22,6 +22,8 @@ export const AboutSection = () => {
             <img
               src={aboutStatues}
               alt="Estátuas gregas com óculos neon — FOCUSS DEV"
+              width={1330}
+              height={1664}
               className="w-full max-w-[28rem]"
               loading="lazy"
               decoding="async"
