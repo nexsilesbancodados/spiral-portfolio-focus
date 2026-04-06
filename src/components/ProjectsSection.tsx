@@ -48,12 +48,16 @@ export const ProjectsSection = () => {
               <img
                 src={projectsStatue}
                 alt="Estátua grega com laptop — representação artística de projetos FOCUSS DEV"
+                width={520}
+                height={650}
                 className="relative z-10 w-full max-w-[16rem] sm:max-w-[18rem] md:max-w-[22rem] lg:max-w-[26rem] drop-shadow-[0_0_60px_rgba(0,255,150,0.15)] object-contain mx-0 my-[clamp(40px,8vw,106px)] px-0 py-[clamp(20px,4vw,55px)]"
                 loading="lazy"
               />
               <img
                 src={cloudOverlay}
                 alt=""
+                width={1200}
+                height={1500}
                 className="absolute -bottom-56 sm:-bottom-72 md:-bottom-96 left-[75%] -translate-x-1/2 w-[150%] sm:w-[160%] md:w-[180%] max-w-none pointer-events-none z-20"
                 aria-hidden="true"
               />

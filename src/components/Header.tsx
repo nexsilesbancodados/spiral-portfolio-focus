@@ -67,6 +67,8 @@ export const Header = () => {
           <img
             src={logoMedallion}
             alt="FOCUSS DEV"
+            width={36}
+            height={36}
             className="h-8 w-8 opacity-80 lg:h-9 lg:w-9"
           />
           <div className="flex items-baseline gap-1">
