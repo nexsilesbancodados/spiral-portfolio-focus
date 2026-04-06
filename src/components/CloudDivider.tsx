@@ -13,28 +13,37 @@ export const CloudDivider = () => {
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReduced || !wrapperRef.current || !cloudRef.current) return;
 
-    const ctx = gsap.context(() => {
-      gsap.to(cloudRef.current, {
-        y: -8,
-        duration: 3,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-      });
+    let ctx: gsap.Context;
+    const rafId = requestAnimationFrame(() => {
+      ctx = gsap.context(() => {
+        gsap.to(cloudRef.current, {
+          y: -8,
+          duration: 3,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+          force3D: true,
+        });
 
-      gsap.to(wrapperRef.current, {
-        y: -30,
-        ease: "none",
-        scrollTrigger: {
-          trigger: wrapperRef.current,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 1.5,
-        },
+        gsap.to(wrapperRef.current, {
+          y: -30,
+          ease: "none",
+          force3D: true,
+          scrollTrigger: {
+            trigger: wrapperRef.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1.5,
+            fastScrollEnd: true,
+          },
+        });
       });
     });
 
-    return () => ctx.revert();
+    return () => {
+      cancelAnimationFrame(rafId);
+      ctx?.revert();
+    };
   }, []);
 
   return (

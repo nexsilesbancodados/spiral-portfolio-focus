@@ -13,17 +13,24 @@ export const HeroSection = () => {
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReduced || !statueRef.current) return;
 
-    const ctx = gsap.context(() => {
-      gsap.to(statueRef.current, {
-        y: -8,
-        duration: 3,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
+    let ctx: gsap.Context;
+    const rafId = requestAnimationFrame(() => {
+      ctx = gsap.context(() => {
+        gsap.to(statueRef.current, {
+          y: -8,
+          duration: 3,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+          force3D: true,
+        });
       });
     });
 
-    return () => ctx.revert();
+    return () => {
+      cancelAnimationFrame(rafId);
+      ctx?.revert();
+    };
   }, []);
 
   return (
