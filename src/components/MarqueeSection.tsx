@@ -15,20 +15,27 @@ export const MarqueeSection = () => {
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReduced || !textPathRef.current || !containerRef.current) return;
 
-    const ctx = gsap.context(() => {
-      gsap.to(textPathRef.current, {
-        attr: { startOffset: "-40%" },
-        ease: "none",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 3,
-        },
+    let ctx: gsap.Context;
+    const rafId = requestAnimationFrame(() => {
+      ctx = gsap.context(() => {
+        gsap.to(textPathRef.current, {
+          attr: { startOffset: "-40%" },
+          ease: "none",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 3,
+            fastScrollEnd: true,
+          },
+        });
       });
     });
 
-    return () => ctx.revert();
+    return () => {
+      cancelAnimationFrame(rafId);
+      ctx?.revert();
+    };
   }, []);
 
   return (
