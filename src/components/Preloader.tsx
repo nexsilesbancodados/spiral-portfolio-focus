@@ -74,7 +74,7 @@ export const Preloader = ({ onComplete }: { onComplete: () => void }) => {
             className="h-full rounded-full bg-primary transition-[width] duration-75"
             style={{ width: `${progress}%` }}
           />
-        </motion.div>
+        </div>
       </div>
     </motion.div>
   );

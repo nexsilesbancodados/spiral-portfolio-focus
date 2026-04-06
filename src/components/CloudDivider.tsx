@@ -47,6 +47,8 @@ export const CloudDivider = () => {
         ref={cloudRef}
         src={cloudImg}
         alt=""
+        width={1880}
+        height={1058}
         className="relative z-[2] h-auto w-[130%] max-w-none will-change-transform sm:w-[126%] lg:w-[121%] xl:w-[116%]"
         style={{
           maskImage: "radial-gradient(ellipse 90% 85% at 50% 50%, black 60%, transparent 100%)",
