@@ -61,6 +61,7 @@ export const SkillsSection = () => {
             transition={{ duration: 0.7 }}
             className="absolute z-10 h-[220px] sm:h-[280px] md:h-[340px] lg:h-[420px] object-contain drop-shadow-[0_0_40px_rgba(0,255,150,0.15)] translate-y-6 sm:translate-y-10 md:translate-y-14"
             loading="lazy"
+            sizes="(max-width: 640px) 176px, (max-width: 768px) 224px, (max-width: 1024px) 272px, 336px"
           />
 
           {/* Orbiting skills — static positions, no infinite animations */}

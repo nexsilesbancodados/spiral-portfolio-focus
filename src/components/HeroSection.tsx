@@ -114,6 +114,7 @@ export const HeroSection = () => {
                 loading="eager"
                 decoding="async"
                 fetchPriority="high"
+                sizes="(max-width: 1024px) 90vw, 50vw"
               />
             </div>
           </motion.div>
