@@ -72,6 +72,7 @@ export const CloudDivider = () => {
         loading="eager"
         fetchPriority="high"
         draggable={false}
+        sizes="100vw"
       />
     </div>
   );

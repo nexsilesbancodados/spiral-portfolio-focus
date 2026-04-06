@@ -71,6 +71,7 @@ export const DeveloperSection = () => {
                 loading="lazy"
                 decoding="async"
                 className="w-auto object-cover object-top"
+                sizes="(max-width: 768px) 50vw, 360px"
                 style={{
                   height: "clamp(16rem, 40vw, 34rem)",
                   maskImage:
