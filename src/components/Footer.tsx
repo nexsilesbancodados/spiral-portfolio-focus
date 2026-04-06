@@ -1,4 +1,4 @@
-import logoMedallion from "@/assets/logo-medallion.png";
+import logoMedallion from "@/assets/logo-medallion.webp";
 import { Instagram, Mail, MessageCircle } from "lucide-react";
 
 const navLinks = [

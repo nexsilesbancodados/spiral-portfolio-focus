@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import cloudImg from "@/assets/cloud-divider.png";
+import cloudImg from "@/assets/cloud-divider.webp";
 
 gsap.registerPlugin(ScrollTrigger);
 

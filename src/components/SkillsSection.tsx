@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import skillsStatue from "@/assets/skills-statue.png";
+import skillsStatue from "@/assets/skills-statue.webp";
 
 const allSkills = [
   "React", "Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "shadcn/ui",

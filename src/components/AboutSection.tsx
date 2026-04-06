@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import aboutStatues from "@/assets/about-statues.png";
+import aboutStatues from "@/assets/about-statues.webp";
 
 const stats = [
   { value: "50+", label: "Projetos Entregues" },
