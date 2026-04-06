@@ -27,8 +27,8 @@ export const Preloader = ({ onComplete }: { onComplete: () => void }) => {
   return (
     <motion.div
       initial={{ opacity: 1 }}
-      exit={{ opacity: 0, scale: 1.05 }}
-      transition={{ duration: 0.6, ease: "easeInOut" }}
+      exit={{ opacity: 0, scale: 1.03 }}
+      transition={{ duration: 0.4, ease: "easeInOut" }}
       className="fixed inset-0 z-[9999] flex flex-col items-center justify-center overflow-hidden"
     >
       {/* Background image */}
