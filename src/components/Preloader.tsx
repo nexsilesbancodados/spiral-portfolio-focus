@@ -6,7 +6,7 @@ export const Preloader = ({ onComplete }: { onComplete: () => void }) => {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    const duration = 1600;
+    const duration = 800;
     const interval = 20;
     const step = 100 / (duration / interval);
     let current = 0;
@@ -16,7 +16,7 @@ export const Preloader = ({ onComplete }: { onComplete: () => void }) => {
       if (current >= 100) {
         current = 100;
         clearInterval(timer);
-        setTimeout(onComplete, 200);
+        setTimeout(onComplete, 100);
       }
       setProgress(Math.min(current, 100));
     }, interval);
