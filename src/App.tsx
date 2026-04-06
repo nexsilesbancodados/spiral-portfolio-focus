@@ -34,7 +34,7 @@ const App = () => {
   useEffect(() => {
     if (heroReady && !loading) return;
     if (heroReady) {
-      const timeout = window.setTimeout(() => setLoading(false), 150);
+      const timeout = window.setTimeout(() => setLoading(false), 50);
       return () => window.clearTimeout(timeout);
     }
   }, [heroReady, loading]);

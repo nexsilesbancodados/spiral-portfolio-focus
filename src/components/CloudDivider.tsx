@@ -64,6 +64,7 @@ export const CloudDivider = () => {
           WebkitMaskImage: "radial-gradient(ellipse 90% 85% at 50% 50%, black 60%, transparent 100%)",
         }}
         loading="eager"
+        fetchPriority="high"
         draggable={false}
       />
     </div>
