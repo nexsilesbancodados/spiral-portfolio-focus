@@ -6,7 +6,7 @@ export const Preloader = ({ onComplete }: { onComplete: () => void }) => {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    const duration = 800;
+    const duration = 500;
     const interval = 20;
     const step = 100 / (duration / interval);
     let current = 0;
@@ -16,7 +16,7 @@ export const Preloader = ({ onComplete }: { onComplete: () => void }) => {
       if (current >= 100) {
         current = 100;
         clearInterval(timer);
-        setTimeout(onComplete, 100);
+        setTimeout(onComplete, 50);
       }
       setProgress(Math.min(current, 100));
     }, interval);
@@ -27,8 +27,8 @@ export const Preloader = ({ onComplete }: { onComplete: () => void }) => {
   return (
     <motion.div
       initial={{ opacity: 1 }}
-      exit={{ opacity: 0, scale: 1.05 }}
-      transition={{ duration: 0.6, ease: "easeInOut" }}
+      exit={{ opacity: 0, scale: 1.03 }}
+      transition={{ duration: 0.4, ease: "easeInOut" }}
       className="fixed inset-0 z-[9999] flex flex-col items-center justify-center overflow-hidden"
     >
       {/* Background image */}
