@@ -97,7 +97,7 @@ export const HeroSection = () => {
                 ref={statueRef}
                 src={heroStatue}
                 alt="Estátua grega com óculos usando laptop — representação artística da FOCUSS DEV"
-                className="relative z-10 w-full rounded-3xl text-xs drop-shadow-2xl will-change-transform"
+                className="relative z-10 w-full rounded-3xl text-xs will-change-transform"
                 loading="eager"
                 decoding="async"
                 fetchPriority="high"
