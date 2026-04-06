@@ -1,7 +1,6 @@
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { ArrowDown } from "lucide-react";
-import gsap from "gsap";
 import heroStatue from "@/assets/hero-statue.webp";
 
 export const HERO_IMAGE_SRC = heroStatue;
@@ -13,22 +12,27 @@ export const HeroSection = () => {
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReduced || !statueRef.current) return;
 
-    let ctx: gsap.Context;
-    const rafId = requestAnimationFrame(() => {
-      ctx = gsap.context(() => {
-        gsap.to(statueRef.current, {
-          y: -8,
-          duration: 3,
-          repeat: -1,
-          yoyo: true,
-          ease: "sine.inOut",
-          force3D: true,
+    let ctx: { revert: () => void } | undefined;
+    let rafId: number;
+
+    import("gsap").then(({ default: gsap }) => {
+      if (!statueRef.current) return;
+      rafId = requestAnimationFrame(() => {
+        ctx = gsap.context(() => {
+          gsap.to(statueRef.current, {
+            y: -8,
+            duration: 3,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut",
+            force3D: true,
+          });
         });
       });
     });
 
     return () => {
-      cancelAnimationFrame(rafId);
+      if (rafId) cancelAnimationFrame(rafId);
       ctx?.revert();
     };
   }, []);
