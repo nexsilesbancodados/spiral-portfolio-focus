@@ -68,7 +68,7 @@ export const DeveloperSection = () => {
                 alt="Gustavo Lopes — Desenvolvedor Full-Stack & Fundador da FOCUSS DEV"
                 loading="lazy"
                 decoding="async"
-                className="w-auto object-cover object-top drop-shadow-2xl"
+                className="w-auto object-cover object-top"
                 style={{
                   height: "clamp(16rem, 40vw, 34rem)",
                   maskImage:
