@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { ArrowDown } from "lucide-react";
 import heroStatue from "@/assets/hero-statue.webp";
 
-export const HERO_IMAGE_SRC = heroStatue;
+
 
 export const HeroSection = () => {
   const statueRef = useRef<HTMLImageElement>(null);
