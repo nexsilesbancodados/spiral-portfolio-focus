@@ -29,7 +29,7 @@ export const HeroSection = () => {
   return (
     <section id="hero" className="relative flex min-h-[100svh] items-center overflow-hidden">
       <div className="primary-aura absolute inset-0 z-[1]" />
-      <div className="absolute left-1/2 top-1/2 z-[1] h-[32rem] w-[32rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/5 blur-[120px]" />
+      <div className="absolute left-1/2 top-1/2 z-[1] h-[32rem] w-[32rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/5 blur-[80px]" />
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pb-20 pt-32 sm:px-6 md:pt-36 lg:px-8">
         <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16 xl:gap-20">
@@ -97,7 +97,7 @@ export const HeroSection = () => {
                 ref={statueRef}
                 src={heroStatue}
                 alt="Estátua grega com óculos usando laptop — representação artística da FOCUSS DEV"
-                className="relative z-10 w-full rounded-3xl text-xs drop-shadow-2xl will-change-transform"
+                className="relative z-10 w-full rounded-3xl text-xs will-change-transform"
                 loading="eager"
                 decoding="async"
                 fetchPriority="high"

@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import aboutStatues from "@/assets/about-statues.png";
+import aboutStatues from "@/assets/about-statues.webp";
 
 const stats = [
   { value: "50+", label: "Projetos Entregues" },
@@ -22,7 +22,7 @@ export const AboutSection = () => {
             <img
               src={aboutStatues}
               alt="Estátuas gregas com óculos neon — FOCUSS DEV"
-              className="w-full max-w-[28rem] drop-shadow-2xl"
+              className="w-full max-w-[28rem]"
               loading="lazy"
               decoding="async"
             />

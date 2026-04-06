@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
-import projectsStatue from "@/assets/projects-statue.png";
-import cloudOverlay from "@/assets/cloud-overlay.png";
+import projectsStatue from "@/assets/projects-statue.webp";
+import cloudOverlay from "@/assets/cloud-overlay.webp";
 
 const projects = [
   { title: "Plataforma SaaS de Gestão", category: "Sistema Web", tech: "React · Supabase · TanStack" },

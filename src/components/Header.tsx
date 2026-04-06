@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import logoMedallion from "@/assets/logo-medallion.png";
+import logoMedallion from "@/assets/logo-medallion.webp";
 
 const leftLinks = [
   { label: "Início", href: "#hero" },

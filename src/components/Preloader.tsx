@@ -1,12 +1,12 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import preloaderBg from "@/assets/preloader-bg.png";
+import preloaderBg from "@/assets/preloader-bg.webp";
 
 export const Preloader = ({ onComplete }: { onComplete: () => void }) => {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    const duration = 2400;
+    const duration = 1600;
     const interval = 20;
     const step = 100 / (duration / interval);
     let current = 0;
