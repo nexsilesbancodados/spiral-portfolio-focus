@@ -61,7 +61,6 @@ export const CloudDivider = () => {
         className="relative z-[2] h-auto w-[130%] max-w-none will-change-transform sm:w-[126%] lg:w-[121%] xl:w-[116%]"
         style={{
           aspectRatio: "1880 / 1058",
-        style={{
           maskImage: "radial-gradient(ellipse 90% 85% at 50% 50%, black 60%, transparent 100%)",
           WebkitMaskImage: "radial-gradient(ellipse 90% 85% at 50% 50%, black 60%, transparent 100%)",
         }}
