@@ -3,12 +3,12 @@ import projectsStatue from "@/assets/projects-statue.webp";
 import cloudOverlay from "@/assets/cloud-overlay.webp";
 
 const projects = [
-  { title: "Plataforma SaaS de Gestão", category: "Sistema Web", tech: "React · Supabase · TanStack" },
-  { title: "E-commerce Premium", category: "Landing Page", tech: "Next.js · Tailwind · Stripe" },
-  { title: "App de Produtividade", category: "Aplicação Web", tech: "React · OpenAI · Framer Motion" },
-  { title: "Portal Corporativo", category: "Website Institucional", tech: "React · CMS · SEO" },
-  { title: "Dashboard Analytics", category: "Painel Inteligente", tech: "React · Recharts · PostgreSQL" },
-  { title: "Marketplace Digital", category: "Plataforma Web", tech: "Next.js · Supabase · Stripe" },
+  { title: "Nexsiles", category: "Sistema SaaS", tech: "React · Supabase · PDV", url: "https://nexsiles.com.br" },
+  { title: "AloClínica", category: "Plataforma de Telemedicina", tech: "React · Tailwind · Supabase", url: "https://aloclinica.com.br" },
+  { title: "CrefiFácil", category: "Plataforma Financeira", tech: "React · Tailwind · API", url: "https://crefifacil.site" },
+  { title: "Hospital Rumo Certo", category: "Website Institucional", tech: "React · Framer Motion · SEO", url: "https://www.hospitalrumocerto.com.br" },
+  { title: "Instituto Resgate", category: "Landing Page", tech: "React · Tailwind · WhatsApp API", url: "https://www.institutoresgate.life" },
+  { title: "EloLab", category: "Sistema de Gestão Clínica", tech: "React · Supabase · SaaS", url: "https://www.elolab.com.br" },
 ];
 
 export const ProjectsSection = () => {
