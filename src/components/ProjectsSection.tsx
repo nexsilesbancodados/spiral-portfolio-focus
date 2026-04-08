@@ -73,14 +73,17 @@ export const ProjectsSection = () => {
             className="space-y-1 sm:space-y-2"
           >
             {projects.map((project, i) => (
-              <motion.div
+              <motion.a
                 key={project.title}
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
                 variants={{
                   hidden: { opacity: 0, x: 30 },
                   visible: { opacity: 1, x: 0 },
                 }}
                 whileHover={{ x: 8, transition: { type: "spring", stiffness: 400 } }}
-                className="group flex items-center gap-3 sm:gap-5 rounded-xl px-3 sm:px-5 py-3 sm:py-4 border border-transparent hover:border-primary/20 hover:bg-card/50 transition-all duration-300 cursor-default"
+                className="group flex items-center gap-3 sm:gap-5 rounded-xl px-3 sm:px-5 py-3 sm:py-4 border border-transparent hover:border-primary/20 hover:bg-card/50 transition-all duration-300 cursor-pointer"
               >
                 <span className="text-primary/60 group-hover:text-primary font-bold text-xl sm:text-2xl md:text-3xl tabular-nums transition-colors min-w-[2rem] sm:min-w-[3rem]">
                   0{i + 1}
@@ -102,7 +105,7 @@ export const ProjectsSection = () => {
                 <div className="opacity-0 group-hover:opacity-100 transition-opacity text-primary">
                   →
                 </div>
-              </motion.div>
+              </motion.a>
             ))}
           </motion.div>
         </div>
