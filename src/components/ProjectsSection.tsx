@@ -3,12 +3,12 @@ import projectsStatue from "@/assets/projects-statue.webp";
 import cloudOverlay from "@/assets/cloud-overlay.webp";
 
 const projects = [
-  { title: "Plataforma SaaS de Gestão", category: "Sistema Web", tech: "React · Supabase · TanStack" },
-  { title: "E-commerce Premium", category: "Landing Page", tech: "Next.js · Tailwind · Stripe" },
-  { title: "App de Produtividade", category: "Aplicação Web", tech: "React · OpenAI · Framer Motion" },
-  { title: "Portal Corporativo", category: "Website Institucional", tech: "React · CMS · SEO" },
-  { title: "Dashboard Analytics", category: "Painel Inteligente", tech: "React · Recharts · PostgreSQL" },
-  { title: "Marketplace Digital", category: "Plataforma Web", tech: "Next.js · Supabase · Stripe" },
+  { title: "Nexsiles", category: "Sistema SaaS", tech: "React · Supabase · PDV", url: "https://nexsiles.com.br" },
+  { title: "AloClínica", category: "Plataforma de Telemedicina", tech: "React · Tailwind · Supabase", url: "https://aloclinica.com.br" },
+  { title: "CrefiFácil", category: "Plataforma Financeira", tech: "React · Tailwind · API", url: "https://crefifacil.site" },
+  { title: "Hospital Rumo Certo", category: "Website Institucional", tech: "React · Framer Motion · SEO", url: "https://www.hospitalrumocerto.com.br" },
+  { title: "Instituto Resgate", category: "Landing Page", tech: "React · Tailwind · WhatsApp API", url: "https://www.institutoresgate.life" },
+  { title: "EloLab", category: "Sistema de Gestão Clínica", tech: "React · Supabase · SaaS", url: "https://www.elolab.com.br" },
 ];
 
 export const ProjectsSection = () => {
@@ -73,14 +73,17 @@ export const ProjectsSection = () => {
             className="space-y-1 sm:space-y-2"
           >
             {projects.map((project, i) => (
-              <motion.div
+              <motion.a
                 key={project.title}
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
                 variants={{
                   hidden: { opacity: 0, x: 30 },
                   visible: { opacity: 1, x: 0 },
                 }}
                 whileHover={{ x: 8, transition: { type: "spring", stiffness: 400 } }}
-                className="group flex items-center gap-3 sm:gap-5 rounded-xl px-3 sm:px-5 py-3 sm:py-4 border border-transparent hover:border-primary/20 hover:bg-card/50 transition-all duration-300 cursor-default"
+                className="group flex items-center gap-3 sm:gap-5 rounded-xl px-3 sm:px-5 py-3 sm:py-4 border border-transparent hover:border-primary/20 hover:bg-card/50 transition-all duration-300 cursor-pointer"
               >
                 <span className="text-primary/60 group-hover:text-primary font-bold text-xl sm:text-2xl md:text-3xl tabular-nums transition-colors min-w-[2rem] sm:min-w-[3rem]">
                   0{i + 1}
@@ -102,7 +105,7 @@ export const ProjectsSection = () => {
                 <div className="opacity-0 group-hover:opacity-100 transition-opacity text-primary">
                   →
                 </div>
-              </motion.div>
+              </motion.a>
             ))}
           </motion.div>
         </div>
