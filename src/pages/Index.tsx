@@ -9,6 +9,7 @@ const MarqueeSection = lazy(() => import("@/components/MarqueeSection").then(m =
 const SkillsSection = lazy(() => import("@/components/SkillsSection").then(m => ({ default: m.SkillsSection })));
 const ProjectsSection = lazy(() => import("@/components/ProjectsSection").then(m => ({ default: m.ProjectsSection })));
 const DeveloperSection = lazy(() => import("@/components/DeveloperSection").then(m => ({ default: m.DeveloperSection })));
+const ContactSection = lazy(() => import("@/components/ContactSection").then(m => ({ default: m.ContactSection })));
 const Footer = lazy(() => import("@/components/Footer").then(m => ({ default: m.Footer })));
 
 const Index = () => {
@@ -23,6 +24,7 @@ const Index = () => {
         <SkillsSection />
         <ProjectsSection />
         <DeveloperSection />
+        <ContactSection />
         <Footer />
       </Suspense>
     </div>
