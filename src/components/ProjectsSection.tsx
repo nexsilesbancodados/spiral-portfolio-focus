@@ -5,7 +5,7 @@ import cloudOverlay from "@/assets/cloud-overlay.webp";
 const projects = [
   { title: "Nexsiles", category: "Sistema SaaS", tech: "React · Supabase · PDV", url: "https://nexsiles.com.br" },
   { title: "AloClínica", category: "Plataforma de Telemedicina", tech: "React · Tailwind · Supabase", url: "https://aloclinica.com.br" },
-  { title: "CrefiFácil", category: "Plataforma Financeira", tech: "React · Tailwind · API", url: "https://crefifacil.site" },
+  { title: "CrefiFácil", category: "Plataforma Financeira", tech: "React · Tailwind · API", url: "https://credifacilsolucoes.com.br" },
   { title: "Hospital Rumo Certo", category: "Website Institucional", tech: "React · Framer Motion · SEO", url: "https://www.hospitalrumocerto.com.br" },
   { title: "Instituto Resgate", category: "Landing Page", tech: "React · Tailwind · WhatsApp API", url: "https://www.institutoresgate.life" },
   { title: "EloLab", category: "Sistema de Gestão Clínica", tech: "React · Supabase · SaaS", url: "https://www.elolab.com.br" },
