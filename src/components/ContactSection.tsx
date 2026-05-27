@@ -85,26 +85,26 @@ export const ContactSection = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.2 + i * 0.1 }}
               whileHover={{ y: -6 }}
-              className="group relative flex flex-col p-6 rounded-3xl border border-border bg-card/40 backdrop-blur-md overflow-hidden hover:border-primary/50 transition-colors duration-300"
+              className="group relative flex flex-col p-6 rounded-3xl border border-white/10 bg-slate-900/85 backdrop-blur-xl shadow-[0_20px_60px_-20px_rgba(0,0,0,0.5)] overflow-hidden hover:border-primary/60 hover:shadow-[0_25px_70px_-15px_hsl(var(--primary)/0.35)] transition-all duration-300"
             >
-              <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br ${channel.accent}`} />
+              <div className={`absolute inset-0 opacity-30 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br ${channel.accent}`} />
               <div className="absolute -right-10 -top-10 w-32 h-32 rounded-full bg-primary/10 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
               <div className="relative flex items-start justify-between">
-                <div className="flex items-center justify-center w-12 h-12 rounded-2xl bg-primary/10 text-primary border border-primary/20 group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300">
+                <div className="flex items-center justify-center w-12 h-12 rounded-2xl bg-primary/15 text-primary border border-primary/30 group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300">
                   <channel.icon className="w-5 h-5" />
                 </div>
-                <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:rotate-12 transition-all duration-300" />
+                <ArrowUpRight className="w-5 h-5 text-white/60 group-hover:text-primary group-hover:rotate-12 transition-all duration-300" />
               </div>
 
               <div className="relative mt-8">
-                <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
+                <p className="text-[0.7rem] uppercase tracking-[0.2em] text-primary/80 font-medium">
                   {channel.description}
                 </p>
-                <h3 className="text-xl font-bold mt-2 text-foreground">
+                <h3 className="text-2xl font-bold mt-2 text-white">
                   {channel.label}
                 </h3>
-                <p className="mt-1 text-sm text-muted-foreground group-hover:text-foreground/80 transition-colors">
+                <p className="mt-1 text-sm text-white/70 group-hover:text-white transition-colors">
                   {channel.value}
                 </p>
               </div>
