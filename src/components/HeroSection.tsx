@@ -100,7 +100,7 @@ export const HeroSection = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.9, delay: 0.2 }}
-            className="order-1 flex justify-center lg:order-2 lg:justify-end"
+            className="order-1 flex justify-center lg:order-2 lg:justify-end lg:translate-y-16 xl:translate-y-24"
           >
             <div className="relative w-full max-w-[24rem] sm:max-w-[30rem] lg:max-w-[36rem] xl:max-w-[42rem]">
               <div className="primary-aura-bottom absolute inset-0 blur-2xl" />
