@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import gustavoPortrait from "@/assets/gustavo-portrait-tech.png";
+import gustavoPortrait from "@/assets/gustavo-portrait-tech-cutout.png";
 
 export const DeveloperSection = () => {
   return (
@@ -70,14 +70,12 @@ export const DeveloperSection = () => {
                 height={900}
                 loading="lazy"
                 decoding="async"
-                className="w-auto object-cover object-top"
-                sizes="(max-width: 768px) 50vw, 360px"
+                className="w-auto object-contain object-bottom drop-shadow-2xl"
+                sizes="(max-width: 768px) 70vw, 480px"
                 style={{
-                  height: "clamp(16rem, 40vw, 34rem)",
-                  maskImage:
-                    "linear-gradient(to bottom, black 65%, transparent 100%)",
-                  WebkitMaskImage:
-                    "linear-gradient(to bottom, black 65%, transparent 100%)",
+                  height: "clamp(20rem, 48vw, 40rem)",
+                  filter:
+                    "drop-shadow(0 30px 60px hsl(var(--primary) / 0.35))",
                 }}
               />
             </motion.div>
