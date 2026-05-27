@@ -42,8 +42,8 @@ export const HeroSection = () => {
       <div className="primary-aura absolute inset-0 z-[1]" />
       <div className="absolute left-1/2 top-1/2 z-[1] h-[32rem] w-[32rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/5 blur-[80px]" />
 
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pb-20 pt-32 sm:px-6 md:pt-36 lg:px-8">
-        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16 xl:gap-20">
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pb-24 pt-28 sm:px-6 md:pt-32 lg:px-8">
+        <div className="grid items-center gap-8 lg:grid-cols-[1.05fr_1fr] lg:gap-12 xl:gap-16">
           <div className="order-2 mx-auto max-w-2xl text-center lg:order-1 lg:mx-0 lg:text-left">
             <motion.div
               initial={{ opacity: 0, y: 40 }}
@@ -102,7 +102,7 @@ export const HeroSection = () => {
             transition={{ duration: 0.9, delay: 0.2 }}
             className="order-1 flex justify-center lg:order-2 lg:justify-end"
           >
-            <div className="relative w-full max-w-[34rem] sm:max-w-[40rem] lg:max-w-[50rem] xl:max-w-[56rem]">
+            <div className="relative w-full max-w-[24rem] sm:max-w-[30rem] lg:max-w-[36rem] xl:max-w-[42rem]">
               <div className="primary-aura-bottom absolute inset-0 blur-2xl" />
               <img
                 ref={statueRef}
@@ -110,11 +110,11 @@ export const HeroSection = () => {
                 alt="Estátua grega com óculos usando laptop — representação artística da FOCUSS DEV"
                 width={800}
                 height={1000}
-                className="relative z-10 w-full rounded-3xl text-xs will-change-transform"
+                className="relative z-10 w-full max-h-[78vh] object-contain rounded-3xl text-xs will-change-transform"
                 loading="eager"
                 decoding="async"
                 fetchPriority="high"
-                sizes="(max-width: 1024px) 90vw, 50vw"
+                sizes="(max-width: 1024px) 70vw, 42vw"
               />
             </div>
           </motion.div>
